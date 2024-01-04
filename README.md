@@ -22,13 +22,14 @@ My custom NeoVim configuration and plugins.
 - `Rg` requires[ ripgrep (rg)](https://github.com/BurntSushi/ripgrep)
 - `Tags` and `Helptags` require Perl
 ### [coc.nvim](https://github.com/neoclide/coc.nvim)
-#### Unity Language Server on Unix/Linux
-- Install [Mono](https://www.mono-project.com/download/stable/#download-mac)
-- In Unity, `Unity > Preferences > External Tools`, check off the options below and regenerate project files:
-  - Embedded Packages
-  - Registry Packages
-  - Local Packages
-- You may need to add the following override to your `.zshrc`/`.bashrc` to point to the latest Mono version:
-```
-export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
-```
+- Setup [Node.js](https://nodejs.dev/learn/how-to-install-nodejs) for [coc.nvim](https://github.com/neoclide/coc.nvim)
+- Omnisharp Language Server on Unix/Linux for Unity
+  - Install [Mono](https://www.mono-project.com/download/stable/#download-mac)
+  - In Unity, `Unity > Preferences > External Tools`, check off the options below and regenerate project files:
+    - Embedded Packages
+    - Registry Packages
+    - Local Packages
+  - You may need to add the following override to your `.zshrc`/`.bashrc` to point to the latest Mono version:
+    ```
+    export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
+    ```
