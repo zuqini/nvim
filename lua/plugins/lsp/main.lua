@@ -109,3 +109,16 @@ lspconfig.jsonls.setup {}
 --         debounce_text_changes = 150,
 --     }
 -- }
+
+-- Arduino stuff
+-- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#arduino_language_server
+-- also: arduino-cli core install arduino:avr
+-- lspconfig.arduino_language_server.setup {
+--   cmd = {
+--     "arduino-language-server",
+--     "-cli-config", "/Users/zuqinimbp16/Library/Arduino15/arduino-cli.yaml",
+--     "-fqbn", "arduino:avr:uno",
+--     "-cli", "arduino-cli",
+--     "-clangd", "clangd"
+--   }
+-- }

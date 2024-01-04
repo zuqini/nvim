@@ -26,6 +26,8 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'junegunn/fzf.vim'
   endif
 
+  Plug 'stevearc/vim-arduino'
+
   " LSP
   Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/mason.nvim'
