@@ -1,15 +1,5 @@
-local theme = nil
-if vim.g.theme == "spaceduck" then
-    theme = require'lualine.themes.spaceduck'
-    -- change background color so horizontal splits have cleaner separation.
-    -- May cause some visual weirdness with tabs/buffers
-    theme.inactive.b.bg = theme.normal.b.bg
-    theme.inactive.c.bg = '#16172d'
-end
-
 require('lualine').setup {
     options = {
-        theme = theme,
         -- component_separators = '|',
         -- section_separators = { left = '', right = ''},
 
