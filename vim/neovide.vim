@@ -11,6 +11,7 @@ if exists("g:neovide")
   nmap <d-v> "+p
   inoremap <d-v> <c-r>+
   cnoremap <d-v> <c-r>+
+  tnoremap <expr> <d-v> "<c-\><c-n>\"+Pi"
 
   nnoremap <D-Up> :silent! let &guifont = substitute(
    \ &guifont,
