@@ -47,9 +47,9 @@ augroup TransparentBackground
   autocmd vimenter * if g:transparent_background | hi TelescopePreviewNormal guibg=NONE ctermbg=NONE
   autocmd vimenter * if g:transparent_background | hi TelescopeResultsNormal guibg=NONE ctermbg=NONE
 
-  autocmd vimenter * if g:transparent_background | hi DiagnosticVirtualTextOk guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi DiagnosticVirtualTextHint guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi DiagnosticVirtualTextInfo guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi DiagnosticVirtualTextWarn guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi DiagnosticVirtualTextError guibg=NONE ctermbg=NONE
+  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextOk guibg=NONE ctermbg=NONE
+  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextHint guibg=NONE ctermbg=NONE
+  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextInfo guibg=NONE ctermbg=NONE
+  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextWarn guibg=NONE ctermbg=NONE
+  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextError guibg=NONE ctermbg=NONE
 augroup END

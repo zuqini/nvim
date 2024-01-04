@@ -9,3 +9,4 @@ require('nightfox').setup({
 
 -- setup must be called before loading
 vim.cmd("colorscheme carbonfox")
+vim.api.nvim_set_hl(0, "Visual", { bg = "#1a1a1a" })
