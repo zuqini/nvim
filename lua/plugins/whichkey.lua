@@ -40,6 +40,13 @@ return {
       P = 'Last Yanked P',
     }, { prefix='<leader>' })
 
+    wk.register({
+      q = 'Quit Cur',
+      Q = 'Quit! Cur',
+      b = 'Del Buf',
+      B = 'Del All Others',
+    }, { prefix = '<BS>' })
+
     require('which-key').register({
       ['[b'] = 'Prev Buffer',
       [']b'] = 'Next Buffer',

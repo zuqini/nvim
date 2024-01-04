@@ -22,4 +22,3 @@ end
 _G.leap_bidirectional = function ()
   require('leap').leap { target_windows = { vim.fn.win_getid() } }
 end
-

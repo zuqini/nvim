@@ -27,10 +27,10 @@ nnoremap <leader>s :Rg<CR>
 nnoremap <leader>o :History<CR>
 
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>hf :GFiles<CR>
-nnoremap <leader>hs :GFiles?<CR>
-nnoremap <leader>hc :Commits<CR>
-nnoremap <leader>hx :BCommits<CR>
+nnoremap <leader>,f :GFiles<CR>
+nnoremap <leader>,s :GFiles?<CR>
+nnoremap <leader>,c :Commits<CR>
+nnoremap <leader>,x :BCommits<CR>
 
 nnoremap <leader>nh :Helptags<CR>
 nnoremap <leader>n; :History;<CR>

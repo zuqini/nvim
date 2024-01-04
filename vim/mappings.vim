@@ -1,4 +1,5 @@
 let mapleader = " "
+" unnofficial leader2 = "<BS>"
 
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
@@ -25,10 +26,10 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Buffer management
-nnoremap <silent>,q :bd<CR>
-nnoremap <silent>,Q :bd!<CR>
-nnoremap <silent>,b :ls<cr>:bd<space>
-nnoremap <silent>,B :%bd!\|e#\|bd!#<CR>
+nnoremap <silent><BS>q :bd<CR>
+nnoremap <silent><BS>Q :bd!<CR>
+nnoremap <silent><BS>b :ls<cr>:bd<space>
+nnoremap <silent><BS>B :%bd!\|e#\|bd!#<CR>
 nnoremap <silent>[b :bp<CR>
 nnoremap <silent>]b :bn<CR>
 
