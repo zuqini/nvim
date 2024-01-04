@@ -51,7 +51,7 @@ function M.selectThemeByTime()
   end
 end
 
-vim.api.nvim_set_keymap('n', '<leader>m', ':lua require"themes/theme".cycleTheme()<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>h', ':lua require"themes/theme".cycleTheme()<CR>', {noremap = true, silent = true})
 
 -- check every 10 min
 timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
