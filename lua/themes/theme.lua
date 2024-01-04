@@ -10,7 +10,6 @@ vim.g.theme = vim.g.themes[vim.g.theme_index]
 require('themes/' .. vim.g.theme)
 
 local M = {}
--- looks like this no longer works
 function M.cycleTheme()
   -- a bit hacky: unload theme packages for reloading
   for package_name, _ in pairs(package.loaded) do

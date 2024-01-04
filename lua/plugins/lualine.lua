@@ -103,7 +103,11 @@ require('lualine').setup {
             },
         },
         lualine_x = {
-            { 'filetype', separator = '|' },
+            {
+                'filetype',
+                colored = false, -- see https://github.com/nvim-lualine/lualine.nvim/issues/610
+                separator = '|',
+            },
             { 'fileformat', separator = '|' },
             { 'encoding', separator = '|' },
             { 'filesize', separator = '|' },
