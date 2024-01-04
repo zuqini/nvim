@@ -68,8 +68,8 @@ end
 -- experimental hot reloading. Disabled since buggy
 -- check every 10 min
 -- timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
+-- vim.api.nvim_set_keymap('n', '<leader>;', ':lua require"themes/theme".next()<CR>', {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>;', ':lua require"themes/theme".next()<CR>', {noremap = true, silent = true})
 vim.api.nvim_create_user_command('ThemeNext', M.next, {})
 vim.api.nvim_create_user_command('ThemePrev', M.prev, {})
 
