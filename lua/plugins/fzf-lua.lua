@@ -35,11 +35,11 @@ vim.api.nvim_set_keymap('n', '<leader>S', ":lua require'fzf-lua'.live_grep_nativ
 
 vim.api.nvim_set_keymap('n', '<leader>o', ":lua require'fzf-lua'.oldfiles()<CR>", opts)
 
-vim.api.nvim_set_keymap('n', '<leader>ngf', ":lua require'fzf-lua'.git_files()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>ngs', ":lua require'fzf-lua'.git_status()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>ngc', ":lua require'fzf-lua'.git_commits()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>ngx', ":lua require'fzf-lua'.git_bcommits()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>ngb', ":lua require'fzf-lua'.git_branches()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>hf', ":lua require'fzf-lua'.git_files()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>hs', ":lua require'fzf-lua'.git_status()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>hc', ":lua require'fzf-lua'.git_commits()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>hx', ":lua require'fzf-lua'.git_bcommits()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>hb', ":lua require'fzf-lua'.git_branches()<CR>", opts)
 
 vim.api.nvim_set_keymap('n', '<leader>t', ":lua require'fzf-lua'.tabs()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>b', ":lua require'fzf-lua'.buffers()<CR>", opts)
@@ -69,3 +69,4 @@ vim.api.nvim_set_keymap('n', '<leader>nr', ":lua require'fzf-lua'.registers()<CR
 vim.api.nvim_set_keymap('n', '<leader>np', ":lua require'fzf-lua'.spell_suggest()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>nk', ":lua require'fzf-lua'.keymaps()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>nh', ":lua require'fzf-lua'.help_tags()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>nd', ":lua require'fzf-lua'.files({ cwd = '~/dotfiles' })<CR>", opts)

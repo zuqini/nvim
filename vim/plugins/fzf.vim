@@ -22,6 +22,13 @@ let g:fzf_colors = {
 " }}}
 
 nnoremap S :Files<CR>
-
 nnoremap <leader>s :Rg<CR>
+nnoremap <leader>o :History<CR>
+
 nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>hf :GFiles<CR>
+nnoremap <leader>hs :GFiles?<CR>
+nnoremap <leader>hc :Commits<CR>
+nnoremap <leader>hx :BCommits<CR>
+
+nnoremap <leader>nh :Helptags<CR>
