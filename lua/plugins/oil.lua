@@ -1,11 +1,20 @@
 return {
   'stevearc/oil.nvim',
   config = function()
-    vim.api.nvim_create_user_command('E', ':Oil --float .', { nargs = 0 }) --Edit working directory
-    vim.api.nvim_create_user_command('EE', ':Oil --float %:p:h<args>', { nargs = 0 }) --Edit current path
-    vim.api.nvim_create_user_command('EC', ':Oil --float %:p:h<args>', { nargs = 0 }) --Edit current path
-    vim.api.nvim_create_user_command('ED', ':Oil --float <args>', { nargs = 1 }) --Edit given path
+    vim.api.nvim_create_user_command('E', ':Oil .', { nargs = 0 }) --Edit working directory
+    vim.api.nvim_create_user_command('EE', ':Oil %:p:h<args>', { nargs = 0 }) --Edit current path
+    vim.api.nvim_create_user_command('ED', ':Oil <args>', { nargs = 1 }) --Edit given path
     require("oil").setup({
+      columns = {
+        -- "type",
+        "permissions",
+        "size",
+        -- "ctime",
+        "mtime",
+        -- "atime",
+        -- "birthtime",
+        "icon",
+      },
       view_options = {
         show_hidden = true,
       },
