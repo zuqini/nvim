@@ -25,7 +25,8 @@ require'nvim-treesitter.configs'.setup {
     -- disable "help" which breaks :h formatting
     disable = function(lang, buf)
         -- First check languages that should be disabled
-        local disabled_lang = Set { "help" }
+        -- local disabled_lang = Set { "help" }
+        local disabled_lang = Set { }
         if disabled_lang[lang] then
           return true
         end
