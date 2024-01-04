@@ -1,4 +1,11 @@
 local luasnip = require('luasnip')
+luasnip.setup({
+  -- see: https://www.reddit.com/r/neovim/comments/12z0orb/unexpected_behavior_when_pressing_tab_in_insert/
+  history = true,
+  region_check_events = "InsertEnter",
+  delete_check_events = "TextChanged,InsertLeave",
+})
+
 require('luasnip.loaders.from_vscode').lazy_load()
 
 ---#Mappings
