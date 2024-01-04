@@ -63,7 +63,7 @@ vim.api.nvim_set_keymap('n', '<leader>lG', ":lua require'fzf-lua'.lsp_workspace_
 
 vim.api.nvim_set_keymap('n', '<leader>nc', ":lua require'fzf-lua'.commands()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>nn', ":lua require'fzf-lua'.resume()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>nh', ":lua require'fzf-lua'.command_history()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>n;', ":lua require'fzf-lua'.command_history()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>n/', ":lua require'fzf-lua'.search_history()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>nf', ":lua require'fzf-lua'.builtin()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>nr', ":lua require'fzf-lua'.registers()<CR>", opts)
@@ -72,3 +72,54 @@ vim.api.nvim_set_keymap('n', '<leader>nk', ":lua require'fzf-lua'.keymaps()<CR>"
 vim.api.nvim_set_keymap('n', '<leader>nh', ":lua require'fzf-lua'.help_tags()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>nd', ":lua require'fzf-lua'.files({ cwd = '~/dotfiles' })<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>nt', ":lua require'fzf-lua'.tabs()<CR>", opts)
+
+require('which-key').register({
+  S = 'Find Files'
+})
+require('which-key').register({
+  s = 'Grep',
+  S = 'Native Grep',
+  o = 'Old Files (History)',
+  b = 'Buffers',
+  t = 'Buffers',
+  h = {
+    name = 'Fzf-Git',
+    b = 'Branches',
+    c = 'Commits',
+    f = 'Files',
+    s = 'Status',
+    x = 'BCommits',
+  },
+  l = {
+    name = 'Fzf-LSP',
+    r = 'References',
+    d = 'Definitions',
+    D = 'Declarations',
+    t = 'TypeDefs',
+    i = 'Implementations',
+    c = 'Code Actions',
+    s = {
+      name = 'Symbols',
+      d = "Document Symbols",
+      w = "Workspace Symbols",
+      W = "Live Workspace Symbols",
+    },
+    g = 'Diagnostics',
+    G = 'Workspace Diagnostics',
+  },
+  n = {
+    name = 'Fzf-Misc',
+    s = 'All Files (hidden, ignored)',
+    c = 'Commands',
+    n = 'Resume',
+    [';'] = 'Commands History',
+    ['/'] = 'Search History',
+    f = 'Fzf Builtin',
+    r = 'Registers',
+    p = 'Spell Suggest',
+    k = 'Keymaps',
+    h = 'Help',
+    d = 'Dotfiles',
+    t = 'Tabs',
+  },
+}, { prefix='<leader>' })

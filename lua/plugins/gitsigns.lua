@@ -30,11 +30,40 @@ require('gitsigns').setup({
     map('n', '<leader>;p', gs.preview_hunk)
     map('n', '<leader>;b', function() gs.blame_line{full=true} end)
     map('n', '<leader>;tb', gs.toggle_current_line_blame)
-    map('n', '<leader>;d', gs.diffthis)
-    map('n', '<leader>;D', function() gs.diffthis('~') end)
+    map('n', '<leader>;d', function() gs.diffthis('~') end)
     map('n', '<leader>;td', gs.toggle_deleted)
 
     -- Text object
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 })
+
+require('which-key').register({
+  ['[c'] = 'Prev Hunk',
+  [']c'] = 'Next Hunk',
+})
+require('which-key').register({
+  w = 'Save',
+  W = 'Save and Quit',
+  z = 'Auto Center Cursor',
+  [';'] = {
+    name = 'GitSigns',
+    s = 'Stage Hunk',
+    r = 'Reset Hunk',
+    S = 'Stage Buffer',
+    u = 'Undo Stage Hunk',
+    R = 'Reset Buffer',
+    p = 'Preview Hunk',
+    b = 'Blame',
+    t = {
+      name = 'Toggle',
+      b = 'Blame',
+      d = 'Deleted',
+    },
+    d = 'Diff',
+  },
+  h = 'Fzf-Git',
+  l = 'Fzf-LSP',
+  n = 'Fzf',
+  r = 'LSP',
+}, { prefix='<leader>' })

@@ -96,11 +96,6 @@ nnoremap <silent><leader>V "+P
 vnoremap <silent><leader>v "+p
 vnoremap <silent><leader>V "+P
 
-" Delete into "0 so it's not lost in the unnamed register
-nnoremap <silent><leader>d "0d
-nnoremap <silent><leader>D "0D
-vnoremap <silent><leader>d "0d
-vnoremap <silent><leader>D "0D
 " Yank Pasting only
 nnoremap <silent><leader>p "0p
 nnoremap <silent><leader>P "0P

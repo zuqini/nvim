@@ -1,4 +1,5 @@
 local lspconfig = require('lspconfig')
+local wk = require('which-key') -- For documentation
 
 -- vim.lsp.set_log_level("debug")
 
@@ -10,31 +11,68 @@ vim.keymap.set('n', '<up>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.keymap.set('n', '<down>', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 -- Q loclist is set in plugins/vim/main.vim
 
+wk.register({
+  ['<up>'] = 'Prev Diagnostic',
+  ['<down>'] = 'Next Diagnostic',
+  ['[d'] = 'Prev Diagnostic',
+  [']d'] = 'Next Diagnostic',
+})
+
+wk.register({
+  e = 'Open Float',
+}, { prefix='<leader>' })
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- Mappings.
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', bufopts)
-    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', bufopts)
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', bufopts)
-    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', bufopts)
-    vim.keymap.set('n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', bufopts)
-    vim.keymap.set('n', '<leader>ra', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', bufopts)
-    vim.keymap.set('n', '<leader>rr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', bufopts)
-    vim.keymap.set('n', '<leader>rl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', bufopts)
-    vim.keymap.set('n', '<leader>rd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
-    vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
-    vim.keymap.set('n', '<leader>rc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
-    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>', bufopts)
-    vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.references()<CR>', bufopts)
+  -- Mappings.
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', bufopts)
+  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', bufopts)
+  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', bufopts)
+  vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>ra', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>rr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>rl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', bufopts)
+  vim.keymap.set('n', '<leader>rd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>rc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
+  vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>', bufopts)
+  vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.references()<CR>', bufopts)
 
-    vim.keymap.set('n', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
-    vim.keymap.set('v', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
+  vim.keymap.set('v', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
+
+  wk.register({
+    K = 'Hover',
+    g = {
+      name = 'Go',
+      d = 'Definition',
+      D = 'Declaration',
+      i = 'Implementation',
+      r = 'References',
+      R = 'References (incl. decl)',
+    }
+  })
+
+  wk.register({
+    K = 'Signature Help',
+    r = {
+      name = 'Misc',
+      a = 'Add Workspace',
+      r = 'Remove Workspace',
+      l = 'Show Workspace',
+      d = 'Type Definition',
+      n = 'Rename',
+      c = 'Code Action',
+      f = 'Format',
+    }
+  }, { prefix='<leader>' })
 end
 
 -- Add additional capabilities supported by nvim-cmp
