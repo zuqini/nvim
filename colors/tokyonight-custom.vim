@@ -9,6 +9,7 @@
 " Modified:
 " Grey: Original: #444b6a - brighter comments
 " Bg4: Original night:#3b3d57/storm:#3a405e - brighter SpecialKey
+" Bg1: Original night: #232433/storm:#282d42 - changed to Bg0
 
 " Initialization: {{{
 highlight clear
@@ -38,7 +39,7 @@ if s:configuration.style ==# 'night'
   let s:palette = {
         \ 'black':      ['#06080a',   '237',  'DarkGrey'],
         \ 'bg0':        ['#1a1b26',   '235',  'Black'],
-        \ 'bg1':        ['#232433',   '236',  'DarkGrey'],
+        \ 'bg1':        ['#1a1b26',   '236',  'DarkGrey'],
         \ 'bg2':        ['#2a2b3d',   '236',  'DarkGrey'],
         \ 'bg3':        ['#32344a',   '237',  'DarkGrey'],
         \ 'bg4':        ['#444b6a',   '237',  'Grey'],
@@ -62,7 +63,7 @@ elseif s:configuration.style ==# 'storm'
   let s:palette = {
         \ 'black':      ['#06080a',   '237',  'DarkGrey'],
         \ 'bg0':        ['#24283b',   '235',  'Black'],
-        \ 'bg1':        ['#282d42',   '236',  'DarkGrey'],
+        \ 'bg1':        ['#24283b',   '236',  'DarkGrey'],
         \ 'bg2':        ['#2f344d',   '236',  'DarkGrey'],
         \ 'bg3':        ['#333954',   '237',  'DarkGrey'],
         \ 'bg4':        ['#3b3d57',   '237',  'Grey'],
