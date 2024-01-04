@@ -53,6 +53,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
   " Utils
+  Plug 'dstein64/vim-startuptime'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'windwp/nvim-autopairs'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
