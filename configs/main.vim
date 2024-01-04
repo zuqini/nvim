@@ -41,6 +41,9 @@ set smartcase
 " <space> to unhighlight search and close coc float menus
 nnoremap <silent> <ESC><ESC> :nohlsearch \| match none \| 2match none \| call coc#float#close_all()<CR>
 
+" Terminal emulator
+tnoremap <Esc> <C-\><C-n>
+
 " more logical Y command
 " because C => c$ and D => d$
 nnoremap Y y$
@@ -62,7 +65,7 @@ nnoremap <leader>Q :Bdelete menu<CR>
 
 " Using Tabs
 nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>T :windo bd<CR> " close tab and kill all buffers within tab
+nnoremap <leader>T :windo bd!<CR> " close tab and kill all buffers within tab
 
 " Windows
 set splitbelow
@@ -94,6 +97,7 @@ set softtabstop=4
 " Colors taken from tokyonight-custom bg4
 " Ideally should use default highlight group, but doesn't seem to work
 " See: https://github.com/Yggdroot/indentLine/issues/339
+" and https://github.com/ghifarit53/tokyonight-vim/issues/20
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#444b6a'
