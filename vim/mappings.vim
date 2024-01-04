@@ -2,7 +2,7 @@ let mapleader = " "
 " unnofficial leader2 = "<BS>"
 
 nnoremap <leader>w :up<CR>
-nnoremap <leader>W :up<CR>:q<CR>
+nnoremap <leader>W :up<CR>:MT<CR>
 
 nnoremap <leader>R :put=execute(':')<left><left>
 
