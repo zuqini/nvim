@@ -97,6 +97,12 @@ nnoremap <silent><leader>V "+P
 vnoremap <silent><leader>v "+p
 vnoremap <silent><leader>V "+P
 
+" Delete into oblivion
+nnoremap <silent><leader>d "_d
+nnoremap <silent><leader>D "_D
+vnoremap <silent><leader>d "_d
+vnoremap <silent><leader>D "_D
+
 " Yank Pasting only
 nnoremap <silent><leader>p "0p
 nnoremap <silent><leader>P "0P
