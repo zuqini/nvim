@@ -45,7 +45,7 @@ call plug#begin(stdpath('data') . '/plugged')
   endfunction
   Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
-  " " Utils
+  " Utils
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'windwp/nvim-autopairs'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
