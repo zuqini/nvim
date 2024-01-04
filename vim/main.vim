@@ -90,6 +90,19 @@ nnoremap <C-v> "+p
 vnoremap <C-x> "+d
 vnoremap <C-c> "+y
 vnoremap <C-v> "+p
+
+nnoremap <silent><leader>y "+y
+nnoremap <silent><leader>Y "+Y
+vnoremap <silent><leader>y "+y
+vnoremap <silent><leader>Y "+Y
+nnoremap <silent><leader>d "+d
+nnoremap <silent><leader>D "+D
+vnoremap <silent><leader>d "+d
+vnoremap <silent><leader>D "+D
+nnoremap <silent><leader>v "+p
+nnoremap <silent><leader>V "+P
+vnoremap <silent><leader>v "+p
+vnoremap <silent><leader>V "+P
 " Yank Pasting only
 nnoremap <silent><leader>p "0p
 nnoremap <silent><leader>P "0P
