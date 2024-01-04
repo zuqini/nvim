@@ -1,4 +1,4 @@
 augroup rustWritePost
     autocmd!
-    autocmd BufWritePost * !cargo fmt
+    autocmd BufWritePost * exe ':!cargo fmt' | redraw
 augroup END
