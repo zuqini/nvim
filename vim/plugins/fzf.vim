@@ -49,6 +49,6 @@ nnoremap <leader>,s :GFiles?<CR>
 nnoremap <leader>,c :Commits<CR>
 nnoremap <leader>,x :BCommits<CR>
 
-nnoremap <leader>nh :Helptags<CR>
-nnoremap <leader>n; :History;<CR>
-nnoremap <leader>n/ :History/<CR>
+nnoremap <leader>fh :Helptags<CR>
+nnoremap <leader>f; :History;<CR>
+nnoremap <leader>f/ :History/<CR>

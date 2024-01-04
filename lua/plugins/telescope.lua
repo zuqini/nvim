@@ -32,7 +32,8 @@ return {
 
     vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 
-    vim.keymap.set('n', '<leader>nh', builtin.help_tags, {})
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+    vim.keymap.set('n', '<leader>fm', builtin.marks, {})
 
     require('telescope').load_extension('fzf')
   end

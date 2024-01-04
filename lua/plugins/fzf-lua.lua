@@ -77,17 +77,18 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>lq', ":lua require'fzf-lua'.quickfix()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>lQ', ":lua require'fzf-lua'.loclist()<CR>", opts)
 
-    vim.api.nvim_set_keymap('n', '<leader>nc', ":lua require'fzf-lua'.commands()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>nn', ":lua require'fzf-lua'.resume()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>n;', ":lua require'fzf-lua'.command_history()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>n/', ":lua require'fzf-lua'.search_history()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>nb', ":lua require'fzf-lua'.builtin()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>nr', ":lua require'fzf-lua'.registers()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>np', ":lua require'fzf-lua'.spell_suggest()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>nk', ":lua require'fzf-lua'.keymaps()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>nh', ":lua require'fzf-lua'.help_tags()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>nd', ":lua require'fzf-lua'.files({ cwd = '~/dotfiles' })<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>nt', ":lua require'fzf-lua'.tabs()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fc', ":lua require'fzf-lua'.commands()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fn', ":lua require'fzf-lua'.resume()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>f;', ":lua require'fzf-lua'.command_history()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>f/', ":lua require'fzf-lua'.search_history()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fb', ":lua require'fzf-lua'.builtin()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fr', ":lua require'fzf-lua'.registers()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fp', ":lua require'fzf-lua'.spell_suggest()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fk', ":lua require'fzf-lua'.keymaps()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fh', ":lua require'fzf-lua'.help_tags()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fd', ":lua require'fzf-lua'.files({ cwd = '~/dotfiles' })<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>ft', ":lua require'fzf-lua'.tabs()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fm', ":lua require'fzf-lua'.marks()<CR>", opts)
 
     require('which-key').register({
       S = 'Find Files'
@@ -97,7 +98,7 @@ return {
       S = 'Native Grep',
       o = 'Old Files (History)',
       b = 'Buffers',
-      h = {
+      [","] = {
         name = 'Fzf-Git',
         b = 'Branches',
         c = 'Commits',
@@ -124,7 +125,7 @@ return {
         q = 'Quickfix',
         Q = 'Loclist',
       },
-      n = {
+      f = {
         name = 'Fzf-Misc',
         s = 'All Files (hidden, ignored)',
         c = 'Commands',
