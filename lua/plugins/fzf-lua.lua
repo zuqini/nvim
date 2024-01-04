@@ -78,7 +78,7 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>lQ', ":lua require'fzf-lua'.loclist()<CR>", opts)
 
     vim.api.nvim_set_keymap('n', '<leader>fc', ":lua require'fzf-lua'.commands()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>fn', ":lua require'fzf-lua'.resume()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>ff', ":lua require'fzf-lua'.resume()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>f;', ":lua require'fzf-lua'.command_history()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>f/', ":lua require'fzf-lua'.search_history()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fb', ":lua require'fzf-lua'.builtin()<CR>", opts)
@@ -129,7 +129,7 @@ return {
         name = 'Fzf-Misc',
         s = 'All Files (hidden, ignored)',
         c = 'Commands',
-        n = 'Resume',
+        u = 'Resume',
         [';'] = 'Commands History',
         ['/'] = 'Search History',
         b = 'Fzf Builtin',
