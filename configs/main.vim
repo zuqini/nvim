@@ -49,10 +49,10 @@ nnoremap <up> <C-W>4+
 nnoremap <down> <C-W>4-
 
 " Clipboard Copy Pasting
-nnoremap <C-v> "*p
-vnoremap <C-x> "*d
-vnoremap <C-c> "*y
-vnoremap <C-v> "*p
+nnoremap <C-v> "+p
+vnoremap <C-x> "+d
+vnoremap <C-c> "+y
+vnoremap <C-v> "+p
 " Yank Pasting only
 nnoremap <silent><leader>p "0p
 nnoremap <silent><leader>P "0P

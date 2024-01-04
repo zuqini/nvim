@@ -34,6 +34,7 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'PhilRunninger/nerdtree-visual-selection'
 
   Plug 'junegunn/vim-plug'
+  Plug 'junegunn/vim-peekaboo'
   Plug 'junegunn/goyo.vim'
   Plug 'junegunn/limelight.vim'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
