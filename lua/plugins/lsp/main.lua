@@ -50,7 +50,7 @@ lspconfig.util.default_config = vim.tbl_extend(
 
 lspconfig.rust_analyzer.setup({
   commands = {
-    RustOpenDocs = {
+    RustOpenExternalDocs = {
       function()
         vim.lsp.buf_request(vim.api.nvim_get_current_buf(), 'experimental/externalDocs', vim.lsp.util.make_position_params(), function(err, url)
           if err then
@@ -70,7 +70,7 @@ lspconfig.rust_analyzer.setup({
 
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
       local opts = { noremap=true, silent=true }
-      buf_set_keymap('n', '<leader>re', ':RustOpenDocs<CR>', opts)
+      buf_set_keymap('n', '<leader>re', ':RustOpenExternalDocs<CR>', opts)
     end,
 })
 lspconfig.tsserver.setup {}
