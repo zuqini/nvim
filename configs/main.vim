@@ -63,15 +63,17 @@ nnoremap <leader>T :windo bd<CR>
 " Windows
 set splitbelow
 set splitright
+nnoremap <left> gT
+nnoremap <right> gt
 
 " copied from ITerm2 Hotkey
 nnoremap <leader>D :sp<CR>
 nnoremap <leader>d :vs<CR>
 " Smart way to move between windows
-nnoremap <Left> <C-W>h
-nnoremap <Down> <C-W>j
-nnoremap <Up> <C-W>k
-nnoremap <Right> <C-W>l
+nnoremap <C-h> <C-W>h
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
 
 " Clipboard Copy Pasting
 nnoremap <leader>x "*d

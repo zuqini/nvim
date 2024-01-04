@@ -124,6 +124,11 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+
+  inoremap <silent><expr> <down> coc#float#has_float() ? coc#float#scroll(1, 1) : "\<down>"
+  inoremap <silent><expr>  <up>  coc#float#has_float() ? coc#float#scroll(0, 1) :  "\<up>"
+  vnoremap <silent><expr> <down> coc#float#has_float() ? coc#float#scroll(1, 1) : "\<down>"
+  vnoremap <silent><expr>  <up>  coc#float#has_float() ? coc#float#scroll(0, 1) :  "\<up>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -161,4 +166,5 @@ nnoremap <silent><nowait> \j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> \k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
+
 nnoremap <silent><nowait> \p  :<C-u>CocListResume<CR>
