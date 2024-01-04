@@ -8,9 +8,8 @@ vim.g.themes = {
 }
 vim.g.theme_index = 2
 vim.g.theme = vim.g.themes[vim.g.theme_index]
-vim.g.theme_timer_active = 1
+vim.g.theme_timer_active = 0
 
-local timer = vim.loop.new_timer()
 local min = 60 * 1000
 
 local M = {}
@@ -71,7 +70,9 @@ end
 
 -- experimental hot reloading
 -- check every 10 min
+-- local timer = vim.loop.new_timer()
 -- timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
+-- vim.g.theme_timer_active = 1
 
 vim.api.nvim_create_user_command('ThemeNext', M.next, {})
 vim.api.nvim_create_user_command('ThemePrev', M.prev, {})
@@ -79,6 +80,7 @@ vim.api.nvim_create_user_command('TN', M.next, {})
 vim.api.nvim_create_user_command('TP', M.prev, {})
 
 -- M.selectThemeByTime()
-M.selectThemeByIndex(vim.g.theme_index)
+-- M.selectThemeByIndex(vim.g.theme_index)
+require('themes/' .. vim.g.theme)
 
 return M
