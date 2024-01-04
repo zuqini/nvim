@@ -32,11 +32,11 @@ end
 function M.selectThemeByTime()
   local hour = tonumber(os.date("%H"))
   local index = 1
-  if hour > 7 and hour < 17 then
+  if hour > 7 and hour < 16 then
     index = 1
-  elseif hour >= 17 and hour < 19 then
+  elseif hour >= 16 and hour < 20 then
     index = 2
-  elseif hour >= 19 and hour < 21 then
+  elseif hour >= 20 and hour < 22 then
     index = 3
   else
     index = 4
