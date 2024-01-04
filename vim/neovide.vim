@@ -1,6 +1,10 @@
 if exists("g:neovide")
   let g:neovide_input_macos_alt_is_meta=v:true
-  set guifont=FiraCode\ Nerd\ Font\ Mono:h18
+  if !is_windows
+    set guifont=FiraCode\ Nerd\ Font\ Mono:h18
+  else
+    set guifont=FiraCode\ NF:h12
+  endif
   let g:neovide_transparency=0.95
   let g:neovide_scroll_animation_length=0.3
   let g:neovide_cursor_animation_length=0.15
@@ -20,6 +24,17 @@ if exists("g:neovide")
    \ '\=eval(submatch(0)+1)',
    \ '')<CR>
   nnoremap <D-Down> :silent! let &guifont = substitute(
+   \ &guifont,
+   \ ':h\zs\d\+',
+   \ '\=eval(submatch(0)-1)',
+   \ '')<CR>
+
+  nnoremap <A-Up> :let &guifont = substitute(
+   \ &guifont,
+   \ ':h\zs\d\+',
+   \ '\=eval(submatch(0)+1)',
+   \ '')<CR>
+  nnoremap <A-Down> :let &guifont = substitute(
    \ &guifont,
    \ ':h\zs\d\+',
    \ '\=eval(submatch(0)-1)',
