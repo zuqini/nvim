@@ -58,23 +58,26 @@ nnoremap <s-tab> :NERDTreeToggle<CR>
 nnoremap <c-f> :NERDTreeFind<CR>
 
 " Using Tabs
-nnoremap <leader>T :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <leader>t :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>T :windo bd<CR>
 
 " Windows
-noremap <leader>D :sp<CR>
-noremap <leader>d :vs<CR>
+set splitbelow
+set splitright
+
+" copied from ITerm2 Hotkey
+nnoremap <leader>D :sp<CR>
+nnoremap <leader>d :vs<CR>
 " Smart way to move between windows
-noremap <C-j> <C-W>j
-noremap <C-k> <C-W>k
-noremap <C-h> <C-W>h
-noremap <C-l> <C-W>l
-noremap <C-t> :tabnew<CR>
+nnoremap <Left> <C-W>h
+nnoremap <Down> <C-W>j
+nnoremap <Up> <C-W>k
+nnoremap <Right> <C-W>l
 
 " Clipboard Copy Pasting
-noremap <leader>x "*d
-noremap <leader>c "*y
-noremap <leader>v "*p
+nnoremap <leader>x "*d
+nnoremap <leader>c "*y
+nnoremap <leader>v "*p
 
 " Indentation with mixed tabs and spaces
 " https://vim.fandom.com/wiki/Indenting_source_code
@@ -82,9 +85,6 @@ set autoindent
 set noexpandtab
 set shiftwidth=4
 set softtabstop=4
-
-set splitbelow
-set splitright
 
 " Auto-toggle hybrid/absolute line numbers
 :set number relativenumber
@@ -105,10 +105,6 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd BufWinEnter * silent NERDTreeMirror
 
 " hard mode to git gud =============================================
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Left> <Nop>
