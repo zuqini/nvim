@@ -58,20 +58,21 @@ call plug#begin(stdpath('data') . '/plugged')
 call plug#end()
 
 if vim_plug_installed
-  " VIMSCRIPT configs
   let vim_configs_path = stdpath('config') . '/vim'
   exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
   exec "source " . vim_configs_path . "/main.vim"
   exec "source " . vim_configs_path . "/configs/fzf.vim"
-  exec "source " . vim_configs_path . "/configs/nvim-tree.vim"
   exec "source " . vim_configs_path . "/configs/surround.vim"
 
-  " LUA configs
+  exec "source " . vim_configs_path . "/configs/nvim-tree.vim"
+  lua require("configs/nvim-tree")
+
+  exec "source " . vim_configs_path . "/configs/lsp.vim"
+  lua require("configs/lsp")
+
   lua require('main')
   lua require("configs/lualine")
   lua require("configs/hop")
-  lua require("configs/nvim-tree")
-  lua require("configs/lsp")
 
   " Disabled configs
   " exec "source " . vim_configs_path . "/configs/configs/hardmode.vim"
