@@ -54,6 +54,7 @@ call plug#begin(stdpath('data') . '/plugged')
   " Utils
   Plug 'nvim-lua/plenary.nvim'
   Plug 'ThePrimeagen/harpoon' " needs plenary
+  Plug 'petertriho/nvim-scrollbar'
   Plug 'dstein64/vim-startuptime'
   Plug 'folke/which-key.nvim'
   Plug 'mbbill/undotree'
