@@ -49,6 +49,9 @@ nnoremap <silent><right> gt
 nnoremap <silent><leader><left> :tabm -1<CR>
 nnoremap <silent><leader><right> :tabm +1<CR>
 
+" go to file in new tab
+nnoremap <silent> gF :tab split<CR>gf
+
 " Windows
 set splitbelow
 set splitright
