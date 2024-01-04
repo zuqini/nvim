@@ -6,10 +6,9 @@ vim.g.themes = {
   'tokyonight',
   'spaceduck',
 }
-vim.g.theme_index = 1
+vim.g.theme_index = 2
 vim.g.theme = vim.g.themes[vim.g.theme_index]
 vim.g.theme_timer_active = 1
-require('themes/' .. vim.g.theme)
 
 local timer = vim.loop.new_timer()
 local min = 60 * 1000
@@ -80,6 +79,6 @@ vim.api.nvim_create_user_command('TN', M.next, {})
 vim.api.nvim_create_user_command('TP', M.prev, {})
 
 -- M.selectThemeByTime()
-M.selectThemeByIndex(2)
+M.selectThemeByIndex(vim.g.theme_index)
 
 return M
