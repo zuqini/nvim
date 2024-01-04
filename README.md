@@ -22,7 +22,7 @@ My custom NeoVim configuration and plugins.
 - `Rg` requires[ ripgrep (rg)](https://github.com/BurntSushi/ripgrep)
 - `Tags` and `Helptags` require Perl
 ### [coc.nvim](https://github.com/neoclide/coc.nvim)
-- Setup [Node.js](https://nodejs.dev/learn/how-to-install-nodejs) for [coc.nvim](https://github.com/neoclide/coc.nvim)
+- Setup [Node.js](https://nodejs.dev/learn/how-to-install-nodejs)
 - Omnisharp Language Server on Unix/Linux for Unity
   - Install [Mono](https://www.mono-project.com/download/stable/#download-mac)
   - In Unity, `Unity > Preferences > External Tools`, check off the options below and regenerate project files:
