@@ -1,3 +1,4 @@
+local Set = require('utils.set');
 -- npm install -g tree-sitter-cli
 -- for certain parsers, tree-sitter-cli needs to be installed
 require("nvim-treesitter.parsers").list.xml = {
@@ -41,8 +42,8 @@ require'nvim-treesitter.configs'.setup {
     -- disable "help" which breaks :h formatting
     disable = function(lang, buf)
         -- First check languages that should be disabled
-        -- local disabled_lang = Set { "help" }
-        local disabled_lang = Set { }
+        -- local disabled_lang = Set.init { "help" }
+        local disabled_lang = Set.init { }
         if disabled_lang[lang] then
           return true
         end

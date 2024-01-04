@@ -1,5 +1,5 @@
 colorscheme habamax
-lua require("helpers")
+lua require("utils.globals")
 exec "source " . stdpath('config') . '/vim/main.vim'
 
 set showmode

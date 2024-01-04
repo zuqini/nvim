@@ -36,6 +36,7 @@ function M.selectThemeByIndex(index)
       end
     end
     if package_name:match('indent_blankline') or
+        package_name:match('indent%-blankline') or
         package_name:match('lualine') then
       package.loaded[package_name] = nil
     end
@@ -43,9 +44,9 @@ function M.selectThemeByIndex(index)
 
   vim.g.theme_index = index
   vim.g.theme = vim.g.themes[vim.g.theme_index]
-  require('themes/' .. vim.g.theme)
-  require('plugins/indent_blankline')
-  require('plugins/lualine')
+  require('plugins.themes.' .. vim.g.theme)
+  require('plugins.indent-blankline.config')
+  require('plugins.lualine.config')
 end
 
 function M.getThemeIndexByTime()
@@ -97,6 +98,6 @@ vim.api.nvim_create_user_command('TP', M.prev, {})
 -- M.selectThemeByTime()
 -- M.selectThemeByIndex(vim.g.theme_index)
 -- vim.g.theme_index = M.getThemeIndexByTime()
-require('themes/' .. vim.g.theme)
+require('plugins.themes.' .. vim.g.theme)
 
 return M

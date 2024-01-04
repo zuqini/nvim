@@ -1,21 +1,14 @@
-function _G.Set (list)
-  local set = {}
-  for _, l in ipairs(list) do set[l] = true end
-  return set
-end
-
-function _G.close_all_float()
+_G.close_all_float = function ()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
         local config = vim.api.nvim_win_get_config(win);
         if config.relative ~= "" then
             vim.api.nvim_win_close(win, false);
-            -- print('Closing window', win);
         end
     end
 end
 
 -- Searching in all windows (including the current one) on the tab page.
-function _G.leap_all_windows()
+_G.leap_all_windows = function ()
   require('leap').leap { target_windows = vim.tbl_filter(
     function (win) return vim.api.nvim_win_get_config(win).focusable end,
     vim.api.nvim_tabpage_list_wins(0)
@@ -24,6 +17,7 @@ end
 
 -- Bidirectional search in the current window is just a specific case of the
 -- multi-window mode.
-function _G.leap_bidirectional()
+_G.leap_bidirectional = function ()
   require('leap').leap { target_windows = { vim.fn.win_getid() } }
 end
+

@@ -1,5 +1,3 @@
--- require('lsp_lines').setup()
-
 -- luasnip setup
 local luasnip = require 'luasnip'
 
