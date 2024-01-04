@@ -13,7 +13,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " Telescope
   " Plug 'nvim-lua/plenary.nvim'
-  " Plug 'nvim-telescope/telescope.nvim'
+  " Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
   " Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " this might be shipped with telescope by default in the future
 
   " FZF
