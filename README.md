@@ -1,13 +1,14 @@
 # nvim
 My Neovim setup
-<img width="1792" alt="Screen Shot 2022-01-17 at 2 31 55 AM" src="https://user-images.githubusercontent.com/5790854/149753476-5594abd9-8185-4c7e-8a19-611bd1a71ccf.png">
+![image](https://user-images.githubusercontent.com/5790854/152670155-c0ff577c-22db-45fe-8d02-485771b228e3.png)
+
 
 ## Install
 <details>
 <summary>MacOS / Linux</summary>
 
 ```
-brew install neovim    # or install neovim with something else
+brew install neovim    # or some other installation method
 git clone https://github.com/zuqini/nvim.git ~/.config/nvim
 nvim
 ```
@@ -19,7 +20,7 @@ nvim
 <summary>Windows (Powershell)</summary>
 
 ```
-choco install neovim    # or install neovim with something else
+choco install neovim    # or some other installation method
 git clone https://github.com/zuqini/nvim.git ~/AppData/Local/nvim
 
 # install vim-plug
@@ -34,16 +35,21 @@ nvim
 
 ## Optional Setup
 <details>
-<summary>Icons</summary>
+<summary>Icons/Italics/Ligatures</summary>
 
 - Install a [patched font](https://github.com/ryanoasis/nerd-fonts)
-  ```
-  brew tap homebrew/cask-fonts
-  brew install --cask font-hack-nerd-font
-  ```
+  - Hack
+    ```
+    brew tap homebrew/cask-fonts
+    brew install --cask font-hack-nerd-font
+    ```
+  - FiraCode
+    - Download at https://www.nerdfonts.com/font-downloads
+  
 - Configure the installed font in your terminal
   
-  e.g. `Iterm2 > Preferences > Profiles > Text > Font > Hack Nerd Font Mono`
+    - e.g. `Iterm2 > Preferences > Profiles > Text > Font > Hack Nerd Font Mono`
+    - Enable ligatures
   
 Alternatively if you don't want to setup icons, you can disable them at `lua/configs/lualine.lua` and `vim/configs/nvim-tree.vim`
  
