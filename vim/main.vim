@@ -17,9 +17,6 @@ set hlsearch
 set ignorecase smartcase
 set laststatus=2
 
-nnoremap <down> gj
-nnoremap <up> gk
-
 " disable F1 as it's easy to accidentally hit on the touchbar
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
@@ -65,6 +62,9 @@ nnoremap <silent><left> gT
 nnoremap <silent><right> gt
 nnoremap <silent><leader><left> :tabm -1<CR>
 nnoremap <silent><leader><right> :tabm +1<CR>
+
+nnoremap <silent><up> :bp<CR>
+nnoremap <silent><down> :bn<CR>
 
 " go to file in new tab
 nnoremap <silent> gF :tab split<CR>gf
