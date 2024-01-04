@@ -8,20 +8,20 @@ return {
     enabled = vim.g.is_windows,
     event = 'VeryLazy', -- @TODO: replace with keys
     dependencies = { 'junegunn/fzf' },
-    config = function ()
+    config = function()
       vrequire('plugins.fzf');
     end
   },
   {
     'darfink/vim-plist',
-    config = function ()
+    config = function()
       vrequire("plugins/plist")
     end
   },
   {
     'mbbill/undotree',
     keys = { '<leader>u' },
-    config = function ()
+    config = function()
       vrequire('plugins/undotree')
     end
   },
