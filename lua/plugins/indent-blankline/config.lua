@@ -1,17 +1,38 @@
-local hl_list = {}
-for i, color in pairs({ '#662121', '#767621', '#216631', '#325a5e', '#324b7b', '#562155' }) do
-  local name = 'IndentBlanklineIndent' .. i
-  vim.api.nvim_set_hl(0, name, { fg = color })
-  table.insert(hl_list, name);
-end
-require('indent_blankline').setup {
-  use_treesitter = true,
-  show_current_context = true,
-  show_current_context_start = true,
-  char_highlight_list = hl_list,
-  show_trailing_blankline_indent = false,
+local highlight = {
+    "IblHighlightLevel1",
+    "IblHighlightLevel2",
+    "IblHighlightLevel3",
+    "IblHighlightLevel4",
+    "IblHighlightLevel5",
+    "IblHighlightLevel6",
 }
-vim.g.indent_blankline_char = '▏'
-vim.g.indent_blankline_context_char = '▎'
-vim.cmd [[highlight IndentBlanklineContextStart guisp=#00FF00 gui=underline]]
-vim.cmd [[highlight IndentBlanklineContextChar guifg=#00FF00 gui=nocombine]]
+
+local hooks = require "ibl.hooks"
+-- create the highlight groups in the highlight setup hook, so they are reset
+-- every time the colorscheme changes
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    vim.api.nvim_set_hl(0, "IblHighlightLevel1", { fg = "#662121" })
+    vim.api.nvim_set_hl(0, "IblHighlightLevel2", { fg = "#767621" })
+    vim.api.nvim_set_hl(0, "IblHighlightLevel3", { fg = "#216631" })
+    vim.api.nvim_set_hl(0, "IblHighlightLevel4", { fg = "#325a5e" })
+    vim.api.nvim_set_hl(0, "IblHighlightLevel5", { fg = "#324b7b" })
+    vim.api.nvim_set_hl(0, "IblHighlightLevel6", { fg = "#562155" })
+    vim.api.nvim_set_hl(0, "IblScope", { fg = "#00FF00" })
+end)
+
+require("ibl").setup {
+  indent = {
+    char =  '▏',
+    highlight = highlight,
+  },
+  scope = {
+    char =  '▎',
+    show_start = false,
+    show_end = false,
+    include = {
+      node_type = {
+        ['*'] = { '*' }
+      }
+    },
+  }
+}
