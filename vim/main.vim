@@ -19,6 +19,8 @@ nnoremap <leader>B :ls<cr>:bd<space>
 nnoremap <leader>q :%bd\|e#\|bd#<CR>
 nnoremap <leader>Q :so $MYVIMRC<CR>
 
+nnoremap <silent><leader><tab> :copen<CR>
+nnoremap <silent><leader><S-tab> :lopen<CR>
 nnoremap <silent><up> :cp<CR>
 nnoremap <silent><down> :cn<CR>
 nnoremap <silent><leader><up> :lp<CR>
