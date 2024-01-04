@@ -7,6 +7,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 
 Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
+Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " install fzf first
 Plug 'junegunn/fzf.vim'
 " note for fzf.vim: for special commands like :Ag and :Rg, need to install additional
@@ -45,6 +46,9 @@ set noexpandtab
 set shiftwidth=4
 set softtabstop=4
 
+set splitbelow
+set splitright
+
 " CUSTOM BINDINGS ==================================================
 " <space> to unhighlight search
 nnoremap <leader><space> :nohlsearch<CR>
@@ -52,10 +56,17 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <C-p> :Files<CR>
 " p to search term within files
 nnoremap <leader>p :Rg<CR>
-" z open/closes folds
+nnoremap <leader>P :Ag<CR>
+" zZ open/closes folds
 nnoremap <leader>z za
-" Z open/closes folds recursively
 nnoremap <leader>Z zA
+" NERDTREE
+nnoremap <s-tab> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+" Windows
+noremap <leader>h :sp<CR>
+noremap <leader>v :vs<CR>
+" CUSTOM BINDINGS END ==============================================
 
 " Auto-toggle hybrid/absolute line numbers
 :set number relativenumber
@@ -65,7 +76,17 @@ nnoremap <leader>Z zA
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
 
-" hard mode to git gud ==================================================
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
+
+" hard mode to git gud =============================================
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
