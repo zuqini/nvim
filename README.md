@@ -5,7 +5,6 @@ My Neovim setup
 ## Install
 <details>
 <summary>MacOS / Linux</summary>
-<br/>
 
 ```
 brew install neovim    # or install neovim with something else
@@ -18,7 +17,6 @@ nvim
 
 <details>
 <summary>Windows (Powershell)</summary>
-<br/>
 
 ```
 choco install neovim    # or install neovim with something else
@@ -37,8 +35,7 @@ nvim
 ## Optional Setup
 <details>
 <summary>Icons</summary>
-<br/>
-  
+
 - Install a [patched font](https://github.com/ryanoasis/nerd-fonts)
   ```
   brew tap homebrew/cask-fonts
@@ -54,7 +51,6 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
 
 <details>
 <summary>Fzf</summary>
-<br/>
 
 - fd - better find utility
 - rg - better grep utility
@@ -64,7 +60,6 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
 
 <details>
 <summary>LSP</summary>
-<br/>
 
 - `:LspInstall {server}`
 - Omnisharp Language Server on Unix/Linux for Unity
@@ -81,7 +76,6 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
 
 <details>
 <summary>Treesitter</summary>
-<br/>
-
+    
 - `:TSInstall {language}`
 </details>
