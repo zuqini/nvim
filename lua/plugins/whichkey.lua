@@ -4,7 +4,7 @@ return {
     local wk = require("which-key")
     wk.setup({
       layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
+        height = { min = 4, max = 15 }, -- min and max height of the columns
         width = { min = 20, max = 35 }, -- min and max width of the columns
         spacing = 3, -- spacing between columns
         align = "left", -- align columns left, center or right
