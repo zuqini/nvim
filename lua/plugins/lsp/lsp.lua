@@ -121,6 +121,7 @@ lspconfig.util.default_config = vim.tbl_extend(
   }
 )
 
+local open_url = require('utils').open_url;
 lspconfig.rust_analyzer.setup({
   commands = {
     RustOpenExternalDocs = {
@@ -131,7 +132,7 @@ lspconfig.rust_analyzer.setup({
           elseif url == nil then
             print("No documentation found.")
           else
-            vim.fn['netrw#BrowseX'](url, 0)
+            open_url(url)
           end
         end)
       end,
@@ -142,9 +143,9 @@ lspconfig.rust_analyzer.setup({
       on_attach(client, bufnr)
 
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-      buf_set_keymap('n', '<leader>ne', ':RustOpenExternalDocs<CR>', keymap_opts)
+      buf_set_keymap('n', '<leader>ge', ':RustOpenExternalDocs<CR>', keymap_opts)
       wk.register({
-        n = {
+        g = {
           e = 'RustOpenExtDocs',
         }
       }, { prefix='<leader>' })
