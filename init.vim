@@ -6,11 +6,11 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 Plug 'sheerun/vim-polyglot'
-" install fzf first
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" note: for special commands like :Ag and :Rg, need to install additional
-" dependencies. See: https://github.com/junegunn/fzf.vim
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " install fzf first
 Plug 'junegunn/fzf.vim'
+" note for fzf.vim: for special commands like :Ag and :Rg, need to install additional
+" dependencies. See: https://github.com/junegunn/fzf.vim
 call plug#end()
 ":PlugInstall
 
@@ -18,23 +18,32 @@ call plug#end()
 set termguicolors
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
-colorscheme tokyonight
+colorscheme tokyonight-custom
+let g:lightline = {'colorscheme' : 'tokyonight'}
 
 set number
 set showcmd
 set wildmenu
-" show matching brackets
-set showmatch
+set showmatch " show matching brackets
 
 " highlight search
 set incsearch
 set hlsearch
+set ignorecase
+set smartcase
 
 " Folding
 set foldenable
 set foldmethod=indent
 set foldlevelstart=1
 set foldnestmax=10
+
+" Indentation with mixed tabs and spaces
+" https://vim.fandom.com/wiki/Indenting_source_code
+set autoindent
+set noexpandtab
+set shiftwidth=4
+set softtabstop=4
 
 " CUSTOM BINDINGS ==================================================
 " <space> to unhighlight search
