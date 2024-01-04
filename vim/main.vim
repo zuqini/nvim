@@ -65,7 +65,7 @@ vnoremap < <gv
 nnoremap <silent>,q :bd<CR>
 nnoremap <silent>,Q :bd!<CR>
 nnoremap <silent>,b :ls<cr>:bd<space>
-nnoremap <silent>,B :%bd\|e#\|bd#<CR>
+nnoremap <silent>,B :%bd!\|e#\|bd!#<CR>
 nnoremap <silent><left> :bp<CR>
 nnoremap <silent><right> :bn<CR>
 
