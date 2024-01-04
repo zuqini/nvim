@@ -11,6 +11,7 @@ return {
   },
   config = function()
     require 'fzf-lua'.setup {
+      file_ignore_patterns = { 'node_modules/.*', '.*%.jpg', '.*%.png', '.*%.gif', '.*%.jpeg' },
       winopts = {
         height = 0.95,
         width = 0.85,
