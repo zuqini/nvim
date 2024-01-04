@@ -21,3 +21,10 @@ augroup mainMiscCommands
   " using // instead of /* */ for vim-commentary
   au FileType c,cpp,cs,java setlocal commentstring=//\ %s
 augroup END
+
+" Make sure this one goes before theme is loaded. Needed for LSP float
+augroup CustomFloatColors
+  au!
+  au ColorScheme * highlight! link NormalFloat Normal
+  au ColorScheme * highlight! link FloatBorder Normal
+augroup END

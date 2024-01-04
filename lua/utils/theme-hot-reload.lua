@@ -4,25 +4,38 @@ vim.g.themes = {
   'gruvbox',
   'kanagawa',
   'tokyonight',
-  'spaceduck',
 }
-vim.g.theme_index = 2
+vim.g.theme_index = 1
 vim.g.theme = vim.g.themes[vim.g.theme_index]
 vim.g.theme_timer_active = 0
 
+local timer = vim.loop.new_timer()
 local min = 60 * 1000
 
--- convert this to lua later
--- custom float colors for LSP. Need to be set before setting the actual colorscheme
 vim.cmd [[
-augroup CustomFloatColors
-  autocmd!
-  autocmd ColorScheme * highlight! link NormalFloat Normal
-  autocmd ColorScheme * highlight! link FloatBorder Normal
-augroup END
 ]]
 
 local M = {}
+
+function M.getThemeIndexByTime()
+  local hour = tonumber(os.date("%H"))
+  local index = 2
+  if hour >= 9 and hour < 15 then
+    -- morning
+    index = 1
+  elseif hour >= 15 and hour < 21 then
+    -- dusk
+    index = 2
+  elseif hour >= 21 or hour < 3 then
+    -- night
+    index = 3
+  else
+    -- dawn
+    index = 4
+  end
+  return index
+end
+
 function M.selectThemeByIndex(index)
   -- this disables lualine and stops its timers
   require('lualine').hide()
@@ -47,17 +60,6 @@ function M.selectThemeByIndex(index)
   require('plugins.themes.' .. vim.g.theme)
   require('plugins.indent-blankline.config')
   require('plugins.lualine.config')
-end
-
-function M.getThemeIndexByTime()
-  local hour = tonumber(os.date("%H"))
-  local index = 2
-  if hour > 7 and hour < 19 then
-    index = 1
-  else
-    index = 2
-  end
-  return index
 end
 
 function M.selectThemeByTime()
@@ -86,18 +88,16 @@ end
 
 -- experimental hot reloading
 -- check every 10 min
--- local timer = vim.loop.new_timer()
--- timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
--- vim.g.theme_timer_active = 1
+timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
+vim.g.theme_timer_active = 1
 
 vim.api.nvim_create_user_command('ThemeNext', M.next, {})
 vim.api.nvim_create_user_command('ThemePrev', M.prev, {})
 vim.api.nvim_create_user_command('TN', M.next, {})
 vim.api.nvim_create_user_command('TP', M.prev, {})
 
--- M.selectThemeByTime()
--- M.selectThemeByIndex(vim.g.theme_index)
--- vim.g.theme_index = M.getThemeIndexByTime()
+vim.g.theme_index = M.getThemeIndexByTime()
+vim.g.theme = vim.g.themes[vim.g.theme_index]
 require('plugins.themes.' .. vim.g.theme)
 
 return M
