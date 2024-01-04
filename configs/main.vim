@@ -26,14 +26,7 @@ vnoremap <C-j> 10j
 " because C => c$ and D => d$
 nnoremap Y y$
 
-" Folding
-set foldenable
-set foldmethod=indent
-set foldlevelstart=99
-set foldnestmax=10
-" zZ open/closes folds
-nnoremap <leader>z za
-nnoremap <leader>Z zA
+let g:highlightedyank_highlight_duration = 350
 
 nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
@@ -73,6 +66,15 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
+
+" Folding
+set foldenable
+set foldmethod=indent
+set foldlevelstart=99
+set foldnestmax=10
+" zZ open/closes folds
+nnoremap <leader>z za
+nnoremap <leader>Z zA
 
 " using // instead of /* */ for vim-commentary
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
