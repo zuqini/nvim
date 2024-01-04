@@ -3,8 +3,8 @@ local vrequire = require("utils").vrequire
 vrequire("options")
 vrequire("mappings")
 vrequire("commands")
-vrequire("neovide") -- client specific configs
+vrequire("neovide")
 
-require("utils.globals") -- globals
-require("utils.lazy") -- plugin manager
-require("utils.theme-hot-reload") -- hot reload
+require("utils.globals")
+require("utils.lazy")
+require("utils.theme-hot-reload")
