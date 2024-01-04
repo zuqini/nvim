@@ -103,7 +103,7 @@ lua require("plugins/harpoon")
 lua require("plugins/misc")
 call RequireVim("plugins/undotree")
 call RequireVim("plugins/closetag")
-call RequireVim("plugins/nutoggle")
+" call RequireVim("plugins/nutoggle")
 call RequireVim("plugins/plist")
 
 if !is_windows
