@@ -38,6 +38,7 @@ vim.api.nvim_set_keymap('n', '<leader>o', ":lua require'fzf-lua'.oldfiles()<CR>"
 vim.api.nvim_set_keymap('n', '<leader>gf', ":lua require'fzf-lua'.git_files()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>gs', ":lua require'fzf-lua'.git_status()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>gc', ":lua require'fzf-lua'.git_commits()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>gx', ":lua require'fzf-lua'.git_bcommits()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>gb', ":lua require'fzf-lua'.git_branches()<CR>", opts)
 
 vim.api.nvim_set_keymap('n', '<leader>t', ":lua require'fzf-lua'.tabs()<CR>", opts)
