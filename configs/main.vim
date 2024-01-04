@@ -50,12 +50,12 @@ nnoremap <leader>z za
 nnoremap <leader>Z zA
 
 " Using Tabs
-nnoremap <silent><leader>t :tab split<CR>
-nnoremap <silent><leader>T :tabclose<CR>
-nnoremap <F3> gT
-nnoremap <F4> gt
-nnoremap <silent><F7> :tabm -1<CR>
-nnoremap <silent><F8> :tabm +1<CR>
+nnoremap <silent><F2> :tab split<CR>
+nnoremap <silent><F9> :tabclose<CR>
+nnoremap H gT
+nnoremap L gt
+nnoremap <silent><leader>h :tabm -1<CR>
+nnoremap <silent><leader>l :tabm +1<CR>
 
 " Windows
 set splitbelow

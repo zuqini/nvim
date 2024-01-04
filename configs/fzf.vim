@@ -3,5 +3,5 @@
 nnoremap <c-p> :Files<CR>
 nnoremap <leader><c-p> :Files 
 " p to search term within files
-nnoremap <leader>f :Rg<CR>
-nnoremap <leader>F :Ag<CR>
+nnoremap <leader>s :Rg<CR>
+nnoremap <leader>S :Ag<CR>
