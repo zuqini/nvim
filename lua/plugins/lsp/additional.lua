@@ -1,4 +1,4 @@
-require('lsp_lines').register_lsp_virtual_lines()
+require('lsp_lines').setup()
 
 -- luasnip setup
 local luasnip = require 'luasnip'

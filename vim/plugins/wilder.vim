@@ -15,9 +15,10 @@ call wilder#set_option('renderer', wilder#renderer_mux({
   \     ' ', wilder#popupmenu_scrollbar(),
   \    ],
   \ }),
-  \ '/': wilder#wildmenu_renderer({
-  \   'highlighter': wilder#basic_highlighter(),
-  \   'separator': ' · ',
-  \   'right': [' ', wilder#wildmenu_index()],
-  \ }),
   \ }))
+
+  " \ '/': wilder#wildmenu_renderer({
+  " \   'highlighter': wilder#basic_highlighter(),
+  " \   'separator': ' · ',
+  " \   'right': [' ', wilder#wildmenu_index()],
+  " \ }),
