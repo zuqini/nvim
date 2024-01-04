@@ -91,10 +91,10 @@ lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
 -- lspconfig.omnisharp.setup {}
 -- omnisharp_mono comes from mason so need to setup manually
-lspconfig.omnisharp_mono.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-        debounce_text_changes = 150,
-    }
-}
+-- lspconfig.omnisharp_mono.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     flags = {
+--         debounce_text_changes = 150,
+--     }
+-- }

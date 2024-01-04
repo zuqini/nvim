@@ -30,7 +30,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
-  " Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
   Plug 'hrsh7th/nvim-cmp' " Autocompletion plugin
   Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp
   Plug 'saadparwaiz1/cmp_luasnip' " Snippets source for nvim-cmp
