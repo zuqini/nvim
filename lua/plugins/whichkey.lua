@@ -37,6 +37,10 @@ return {
       V = 'Clipboard P',
       p = 'Last Yanked p',
       P = 'Last Yanked P',
+      g = {
+        h = 'Open GH file',
+        H = 'Open GH repo',
+      }
     }, { prefix='<leader>' })
 
     wk.register({
