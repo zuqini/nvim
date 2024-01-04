@@ -84,13 +84,13 @@ call RequireVim("neovide")
 
 lua require("plugins/nvim-tree")
 
-lua require("plugins/treesitter/main")
+lua require("plugins/treesitter/treesitter")
 lua require("plugins/treesitter/context")
 lua require("plugins/treesitter/treeclimber")
 
 lua require("plugins/lsp/mason")
-lua require("plugins/lsp/main")
-lua require("plugins/lsp/additional")
+lua require("plugins/lsp/lsp")
+lua require("plugins/lsp/cmp")
 lua pcall(function() require("plugins/lsp/my") end) -- this is for env specific lsp configs
 
 lua require("plugins/lualine")
