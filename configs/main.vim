@@ -40,13 +40,9 @@ set smartcase
 " <space> to unhighlight search
 nnoremap <leader><esc> :nohlsearch<CR>
 
-" FZF
-" Ctrl-p to search for file
-nnoremap <c-p> :Files<CR>
-nnoremap <leader><c-p> :Files 
-" p to search term within files
-nnoremap <leader>p :Rg<CR>
-nnoremap <leader>P :Ag<CR>
+" smaller scroll to be less jarring
+nnoremap <C-d> 20<C-d>
+nnoremap <C-u> 20<C-u>
 
 " Folding
 set foldenable
@@ -57,10 +53,7 @@ set foldnestmax=10
 nnoremap <leader>z za
 nnoremap <leader>Z zA
 
-" NERDTREE
-nnoremap <s-tab> :NERDTreeToggle<CR>
-nnoremap <c-n> :NERDTreeFind<CR>
-
+" Kill buffers
 nnoremap <leader>Q :Bdelete menu<CR>
 
 " Using Tabs
@@ -103,25 +96,3 @@ set softtabstop=4
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
 
-" Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
-
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-" Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * silent NERDTreeMirror
-
-" hard mode to git gud =============================================
-let g:hardtime_default_on = 1
-let g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+"]
-let g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+"]
-let g:list_of_insert_keys = []
-let g:list_of_disabled_keys = []
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
-inoremap <BS> <Nop>
-inoremap <Del> <Nop>
