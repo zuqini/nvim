@@ -4,3 +4,6 @@ source $HOME/.config/nvim/configs/fzf.vim
 source $HOME/.config/nvim/configs/nerdtree.vim
 source $HOME/.config/nvim/configs/easymotion.vim
 source $HOME/.config/nvim/configs/hardmode.vim
+
+" Disabled
+" source $HOME/.config/nvim/configs/absrelnumtoggle.vim

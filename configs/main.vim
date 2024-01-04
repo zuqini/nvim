@@ -105,15 +105,8 @@ let g:indentLine_color_gui = '#444b6a'
 " whitespace characters
 set list
 set showbreak=↪\
+set listchars=tab:→\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
+" other listchars:
 "set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 "set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 "set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
-set listchars=tab:→\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
-
-" Auto-toggle hybrid/absolute line numbers
-:set number relativenumber
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
