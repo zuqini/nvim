@@ -1,6 +1,6 @@
 -- TODO: Instead of using vim variables, convert to full lua 
 vim.g.themes = {
-  'nightfox',
+  -- 'nightfox',
   'gruvbox',
   'kanagawa',
   'tokyonight',
