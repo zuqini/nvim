@@ -15,7 +15,6 @@ return {
   },
   {
     'hrsh7th/nvim-cmp', -- Autocompletion plugin
-    -- not InsertEnter because I need it for commandline cmp too
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       'hrsh7th/cmp-buffer',
