@@ -42,7 +42,7 @@ require("lazy").setup({
   },
 
   -- FZF
-  { 'junegunn/fzf', build = './install --bin' },
+  { 'junegunn/fzf', build = (vim.g.is_window and '' or './install --bin') },
   {
     'ibhagwan/fzf-lua',
     enabled = not vim.g.is_windows,
