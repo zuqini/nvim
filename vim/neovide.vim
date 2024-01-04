@@ -6,7 +6,7 @@ let g:neovide_input_macos_alt_is_meta=v:true
 if !g:is_windows
   set guifont=FiraCode\ Nerd\ Font\ Mono:h18
 else
-  set guifont=FiraCode\ NF:h15
+  set guifont=FiraCode\ NFM:h15
 endif
 let g:neovide_transparency=0.95
 let g:neovide_scroll_animation_length=0.3
