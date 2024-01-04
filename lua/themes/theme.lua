@@ -72,13 +72,14 @@ end
 
 -- experimental hot reloading
 -- check every 10 min
-timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
+-- timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
 
 vim.api.nvim_create_user_command('ThemeNext', M.next, {})
 vim.api.nvim_create_user_command('ThemePrev', M.prev, {})
 vim.api.nvim_create_user_command('TN', M.next, {})
 vim.api.nvim_create_user_command('TP', M.prev, {})
 
-M.selectThemeByTime()
+-- M.selectThemeByTime()
+M.selectThemeByIndex(2)
 
 return M
