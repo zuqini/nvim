@@ -57,18 +57,18 @@ nnoremap <leader>T :windo bd!<CR> " close tab and kill all buffers within tab
 " Windows
 set splitbelow
 set splitright
-nnoremap <C-h> <C-W>4<
-nnoremap <C-l> <C-W>4>
-nnoremap <C-k> <C-W>4+
-nnoremap <C-j> <C-W>4-
-nnoremap <left> <C-W>h
-nnoremap <right> <C-W>l
-nnoremap <up> <C-W>k
-nnoremap <down> <C-W>j
-nnoremap <leader><left> <C-W>H
-nnoremap <leader><right> <C-W>L
-nnoremap <leader><up> <C-W>K
-nnoremap <leader><down> <C-W>J
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap <C-k> <C-W>k
+nnoremap <C-j> <C-W>j
+nnoremap <left> <C-W>4<
+nnoremap <right> <C-W>4>
+nnoremap <up> <C-W>4+
+nnoremap <down> <C-W>4-
+nnoremap <leader><C-h> <C-W>H
+nnoremap <leader><C-l> <C-W>L
+nnoremap <leader><C-k> <C-W>K
+nnoremap <leader><C-j> <C-W>J
 nnoremap <silent><F5> :mod<CR>
 
 " copied from ITerm2 Hotkey
