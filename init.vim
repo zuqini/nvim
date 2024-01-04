@@ -1,5 +1,5 @@
-" Themes: spaceduck-custom, gruvbox
-let theme = "gruvbox"
+let themes = ["spaceduck-custom", "gruvbox"]
+let theme = themes[1]
 
 let is_windows = has("win64") || has("win32") || has("win16")
 let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
@@ -74,6 +74,7 @@ if vim_plug_installed
   " 3. nvim-tree.vim needs to execute before nvim-tree
 
   lua require("helpers")
+  call RequireVim("themes/" . theme)
   call RequireVim("main")
 
   call RequireVim("plugins/nvim-tree")
