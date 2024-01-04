@@ -11,7 +11,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
-  Plug 'kyazdani42/nvim-tree.lua' " deprecation notice: https://github.com/kyazdani42/nvim-tree.lua/issues/877
+  Plug 'kyazdani42/nvim-tree.lua' " https://github.com/kyazdani42/nvim-tree.lua/issues/877
 
   " Telescope
   " Plug 'nvim-lua/plenary.nvim'
@@ -64,7 +64,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
   Plug 'junegunn/vim-peekaboo'
   Plug 'lukas-reineke/indent-blankline.nvim'
-  Plug 'ggandor/leap.nvim'
+  Plug 'ggandor/leap.nvim' " breaking changes: https://github.com/ggandor/leap.nvim/issues/18
 call plug#end()
 command! PU PlugUpdate | PlugUpgrade
 
