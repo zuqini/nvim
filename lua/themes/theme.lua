@@ -16,14 +16,16 @@ local min = 60 * 1000;
 
 local M = {}
 function M.selectThemeByIndex(index)
+  -- this disables lualine and stops its timers
+  require('lualine').hide()
+
   -- experimental code for hot reloading
   -- hacky and buggy: unload theme packages for hot-reloading
   for _, theme_name in pairs(vim.g.themes) do
     for package_name, _ in pairs(package.loaded) do
-      if package_name:match(theme_name) then
-        package.loaded[package_name] = nil
-      end
-      if package_name:match('indent_blankline') then
+      if package_name:match(theme_name) or
+          package_name:match('indent_blankline') or
+          package_name:match('lualine') then
         package.loaded[package_name] = nil
       end
     end
@@ -33,6 +35,7 @@ function M.selectThemeByIndex(index)
   vim.g.theme = vim.g.themes[vim.g.theme_index]
   require('themes/' .. vim.g.theme)
   require('plugins/indent_blankline')
+  require('plugins/lualine')
 end
 
 function M.selectThemeByTime()
@@ -65,13 +68,14 @@ function M.prev()
   M.selectThemeByIndex(((vim.g.theme_index - 2) % #vim.g.themes) + 1)
 end
 
--- experimental hot reloading. Disabled since buggy
+-- experimental hot reloading
 -- check every 10 min
--- timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
--- vim.api.nvim_set_keymap('n', '<leader>;', ':lua require"themes/theme".next()<CR>', {noremap = true, silent = true})
+timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
 
 vim.api.nvim_create_user_command('ThemeNext', M.next, {})
 vim.api.nvim_create_user_command('ThemePrev', M.prev, {})
+vim.api.nvim_create_user_command('TN', M.next, {})
+vim.api.nvim_create_user_command('TP', M.prev, {})
 
 M.selectThemeByTime()
 
