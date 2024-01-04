@@ -41,7 +41,9 @@ function M.selectThemeByTime()
   else
     index = 4
   end
-  M.selectThemeByIndex(index)
+  if vim.g.theme_index ~= index then
+    M.selectThemeByIndex(index)
+  end
 end
 
 vim.api.nvim_set_keymap('n', '<leader>m', ':lua require"themes/theme".cycleTheme()<CR>', {noremap = true, silent = true})
