@@ -4,6 +4,7 @@ local themes = {
   { name = 'gruvbox', lualine = 'auto', tabby_header = ' 火' },
   { name = 'kanagawa', lualine = 'auto', tabby_header = ' 水' },
   { name = 'ayu', lualine = 'ayu', tabby_header = ' 土' },
+  { name = 'citruszest', lualine = 'citruszest', tabby_header = ' 金' },
 }
 local theme_index = 1
 local theme_timer_active = 0
