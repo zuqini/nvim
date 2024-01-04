@@ -1,17 +1,17 @@
 local theme = require('utils.theme-hot-reload').get_current_lualine_theme()
 
-local separators0 = { left = '', right = '' }
-local separators1 = { left = '', right = '' }
-local separators2 = { left = '', right = '' }
-local separators3 = { left = '', right = '' }
-local separators4 = { left = '', right = '' }
+local no_seps = { left = '', right = '' }
+local angle_down_seps = { left = '', right = '' }
+local angle_up_seps = { left = '', right = '' }
+local triangle_seps = { left = '', right = '' }
+local circle_seps = { left = '', right = '' }
 
-local separators5 = { left = '\\', right = '/' }
-local separators6 = { left = '/', right = '\\' }
-local separators7 = { left = '', right = '' }
-local separators8 = { left = '', right = '' }
-local separators9 = { left = '', right = '' }
-local separators10 = { left = '', right = '' }
+local angle_down_thin_seps = { left = '\\', right = '/' }
+local angle_up_thin_seps = { left = '/', right = '\\' }
+local angle_down_thin2_seps = { left = '', right = '' }
+local angle_up_thin2_seps = { left = '', right = '' }
+local triangle_thin_seps = { left = '', right = '' }
+local circle_thin_seps = { left = '', right = '' }
 
 -- local signs = { Error = '', Warn = '', Info = '', Hint = 'ﯦ' }
 -- local symbols = { error = ' ', warn = ' ', info = ' ', hint = 'ﯦ ' }
@@ -22,28 +22,27 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local winbar = {
-  lualine_b = {
-    {
-      'filetype',
-      colored = true, -- Displays filetype icon in color if set to true
-      icon_only = true, -- Display only an icon for filetype
-      padding = { left = 1, right = 0 },
-      component_separators = separators0,
-      section_separators = separators2,
+local winbar =
+{
+  {
+    'filetype',
+    colored = true, -- Displays filetype icon in color if set to true
+    icon_only = true, -- Display only an icon for filetype
+    padding = { left = 1, right = 0 },
+    component_separators = no_seps,
+    section_separators = angle_up_seps,
+  },
+  {
+    'filename',
+    file_status = true,
+    path = 1,
+    symbols = {
+      modified = '[+]',
+      readonly = '[-]',
+      unnamed = '[]',
     },
-    {
-      'filename',
-      file_status = true,
-      path = 1,
-      symbols = {
-        modified = '[+]',
-        readonly = '[-]',
-        unnamed = '[]',
-      },
-      separator = '',
-    },
-  }
+    separator = '',
+  },
 };
 
 local tabline = {
@@ -108,16 +107,16 @@ local sections = {
 require('lualine').setup {
   options = {
     theme = theme,
-    component_separators = separators9,
-    section_separators = separators1,
+    component_separators = angle_down_thin2_seps,
+    section_separators = angle_down_seps,
     icons_enabled = true,
     globalstatus = true,
 
     -- Uncomment to disable icons
     -- icons_enabled = false,
   },
-  winbar = winbar,
-  inactive_winbar = winbar,
+  winbar = { lualine_b = winbar },
+  inactive_winbar = { lualine_c = winbar },
   tabline = tabline,
   sections = sections,
   extensions = { 'fzf' },
