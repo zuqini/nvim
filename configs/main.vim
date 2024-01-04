@@ -64,7 +64,8 @@ nnoremap <leader>z za
 nnoremap <leader>Z zA
 
 " Kill buffers
-nnoremap <leader>Q :Bdelete menu<CR>
+set confirm
+nnoremap <silent> <C-q> :Bdelete menu<CR>
 
 " Using Tabs
 nnoremap <leader>t :tabnew<CR>
