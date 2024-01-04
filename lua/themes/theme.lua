@@ -49,6 +49,6 @@ end
 vim.api.nvim_set_keymap('n', '<leader>m', ':lua require"themes/theme".cycleTheme()<CR>', {noremap = true, silent = true})
 
 local timer = vim.loop.new_timer()
-timer:start((60 - tonumber(os.date("%M"))) * 1000 * 60 + 1000, 60000, vim.schedule_wrap(M.selectThemeByTime))
+timer:start((60 - tonumber(os.date("%M"))) * 1000 * 60 + 1000 * 60, 60 * 60 * 1000, vim.schedule_wrap(M.selectThemeByTime))
 M.selectThemeByTime()
 return M
