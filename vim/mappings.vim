@@ -1,8 +1,8 @@
 let mapleader = " "
 " unnofficial leader2 = "<BS>"
 
-nnoremap <leader>w :w<CR>
-nnoremap <leader>W :wq<CR>
+nnoremap <leader>w :up<CR>
+nnoremap <leader>W :up<CR>:q<CR>
 
 nnoremap <silent> <c-s> :cd %:p:h<CR>
 nnoremap <leader>R :put=execute(':')<left><left>
