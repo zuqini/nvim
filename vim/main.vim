@@ -69,7 +69,7 @@ vnoremap > >gv
 vnoremap < <gv
 
 " highlight without moving
-nnoremap <silent><leader>i :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+nnoremap <silent><leader>u :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Using Tabs
 nnoremap <silent><leader>gt :tab split<CR>
@@ -92,7 +92,7 @@ nnoremap <S-down> <C-W>4-
 
 " Clipboard Copy Pasting
 nnoremap <silent><leader>y "+y
-nnoremap <silent><leader>Y "+Y
+nnoremap <silent><leader>Y "+y$
 vnoremap <silent><leader>y "+y
 vnoremap <silent><leader>Y "+Y
 nnoremap <silent><leader>d "+d
