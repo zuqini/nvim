@@ -22,4 +22,4 @@ require('nvim-tree').setup({
 
 local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap('n', '<s-tab>', ':NvimTreeToggle<CR>', opts)
-vim.api.nvim_set_keymap('n', '<c-t>', ':NvimTreeFindFile!<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader><tab>', ':NvimTreeFindFileToggle!<CR>', opts)
