@@ -2,6 +2,6 @@
 set number relativenumber
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber | let NERDTreeShowLineNumbers=0
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber | let NERDTreeShowLineNumbers=0
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
