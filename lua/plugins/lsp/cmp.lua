@@ -1,5 +1,23 @@
 -- luasnip setup
 local luasnip = require 'luasnip'
+---#Mappings
+-- Previous snippet region
+vim.keymap.set({ "i", "s" }, "<C-k>", function()
+    if luasnip.jumpable(-1) then luasnip.jump(-1) end
+end, { silent = true })
+
+-- Next snippet region
+vim.keymap.set({ "i", "s" }, "<C-j>", function()
+    if luasnip.jumpable(1) then luasnip.jump(1) end
+end, { silent = true })
+
+-- Cycle "choices" for current snippet region
+vim.keymap.set({ "i", "s" }, "<c-l>", function()
+    if luasnip.choice_active() then luasnip.change_choice(1) end
+end)
+vim.keymap.set({ "i", "s" }, "<c-h>", function()
+    if luasnip.choice_active() then luasnip.change_choice(-1) end
+end)
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
