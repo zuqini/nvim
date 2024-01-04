@@ -55,7 +55,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'ThePrimeagen/harpoon' " needs plenary
   Plug 'darfink/vim-plist'
-  Plug 'nvim-zh/colorful-winsep.nvim'
   Plug 'petertriho/nvim-scrollbar'
   Plug 'dstein64/vim-startuptime'
   Plug 'folke/which-key.nvim'
@@ -94,7 +93,6 @@ lua require("plugins/lsp/cmp")
 lua pcall(function() require("plugins/lsp/my") end) -- this is for env specific lsp configs
 
 lua require("plugins/lualine")
-lua require("plugins/colorful-winsep")
 lua require("plugins/gitsigns")
 lua require("plugins/indent_blankline")
 lua require("plugins/leap")
