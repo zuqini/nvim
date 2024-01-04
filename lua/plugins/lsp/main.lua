@@ -3,11 +3,54 @@ local wk = require('which-key') -- For documentation
 
 -- vim.lsp.set_log_level("debug")
 
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+local keymap_opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', keymap_opts)
+vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', keymap_opts)
+vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', keymap_opts)
 -- Q loclist is set in plugins/vim/main.vim
+
+-- local border = {
+--       {"🭽", "FloatBorder"},
+--       {"▔", "FloatBorder"},
+--       {"🭾", "FloatBorder"},
+--       {"▕", "FloatBorder"},
+--       {"🭿", "FloatBorder"},
+--       {"▁", "FloatBorder"},
+--       {"🭼", "FloatBorder"},
+--       {"▏", "FloatBorder"},
+-- }
+
+-- convert this to lua later
+vim.cmd [[
+augroup CustomFloatColors
+  autocmd!
+  autocmd ColorScheme * highlight! link NormalFloat Normal
+  autocmd ColorScheme * highlight! link FloatBorder Normal
+augroup END
+]]
+local border = {
+      {"╭", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╮", "FloatBorder"},
+      {"│", "FloatBorder"},
+      {"╯", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╰", "FloatBorder"},
+      {"│", "FloatBorder"},
+}
+
+-- LSP settings (for overriding per client)
+local handlers = {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+}
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
 
 wk.register({
   ['[d'] = 'Prev Diagnostic',
@@ -108,7 +151,7 @@ lspconfig.rust_analyzer.setup({
       on_attach(client, bufnr)
 
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-      buf_set_keymap('n', '<leader>ne', ':RustOpenExternalDocs<CR>', opts)
+      buf_set_keymap('n', '<leader>ne', ':RustOpenExternalDocs<CR>', keymap_opts)
       wk.register({
         n = {
           e = 'RustOpenExtDocs',

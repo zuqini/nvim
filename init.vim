@@ -76,14 +76,11 @@ function! RequireVim(path)
   exec "source " . stdpath('config') . '/vim/' . a:path . '.vim'
 endfunction
 
-" Order is important
-" 1. helpers.lua defines helper functions that other config files may use
-" 2. theme should be before everything else since some plugins need the theme to be set prior to setup
-" 3. nvim-tree.vim needs to execute before nvim-tree
+" require helpers.lua first - it defines helper functions that other config files may use
 lua require("helpers")
+
 call RequireVim("main")
 call RequireVim("neovide")
-lua require("themes/theme")
 
 lua require("plugins/nvim-tree")
 
@@ -114,3 +111,6 @@ if !is_windows
 else
   call RequireVim("plugins/fzf")
 endif
+
+" theme needs to be at the end so the ColorScheme autocmds take effect
+lua require("themes/theme")

@@ -21,6 +21,8 @@ set cursorline
 set scrolloff=8
 set synmaxcol=512
 set undofile
+set pumblend=6
+set winblend=6
 
 " block insert
 " set guicursor=n-v-c-i-ci-ve:block,r-cr:hor20,o:hor50
