@@ -35,7 +35,8 @@ set foldnestmax=10
 nnoremap <leader>z za
 nnoremap <leader>Z zA
 
-nnoremap <silent><F5> :mod<CR>
+vnoremap > >gv
+vnoremap < <gv
 
 " Using Tabs
 nnoremap <silent><leader>gt :tab split<CR>
