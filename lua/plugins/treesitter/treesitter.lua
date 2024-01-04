@@ -1,3 +1,5 @@
+-- npm install -g tree-sitter-cli
+-- for certain parsers, tree-sitter-cli needs to be installed
 require("nvim-treesitter.parsers").list.xml = {
 	install_info = {
 		url = "https://github.com/Trivernis/tree-sitter-xml",

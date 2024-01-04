@@ -33,16 +33,11 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-nnoremap <left> h
-nnoremap <down> j
-nnoremap <up> k
-nnoremap <right> l
-
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
 
-nnoremap <leader>R :so $MYVIMRC<CR>
 nnoremap <silent> <c-s> :cd %:p:h<CR>
+nnoremap <leader>R :put=execute(':')<left><left>
 
 " format json
 nnoremap <leader>nq :%!jq<CR>
@@ -176,6 +171,16 @@ if &encoding == "utf-8"
 else
   set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
 endif
+
+" Search for the ... arguments separated with whitespace (if no '!'),
+" or with non-word characters (if '!' added to command).
+function! SearchMultiLine(bang, ...)
+  if a:0 > 0
+    let sep = (a:bang) ? '\_W\+' : '\_s\+'
+    let @/ = join(a:000, sep)
+  endif
+endfunction
+command! -bang -nargs=* S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 
 " Augroups
 augroup mainMiscCommands

@@ -44,9 +44,6 @@ require('which-key').register({
   [']g'] = 'Next Hunk',
 })
 require('which-key').register({
-  w = 'Save',
-  W = 'Save and Quit',
-  z = 'Auto Center Cursor',
   [';'] = {
     name = 'GitSigns',
     s = 'Stage Hunk',
@@ -63,8 +60,4 @@ require('which-key').register({
     },
     d = 'Diff',
   },
-  h = 'Fzf-Git',
-  l = 'Fzf-LSP',
-  n = 'Fzf',
-  r = 'LSP',
 }, { prefix='<leader>' })
