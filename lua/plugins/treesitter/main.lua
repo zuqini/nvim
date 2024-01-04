@@ -109,21 +109,25 @@ require'nvim-treesitter.configs'.setup {
       goto_next_start = {
         ["]m"] = "@function.outer",
         ["]f"] = "@function.outer",
+        ["]["] = "@function.outer",
         ["]c"] = { query = "@class.outer", desc = "Next class start" },
       },
       goto_next_end = {
         ["]M"] = "@function.outer",
         ["]F"] = "@function.outer",
+        ["]]"] = "@function.outer",
         ["]C"] = "@class.outer",
       },
       goto_previous_start = {
         ["[m"] = "@function.outer",
         ["[f"] = "@function.outer",
+        ["[["] = "@function.outer",
         ["[c"] = "@class.outer",
       },
       goto_previous_end = {
         ["[M"] = "@function.outer",
         ["[F"] = "@function.outer",
+        ["[]"] = "@function.outer",
         ["[C"] = "@class.outer",
       },
     },
