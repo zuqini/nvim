@@ -1,9 +1,9 @@
 -- '  ﳟ          ﲵ    ﴫ  '
 local themes = {
-  { name = 'nightfox', lualine = 'auto', tabby_header = ' 木 ' },
-  { name = 'gruvbox', lualine = 'auto', tabby_header = ' 火 ' },
-  { name = 'kanagawa', lualine = 'auto', tabby_header = ' 水 ' },
-  { name = 'ayu', lualine = 'ayu', tabby_header = ' 土 ' },
+  { name = 'nightfox', lualine = 'auto', tabby_header = ' 木' },
+  { name = 'gruvbox', lualine = 'auto', tabby_header = ' 火' },
+  { name = 'kanagawa', lualine = 'auto', tabby_header = ' 水' },
+  { name = 'ayu', lualine = 'ayu', tabby_header = ' 土' },
 }
 local theme_index = 1
 local theme_timer_active = 0
