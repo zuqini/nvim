@@ -9,6 +9,9 @@ nnoremap <leader>Q :wq<CR>
 nnoremap <leader>b :ls<cr>:b<space>
 nnoremap <leader>B :ls<cr>:sb<space>
 
+" centering
+nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
+
 " Esc in Terminal emulator
 " See https://github.com/junegunn/fzf.vim/issues/544 for FZF
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
@@ -86,9 +89,6 @@ set foldenable
 set foldmethod=indent
 set foldlevelstart=99
 set foldnestmax=10
-" zZ open/closes folds
-nnoremap <leader>z za
-nnoremap <leader>Z zA
 
 " using // instead of /* */ for vim-commentary
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
