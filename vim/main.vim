@@ -19,8 +19,7 @@ set wildmenu
 set showmatch " show matching brackets
 set incsearch
 set hlsearch
-set ignorecase
-set smartcase
+set ignorecase smartcase
 set laststatus=2
 
 " NOTE: dependency on coc
