@@ -48,7 +48,6 @@ nnoremap <leader>z za
 nnoremap <leader>Z zA
 
 " Kill buffers
-nnoremap <silent> <C-q> :Bdelete menu<CR>
 nnoremap <silent> <leader>Q :Bdelete! menu<CR>
 
 " Using Tabs
@@ -77,12 +76,13 @@ nnoremap <leader>D :sp<CR>
 nnoremap <leader>d :vs<CR>
 
 " Clipboard Copy Pasting
-nnoremap <leader>x "*d
-nnoremap <leader>c "*y
-nnoremap <leader>v "*p
-vnoremap <leader>x "*d
-vnoremap <leader>c "*y
-vnoremap <leader>v "*p
+nnoremap <C-v> "*p
+vnoremap <C-x> "*d
+vnoremap <C-c> "*y
+vnoremap <C-v> "*p
+" Yank Pasting only
+nnoremap <leader>v "0p
+nnoremap <leader>V "0P
 
 " Indentation without hard tabs
 " https://vim.fandom.com/wiki/Indenting_source_code
