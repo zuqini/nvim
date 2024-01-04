@@ -1,9 +1,6 @@
 return {
   'lewis6991/gitsigns.nvim',
-  event = 'VeryLazy',
-  dependencies = {
-    'petertriho/nvim-scrollbar',
-  },
+  lazy = true,
   config = function ()
     require('gitsigns').setup({
       on_attach = function(bufnr)
@@ -44,7 +41,6 @@ return {
         map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
       end
     })
-    require("scrollbar.handlers.gitsigns").setup()
 
     require('which-key').register({
       ['[g'] = 'Prev Hunk',

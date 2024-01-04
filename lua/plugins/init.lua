@@ -29,11 +29,6 @@ return {
     end
   },
   {
-    'petertriho/nvim-scrollbar',
-    event = 'VeryLazy',
-    config = true,
-  },
-  {
     'kylechui/nvim-surround', -- ys,ds,cs,ts
     event = 'VeryLazy',
     config = true,
