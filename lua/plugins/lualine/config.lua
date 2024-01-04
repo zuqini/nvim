@@ -60,36 +60,6 @@ require('lualine').setup {
   inactive_winbar = {
     lualine_b = winbar,
   },
-  tabline = {
-    lualine_a = {
-      {
-        'buffers',
-        filetype_names = {
-          TelescopePrompt = 'Telescope',
-          dashboard = 'Dashboard',
-          packer = 'Packer',
-          fzf = 'FZF',
-          alpha = 'Alpha'
-        },
-        show_filename_only = true,   -- Shows shortened relative path when set to false.
-        hide_filename_extension = true,   -- Hide filename extension when set to true.
-        max_length = vim.o.columns - 15 - 5; -- 15 is the length of tabs defined below + 5 for padding
-
-        symbols = {
-          modified = '[+]',
-          unnamed = '[]',
-          readonly = '[-]',
-        },
-      }
-    },
-    lualine_z = {
-      {
-        'tabs',
-        mode = 0,
-        max_length = 15;
-      },
-    },
-  },
   sections = {
     lualine_a = {
       {
