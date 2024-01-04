@@ -35,7 +35,7 @@ nnoremap <leader><c-b> :%bd\|e#\|bd#<CR>
 nnoremap <leader>R :so $MYVIMRC<CR>
 
 " centering
-set scrolloff=999
+" set scrolloff=999
 nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
 
 " Esc in Terminal emulator
