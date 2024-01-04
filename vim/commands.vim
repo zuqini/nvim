@@ -1,3 +1,6 @@
+command! L :Lazy<CR>
+command! LS :Lazy sync<CR>
+
 " Search for the ... arguments separated with whitespace (if no '!'),
 " or with non-word characters (if '!' added to command).
 function! SearchMultiLine(bang, ...)
