@@ -11,7 +11,7 @@ local theme = {
 require('tabby.tabline').set(function(line)
   return {
     {
-      { '  ', hl = theme.head },
+      { '  ', hl = theme.head },
       line.sep('', theme.head, theme.fill),
     },
     line.tabs().foreach(function(tab)
