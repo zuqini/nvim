@@ -2,7 +2,7 @@
 My custom NeoVim configuration and plugins.
 ![image](https://user-images.githubusercontent.com/5790854/103149736-22e72a80-4721-11eb-9519-019522241c2a.png)
 
-## Set-up Instructions
+## Installation
 ### Unix/Linux (terminal)
 - Install Homebrew and run `$ brew install neovim`
 - Set up terminal
@@ -11,12 +11,12 @@ My custom NeoVim configuration and plugins.
 - Clone into `~/.config/nvim`
 - Run `$ nvim`
 
-`init.vim` should automatically install Vim-Plug and plugins on first run.
+\*`init.vim` will automatically install Vim-Plug and plugins.
 
-The theme sets background to transparent because I use a background image in the terminal. To use the default theme background, see `configs/main.vim`.
+\*The theme sets background to transparent because I use a background image in the terminal. To use the default theme background, see `configs/main.vim`.
 
-### Windows (neovim-qt)
-Windows requires manual Vim-Plug and plugins set-up.
+### Windows (nvim-qt)
+\*Windows requires manual Vim-Plug and plugins installation.
 - Follow the [Windows installation instructions](https://github.com/neovim/neovim/releases/)
 - Add path to `nvim-qt.exe` to environment variables
 - Install [Vim-Plug](https://github.com/junegunn/vim-plug)
@@ -42,7 +42,7 @@ See `ginit.vim` for nvim-qt specific configs.
 export FrameworkPathOverride=~/.config/coc/extensions/coc-omnisharp-data/server/omnisharp
 ```
 
-##### Useful debugging commands
+\*Useful debugging commands
 ```
 :CocList extensions " Show currently active extensions
 :CocCommand workspace.showOutput " Show CocExtension/LSP logs
@@ -51,9 +51,7 @@ export FrameworkPathOverride=~/.config/coc/extensions/coc-omnisharp-data/server/
 
 ## Symlink NeoVim configs to Vim8 (Unix/Linux)
 
-[Source](https://gist.github.com/laggardkernel/9013f948345212563ede9c9ee56c6b42)
-
-We try to symlink `~/.config/nvim` to `~/.vim` and make the conf compatible with `vim`. Run the following commands into your shell.
+Run the following commands into your shell. ([Source](https://gist.github.com/laggardkernel/9013f948345212563ede9c9ee56c6b42))
 
 ```bash
 # nvim conf dir: ~/.config/nvim
