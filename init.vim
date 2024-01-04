@@ -27,31 +27,26 @@ unlet autoload_plug_path
 " END ========================================================================
 
 call plug#begin(stdpath('data') . '/plugged')
+  Plug 'junegunn/vim-plug'
+
   " Themes
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
   Plug 'nvim-lualine/lualine.nvim'
+  Plug 'kyazdani42/nvim-web-devicons' " for file icons
+  Plug 'kyazdani42/nvim-tree.lua'
 
-  Plug 'preservim/nerdtree'
-  Plug 'PhilRunninger/nerdtree-visual-selection'
 
-  Plug 'junegunn/vim-plug'
-  Plug 'junegunn/vim-peekaboo'
-  Plug 'junegunn/goyo.vim'
-  Plug 'junegunn/limelight.vim'
+  " for :Ag and :Rg, See: https://github.com/junegunn/fzf.vim
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  " note for fzf.vim: for special commands like :Ag and :Rg, need to install additional
-  " dependencies. See: https://github.com/junegunn/fzf.vim
 
-  " ys,ds,cs,ts
-  Plug 'tpope/vim-surround'
-  " gc
-  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-surround' " ys,ds,cs,ts
+  Plug 'tpope/vim-commentary' " gc
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
 
-  " ii, ai, iI, aI
-  Plug 'michaeljsmith/vim-indent-object'
+  Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
+  Plug 'junegunn/vim-peekaboo'
   Plug 'psliwka/vim-smoothie'
   Plug 'jiangmiao/auto-pairs'
   Plug 'takac/vim-hardtime'
@@ -68,3 +63,4 @@ if vim_plug_installed
 
   lua require('main')
 endif
+

@@ -1,6 +1,6 @@
 local map = vim.api.nvim_set_keymap
 
-require('hop').setup()
+require'hop'.setup()
 map("x", "s", "<cmd>HopChar2<cr>", { silent = true })
 map("v", "s", "<cmd>HopChar2<cr>", { silent = true })
 map("n", "s", "<cmd>HopChar2<cr>", { silent = true })

@@ -1,9 +1,14 @@
  require('lualine').setup {
     options = {
         theme = 'spaceduck',
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
-        icons_enabled = false,
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+        icons_enabled = true,
+
+        -- Uncomment to disable icons
+        -- component_separators = { left = '', right = ''},
+        -- section_separators = { left = '', right = ''},
+        -- icons_enabled = false,
     },
     sections = {
         lualine_a = {

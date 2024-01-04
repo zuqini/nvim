@@ -1,0 +1,14 @@
+" https://github.com/kyazdani42/nvim-tree.lua/issues/674
+
+" Uncomment to disable icons
+" let g:nvim_tree_show_icons = {
+"     \ 'git': 0,
+"     \ 'folders': 0,
+"     \ 'files': 0,
+"     \ 'folder_arrows': 0,
+"     \ }
+
+nnoremap <s-tab> :NvimTreeToggle<CR>
+nnoremap <c-m> :NvimTreeToggle<CR>
+nnoremap <c-r> :NvimTreeRefresh<CR>
+nnoremap <c-n> :NvimTreeFindFile<CR>
