@@ -55,6 +55,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " Utils
   Plug 'dstein64/vim-startuptime'
+  Plug 'folke/which-key.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'windwp/nvim-autopairs'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
@@ -95,6 +96,7 @@ lua require("plugins/lualine")
 lua require("plugins/gitsigns")
 lua require("plugins/indent_blankline")
 lua require("plugins/leap")
+lua require("plugins/whichkey")
 call RequireVim("plugins/surround")
 call RequireVim("plugins/wilder")
 call RequireVim("plugins/closetag")

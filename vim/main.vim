@@ -38,6 +38,7 @@ nnoremap <leader>B :ls<cr>:bd<space>
 nnoremap <leader><c-b> :%bd\|e#\|bd#<CR>
 
 nnoremap <leader>R :so $MYVIMRC<CR>
+nnoremap <silent> <c-s> :cd %:p:h<CR>
 
 " centering
 " set scrolloff=999
@@ -57,8 +58,8 @@ vnoremap < <gv
 nnoremap <silent><leader>u :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Using Tabs
-nnoremap <silent><leader>gt :tab split<CR>
-nnoremap <silent><leader>gT :tab new<CR>
+nnoremap <silent><leader>t :tab split<CR>
+nnoremap <silent><leader>T :tab new<CR>
 nnoremap <silent><left> gT
 nnoremap <silent><right> gt
 nnoremap <silent><leader><left> :tabm -1<CR>
