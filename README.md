@@ -4,7 +4,6 @@ My custom NeoVim configuration and plugins.
 
 ## Set-up Instructions
 - (macOS) Clone this into `~/.config/nvim`
-- Install [VimPlug](https://github.com/junegunn/vim-plug) and run `:PlugInstall`
 - (terminal) Setup [Italics](https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/) in your terminal
 - (optional) See [Additional Plugins Notes](#Additional-Plugins-Notes) for additional plugin setup instructions
 ## Additional Plugins Notes
