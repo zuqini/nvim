@@ -10,26 +10,16 @@ My Neovim setup
 ```
 brew install neovim    # or some other package manager
 git clone https://github.com/zuqini/nvim.git ~/.config/nvim
-
-# install vim-plug
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
 nvim
 ```
 </details>
 
 <details>
-<summary>Windows (Powershell)</summary>
+<summary>Windows (PowerShell)</summary>
 
 ```
 choco install neovim    # or some other package manager
 git clone https://github.com/zuqini/nvim.git ~/AppData/Local/nvim
-
-# install vim-plug
-iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
-    ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
-
 nvim
 ```
 
@@ -69,7 +59,6 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
 <details>
 <summary>LSP</summary>
 
-- `:LspInstall {server}`
 - Omnisharp Language Server on Unix/Linux for Unity
   - Install [Mono](https://www.mono-project.com/download/stable/#download-mac)
   - In Unity, `Unity > Preferences > External Tools`, check off the options below and regenerate project files:
@@ -80,10 +69,4 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
     ```
     export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
     ```
-</details>
-
-<details>
-<summary>Treesitter</summary>
-    
-- `:TSInstall {language}`
 </details>
