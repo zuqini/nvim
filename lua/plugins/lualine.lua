@@ -35,8 +35,7 @@ require('lualine').setup {
                                         -- 1: Relative path
                                         -- 2: Absolute path
 
-                shorting_target = 40,   -- Shortens path to leave 40 spaces in the window
-                                        -- for other components. (terrible name, any suggestions?)
+                shorting_target = 40,
                 symbols = {
                     modified = '[+]',
                     readonly = '[-]',
@@ -88,8 +87,7 @@ require('lualine').setup {
                                         -- 1: Relative path
                                         -- 2: Absolute path
 
-                shorting_target = 40,   -- Shortens path to leave 40 spaces in the window
-                                        -- for other components. (terrible name, any suggestions?)
+                shorting_target = 80,
                 symbols = {
                     modified = '[+]',
                     readonly = '[-]',
