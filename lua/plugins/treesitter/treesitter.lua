@@ -1,15 +1,4 @@
 local Set = require('utils.set');
--- npm install -g tree-sitter-cli
--- for certain parsers, tree-sitter-cli needs to be installed
-require("nvim-treesitter.parsers").list.xml = {
-	install_info = {
-		url = "https://github.com/Trivernis/tree-sitter-xml",
-		files = { "src/parser.c" },
-		generate_requires_npm = true,
-		branch = "main",
-	},
-	filetype = "xml",
-}
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
