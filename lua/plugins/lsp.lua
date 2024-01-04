@@ -1,4 +1,14 @@
-local lsp_installer = require("nvim-lsp-installer")
+require("nvim-lsp-installer").setup({
+    automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
+        }
+    }
+})
+local lspconfig = require("lspconfig")
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -36,30 +46,23 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('v', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
--- see https://github.com/williamboman/nvim-lsp-installer
--- Register a handler that will be called for all installed servers.
--- Alternatively, you may also register handlers on specific server instances instead (see example below).
-lsp_installer.on_server_ready(function(server)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    local opts = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = {
-            debounce_text_changes = 150,
-        },
+lspconfig.util.default_config = vim.tbl_extend(
+  "force",
+  lspconfig.util.default_config,
+  {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 150,
     }
+  }
+)
 
-    -- (optional) Customize the options passed to the server
-    -- if server.name == "tsserver" then
-    --     opts.root_dir = function() ... end
-    -- end
-
-    -- This setup() function is exactly the same as lspconfig's setup function.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    server:setup(opts)
-end)
+lspconfig.tsserver.setup {}
+lspconfig.rust_analyzer.setup {}
+lspconfig.pyright.setup {}
+lspconfig.sumneko_lua.setup {}
+lspconfig.omnisharp.setup {}
 
 -- luasnip setup
 local luasnip = require 'luasnip'
