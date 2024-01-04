@@ -28,11 +28,8 @@ unlet autoload_plug_path
 
 call plug#begin(stdpath('data') . '/plugged')
   " Themes
-  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-  Plug 'dracula/vim', { 'as': 'dracula' }
-  Plug 'cocopon/iceberg.vim'
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-  Plug 'embark-theme/vim', { 'as': 'embark' }
+  Plug 'nvim-lualine/lualine.nvim'
 
   Plug 'preservim/nerdtree'
   Plug 'PhilRunninger/nerdtree-visual-selection'
@@ -62,7 +59,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'phaazon/hop.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'sheerun/vim-polyglot'
-  Plug 'itchyny/lightline.vim'
 call plug#end()
 
 let vim_configs_path = stdpath('config') . '/vim'
@@ -70,16 +66,5 @@ if vim_plug_installed
   exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
   exec "source " . vim_configs_path . "/main.vim"
 
-  exec "source " . vim_configs_path . "/goyolime.vim"
-  exec "source " . vim_configs_path . "/coc.vim"
-  exec "source " . vim_configs_path . "/fzf.vim"
-  exec "source " . vim_configs_path . "/nerdtree.vim"
-  exec "source " . vim_configs_path . "/surround.vim"
-  exec "source " . vim_configs_path . "/smoothie.vim"
-
   lua require('main')
-
-  " Disabled
-  " exec "source " . stdpath('config') . "/configs/hardmode.vim"
-  " exec "source " . vim_configs_path . "/nutoggle.vim"
 endif

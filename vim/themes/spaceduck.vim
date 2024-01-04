@@ -16,4 +16,3 @@ let g:fzf_colors = {
 " }}}
 
 colorscheme spaceduck-custom
-let g:lightline = { 'colorscheme': 'spaceduck' }
