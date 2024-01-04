@@ -81,3 +81,10 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
     export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
     ```
 </details>
+
+<details>
+<summary>Treesitter</summary>
+<br/>
+
+- `:TSInstall {language}`
+</details>
