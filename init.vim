@@ -78,6 +78,7 @@ endfunction
 " 3. nvim-tree.vim needs to execute before nvim-tree
 lua require("helpers")
 call RequireVim("main")
+call RequireVim("neovide")
 lua require("themes/theme")
 
 lua require("plugins/nvim-tree")
