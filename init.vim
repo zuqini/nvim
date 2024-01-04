@@ -62,14 +62,19 @@ nnoremap <leader>T :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <leader>t :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 " Windows
-noremap <leader>b :sp<CR>
-noremap <leader>v :vs<CR>
-"Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-map <C-t> :tabnew<CR>
+noremap <leader>D :sp<CR>
+noremap <leader>d :vs<CR>
+" Smart way to move between windows
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
+noremap <C-t> :tabnew<CR>
+
+" Clipboard Copy Pasting
+noremap <leader>x "*d
+noremap <leader>c "*y
+noremap <leader>v "*p
 
 " Indentation with mixed tabs and spaces
 " https://vim.fandom.com/wiki/Indenting_source_code
@@ -108,6 +113,5 @@ inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
-inoremap <BS> <Nop>
 inoremap <BS> <Nop>
 inoremap <Del> <Nop>
