@@ -17,7 +17,7 @@ nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
 " Esc in Terminal emulator
 " See https://github.com/junegunn/fzf.vim/issues/544 for FZF
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-nnoremap <silent> <c-l> :lua clear_floats_and_highlights()<CR>
+nnoremap <silent> <c-l> :lua clear_floats_and_highlights()<CR><c-l>
 
 nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
