@@ -73,6 +73,8 @@ function M.select_theme_by_index(index)
   require('plugins.lualine.config')
   if vim.g.transparent_background then
     vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
+    vim.cmd('hi NormalNC guibg=NONE ctermbg=NONE')
+    vim.cmd('hi TelescopeBorder guibg=NONE ctermbg=NONE')
   end
 end
 
