@@ -1,11 +1,11 @@
 -- '  ﳟ          ﲵ    ﴫ  '
 local themes = {
-  { name = 'gruvbox', lualine = 'auto', tabby_header = ' 火' },
-  { name = 'terafox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 木' },
-  { name = 'duskfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 水' },
-  { name = 'nightfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 水' },
-  { name = 'tokyonight', lualine = 'auto', tabby_header = ' 水' },
-  { name = 'carbonfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 土' },
+  { name = 'gruvbox', lualine = 'auto', tabby_header = ' 火 ' },
+  { name = 'terafox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 木 ' },
+  { name = 'duskfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 水 ' },
+  { name = 'nightfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 水 ' },
+  { name = 'tokyonight', lualine = 'auto', tabby_header = ' 水 ' },
+  { name = 'carbonfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 土 ' },
 }
 local theme_index = 1
 local theme_timer_active = 0
