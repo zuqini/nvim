@@ -1,9 +1,9 @@
 # nvim
-My custom NeoVim configuration and plugins. I recommend complementing this with [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
+My custom NeoVim configuration and plugins.
 ![image](https://user-images.githubusercontent.com/5790854/103149736-22e72a80-4721-11eb-9519-019522241c2a.png)
 
 ## Set-up Instructions
-- (macOs) Clone this into `~/.config/nvim`
+- (macOS) Clone this into `~/.config/nvim`
 - Install [VimPlug](https://github.com/junegunn/vim-plug) and run `:PlugInstall`
 - (terminal) Setup [Italics](https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/) in your terminal
 - (optional) See [Additional Plugins Notes](#Additional-Plugins-Notes) for additional plugin setup instructions
@@ -27,11 +27,11 @@ My custom NeoVim configuration and plugins. I recommend complementing this with 
 - Add the following override to your `.zshrc`/`.bashrc` ([source](https://www.reddit.com/r/vim/comments/i4tuay/anyone_has_managed_to_get_c_and_unity_completion/g0m7wlh/?utm_source=reddit&utm_medium=web2x&context=3)):
 ```export FrameworkPathOverride=~/.config/coc/extensions/coc-omnisharp-data/server/omnisharp```
 
-## Symlink NeoVim configs to Vim8
+## Symlink NeoVim configs to Vim8 (Unix/Linux)
 
 [Source](https://gist.github.com/laggardkernel/9013f948345212563ede9c9ee56c6b42)
 
-We try to symlink `~/.config/nvim` to `~/.vim`, and make the conf compatible with `vim`. Run the following commands into your shell.
+We try to symlink `~/.config/nvim` to `~/.vim` and make the conf compatible with `vim`. Run the following commands into your shell.
 
 ```bash
 # nvim conf dir: ~/.config/nvim

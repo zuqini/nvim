@@ -1,4 +1,5 @@
 " vim8 does not have stdpath, manually fill in nvim plugin path
+" note for Windows: nvim should continue to work, but symlink'ed vim8 will not
 let nvimPluggedPath = g:is_nvim ? stdpath('data') . '/plugged' : '~/.local/share/nvim/plugged'
 
 call plug#begin(nvimPluggedPath)
@@ -29,6 +30,7 @@ let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
 colorscheme tokyonight-custom
 let g:lightline = {'colorscheme' : 'tokyonight'}
+set laststatus=2
 
 set mouse=a
 set number
