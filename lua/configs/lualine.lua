@@ -24,7 +24,8 @@ local colors = {
         -- icons_enabled = false,
     },
     tabline = {
-        lualine_a = {
+        lualine_a = { { 'tabs', mode = 0, }, },
+        lualine_b = {
             {
                 'filename',
                 file_status = true,     -- Displays file status (readonly status, modified status)
@@ -39,9 +40,17 @@ local colors = {
                     readonly = '[-]',
                     unnamed = '[]',
                 },
+
+                separator = '',
+                padding = { left = 1, right = 0 },
+            },
+            {
+                'filetype',
+                colored = true,   -- Displays filetype icon in color if set to true
+                icon_only = true, -- Display only an icon for filetype
+                padding = { left = 1, right = 0 },
             },
         },
-        lualine_b = { { 'tabs', mode = 0, }, },
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
