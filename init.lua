@@ -11,13 +11,10 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.runtimepath:prepend(lazypath)
-print(vim.g.is_windows);
 
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
 
 require("lazy").setup({
-  'junegunn/vim-plug',
-
   -- Themes
   'zuqini/gruvbox-material',
   'EdenEast/nightfox.nvim',
@@ -48,14 +45,8 @@ require("lazy").setup({
 
   -- FZF
   { 'junegunn/fzf', build = './install --bin' },
-  {
-    'ibhagwan/fzf-lua',
-    enabled = not vim.g.is_windows -- fzf-lua is not supported on windows
-  },
-  {
-    'junegunn/fzf.vim',
-    enabled = vim.g.is_windows,
-  },
+  'ibhagwan/fzf-lua',
+  'junegunn/fzf.vim',
 
   -- Languages stuff
   'neovim/nvim-lspconfig',
