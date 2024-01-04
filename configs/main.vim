@@ -59,22 +59,19 @@ nnoremap <leader>Q :Bdelete menu<CR>
 
 " Using Tabs
 nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>T :windo bd<CR>
+nnoremap <leader>T :windo bd<CR> " close tab and kill all buffers within tab
 
 " Windows
 set splitbelow
 set splitright
-nnoremap <left> gT
-nnoremap <right> gt
+nnoremap <left> <C-W>h
+nnoremap <right> <C-W>l
+nnoremap <up> <C-W>k
+nnoremap <down> <C-W>j
 
 " copied from ITerm2 Hotkey
 nnoremap <leader>D :sp<CR>
 nnoremap <leader>d :vs<CR>
-" Smart way to move between windows
-nnoremap <C-h> <C-W>h
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
 
 " Clipboard Copy Pasting
 nnoremap <leader>x "*d
