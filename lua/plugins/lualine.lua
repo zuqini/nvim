@@ -74,6 +74,12 @@ require('lualine').setup {
         },
       }
     },
+    lualine_z = {
+      {
+        'tabs',
+        mode = 0,
+      },
+    },
   },
   sections = {
     lualine_a = {
