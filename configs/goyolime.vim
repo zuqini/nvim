@@ -5,8 +5,8 @@ let g:goyo_height = '85%'
 " manually diasble nu with autocmd below
 let g:goyo_linenr = 1
 
-nnoremap <silent><F1> :Goyo<CR>
-nnoremap <silent><leader><F1> :Limelight!!<CR>
+nnoremap <silent><F6> :Goyo<CR>
+nnoremap <silent><leader><F6> :Limelight!!<CR>
 
 let g:limelight_paragraph_span = 1
 " Color name (:help cterm-colors) or ANSI code

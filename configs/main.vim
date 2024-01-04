@@ -50,13 +50,12 @@ nnoremap <leader>z za
 nnoremap <leader>Z zA
 
 " Using Tabs
-nnoremap <silent><leader>t :tabnew<CR>
-nnoremap <silent><leader>T :windo bd!<CR> " close tab and kill all buffers within tab
+nnoremap <silent><leader>t :tab split<CR>
+nnoremap <silent><leader>T :tabclose<CR>
 nnoremap <F3> gT
 nnoremap <F4> gt
 nnoremap <silent><F7> :tabm -1<CR>
 nnoremap <silent><F8> :tabm +1<CR>
-nnoremap <silent><F6> <C-W>T
 
 " Windows
 set splitbelow
