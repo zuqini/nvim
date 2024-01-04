@@ -20,8 +20,11 @@ set scrolloff=8
 set synmaxcol=512
 
 set cursorline
-set pumblend=6
-set winblend=6
+
+if !g:transparent_background
+  set pumblend=6
+  set winblend=6
+endif
 
 set splitbelow
 set splitright
