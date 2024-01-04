@@ -41,6 +41,9 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
   view = {
+    docs = {
+      auto_open = false,
+    },
     entries = { name = 'custom', selection_order = 'near_cursor' }
   },
   snippet = {
