@@ -81,9 +81,9 @@ nnoremap <leader>V "0P
 " https://vim.fandom.com/wiki/Indenting_source_code
 set autoindent
 set expandtab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 
 let g:indentLine_char = '│'
 " indentLine defaults conceal level to 2 (it won't work with conceal level 0)

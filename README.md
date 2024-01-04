@@ -6,8 +6,8 @@ My custom NeoVim configuration and plugins.
 ### Unix/Linux (terminal)
 - Install Homebrew and run `$ brew install neovim`
 - Set up terminal
-    - Enable true color mode in terminal if needed
-    - Setup [Italics](https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/)
+  - Enable true color mode in terminal if needed
+  - Setup [Italics](https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/)
 - Clone into `~/.config/nvim`
 - Run `$ nvim`
 
