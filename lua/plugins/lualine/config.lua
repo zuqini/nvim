@@ -14,7 +14,7 @@ local triangle_thin_seps = { left = '', right = '' }
 local circle_thin_seps = { left = '', right = '' }
 
 local signs = { Error = "󰅚", Warn = "󰀪", Hint = "󰌶", Info = "󰋽" }
-local symbols = { error = "󰅚 ", warn = "󰀪 ", hint = "󰌶 ", info = "󰋽 " }
+local symbols = { error = "󰅚  ", warn = "󰀪  ", hint = "󰌶  ", info = "󰋽  " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
