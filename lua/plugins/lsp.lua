@@ -1,5 +1,6 @@
-require('nvim-lsp-installer').setup({
-    automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+local lspconfig = require('lspconfig')
+
+require('mason').setup({
     ui = {
         icons = {
             server_installed = "✓",
@@ -8,7 +9,18 @@ require('nvim-lsp-installer').setup({
         }
     }
 })
-local lspconfig = require('lspconfig')
+
+require("mason-lspconfig").setup({
+  automatic_installation = { exclude = { "omnisharp" } }
+})
+
+lspconfig.tsserver.setup {}
+lspconfig.rust_analyzer.setup {}
+lspconfig.pyright.setup {}
+lspconfig.sumneko_lua.setup {}
+lspconfig.omnisharp.setup {}
+lspconfig.jdtls.setup {}
+lspconfig.jsonls.setup {}
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -57,14 +69,6 @@ lspconfig.util.default_config = vim.tbl_extend(
     }
   }
 )
-
-lspconfig.tsserver.setup {}
-lspconfig.rust_analyzer.setup {}
-lspconfig.pyright.setup {}
-lspconfig.sumneko_lua.setup {}
--- lspconfig.omnisharp.setup {}
-lspconfig.jdtls.setup {}
-lspconfig.jsonls.setup {}
 
 require('lsp_lines').register_lsp_virtual_lines()
 
