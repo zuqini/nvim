@@ -6,7 +6,7 @@ nmap s <Plug>(easymotion-overwin-f2)
 nmap S <Plug>(easymotion-overwin-f)
 
 nmap <Leader>f <Plug>(easymotion-f)
-nmap <Leader>F <Plug>(easymotion-f)
+nmap <Leader>F <Plug>(easymotion-F)
 nmap <Leader>t <Plug>(easymotion-t)
 nmap <Leader>T <Plug>(easymotion-T)
 

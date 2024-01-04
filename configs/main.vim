@@ -46,8 +46,8 @@ nnoremap <leader>z za
 nnoremap <leader>Z zA
 
 " Using Tabs
-nnoremap <silent><F2> :tab split<CR>
-nnoremap <silent><F9> :tabclose<CR>
+nnoremap <silent><leader>gt :tab split<CR>
+nnoremap <silent><leader>gT :tabclose<CR>
 nnoremap <C-h> gT
 nnoremap <C-l> gt
 nnoremap <silent><leader>h :tabm -1<CR>
@@ -65,10 +65,6 @@ nnoremap <leader><C-l> <C-W>L
 nnoremap <leader><C-k> <C-W>K
 nnoremap <leader><C-j> <C-W>J
 nnoremap <silent><F5> :mod<CR>
-
-" copied from ITerm2 Hotkey
-nnoremap <silent><leader>D :sp<CR>
-nnoremap <silent><leader>d :vs<CR>
 
 " Clipboard Copy Pasting
 nnoremap <C-v> "*p
