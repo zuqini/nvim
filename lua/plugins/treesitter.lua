@@ -23,7 +23,20 @@ require'nvim-treesitter.configs'.setup {
     -- the name of the parser)
     -- list of language that will be disabled
     -- disable "help" which breaks :h formatting
-    disable = { "help" },
+    disable = function(lang, buf)
+        -- First check languages that should be disabled
+        local disabled_lang = Set { "help" }
+        if disabled_lang[lang] then
+          return true
+        end
+
+        -- Then check max file size
+        local max_filesize = 1.5 * 1024 * 1024 -- 1.5MiB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+          return true
+        end
+    end,
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

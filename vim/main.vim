@@ -18,6 +18,7 @@ set ignorecase smartcase
 set laststatus=3
 set nofixendofline
 set cursorline
+set synmaxcol=512
 
 " block insert
 " set guicursor=n-v-c-i-ci-ve:block,r-cr:hor20,o:hor50
