@@ -106,11 +106,11 @@ function! ToggleLocList()
 endfunction
 
 nnoremap <silent><leader>q :call ToggleQuickFix()<CR>
-nnoremap <silent><c-k> :cp<CR>
-nnoremap <silent><c-j> :cn<CR>
+nnoremap <silent><leader>k :cp<CR>
+nnoremap <silent><leader>j :cn<CR>
 nnoremap <silent>Q :call ToggleLocList()<CR>
-nnoremap <silent><leader>k :lp<CR>
-nnoremap <silent><leader>j :lne<CR>
+nnoremap <silent><c-k> :lp<CR>
+nnoremap <silent><c-j> :lne<CR>
 
 " Indentation without hard tabs
 " https://vim.fandom.com/wiki/Indenting_source_code
