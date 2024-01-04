@@ -5,7 +5,12 @@ return {
     dependencies = {
       {
         'williamboman/mason-lspconfig.nvim',
-        dependencies = { 'williamboman/mason.nvim' },
+        dependencies = {
+          {
+            "williamboman/mason.nvim",
+            build = ":MasonUpdate" -- :MasonUpdate updates registry contents
+          },
+        },
       },
     },
     config = function ()
