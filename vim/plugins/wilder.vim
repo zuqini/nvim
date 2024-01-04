@@ -3,7 +3,7 @@ call wilder#setup({'modes': [':', '/', '?']})
 
 call wilder#set_option('renderer', wilder#renderer_mux({
   \ ':': wilder#popupmenu_renderer({
-  \   'pumblend': 10,
+  \   'pumblend': 35,
   \   'highlighter': wilder#basic_highlighter(),
   \   'highlights': {
   \     'accent': wilder#make_hl('WilderAccent', 'Pmenu', [{}, {}, {'foreground': '#fb4934', 'bold': 1, 'underline': 1 }]),
