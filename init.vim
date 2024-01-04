@@ -46,6 +46,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
 
+  Plug 'psliwka/vim-smoothie'
   Plug 'machakann/vim-highlightedyank'
   Plug 'jiangmiao/auto-pairs'
   Plug 'takac/vim-hardtime'
@@ -59,17 +60,19 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'Asheq/close-buffers.vim'
 call plug#end()
 
+let configs_path = stdpath('config') . '/configs'
 if vim_plug_installed
-  exec "source " . stdpath('config') . "/configs/themes/" . theme . ".vim"
-  exec "source " . stdpath('config') . "/configs/main.vim"
+  exec "source " . configs_path . "/themes/" . theme . ".vim"
+  exec "source " . configs_path . "/main.vim"
 
-  exec "source " . stdpath('config') . "/configs/goyolime.vim"
-  exec "source " . stdpath('config') . "/configs/coc.vim"
-  exec "source " . stdpath('config') . "/configs/fzf.vim"
-  exec "source " . stdpath('config') . "/configs/nerdtree.vim"
-  exec "source " . stdpath('config') . "/configs/easymotion.vim"
-  exec "source " . stdpath('config') . "/configs/surround.vim"
-  exec "source " . stdpath('config') . "/configs/nutoggle.vim"
+  exec "source " . configs_path . "/goyolime.vim"
+  exec "source " . configs_path . "/coc.vim"
+  exec "source " . configs_path . "/fzf.vim"
+  exec "source " . configs_path . "/nerdtree.vim"
+  exec "source " . configs_path . "/easymotion.vim"
+  exec "source " . configs_path . "/surround.vim"
+  exec "source " . configs_path . "/nutoggle.vim"
+  exec "source " . configs_path . "/smoothie.vim"
 
   " Disabled
   " exec "source " . stdpath('config') . "/configs/hardmode.vim"

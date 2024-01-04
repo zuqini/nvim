@@ -15,13 +15,15 @@ set hlsearch
 set ignorecase
 set smartcase
 set laststatus=2
+
+" NOTE: dependency on coc
 nnoremap <silent> <ESC><ESC> :nohlsearch \| call coc#float#close_all()<CR>
 
 " Movement
-nnoremap <C-k> 15k
-nnoremap <C-j> 15j
-vnoremap <C-k> 15k
-vnoremap <C-j> 15j
+nnoremap <C-k> 10k
+nnoremap <C-j> 10j
+vnoremap <C-k> 10k
+vnoremap <C-j> 10j
 
 " more logical Y command
 " because C => c$ and D => d$
