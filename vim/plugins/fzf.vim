@@ -4,7 +4,7 @@ if has("win64") || has("win32") || has("win16")
 endif
 
 nnoremap S <cmd>lua require('fzf-lua').files()<CR>
-nnoremap <leader>s <cmd>lua require('fzf-lua').live_grep()<CR>
+nnoremap <leader>s <cmd>lua require('fzf-lua').grep({ search = "" })<CR>
 nnoremap <leader>S <cmd>lua require('fzf-lua').live_grep_native()<CR>
 
 nnoremap <leader>o <cmd>lua require('fzf-lua').oldfiles()<CR>
