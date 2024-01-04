@@ -87,7 +87,14 @@ lspconfig.sumneko_lua.setup {
 
 lspconfig.tsserver.setup {}
 lspconfig.pyright.setup {}
--- lspconfig.omnisharp.setup {}
--- lspconfig.omnisharp_mono.setup {}
 lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
+-- lspconfig.omnisharp.setup {}
+-- omnisharp_mono comes from mason so need to setup manually
+lspconfig.omnisharp_mono.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 150,
+    }
+}
