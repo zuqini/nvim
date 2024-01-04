@@ -66,10 +66,10 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
 </details>
 
 <details>
-<summary>coc.nvim</summary>
+<summary>LSP</summary>
 <br/>
-  
-- Setup [Node.js](https://nodejs.dev/learn/how-to-install-nodejs)
+
+- `:LspInstall {server}`
 - Omnisharp Language Server on Unix/Linux for Unity
   - Install [Mono](https://www.mono-project.com/download/stable/#download-mac)
   - In Unity, `Unity > Preferences > External Tools`, check off the options below and regenerate project files:

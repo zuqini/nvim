@@ -101,7 +101,7 @@ require('lualine').setup {
             'diff',
             {
                 'diagnostics',
-                sources = { 'nvim_diagnostic', 'coc' },
+                sources = { 'nvim_lsp', 'nvim_diagnostic', },
 
                 sections = { 'error', 'warn', 'info', 'hint' },
 
