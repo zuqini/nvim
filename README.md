@@ -2,6 +2,7 @@
 My custom NeoVim configuration and plugins. I recommend complementing this with [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ## Set-up Instructions
+- (macOs) Clone this into `~/.config/nvim`
 - Install [VimPlug](https://github.com/junegunn/vim-plug) and run `:PlugInstall`
 - (terminal) Setup [Italics](https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/) in your terminal
 ## Special Plugins Notes
@@ -20,6 +21,6 @@ My custom NeoVim configuration and plugins. I recommend complementing this with 
 :CocCommand workspace.showOutput " Show CocExtension/LSP logs
 :CocList outline " Search workspace symbols.
 ```
-#### Unity on Unix
-- Add the following override to your .zshrc ([source](https://www.reddit.com/r/vim/comments/i4tuay/anyone_has_managed_to_get_c_and_unity_completion/g0m7wlh/?utm_source=reddit&utm_medium=web2x&context=3)):
+#### Unity on Unix/Linux
+- Add the following override to your `.zshrc`/`.bashrc` ([source](https://www.reddit.com/r/vim/comments/i4tuay/anyone_has_managed_to_get_c_and_unity_completion/g0m7wlh/?utm_source=reddit&utm_medium=web2x&context=3)):
 ```export FrameworkPathOverride=~/.config/coc/extensions/coc-omnisharp-data/server/omnisharp```
