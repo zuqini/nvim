@@ -91,6 +91,7 @@ lua require("plugins/indent_blankline")
 call RequireVim("plugins/surround")
 call RequireVim("plugins/wilder")
 call RequireVim("plugins/closetag")
+call RequireVim("plugins/nutoggle")
 
 if !is_windows
   lua require("plugins/fzf-lua")

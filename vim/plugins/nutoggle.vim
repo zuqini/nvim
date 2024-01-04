@@ -2,6 +2,6 @@
 set number relativenumber
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * if !exists('g:disable_nu_toggle') || !g:disable_nu_toggle | set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * if !exists('g:disable_nu_toggle') || !g:disable_nu_toggle | set norelativenumber
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
