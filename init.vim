@@ -11,11 +11,18 @@ let is_windows = has("win64") || has("win32") || has("win16")
 
 let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
 let vim_plug_installed = !empty(glob(autoload_plug_path))
-if !is_windows && !vim_plug_installed
-  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
-    \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if !is_windows
+  if !vim_plug_installed
+    silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
+      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
+  endif
+
+  " Run PlugInstall if there are missing plugins
+  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+    \| PlugInstall --sync | source $MYVIMRC
+  \| endif
 endif
+
 unlet autoload_plug_path
 " END ========================================================================
 
@@ -50,8 +57,8 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'machakann/vim-highlightedyank'
   Plug 'jiangmiao/auto-pairs'
   Plug 'takac/vim-hardtime'
-  Plug 'Yggdroot/indentLine'
-  Plug 'easymotion/vim-easymotion'
+  Plug 'lukas-reineke/indent-blankline.nvim'
+  Plug 'phaazon/hop.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'sheerun/vim-polyglot'
   Plug 'itchyny/lightline.vim'
@@ -60,20 +67,21 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'Asheq/close-buffers.vim'
 call plug#end()
 
-let configs_path = stdpath('config') . '/configs'
+let vim_configs_path = stdpath('config') . '/vim'
 if vim_plug_installed
-  exec "source " . configs_path . "/themes/" . theme . ".vim"
-  exec "source " . configs_path . "/main.vim"
+  exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
+  exec "source " . vim_configs_path . "/main.vim"
 
-  exec "source " . configs_path . "/goyolime.vim"
-  exec "source " . configs_path . "/coc.vim"
-  exec "source " . configs_path . "/fzf.vim"
-  exec "source " . configs_path . "/nerdtree.vim"
-  exec "source " . configs_path . "/easymotion.vim"
-  exec "source " . configs_path . "/surround.vim"
-  exec "source " . configs_path . "/nutoggle.vim"
-  exec "source " . configs_path . "/smoothie.vim"
+  exec "source " . vim_configs_path . "/goyolime.vim"
+  exec "source " . vim_configs_path . "/coc.vim"
+  exec "source " . vim_configs_path . "/fzf.vim"
+  exec "source " . vim_configs_path . "/nerdtree.vim"
+  exec "source " . vim_configs_path . "/surround.vim"
+  exec "source " . vim_configs_path . "/smoothie.vim"
+
+  lua require('main')
 
   " Disabled
   " exec "source " . stdpath('config') . "/configs/hardmode.vim"
+  " exec "source " . vim_configs_path . "/nutoggle.vim"
 endif

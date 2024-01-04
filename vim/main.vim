@@ -82,13 +82,6 @@ nnoremap <leader>Z zA
 " using // instead of /* */ for vim-commentary
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 
-let g:indentLine_char = '│'
-" indentLine defaults conceal level to 2 (it won't work with conceal level 0)
-" setting conceal level for specific file types manually
-let g:vim_json_syntax_conceal = 0
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_conceal_code_blocks = 0
-
 " whitespace characters
 " other listchars:
 "set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
@@ -104,4 +97,3 @@ endif
 
 " small plugins configs
 nnoremap <silent> <leader>Q :Bdelete! menu<CR>
-silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
