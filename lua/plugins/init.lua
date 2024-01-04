@@ -29,5 +29,4 @@ return {
   { 'kylechui/nvim-surround', event = 'VeryLazy', config = true }, -- @TODO: lazy load with keys
   { 'stevearc/vim-arduino', ft = "arduino", },
   { 'michaeljsmith/vim-indent-object', event = 'VeryLazy' }, -- ii, ai, iI, aI
-  { "dstein64/vim-startuptime", cmd = "StartupTime", },
 }
