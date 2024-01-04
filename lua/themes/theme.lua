@@ -8,7 +8,11 @@ vim.g.themes = {
 }
 vim.g.theme_index = 1
 vim.g.theme = vim.g.themes[vim.g.theme_index]
+vim.g.theme_timer_active = 1
 require('themes/' .. vim.g.theme)
+
+local timer = vim.loop.new_timer()
+local min = 60 * 1000;
 
 local M = {}
 function M.selectThemeByIndex(index)
@@ -27,6 +31,10 @@ function M.selectThemeByIndex(index)
 end
 
 function M.cycleTheme()
+  if vim.g.theme_timer_active == 1 then
+    timer:close()
+    vim.g.theme_timer_active = 0
+  end
   M.selectThemeByIndex((vim.g.theme_index % #vim.g.themes) + 1)
 end
 
@@ -45,8 +53,6 @@ end
 
 vim.api.nvim_set_keymap('n', '<leader>m', ':lua require"themes/theme".cycleTheme()<CR>', {noremap = true, silent = true})
 
-local timer = vim.loop.new_timer()
-local min = 60 * 1000;
 -- check every 10 min
 timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
 M.selectThemeByTime()
