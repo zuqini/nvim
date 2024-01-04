@@ -88,9 +88,9 @@ local sections = {
     {
       'fileformat',
       symbols = {
-        unix = ' ',
-        dos = '󰨡',
-        mac = '󰀶',
+        unix = '  ',
+        dos = '󰨡 ',
+        mac = '󰀶 ',
       },
       separator = '·',
     },

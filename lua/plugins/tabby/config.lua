@@ -32,7 +32,7 @@ require('tabby.tabline').set(function(line)
       local hl = win.is_current() and theme.current_tab or theme.fill
       return {
         line.sep(win.is_current() and '' or '', hl, theme.fill),
-        win.is_current() and '' or '',
+        win.is_current() and '󱓻 ' or '󱓼 ',
         win.buf_name(),
         line.sep(win.is_current() and '' or '', hl, theme.fill),
         hl = hl,
@@ -41,7 +41,7 @@ require('tabby.tabline').set(function(line)
     end),
     {
       line.sep('', theme.tail, theme.fill),
-      { '  ', hl = theme.tail },
+      { '   ', hl = theme.tail },
     },
     hl = theme.fill,
   }
