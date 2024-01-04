@@ -45,13 +45,14 @@ nnoremap <leader>Z zA
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>T :windo bd!<CR> " close tab and kill all buffers within tab
 
+nnoremap <C-h> 10h
+nnoremap <C-l> 10l
+nnoremap <C-k> 10k
+nnoremap <C-j> 10j
+
 " Windows
 set splitbelow
 set splitright
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
-nnoremap <C-k> <C-W>k
-nnoremap <C-j> <C-W>j
 nnoremap <left> <C-W>4<
 nnoremap <right> <C-W>4>
 nnoremap <up> <C-W>4+

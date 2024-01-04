@@ -1,9 +1,10 @@
-let g:goyo_width='160'
+let g:goyo_width='85%'
 let g:goyo_height = '85%'
 let g:goyo_linenr = 1
 nnoremap <leader>g :Goyo<CR>
+nnoremap <leader>G :Limelight!!<CR>
 
-let g:limelight_paragraph_span = 1
+let g:limelight_paragraph_span = 2
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 246
 " Color name (:help gui-colors) or RGB color
@@ -14,13 +15,13 @@ function! s:goyo_enter()
   Limelight
   " disable nu toggling for true zen
   let g:disable_nu_toggle = 1
-  setlocal nornu
+  set nu nornu
 endfunction
 
 function! s:goyo_leave()
   Limelight!
   let g:disable_nu_toggle = 0
-  setlocal nu rnu
+  set nu rnu
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
