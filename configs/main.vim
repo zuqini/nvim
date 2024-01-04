@@ -105,6 +105,7 @@ set autoindent
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+set tabstop=4
 
 let g:indentLine_char = '│'
 " indentLine defaults conceal level to 2 (it won't work with conceal level 0)
