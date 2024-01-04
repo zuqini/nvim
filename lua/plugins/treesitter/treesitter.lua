@@ -1,3 +1,13 @@
+require("nvim-treesitter.parsers").list.xml = {
+	install_info = {
+		url = "https://github.com/Trivernis/tree-sitter-xml",
+		files = { "src/parser.c" },
+		generate_requires_npm = true,
+		branch = "main",
+	},
+	filetype = "xml",
+}
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {},
@@ -13,6 +23,10 @@ require'nvim-treesitter.configs'.setup {
 
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  autotag = {
+    enable = true,
+  },
 
   highlight = {
     -- `false` will disable the whole extension

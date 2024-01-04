@@ -80,7 +80,6 @@ vim.api.nvim_create_user_command('TN', M.next, {})
 vim.api.nvim_create_user_command('TP', M.prev, {})
 
 -- M.selectThemeByTime()
--- M.selectThemeByIndex(vim.g.theme_index)
-require('themes/' .. vim.g.theme)
+M.selectThemeByIndex(vim.g.theme_index)
 
 return M
