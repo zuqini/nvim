@@ -22,6 +22,7 @@ let g:tokyonight_enable_italic = 1
 colorscheme tokyonight-custom
 let g:lightline = {'colorscheme' : 'tokyonight'}
 
+set mouse=a
 set number
 set showcmd
 set wildmenu
@@ -32,12 +33,43 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+" <space> to unhighlight search
+nnoremap <leader><space> :nohlsearch<CR>
+
+" FZF
+" Ctrl-p to search for file
+nnoremap <c-p> :Files<CR>
+nnoremap <leader><c-p> :Files 
+" p to search term within files
+nnoremap <leader>p :Rg<CR>
+nnoremap <leader>P :Ag<CR>
 
 " Folding
 set foldenable
 set foldmethod=indent
-set foldlevelstart=1
+set foldlevelstart=99
 set foldnestmax=10
+" zZ open/closes folds
+nnoremap <leader>z za
+nnoremap <leader>Z zA
+
+" NERDTREE
+nnoremap <s-tab> :NERDTreeToggle<CR>
+nnoremap <c-f> :NERDTreeFind<CR>
+
+" Using Tabs
+nnoremap <leader>T :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <leader>t :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+
+" Windows
+noremap <leader>b :sp<CR>
+noremap <leader>v :vs<CR>
+"Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+map <C-t> :tabnew<CR>
 
 " Indentation with mixed tabs and spaces
 " https://vim.fandom.com/wiki/Indenting_source_code
@@ -49,25 +81,6 @@ set softtabstop=4
 set splitbelow
 set splitright
 
-" CUSTOM BINDINGS ==================================================
-" <space> to unhighlight search
-nnoremap <leader><space> :nohlsearch<CR>
-" Ctrl-p to search for file
-nnoremap <C-p> :Files<CR>
-" p to search term within files
-nnoremap <leader>p :Rg<CR>
-nnoremap <leader>P :Ag<CR>
-" zZ open/closes folds
-nnoremap <leader>z za
-nnoremap <leader>Z zA
-" NERDTREE
-nnoremap <s-tab> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-" Windows
-noremap <leader>h :sp<CR>
-noremap <leader>v :vs<CR>
-" CUSTOM BINDINGS END ==============================================
-
 " Auto-toggle hybrid/absolute line numbers
 :set number relativenumber
 :augroup numbertoggle
@@ -76,9 +89,9 @@ noremap <leader>v :vs<CR>
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
 
-" Start NERDTree when Vim is started without file arguments.
+" Start NERDTree. If a file is specified, move the cursor to its window.
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
