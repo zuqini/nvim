@@ -1,6 +1,7 @@
 require('bufferline').setup({
   animation = false,
   icon_pinned = '車',
+  closable = false,
   -- icon_separator_active = '',
   -- icon_separator_inactive = '',
   maximum_padding = 1,

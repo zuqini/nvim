@@ -59,7 +59,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'folke/which-key.nvim'
   Plug 'mbbill/undotree'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'windwp/nvim-autopairs'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
   Plug 'tpope/vim-repeat'
