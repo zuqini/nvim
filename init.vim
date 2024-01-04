@@ -61,8 +61,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'sheerun/vim-polyglot'
   Plug 'itchyny/lightline.vim'
-  Plug 'preservim/nerdtree'
-  Plug 'PhilRunninger/nerdtree-visual-selection'
 call plug#end()
 
 let vim_configs_path = stdpath('config') . '/vim'
