@@ -116,3 +116,14 @@ nnoremap <silent><c-up> :lp<CR>
 nnoremap <silent><c-down> :lne<CR>
 nnoremap <silent><leader><left> :lp<CR>
 nnoremap <silent><leader><right> :lne<CR>
+
+function! HandleURI()
+  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
+  echo s:uri
+  if s:uri != ""
+    silent exec "lua require(\"utils\").open_url('" . s:uri . "')"
+  else
+    echo "No URI found in line."
+  endif
+endfunction
+nnoremap gx :call HandleURI()<cr>
