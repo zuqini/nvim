@@ -98,12 +98,13 @@ require('lualine').setup {
             },
         },
         lualine_c = {
-            'diff',
+            { 'diff', separator = '|' },
             {
                 'diagnostics',
                 sources = { 'nvim_diagnostic', },
 
                 sections = { 'error', 'warn', 'info', 'hint' },
+                separator = '|',
 
                 symbols = { error = ' ', warn = ' ', info = ' ', hint = 'ﯦ ' },
                 colored = true,           -- Displays diagnostics status in color if set to true.
@@ -112,10 +113,10 @@ require('lualine').setup {
             },
         },
         lualine_x = {
-            'filetype',
-            'fileformat',
-            'encoding',
-            'filesize',
+            { 'filetype', separator = '|' },
+            { 'fileformat', separator = '|' },
+            { 'encoding', separator = '|' },
+            { 'filesize', separator = '|' },
         },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
