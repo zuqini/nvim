@@ -52,16 +52,6 @@ tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 nnoremap <silent> <ESC><ESC> :nohlsearch \| :lua close_all_float()<CR>
 
-" Movement
-" nnoremap <C-k> 10k
-" nnoremap <C-j> 10j
-" vnoremap <C-k> 10k
-" vnoremap <C-j> 10j
-
-" more logical Y command (C => c$ and D => d$
-" note: this is default in nvim. keeping mapping for vim compatibility
-nnoremap Y y$
-
 au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=250, on_visual=true}
 
 nnoremap <silent><F5> :mod<CR>
@@ -107,11 +97,13 @@ nnoremap <silent><leader>v "+p
 nnoremap <silent><leader>V "+P
 vnoremap <silent><leader>v "+p
 vnoremap <silent><leader>V "+P
-" Yank Pasting only
+
+" Delete into "0 so it's not lost in the unnamed register
 nnoremap <silent><leader>d "0d
 nnoremap <silent><leader>D "0D
 vnoremap <silent><leader>d "0d
 vnoremap <silent><leader>D "0D
+" Yank Pasting only
 nnoremap <silent><leader>p "0p
 nnoremap <silent><leader>P "0P
 vnoremap <silent><leader>p "0p
