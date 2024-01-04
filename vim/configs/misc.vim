@@ -2,8 +2,12 @@
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
 
-" disable Q EX-mode
-nnoremap Q <nop>
+" buffers
+nnoremap Q :q<CR>
+nnoremap <leader>q :w<CR>
+nnoremap <leader>Q :wq<CR>
+nnoremap <leader>b :ls<cr>:b<space>
+nnoremap <leader>B :ls<cr>:sb<space>
 
 " Esc in Terminal emulator
 " See https://github.com/junegunn/fzf.vim/issues/544 for FZF
