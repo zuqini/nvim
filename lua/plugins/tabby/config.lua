@@ -19,7 +19,7 @@ require('tabby.tabline').set(function(line)
       local hl = tab.is_current() and theme.current_tab or theme.fill
       return {
         line.sep(tab.is_current() and '' or '', hl, theme.fill),
-        tab.is_current() and '' or '',
+        tab.is_current() and '󱓻 ' or '󱓼 ',
         tab.number(),
         tab.name(),
         line.sep(tab.is_current() and '' or '', hl, theme.fill),
