@@ -1,6 +1,6 @@
 # nvim
 My Neovim setup
-<img width="1792" alt="Screen Shot 2022-01-16 at 2 48 34 AM" src="https://user-images.githubusercontent.com/5790854/149656881-4a8d9968-fa97-44f5-bea3-2b01b6a62609.png">
+<img width="1792" alt="Screen Shot 2022-01-16 at 2 22 42 PM" src="https://user-images.githubusercontent.com/5790854/149680520-77117bf3-ecfc-4586-bb6b-42cb1d1009a4.png">
 
 ## Install
 <details>
