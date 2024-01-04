@@ -1,6 +1,6 @@
 let mapleader = "\<space>"
-call plug#begin(stdpath('data') . '/plugged')
 
+call plug#begin(stdpath('data') . '/plugged')
 " Themes
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -11,7 +11,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " note: for special commands like :Ag and :Rg, need to install additional
 " dependencies. See: https://github.com/junegunn/fzf.vim
 Plug 'junegunn/fzf.vim'
-
 call plug#end()
 ":PlugInstall
 
@@ -24,7 +23,7 @@ colorscheme tokyonight
 set number
 set showcmd
 set wildmenu
-" show brackets
+" show matching brackets
 set showmatch
 
 " highlight search
@@ -35,7 +34,6 @@ set hlsearch
 set foldenable
 set foldlevelstart=10
 set foldmethod=indent
-" <space> to unfold
 
 " CUSTOM BINDINGS ==================================================
 " \<space> to unhighlight search
