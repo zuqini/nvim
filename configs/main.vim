@@ -34,7 +34,7 @@ vnoremap < <gv
 
 " Using Tabs
 nnoremap <silent><leader>gt :tab split<CR>
-nnoremap <silent><leader>gT :tabclose<CR>
+nnoremap <silent><leader>gT :tab new<CR>
 nnoremap <C-h> gT
 nnoremap <C-l> gt
 nnoremap <silent><leader>h :tabm -1<CR>
