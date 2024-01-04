@@ -80,6 +80,15 @@ cmp.setup {
     { name = 'buffer' },
   })
 }
+cmp.setup.filetype('lua', {
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'nvim_lua' },
+  }, {
+    { name = 'buffer' },
+  })
+})
 
 local feedkeys = require('cmp.utils.feedkeys')
 local keymap = require('cmp.utils.keymap')
