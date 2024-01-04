@@ -6,17 +6,18 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" SETUP =======================================================================
+" BOOTSTRAP PLUG =============================================================
 let is_windows = has("win64") || has("win32") || has("win16")
 
-let vim_plug_installed = !empty(glob(stdpath('data') . '/site/autoload/plug.vim'))
-
+let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
+let vim_plug_installed = !empty(glob(autoload_plug_path))
 if !is_windows && !vim_plug_installed
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
+    \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-" END =======================================================================
+unlet autoload_plug_path
+" END ========================================================================
 
 call plug#begin(stdpath('data') . '/plugged')
   " Themes
