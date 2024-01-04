@@ -31,7 +31,7 @@ require'nvim-tree'.setup {
     args = {}
   },
   filters = {
-    dotfies = false,
+    dotfiles = false,
     custom = {}
   },
   git = {
