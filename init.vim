@@ -47,6 +47,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " Utils
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-context'
   Plug 'windwp/nvim-autopairs'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
