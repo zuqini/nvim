@@ -4,7 +4,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'junegunn/vim-plug'
 
   " Themes
-  Plug 'sainnhe/gruvbox-material'
+  Plug 'zuqini/gruvbox-material'
   Plug 'EdenEast/nightfox.nvim'
   Plug 'rebelot/kanagawa.nvim'
   Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
