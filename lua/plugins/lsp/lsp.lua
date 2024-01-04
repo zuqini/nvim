@@ -108,7 +108,15 @@ local on_attach = function(client, bufnr)
 end
 
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = {
+		"documentation",
+		"detail",
+		"additionalTextEdits",
+	},
+}
 
 lspconfig.util.default_config = vim.tbl_extend(
   "force",
