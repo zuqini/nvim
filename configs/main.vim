@@ -1,6 +1,7 @@
-let mapleader = "\<space>"
+" vim8 does not have stdpath, manually fill in nvim plugin path
+let nvimPluggedPath = g:is_nvim ? stdpath('data') . '/plugged' : '~/.local/share/nvim/plugged'
 
-call plug#begin(stdpath('data') . '/plugged')
+call plug#begin(nvimPluggedPath)
     " Themes
     Plug 'ghifarit53/tokyonight-vim'
     Plug 'dracula/vim', { 'as': 'dracula' }
@@ -21,6 +22,7 @@ call plug#begin(stdpath('data') . '/plugged')
 call plug#end()
 ":PlugInstall
 
+let mapleader = "\<space>"
 " enable true color
 set termguicolors
 let g:tokyonight_style = 'night' " available: night, storm
@@ -103,7 +105,13 @@ set autoindent
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+
 let g:indentLine_char = '│'
+" indentLine defaults conceal level to 2 (it won't work with conceal level 0)
+" setting conceal level for specific file types manually
+let g:vim_json_syntax_conceal = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
 " whitespace characters
 " other listchars:

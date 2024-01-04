@@ -26,3 +26,21 @@ My custom NeoVim configuration and plugins. I recommend complementing this with 
 #### Unity on Unix/Linux
 - Add the following override to your `.zshrc`/`.bashrc` ([source](https://www.reddit.com/r/vim/comments/i4tuay/anyone_has_managed_to_get_c_and_unity_completion/g0m7wlh/?utm_source=reddit&utm_medium=web2x&context=3)):
 ```export FrameworkPathOverride=~/.config/coc/extensions/coc-omnisharp-data/server/omnisharp```
+
+## Symlink NeoVim configs to Vim8
+
+[Source](https://gist.github.com/laggardkernel/9013f948345212563ede9c9ee56c6b42)
+
+We try to symlink `~/.config/nvim` to `~/.vim`, and make the conf compatible with `vim`.
+
+```bash
+# nvim conf dir: ~/.config/nvim
+# vim conf dir: ~/.vim
+# link the 1st as the 2nd with relative links
+
+# Prepare a vimrc file in ~/.config/nvim folder
+ln -sf ./init.vim ~/.config/nvim/vimrc
+
+# Link the whole ~/.config/nvim folder as ~/.vim foler
+ln -sf ./.config/nvim ~/.vim
+```
