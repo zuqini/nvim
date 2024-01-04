@@ -45,6 +45,8 @@ set foldnestmax=10
 nnoremap <leader>z za
 nnoremap <leader>Z zA
 
+nnoremap <silent><F5> :mod<CR>
+
 " Using Tabs
 nnoremap <silent><leader>gt :tab split<CR>
 nnoremap <silent><leader>gT :tabclose<CR>
@@ -60,11 +62,6 @@ nnoremap <left> <C-W>4<
 nnoremap <right> <C-W>4>
 nnoremap <up> <C-W>4+
 nnoremap <down> <C-W>4-
-nnoremap <leader><C-h> <C-W>H
-nnoremap <leader><C-l> <C-W>L
-nnoremap <leader><C-k> <C-W>K
-nnoremap <leader><C-j> <C-W>J
-nnoremap <silent><F5> :mod<CR>
 
 " Clipboard Copy Pasting
 nnoremap <C-v> "*p
