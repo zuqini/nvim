@@ -1,5 +1,8 @@
 let mapleader = "\<space>"
 
+" disable F1 as it's easy to accidentally hit on the touchbar
+nnoremap <F1> <nop>
+
 " Esc in Terminal emulator
 " See https://github.com/junegunn/fzf.vim/issues/544 for FZF
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
