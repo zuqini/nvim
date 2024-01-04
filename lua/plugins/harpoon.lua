@@ -1,6 +1,6 @@
 return {
   'ThePrimeagen/harpoon', -- needs plenary
-  event = 'VeryLazy',
+  keys = { "<leader>h" },
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function ()
     local opts = { noremap=true, silent=false}

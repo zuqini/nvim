@@ -6,13 +6,12 @@ return {
   {
     'junegunn/fzf.vim',
     enabled = vim.g.is_windows,
-    event = 'VeryLazy',
+    event = 'VeryLazy', -- @TODO: replace with keys
     dependencies = { 'junegunn/fzf' },
     config = function ()
       vrequire('plugins.fzf');
     end
   },
-  { 'stevearc/vim-arduino', ft = "arduino", },
   {
     'darfink/vim-plist',
     ft={ "plist", "strings" },
@@ -27,18 +26,8 @@ return {
       vrequire('plugins/undotree')
     end
   },
-  {
-    'kylechui/nvim-surround', -- ys,ds,cs,ts
-    event = 'VeryLazy',
-    config = true,
-  },
+  { 'kylechui/nvim-surround', event = 'VeryLazy', config = true }, -- @TODO: lazy load with keys
+  { 'stevearc/vim-arduino', ft = "arduino", },
+  { 'michaeljsmith/vim-indent-object', event = 'VeryLazy' }, -- ii, ai, iI, aI
   { "dstein64/vim-startuptime", cmd = "StartupTime", },
-  'tpope/vim-repeat',
-  'michaeljsmith/vim-indent-object', -- ii, ai, iI, aI
-  {
-    'AndrewRadev/tagalong.vim',
-    ft = {
-      'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'rescript', 'xml', 'php', 'markdown', 'glimmer','handlebars','hbs',
-    }
-  },
 }
