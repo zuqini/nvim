@@ -136,9 +136,16 @@ endfunction
 nnoremap <silent><leader>q :call ToggleQuickFix()<CR>
 nnoremap <silent><leader>k :cp<CR>
 nnoremap <silent><leader>j :cn<CR>
+nnoremap <silent><leader><up> :cp<CR>
+nnoremap <silent><leader><down> :cn<CR>
+
 nnoremap <silent>Q :call ToggleLocList()<CR>
 nnoremap <silent><c-k> :lp<CR>
 nnoremap <silent><c-j> :lne<CR>
+nnoremap <silent><c-up> :lp<CR>
+nnoremap <silent><c-down> :lne<CR>
+nnoremap <silent><leader><left> :lp<CR>
+nnoremap <silent><leader><right> :lne<CR>
 
 " Indentation without hard tabs
 " https://vim.fandom.com/wiki/Indenting_source_code
