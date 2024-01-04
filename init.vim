@@ -87,7 +87,7 @@ lua require("plugins/treesitter")
 lua require("plugins/lsp/mason")
 lua require("plugins/lsp/main")
 lua require("plugins/lsp/additional")
-lua require("plugins/lsp/my")
+lua pcall(function() require("plugins/lsp/my") end) -- this is for env specific lsp configs
 
 lua require("plugins/lualine")
 lua require("plugins/gitsigns")
