@@ -9,9 +9,6 @@ nnoremap <leader>gs <cmd>lua require('fzf-lua').git_status()<CR>
 nnoremap <leader>gc <cmd>lua require('fzf-lua').git_commits()<CR>
 nnoremap <leader>gb <cmd>lua require('fzf-lua').git_branches()<CR>
 
-" nnoremap <leader>t <cmd>lua require('fzf-lua').tabs({ fzf_opts = { ['--keep-right'] = '' } })<CR>
-" nnoremap <leader>b <cmd>lua require('fzf-lua').buffers({ fzf_opts = { ['--keep-right'] = '' } })<CR>
-
 nnoremap <leader>t <cmd>lua require('fzf-lua').tabs()<CR>
 nnoremap <leader>b <cmd>lua require('fzf-lua').buffers()<CR>
 
