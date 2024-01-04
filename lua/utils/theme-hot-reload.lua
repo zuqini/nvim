@@ -1,9 +1,9 @@
 -- TODO: Instead of using vim variables, convert to full lua 
 local themes = {
   { name = 'nightfox', lualine = 'auto' },
-  { name = 'ayu', lualine = 'ayu' },
   { name = 'gruvbox', lualine = 'auto' },
   { name = 'kanagawa', lualine = 'auto' },
+  { name = 'ayu', lualine = 'ayu' },
 }
 local theme_index = 1
 local theme_timer_active = 0
