@@ -56,7 +56,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'folke/which-key.nvim'
   Plug 'mbbill/undotree'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'tpope/vim-surround' " ys,ds,cs,ts
+  Plug 'kylechui/nvim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
   Plug 'tpope/vim-repeat'
   Plug 'alvan/vim-closetag'
@@ -95,8 +95,8 @@ lua require("plugins/indent_blankline")
 lua require("plugins/leap")
 lua require("plugins/whichkey")
 lua require("plugins/harpoon")
+lua require("plugins/misc")
 call RequireVim("plugins/undotree")
-call RequireVim("plugins/surround")
 call RequireVim("plugins/closetag")
 call RequireVim("plugins/nutoggle")
 
