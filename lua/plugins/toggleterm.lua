@@ -4,9 +4,9 @@ return {
   config = function()
     require("toggleterm").setup({
       open_mapping = [[<c-\>]],
-      -- size = function (term)
-      --   return vim.o.lines * 0.75
-      -- end,
+      size = function (_term)
+        return vim.o.lines * 0.6
+      end,
     })
   end
 }
