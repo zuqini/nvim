@@ -1,6 +1,6 @@
 # nvim
 My custom NeoVim configuration and plugins.
-![image](https://user-images.githubusercontent.com/5790854/103149736-22e72a80-4721-11eb-9519-019522241c2a.png)
+<img width="1705" alt="Screen Shot 2021-03-25 at 5 46 36 PM" src="https://user-images.githubusercontent.com/5790854/112561408-625dfb00-8d92-11eb-831a-2b3a1eea226e.png">
 
 ## Installation
 - Install [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
