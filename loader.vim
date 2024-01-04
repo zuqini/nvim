@@ -1,4 +1,3 @@
-source $HOME/.config/nvim/configs/vimcompativility.vim
 source $HOME/.config/nvim/configs/main.vim
 source $HOME/.config/nvim/configs/coc.vim
 source $HOME/.config/nvim/configs/fzf.vim
