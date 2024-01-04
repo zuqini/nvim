@@ -55,5 +55,6 @@ end, {
 
 vim.api.nvim_create_user_command('TR', "TabRename <args>", { nargs = "?", bang = true })
 vim.api.nvim_create_user_command('TS', "tab split", { bang = true })
+vim.api.nvim_create_user_command('TW', "tab new", { bang = true })
 vim.api.nvim_create_user_command('VS', "vs", { bang = true })
 vim.api.nvim_create_user_command('SP', "sp", { bang = true })
