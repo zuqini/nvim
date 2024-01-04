@@ -1,3 +1,5 @@
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 require'nvim-tree'.setup {
@@ -42,7 +44,10 @@ require'nvim-tree'.setup {
     side = 'left',
     mappings = {
       custom_only = false,
-      list = {}
+      list = {
+        { key = "s", cb = ":lua leap_all_windows()<CR>" },
+        { key = "<c-s>", cb = tree_cb("system_open") },
+      }
     },
     number = false,
     relativenumber = false,
@@ -53,3 +58,7 @@ require'nvim-tree'.setup {
     require_confirm = true
   }
 }
+
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<s-tab>', ':NvimTreeToggle<CR>', opts)
+vim.api.nvim_set_keymap('n', '<c-n>', ':NvimTreeFindFile<Cr>', opts)

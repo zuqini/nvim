@@ -52,7 +52,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
   Plug 'junegunn/vim-peekaboo'
   Plug 'lukas-reineke/indent-blankline.nvim'
-  Plug 'phaazon/hop.nvim'
+  Plug 'ggandor/leap.nvim'
   Plug 'sheerun/vim-polyglot'
 call plug#end()
 
@@ -68,13 +68,12 @@ lua require("helpers")
 call RequireVim("main")
 lua require("themes/theme")
 
-call RequireVim("plugins/nvim-tree")
 lua require("plugins/nvim-tree")
 
 lua require("plugins/treesitter")
+lua require("plugins/leap")
 lua require("plugins/lsp")
 lua require("plugins/lualine")
-lua require("plugins/hop")
 lua require("plugins/indent_blankline")
 call RequireVim("plugins/surround")
 call RequireVim("plugins/wilder")

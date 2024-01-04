@@ -18,6 +18,13 @@ set ignorecase smartcase
 set laststatus=3
 set nofixendofline
 
+" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+"   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+"   \,sm:block-blinkwait175-blinkoff150-blinkon175
+set guicursor=n-v-c-i-ci-ve:block,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
+
 " disable automatic comment insertion
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
