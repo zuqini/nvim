@@ -1,38 +1,5 @@
 let mapleader = " "
 
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
-set mouse=a
-set hidden
-set number
-set showcmd
-set wildmenu
-set showmatch " show matching brackets
-set noshowmode
-set incsearch
-set hlsearch
-set ignorecase smartcase
-set laststatus=3
-set nofixendofline
-set cursorline
-set scrolloff=8
-set synmaxcol=512
-set undofile
-set pumblend=6
-set winblend=6
-
-" block insert
-" set guicursor=n-v-c-i-ci-ve:block,r-cr:hor20,o:hor50
-"   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-"   \,sm:block-blinkwait175-blinkoff150-blinkon175
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-  \,sm:block-blinkwait175-blinkoff150-blinkon175
-
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
 
@@ -57,14 +24,6 @@ nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
 vnoremap < <gv
 
-" Using Tabs
-" nnoremap <silent><leader>t :tab split<CR>
-" nnoremap <silent><leader>T :tab new<CR>
-" nnoremap <silent><left> gT
-" nnoremap <silent><right> gt
-" nnoremap <silent><leader><left> :tabm -1<CR>
-" nnoremap <silent><leader><right> :tabm +1<CR>
-
 " Buffer management
 nnoremap <silent>,q :bd<CR>
 nnoremap <silent>,Q :bd!<CR>
@@ -77,8 +36,6 @@ nnoremap <silent>]b :bn<CR>
 nnoremap <silent> gF :tab split<CR>gf
 
 " Windows
-set splitbelow
-set splitright
 nnoremap <S-left> <C-W>4<
 nnoremap <S-right> <C-W>4>
 nnoremap <S-up> <C-W>4+
@@ -144,51 +101,3 @@ nnoremap <silent><c-up> :lp<CR>
 nnoremap <silent><c-down> :lne<CR>
 nnoremap <silent><leader><left> :lp<CR>
 nnoremap <silent><leader><right> :lne<CR>
-
-" Indentation without hard tabs
-" https://vim.fandom.com/wiki/Indenting_source_code
-set autoindent
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-
-" Folding
-set foldenable
-set foldmethod=indent
-set foldlevelstart=99
-set foldnestmax=10
-
-" whitespace characters
-" other listchars:
-"set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
-"set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-"set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
-set list
-set showbreak=↪\
-if &encoding == "utf-8"
-  set listchars=tab:│\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
-else
-  set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
-endif
-
-" Search for the ... arguments separated with whitespace (if no '!'),
-" or with non-word characters (if '!' added to command).
-function! SearchMultiLine(bang, ...)
-  if a:0 > 0
-    let sep = (a:bang) ? '\_W\+' : '\_s\+'
-    let @/ = join(a:000, sep)
-  endif
-endfunction
-command! -bang -nargs=* S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
-
-" Augroups
-augroup mainMiscCommands
-  au!
-  " disable automatic comment insertion
-  au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-  " highlight yank
-  au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
-  " using // instead of /* */ for vim-commentary
-  au FileType c,cpp,cs,java setlocal commentstring=//\ %s
-augroup END
