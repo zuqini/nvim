@@ -11,6 +11,12 @@ vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', keymap_opts
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', keymap_opts)
 -- Q loclist is set in plugins/vim/mappings.vim
 
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '󰅏 ',
+  }
+})
+
 local border = {
   { "╭", "FloatBorder" },
   { "─", "FloatBorder" },
