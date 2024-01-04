@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-function vRequire(path)
+local function vRequire(path)
   vim.cmd('source ' .. vim.fn.stdpath('config') .. '/vim/' .. path .. '.vim')
 end
 
@@ -152,8 +152,14 @@ require("lazy").setup({
       require('plugins/leap')
     end
   },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'VeryLazy',
+    config = function ()
+      require('plugins/indent_blankline')
+    end
+  },
   { "dstein64/vim-startuptime", cmd = "StartupTime", },
-  'lukas-reineke/indent-blankline.nvim',
   'tpope/vim-commentary', -- gc
   'tpope/vim-repeat',
   'michaeljsmith/vim-indent-object', -- ii, ai, iI, aI
@@ -171,7 +177,6 @@ require("plugins/treesitter/treesitter")
 require("plugins/treesitter/context")
 require("plugins/treesitter/treeclimber")
 require('plugins/lualine')
-require('plugins/indent_blankline')
 
 require("plugins/lsp/mason")
 require("plugins/lsp/lsp")
