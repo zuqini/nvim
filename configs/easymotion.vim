@@ -10,3 +10,8 @@ nmap <Leader>l <Plug>(easymotion-lineforward)
 nmap <Leader>j <Plug>(easymotion-j)
 nmap <Leader>k <Plug>(easymotion-k)
 nmap <Leader>h <Plug>(easymotion-linebackward)
+
+" disables Coc when easymotion is active
+" See: https://github.com/easymotion/vim-easymotion/pull/437
+autocmd User EasyMotionPromptBegin silent! CocDisable
+autocmd User EasyMotionPromptEnd   silent! CocEnable
