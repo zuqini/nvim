@@ -60,6 +60,9 @@ nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
 vnoremap < <gv
 
+" highlight without moving
+:nnoremap <silent>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
 " Using Tabs
 nnoremap <silent><leader>gt :tab split<CR>
 nnoremap <silent><leader>gT :tab new<CR>
