@@ -72,6 +72,9 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 
+" using // instead of /* */ for vim-commentary
+autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+
 let g:indentLine_char = '│'
 " indentLine defaults conceal level to 2 (it won't work with conceal level 0)
 " setting conceal level for specific file types manually
