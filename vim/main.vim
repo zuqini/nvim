@@ -16,6 +16,7 @@ set incsearch
 set hlsearch
 set ignorecase smartcase
 set laststatus=2
+set nofixendofline
 
 " disable automatic comment insertion
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
