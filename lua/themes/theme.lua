@@ -1,19 +1,20 @@
 -- TODO: Instead of using vim variables, convert to full lua 
 vim.g.themes = {
+  'nightfox',
   'gruvbox',
   'kanagawa',
   'tokyonight',
   'spaceduck',
 }
-vim.g.theme_index = 3
+vim.g.theme_index = 1
 vim.g.theme = vim.g.themes[vim.g.theme_index]
 require('themes/' .. vim.g.theme)
 
 local M = {}
 function M.selectThemeByIndex(index)
   -- a bit hacky: unload theme packages for reloading
-  for package_name, _ in pairs(package.loaded) do
-    for _, theme_name in pairs(vim.g.themes) do
+  for _, theme_name in pairs(vim.g.themes) do
+    for package_name, _ in pairs(package.loaded) do
       if package_name:match(theme_name) then
         package.loaded[package_name] = nil
       end
@@ -32,12 +33,10 @@ end
 function M.selectThemeByTime()
   local hour = tonumber(os.date("%H"))
   local index = 2
-  if hour > 7 and hour < 16 then
-    index = 2
-  elseif hour >= 16 and hour < 21 then
-    index = 3
+  if hour > 7 and hour < 19 then
+    index = 1
   else
-    index = 4
+    index = 2
   end
   if vim.g.theme_index ~= index then
     M.selectThemeByIndex(index)
@@ -47,7 +46,9 @@ end
 vim.api.nvim_set_keymap('n', '<leader>m', ':lua require"themes/theme".cycleTheme()<CR>', {noremap = true, silent = true})
 
 local timer = vim.loop.new_timer()
-timer:start((60 - tonumber(os.date("%M"))) * 1000 * 60 + 1000 * 60, 60 * 60 * 1000, vim.schedule_wrap(M.selectThemeByTime))
+local min = 60 * 1000;
+-- check every 10 min
+timer:start(10 * min, 10 * min, vim.schedule_wrap(M.selectThemeByTime))
 M.selectThemeByTime()
 
 return M

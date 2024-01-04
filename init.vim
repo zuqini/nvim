@@ -3,10 +3,12 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'junegunn/vim-plug'
 
   " Themes
-  Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-  Plug 'morhetz/gruvbox'
-  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+  Plug 'sainnhe/gruvbox-material'
+  Plug 'EdenEast/nightfox.nvim'
   Plug 'rebelot/kanagawa.nvim'
+  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+  Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua' " deprecation notice: https://github.com/kyazdani42/nvim-tree.lua/issues/877
