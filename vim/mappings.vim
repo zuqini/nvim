@@ -53,10 +53,10 @@ nnoremap <silent>]b :bn<CR>
 nnoremap <silent> gF :tab split<CR>gf
 
 " Windows
-nnoremap <c-9> <C-W>4<
-nnoremap <c-0> <C-W>4>
-nnoremap <c--> <C-W>4-
-nnoremap <c-=> <C-W>4+
+nnoremap <s-left> <C-W><
+nnoremap <s-right> <C-W>>
+nnoremap <s-down> <C-W>-
+nnoremap <s-up> <C-W>+
 
 " Clipboard Copy Pasting
 nnoremap <silent><leader>y "+y
