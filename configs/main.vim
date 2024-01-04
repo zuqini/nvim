@@ -27,12 +27,8 @@ set smartcase
 nnoremap <silent> <ESC><ESC> :nohlsearch \| match none \| 2match none \| call coc#float#close_all()<CR>
 
 " Movement
-nnoremap <C-h> 10h
-nnoremap <C-l> 10l
 nnoremap <C-k> 10k
 nnoremap <C-j> 10j
-vnoremap <C-h> 10h
-vnoremap <C-l> 10l
 vnoremap <C-k> 10k
 vnoremap <C-j> 10j
 
@@ -52,8 +48,8 @@ nnoremap <leader>Z zA
 " Using Tabs
 nnoremap <silent><F2> :tab split<CR>
 nnoremap <silent><F9> :tabclose<CR>
-nnoremap H gT
-nnoremap L gt
+nnoremap <C-h> gT
+nnoremap <C-l> gt
 nnoremap <silent><leader>h :tabm -1<CR>
 nnoremap <silent><leader>l :tabm +1<CR>
 

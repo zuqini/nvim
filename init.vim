@@ -21,8 +21,19 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'junegunn/vim-plug'
   Plug 'junegunn/goyo.vim'
   Plug 'junegunn/limelight.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  " note for fzf.vim: for special commands like :Ag and :Rg, need to install additional
+  " dependencies. See: https://github.com/junegunn/fzf.vim
+
+  " ds,cs,ts
   Plug 'tpope/vim-surround'
+  " gc
+  Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-endwise'
+
+  Plug 'rstacruz/vim-closer'
   Plug 'takac/vim-hardtime'
   Plug 'Yggdroot/indentLine'
   Plug 'easymotion/vim-easymotion'
@@ -31,12 +42,18 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'preservim/nerdtree'
   Plug 'Asheq/close-buffers.vim'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  " note for fzf.vim: for special commands like :Ag and :Rg, need to install additional
-  " dependencies. See: https://github.com/junegunn/fzf.vim
 call plug#end()
 
 if vim_plug_installed
-  exec "source " . g:std_path_config . "/loader.vim"
+  exec "source " . g:std_path_config . "/configs/main.vim"
+  exec "source " . g:std_path_config . "/configs/goyolime.vim"
+  exec "source " . g:std_path_config . "/configs/coc.vim"
+  exec "source " . g:std_path_config . "/configs/fzf.vim"
+  exec "source " . g:std_path_config . "/configs/nerdtree.vim"
+  exec "source " . g:std_path_config . "/configs/easymotion.vim"
+  exec "source " . g:std_path_config . "/configs/surround.vim"
+  exec "source " . g:std_path_config . "/configs/nutoggle.vim"
+
+  " Disabled
+  " exec "source " . g:std_path_config . "/configs/hardmode.vim"
 endif
