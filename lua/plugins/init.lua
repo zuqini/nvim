@@ -41,4 +41,10 @@ return {
   { "dstein64/vim-startuptime", cmd = "StartupTime", },
   'tpope/vim-repeat',
   'michaeljsmith/vim-indent-object', -- ii, ai, iI, aI
+  {
+    'AndrewRadev/tagalong.vim',
+    ft = {
+      'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'rescript', 'xml', 'php', 'markdown', 'glimmer','handlebars','hbs',
+    }
+  },
 }

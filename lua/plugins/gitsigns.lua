@@ -1,6 +1,9 @@
 return {
   'lewis6991/gitsigns.nvim',
   event = 'VeryLazy',
+  dependencies = {
+    'petertriho/nvim-scrollbar',
+  },
   config = function ()
     require('gitsigns').setup({
       on_attach = function(bufnr)
