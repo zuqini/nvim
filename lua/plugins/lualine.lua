@@ -1,12 +1,24 @@
-local angle_down_separators = { left = '', right = '' }
+local separators0 = { left = '', right = ''}
+local separators1 = { left = '', right = '' }
+local separators2 = { left = '', right = '' }
+local separators3 = { left = '', right = ''}
+local separators4 = { left = '', right = '' }
+
+local separators5 = { left = '\\', right = '/'}
+local separators6 = { left = '/', right = '\\'}
+local separators7 = { left = '', right = ''}
+local separators8 = { left = '', right = '' }
+local separators9 = { left = '', right = ''}
+local separators10 = { left = '', right = ''}
+
 local winbar = {
   {
     'filetype',
     colored = true,   -- Displays filetype icon in color if set to true
     icon_only = true, -- Display only an icon for filetype
-    padding = { left = 2, right = 0 },
-    component_separators = '',
-    -- section_separators = angle_down_separators,
+    padding = { left = 1, right = 0 },
+    component_separators = separators0,
+    section_separators = separators2,
   },
   {
     'filename',
@@ -21,30 +33,16 @@ local winbar = {
     separator = '',
   },
 };
+
 require('lualine').setup {
   options = {
-    -- section_separators = '',
-    -- component_separators = '|',
-
-    -- component_separators = { left = '\\', right = '/'},
-    -- section_separators = { left = '', right = '' },
-
-    -- component_separators = { left = '/', right = '\\'},
-    -- section_separators = { left = '', right = '' },
-
-    -- component_separators = { left = '', right = ''},
-    -- section_separators = { left = '', right = ''},
-
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
-
+    component_separators = separators9,
+    section_separators = separators1,
     icons_enabled = true,
     globalstatus = true,
     disabled_filetypes = {'NvimTree'},
 
     -- Uncomment to disable icons
-    -- component_separators = { left = '', right = ''},
-    -- section_separators = { left = '', right = ''},
     -- icons_enabled = false,
   },
   winbar = {
@@ -66,7 +64,7 @@ require('lualine').setup {
         },
         show_filename_only = true,   -- Shows shortened relative path when set to false.
         hide_filename_extension = true,   -- Hide filename extension when set to true.
-        -- section_separators = angle_down_separators,
+
         symbols = {
           modified = '[+]',
           unnamed = '[]',
