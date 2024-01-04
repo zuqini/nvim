@@ -17,6 +17,7 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'cocopon/iceberg.vim'
+  Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 
   Plug 'junegunn/vim-plug'
   Plug 'junegunn/goyo.vim'
@@ -46,6 +47,8 @@ call plug#end()
 
 if vim_plug_installed
   exec "source " . g:std_path_config . "/configs/main.vim"
+  exec "source " . g:std_path_config . "/configs/themes/tokyonight.vim"
+
   exec "source " . g:std_path_config . "/configs/goyolime.vim"
   exec "source " . g:std_path_config . "/configs/coc.vim"
   exec "source " . g:std_path_config . "/configs/fzf.vim"

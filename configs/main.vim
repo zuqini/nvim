@@ -6,15 +6,6 @@ set termguicolors
 " Terminal emulator
 tnoremap <Esc> <C-\><C-n>
 
-" TokyoNight colorscheme settings
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_transparent_background = 1
-colorscheme tokyonight-custom
-"colorscheme dracula
-let g:lightline = {'colorscheme' : 'tokyonight'}
-set laststatus=2
-
 set mouse=a
 set number
 set showcmd
@@ -24,6 +15,7 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+set laststatus=2
 nnoremap <silent> <ESC><ESC> :nohlsearch \| match none \| 2match none \| call coc#float#close_all()<CR>
 
 " Movement
