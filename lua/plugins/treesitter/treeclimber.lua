@@ -19,7 +19,17 @@ vim.keymap.set('n', '<C-p>', function() tc.swap_prev(opts) end, keyopts)
 vim.keymap.set('n', '<C-n>', function() tc.swap_next(opts) end, keyopts)
 
 require('which-key').register({
-  ['<C-N>'] = 'Swap next node',
-  ['<C-P>'] = 'Swap prev node',
-  ['<A-M>'] = 'Highlight node',
+  ['<C-n>'] = 'Swap next node',
+  ['<C-p>'] = 'Swap prev node',
+  ['<M-m>'] = 'Highlight node',
+
+  ['<M-j>'] = 'Goto next node',
+  ['<M-h>'] = 'Goto parent node',
+  ['<M-k>'] = 'Goto prev node',
+  ['<M-l>'] = 'Goto child node',
+
+  ['<M-down>'] = 'Goto next node',
+  ['<M-left>'] = 'Goto parent node',
+  ['<M-up>'] = 'Goto prev node',
+  ['<M-right>'] = 'Goto child node',
 })

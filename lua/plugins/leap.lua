@@ -13,10 +13,6 @@ return {
     vim.keymap.set('v', 's', leap_all_windows, { silent = true })
     vim.keymap.set('n', 's', leap_all_windows, { silent = true })
 
-    require('which-key').register({
-      s = 'Search (Leap)'
-    })
-
     -- custom highlights
     -- local function leap_highlight()
     --   vim.api.nvim_set_hl(0, 'LeapMatch', { fg = "#ccff88", ctermfg = "red", underline = true })

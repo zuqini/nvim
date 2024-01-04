@@ -1,6 +1,5 @@
 return {
   'folke/which-key.nvim',
-  event = 'VeryLazy',
   config = function ()
     local wk = require("which-key")
     wk.setup({
@@ -47,7 +46,11 @@ return {
       B = 'Del All Others',
     }, { prefix = '<BS>' })
 
-    require('which-key').register({
+    wk.register({
+      s = 'Search (Leap)',
+      ["<S-Tab>"] = 'NvimTreeToggle',
+      ["<leader><Tab>"] = 'NvimTreeFindFile',
+
       ['[b'] = 'Prev Buffer',
       [']b'] = 'Next Buffer',
     })
