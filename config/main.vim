@@ -82,6 +82,9 @@ nnoremap <Right> <C-W>l
 nnoremap <leader>x "*d
 nnoremap <leader>c "*y
 nnoremap <leader>v "*p
+vnoremap <leader>x "*d
+vnoremap <leader>c "*y
+vnoremap <leader>v "*p
 
 " Indentation with mixed tabs and spaces
 " https://vim.fandom.com/wiki/Indenting_source_code
