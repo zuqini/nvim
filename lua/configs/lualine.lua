@@ -1,16 +1,13 @@
-local colors = {
-  red = '#ca1243',
-  grey = '#a0a1a7',
-  black = '#383a42',
-  white = '#f3f3f3',
-  light_green = '#83a598',
-  orange = '#fe8019',
-  green = '#8ec07c',
-}
+local custom_spaceduck = require'lualine.themes.spaceduck'
 
- require('lualine').setup {
+-- change background color so horizontal splits have cleaner separation.
+-- May cause some visual weirdness with tabs/buffers
+custom_spaceduck.inactive.b.bg = custom_spaceduck.normal.b.bg
+custom_spaceduck.inactive.c.bg = '#16172d'
+
+require('lualine').setup {
     options = {
-        theme = 'spaceduck',
+        theme = custom_spaceduck,
         -- component_separators = { left = '', right = '' },
         -- section_separators = { left = '', right = ''},
 
@@ -24,7 +21,12 @@ local colors = {
         -- icons_enabled = false,
     },
     tabline = {
-        lualine_a = { { 'tabs', mode = 0, }, },
+        lualine_a = {
+            {
+                'tabs',
+                mode = 0,
+            },
+        },
         lualine_b = {
             {
                 'filename',
@@ -75,7 +77,6 @@ local colors = {
         },
         lualine_b = {
             'branch',
-            'filetype',
         },
         lualine_c = {
             'diff',
@@ -91,16 +92,21 @@ local colors = {
                 always_visible = false,   -- Show diagnostics even if there are none.
             },
         },
-        lualine_x = { 'encoding',  'filesize', 'fileformat' },
-        lualine_y = { { 'progress' } },
-        lualine_z = { { 'location' } },
+        lualine_x = {
+            'filetype',
+            'fileformat',
+            'encoding',
+            'filesize',
+        },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' },
     },
     inactive_sections = {
         lualine_a = {  },
-        lualine_b = {  },
-        lualine_c = { { 'filename' } },
-        lualine_x = { { 'location' } },
-        lualine_y = {  },
+        lualine_b = { 'filename' },
+        lualine_c = {  },
+        lualine_x = {  },
+        lualine_y = { 'location' },
         lualine_z = {  },
     },
     extensions = { 'fzf' },

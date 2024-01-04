@@ -7,7 +7,7 @@ nnoremap Q :q<CR>
 nnoremap <leader>q :w<CR>
 nnoremap <leader>Q :wq<CR>
 nnoremap <leader>b :ls<cr>:b<space>
-nnoremap <leader>B :ls<cr>:sb<space>
+nnoremap <leader>B :ls<cr>:bd<space>
 
 " centering
 nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
