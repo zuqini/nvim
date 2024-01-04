@@ -54,6 +54,7 @@ call plug#begin(stdpath('data') . '/plugged')
   " Utils
   Plug 'nvim-lua/plenary.nvim'
   Plug 'ThePrimeagen/harpoon' " needs plenary
+  Plug 'darfink/vim-plist'
   Plug 'nvim-zh/colorful-winsep.nvim'
   Plug 'petertriho/nvim-scrollbar'
   Plug 'dstein64/vim-startuptime'
@@ -106,6 +107,7 @@ lua require("plugins/misc")
 call RequireVim("plugins/undotree")
 call RequireVim("plugins/closetag")
 call RequireVim("plugins/nutoggle")
+call RequireVim("plugins/plist")
 
 if !is_windows
   lua require("plugins/fzf-lua")
