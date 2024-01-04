@@ -5,7 +5,7 @@ vim.g.themes = {
   'tokyonight',
   'spaceduck',
 }
-vim.g.theme_index = 2
+vim.g.theme_index = 3
 vim.g.theme = vim.g.themes[vim.g.theme_index]
 require('themes/' .. vim.g.theme)
 
@@ -31,12 +31,10 @@ end
 
 function M.selectThemeByTime()
   local hour = tonumber(os.date("%H"))
-  local index = 1
+  local index = 2
   if hour > 7 and hour < 16 then
-    index = 1
-  elseif hour >= 16 and hour < 20 then
     index = 2
-  elseif hour >= 20 and hour < 22 then
+  elseif hour >= 16 and hour < 21 then
     index = 3
   else
     index = 4
@@ -51,4 +49,5 @@ vim.api.nvim_set_keymap('n', '<leader>m', ':lua require"themes/theme".cycleTheme
 local timer = vim.loop.new_timer()
 timer:start((60 - tonumber(os.date("%M"))) * 1000 * 60 + 1000 * 60, 60 * 60 * 1000, vim.schedule_wrap(M.selectThemeByTime))
 M.selectThemeByTime()
+
 return M
