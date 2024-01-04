@@ -30,6 +30,9 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
   Plug 'embark-theme/vim', { 'as': 'embark' }
 
+  Plug 'preservim/nerdtree'
+  Plug 'PhilRunninger/nerdtree-visual-selection'
+
   Plug 'junegunn/vim-plug'
   Plug 'junegunn/goyo.vim'
   Plug 'junegunn/limelight.vim'
@@ -53,6 +56,7 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'itchyny/lightline.vim'
   Plug 'preservim/nerdtree'
+  Plug 'PhilRunninger/nerdtree-visual-selection'
   Plug 'Asheq/close-buffers.vim'
 call plug#end()
 
