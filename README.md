@@ -26,7 +26,7 @@ Windows requires manual Vim-Plug and plugins set-up.
 
 See `ginit.vim` for nvim-qt specific configs.
 
-## Options Plugins Setup
+## Optional Plugins Setup
 ### [Fzf.vim](https://github.com/junegunn/fzf.vim) Dependencies
 - [fzf](https://github.com/junegunn/fzf) 0.23.0 or above
 - For syntax-highlighted preview, install [bat](https://github.com/sharkdp/bat)
