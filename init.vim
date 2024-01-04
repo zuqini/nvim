@@ -65,7 +65,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'alvan/vim-closetag'
 
   Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
-  Plug 'junegunn/vim-peekaboo'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'ggandor/leap.nvim' " breaking changes: https://github.com/ggandor/leap.nvim/issues/18
 call plug#end()
