@@ -42,6 +42,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'L3MON4D3/LuaSnip' " Snippets plugin
 
   " Utils
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
   Plug 'tpope/vim-repeat'
@@ -73,8 +74,9 @@ if vim_plug_installed
   exec "source " . vim_configs_path . "/configs/nvim-tree.vim"
   lua require("configs/nvim-tree")
 
-  lua require("main")
+  lua require("configs/indent_blankline")
   lua require("configs/lualine")
   lua require("configs/hop")
   lua require("configs/lsp")
+  lua require("configs/treesitter")
 endif
