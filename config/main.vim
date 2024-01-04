@@ -10,7 +10,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'Asheq/close-buffers.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " install fzf first
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " note for fzf.vim: for special commands like :Ag and :Rg, need to install additional
 " dependencies. See: https://github.com/junegunn/fzf.vim
