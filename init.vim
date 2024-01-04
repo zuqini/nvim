@@ -9,9 +9,14 @@ if !is_windows
   if !vim_plug_installed
     silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
       \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
-    autocmd VimEnter * PlugInstall
   endif
 endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
 unlet autoload_plug_path
 " END ========================================================================
 
@@ -29,6 +34,8 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'junegunn/fzf.vim' " for :Ag and :Rg, See: https://github.com/junegunn/fzf.vim
 
   " LSP
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/nvim-lsp-installer'
 
   " Utils
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
@@ -60,9 +67,9 @@ if vim_plug_installed
   lua require("configs/lualine")
   lua require("configs/hop")
   lua require("configs/nvim-tree")
+  lua require("configs/lsp")
 
   " Disabled configs
   " exec "source " . vim_configs_path . "/configs/configs/hardmode.vim"
   " exec "source " . vim_configs_path . "/configs/nutoggle.vim"
 endif
-
