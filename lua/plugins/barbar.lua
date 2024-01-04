@@ -1,8 +1,8 @@
 require('bufferline').setup({
   animation = false,
   icon_pinned = '車',
-  icon_separator_active = '',
-  icon_separator_inactive = '',
+  -- icon_separator_active = '',
+  -- icon_separator_inactive = '',
   maximum_padding = 1,
 
   -- colemak-dh
