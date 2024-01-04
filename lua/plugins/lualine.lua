@@ -1,10 +1,17 @@
 require('lualine').setup {
     options = {
         -- component_separators = '|',
-        -- section_separators = { left = '', right = ''},
+        -- section_separators = '',
 
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
+        -- component_separators = '',
+        -- section_separators = { left = '', right = '' },
+
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+
+        -- component_separators = { left = '', right = '' },
+        -- section_separators = { left = '', right = '' },
+
         icons_enabled = true,
         globalstatus = true,
         disabled_filetypes = {'NvimTree'},
@@ -29,36 +36,41 @@ require('lualine').setup {
                                         -- 1: Relative path
                                         -- 2: Absolute path
 
-                shorting_target = 40,
+                -- shorting_target = 40,
                 symbols = {
                     modified = '[+]',
                     readonly = '[-]',
                     unnamed = '[]',
                 },
-
                 separator = '',
-                padding = { left = 1, right = 0 },
+                padding = { left = 1, right = 1 },
             },
             {
                 'filetype',
                 colored = true,   -- Displays filetype icon in color if set to true
                 icon_only = true, -- Display only an icon for filetype
+                padding = { left = 0, right = 1 },
             },
         },
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
         lualine_z = {
-            {
-                'buffers',
-                filetype_names = {
-                    TelescopePrompt = 'Telescope',
-                    dashboard = 'Dashboard',
-                    packer = 'Packer',
-                    fzf = 'FZF',
-                    alpha = 'Alpha'
-                },
-            }
+            -- {
+            --     'buffers',
+            --     filetype_names = {
+            --         TelescopePrompt = 'Telescope',
+            --         dashboard = 'Dashboard',
+            --         packer = 'Packer',
+            --         fzf = 'FZF',
+            --         alpha = 'Alpha'
+            --     },
+            --     show_filename_only = true,   -- Shows shortened relative path when set to false.
+            --     hide_filename_extension = true,   -- Hide filename extension when set to true.
+            --     symbols = {
+            --         modified = '[+]',
+            --     },
+            -- }
         },
     },
     sections = {
@@ -74,23 +86,24 @@ require('lualine').setup {
                 icon = '',
                 separator = ':'
             },
-            {
-                'filename',
-                file_status = true,     -- Displays file status (readonly status, modified status)
-                path = 1,               -- 0: Just the filename
-                                        -- 1: Relative path
-                                        -- 2: Absolute path
+            { 'diff' },
+            -- {
+            --     'filename',
+            --     file_status = true,     -- Displays file status (readonly status, modified status)
+            --     path = 0,               -- 0: Just the filename
+            --                             -- 1: Relative path
+            --                             -- 2: Absolute path
 
-                shorting_target = 80,
-                symbols = {
-                    modified = '[+]',
-                    readonly = '[-]',
-                    unnamed = '[]',
-                },
-            },
+            --     -- shorting_target = 80,
+            --     symbols = {
+            --         modified = '[+]',
+            --         readonly = '[-]',
+            --         unnamed = '[]',
+            --     },
+            -- },
         },
         lualine_c = {
-            { 'diff', separator = '|' },
+            -- { 'diff', separator = '|' },
             {
                 'diagnostics',
                 sources = { 'nvim_diagnostic', },
