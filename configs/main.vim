@@ -3,6 +3,9 @@ let mapleader = "\<space>"
 " enable true color
 set termguicolors
 
+" Terminal emulator
+tnoremap <Esc> <C-\><C-n>
+
 " TokyoNight colorscheme settings
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
@@ -11,32 +14,22 @@ colorscheme tokyonight-custom
 let g:lightline = {'colorscheme' : 'tokyonight'}
 set laststatus=2
 
-" Dracula colorscheme settings
-" let g:dracula_colorterm = 0
-" colorscheme dracula
-
 set mouse=a
 set number
 set showcmd
 set wildmenu
 set showmatch " show matching brackets
-
-" shortcut to run macro @q. qq to record, q to stop recording.
-nnoremap <F1> @q
-
-" highlight search
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
 nnoremap <silent> <ESC><ESC> :nohlsearch \| match none \| 2match none \| call coc#float#close_all()<CR>
 
-" Terminal emulator
-tnoremap <Esc> <C-\><C-n>
-
 " more logical Y command
 " because C => c$ and D => d$
 nnoremap Y y$
+" shortcut to run macro @q. qq to record, q to stop recording.
+nnoremap <F1> @q
 
 " Folding
 set foldenable
