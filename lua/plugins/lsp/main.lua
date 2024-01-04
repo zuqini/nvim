@@ -89,8 +89,11 @@ lspconfig.tsserver.setup {}
 lspconfig.pyright.setup {}
 lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
+
+-- either use omnisharp or omnisharp_mono, uncomment based on which is needed
 -- lspconfig.omnisharp.setup {}
--- omnisharp_mono comes from mason so need to setup manually
+
+-- omnisharp_mono comes from mason so need to setup defaults manually
 -- lspconfig.omnisharp_mono.setup {
 --     on_attach = on_attach,
 --     capabilities = capabilities,
