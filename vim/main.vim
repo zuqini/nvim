@@ -66,6 +66,8 @@ nnoremap ,q :bd<CR>
 nnoremap ,Q :bd!<CR>
 nnoremap ,b :ls<cr>:bd<space>
 nnoremap ,B :%bd\|e#\|bd#<CR>
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
 
 " go to file in new tab
 nnoremap <silent> gF :tab split<CR>gf
