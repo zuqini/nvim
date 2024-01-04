@@ -49,7 +49,6 @@ call plug#begin(stdpath('data') . '/plugged')
 
   Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
   Plug 'junegunn/vim-peekaboo'
-  Plug 'psliwka/vim-smoothie'
   Plug 'jiangmiao/auto-pairs'
   Plug 'takac/vim-hardtime'
   Plug 'lukas-reineke/indent-blankline.nvim'
@@ -67,12 +66,10 @@ if vim_plug_installed
   exec "source " . vim_configs_path . "/configs/nvim-tree.vim"
   lua require("configs/nvim-tree")
 
-  exec "source " . vim_configs_path . "/configs/lsp.vim"
-  lua require("configs/lsp")
-
   lua require('main')
   lua require("configs/lualine")
   lua require("configs/hop")
+  lua require("configs/lsp")
 
   " Disabled configs
   " exec "source " . vim_configs_path . "/configs/configs/hardmode.vim"

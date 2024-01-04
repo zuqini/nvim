@@ -9,7 +9,6 @@
 "     \ }
 
 nnoremap <s-tab> :NvimTreeToggle<CR>
-nnoremap <c-m> :NvimTreeRefresh<CR>
 nnoremap <c-n> :NvimTreeFindFile<CR>
 
 function! DisableST()

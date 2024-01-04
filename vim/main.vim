@@ -11,20 +11,14 @@ nnoremap <F1> <nop>
 inoremap <F1> <nop>
 
 " buffers
-nnoremap Q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
-nnoremap <leader>b :ls<cr>:b<space>
-nnoremap <leader>B :ls<cr>:bd<space>
-nnoremap <leader>q :%bd\|e#\|bd#<CR>
-nnoremap <leader>Q :so $MYVIMRC<CR>
 
-nnoremap <silent><leader><tab> :copen<CR>
-nnoremap <silent><leader><S-tab> :lopen<CR>
-nnoremap <silent><up> :cp<CR>
-nnoremap <silent><down> :cn<CR>
-nnoremap <silent><leader><up> :lp<CR>
-nnoremap <silent><leader><down> :lne<CR>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>B :ls<cr>:bd<space>
+nnoremap <leader><c-b> :%bd\|e#\|bd#<CR>
+
+nnoremap <leader>R :so $MYVIMRC<CR>
 
 " centering
 nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
@@ -47,10 +41,10 @@ set laststatus=2
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 
 " Movement
-nnoremap <C-k> 10k
-nnoremap <C-j> 10j
-vnoremap <C-k> 10k
-vnoremap <C-j> 10j
+" nnoremap <C-k> 10k
+" nnoremap <C-j> 10j
+" vnoremap <C-k> 10k
+" vnoremap <C-j> 10j
 
 " more logical Y command (C => c$ and D => d$
 " note: this is default in nvim. keeping mapping for vim compatibility
@@ -91,6 +85,30 @@ nnoremap <silent><leader>p "0p
 nnoremap <silent><leader>P "0P
 vnoremap <silent><leader>p "0p
 vnoremap <silent><leader>P "0P
+
+" quickfix
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
+
+function! ToggleLocList()
+    if empty(filter(getwininfo(), 'v:val.loclist'))
+        lua vim.diagnostic.setloclist()
+    else
+        lclose
+    endif
+endfunction
+
+nnoremap <silent>Q :call ToggleQuickFix()<CR>
+nnoremap <silent><c-k> :cp<CR>
+nnoremap <silent><c-j> :cn<CR>
+nnoremap <silent><leader>q :call ToggleLocList()<CR>
+nnoremap <silent><leader>k :lp<CR>
+nnoremap <silent><leader>j :lne<CR>
 
 " Indentation without hard tabs
 " https://vim.fandom.com/wiki/Indenting_source_code
