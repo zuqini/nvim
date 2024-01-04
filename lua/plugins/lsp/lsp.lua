@@ -3,27 +3,27 @@ local wk = require('which-key') -- For documentation
 
 -- vim.lsp.set_log_level("debug")
 
-local keymap_opts = { noremap=true, silent=true }
+local keymap_opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', keymap_opts)
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', keymap_opts)
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', keymap_opts)
 -- Q loclist is set in plugins/vim/main.vim
 
 local border = {
-      {"╭", "FloatBorder"},
-      {"─", "FloatBorder"},
-      {"╮", "FloatBorder"},
-      {"│", "FloatBorder"},
-      {"╯", "FloatBorder"},
-      {"─", "FloatBorder"},
-      {"╰", "FloatBorder"},
-      {"│", "FloatBorder"},
+  { "╭", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╮", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "╯", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╰", "FloatBorder" },
+  { "│", "FloatBorder" },
 }
 
 -- LSP settings (for overriding per client)
 local handlers = {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
 }
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -40,7 +40,7 @@ wk.register({
 
 wk.register({
   e = 'Open Float',
-}, { prefix='<leader>' })
+}, { prefix = '<leader>' })
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -49,24 +49,24 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', bufopts)
-  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', bufopts)
-  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', bufopts)
-  vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>ga', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>gr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>gl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', bufopts)
-  vim.keymap.set('n', '<leader>gd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>gn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>gc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
-  vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>', bufopts)
-  vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.references()<CR>', bufopts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>gr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>gl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
+  vim.keymap.set('n', '<leader>gd', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<leader>gc', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', function() vim.lsp.buf.references { includeDeclaration = false } end, bufopts)
+  vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
 
-  vim.keymap.set('n', '<leader>nf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
-  vim.keymap.set('v', '<leader>nf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('v', '<leader>gf', vim.lsp.buf.format, bufopts)
 
   wk.register({
     K = 'Hover',
@@ -95,18 +95,18 @@ local on_attach = function(client, bufnr)
       p = 'Peek func',
       P = 'Peek class',
     }
-  }, { prefix='<leader>' })
+  }, { prefix = '<leader>' })
 end
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
-	properties = {
-		"documentation",
-		"detail",
-		"additionalTextEdits",
-	},
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
 }
 
 lspconfig.util.default_config = vim.tbl_extend(
@@ -116,7 +116,7 @@ lspconfig.util.default_config = vim.tbl_extend(
     on_attach = on_attach,
     capabilities = capabilities,
     flags = {
-        debounce_text_changes = 150,
+      debounce_text_changes = 150,
     }
   }
 )
@@ -126,7 +126,8 @@ lspconfig.rust_analyzer.setup({
   commands = {
     RustOpenExternalDocs = {
       function()
-        vim.lsp.buf_request(vim.api.nvim_get_current_buf(), 'experimental/externalDocs', vim.lsp.util.make_position_params(), function(err, url)
+        vim.lsp.buf_request(vim.api.nvim_get_current_buf(), 'experimental/externalDocs',
+          vim.lsp.util.make_position_params(), function(err, url)
           if err then
             error(tostring(err))
           elseif url == nil then
@@ -139,17 +140,18 @@ lspconfig.rust_analyzer.setup({
       description = 'Open documentation for the symbol under the cursor in default browser',
     },
   },
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
 
-      local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-      buf_set_keymap('n', '<leader>ge', ':RustOpenExternalDocs<CR>', keymap_opts)
-      wk.register({
-        g = {
-          e = 'RustOpenExtDocs',
-        }
-      }, { prefix='<leader>' })
-    end,
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+    buf_set_keymap('n', '<leader>ge', ':RustOpenExternalDocs<CR>', keymap_opts)
+    wk.register({
+      g = {
+        e = 'RustOpenExtDocs',
+      }
+    }, { prefix = '<leader>' })
+  end,
 })
 
 lspconfig.sumneko_lua.setup {
