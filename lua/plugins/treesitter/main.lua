@@ -131,8 +131,8 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       border = 'none',
       peek_definition_code = {
-        ["<leader>rp"] = "@function.outer",
-        ["<leader>rP"] = "@class.outer",
+        ["<leader>np"] = "@function.outer",
+        ["<leader>nP"] = "@class.outer",
       },
     },
   },

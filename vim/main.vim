@@ -42,8 +42,8 @@ nnoremap <leader>R :so $MYVIMRC<CR>
 nnoremap <silent> <c-s> :cd %:p:h<CR>
 
 " format json
-nnoremap <leader>rj :%!jq<CR>
-vnoremap <leader>rj :%!jq<CR>
+nnoremap <leader>nj :%!jq<CR>
+vnoremap <leader>nj :%!jq<CR>
 
 " centering
 " set scrolloff=999

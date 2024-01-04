@@ -32,17 +32,17 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', bufopts)
   vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', bufopts)
   vim.keymap.set('n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>ra', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>rr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>rl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', bufopts)
-  vim.keymap.set('n', '<leader>rd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>rc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>na', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>nr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>nl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', bufopts)
+  vim.keymap.set('n', '<leader>nd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>nn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>nc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
   vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>', bufopts)
   vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.references()<CR>', bufopts)
 
-  vim.keymap.set('n', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
-  vim.keymap.set('v', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>nf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
+  vim.keymap.set('v', '<leader>nf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
 
   wk.register({
     K = 'Hover',
@@ -58,7 +58,7 @@ local on_attach = function(client, bufnr)
 
   wk.register({
     K = 'Signature Help',
-    r = {
+    n = {
       name = 'Lang.',
       a = 'Add Workspace',
       r = 'Remove Workspace',
