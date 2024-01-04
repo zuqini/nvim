@@ -1,5 +1,5 @@
 let is_windows = has("win64") || has("win32") || has("win16")
-" simulate windows let is_windows = 1
+
 call plug#begin(stdpath('data') . '/plugged')
   Plug 'junegunn/vim-plug'
 

@@ -6,14 +6,14 @@ require('lualine').setup {
         -- component_separators = { left = '\\', right = '/'},
         -- section_separators = { left = '', right = '' },
 
-        component_separators = { left = '/', right = '\\'},
-        section_separators = { left = '', right = '' },
+        -- component_separators = { left = '/', right = '\\'},
+        -- section_separators = { left = '', right = '' },
 
         -- component_separators = { left = '', right = ''},
         -- section_separators = { left = '', right = ''},
 
-        -- component_separators = { left = '', right = '' },
-        -- section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
 
         icons_enabled = true,
         globalstatus = true,
@@ -29,8 +29,8 @@ require('lualine').setup {
             {
                 'tabs',
                 mode = 0,
-                component_separators = { left = '\\', right = '/'},
-                section_separators = { left = '', right = '' },
+                -- component_separators = { left = '\\', right = '/'},
+                -- section_separators = { left = '', right = '' },
             },
         },
         lualine_b = {
@@ -49,7 +49,7 @@ require('lualine').setup {
                 },
                 separator = '',
                 padding = { left = 1, right = 1 },
-                section_separators = { left = '', right = '' },
+                -- section_separators = { left = '', right = '' },
             },
             {
                 'filetype',
