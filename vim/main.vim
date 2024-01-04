@@ -18,6 +18,7 @@ set ignorecase smartcase
 set laststatus=3
 set nofixendofline
 set cursorline
+set scrolloff=8
 set synmaxcol=512
 
 " block insert

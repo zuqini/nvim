@@ -7,7 +7,7 @@ wk.setup({
     align = "left", -- align columns left, center or right
   },
 })
-vim.opt.timeoutlen = 500
+-- vim.opt.timeoutlen = 500
 
 vim.api.nvim_set_keymap('n', '<leader><leader>', '<Cmd>WhichKey<CR>', { noremap = true, silent = true })
 
