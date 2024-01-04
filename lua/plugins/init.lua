@@ -12,7 +12,6 @@ return {
       vrequire('plugins.fzf');
     end
   },
-  --  Utils
   { 'stevearc/vim-arduino', ft = "arduino", },
   {
     'darfink/vim-plist',
