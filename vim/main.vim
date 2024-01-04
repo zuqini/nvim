@@ -30,12 +30,8 @@ set guicursor=n-v-c-i-ci-ve:block,r-cr:hor20,o:hor50
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
 
-" buffers
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
-
-nnoremap <leader>B :ls<cr>:bd<space>
-nnoremap <leader><c-b> :%bd\|e#\|bd#<CR>
 
 nnoremap <leader>R :so $MYVIMRC<CR>
 nnoremap <silent> <c-s> :cd %:p:h<CR>
@@ -58,12 +54,16 @@ vnoremap < <gv
 nnoremap <silent><leader>u :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Using Tabs
-nnoremap <silent><leader>t :tab split<CR>
-nnoremap <silent><leader>T :tab new<CR>
-nnoremap <silent><left> gT
-nnoremap <silent><right> gt
-nnoremap <silent><leader><left> :tabm -1<CR>
-nnoremap <silent><leader><right> :tabm +1<CR>
+" See barbar.lua
+" nnoremap <silent><leader>t :tab split<CR>
+" nnoremap <silent><leader>T :tab new<CR>
+" nnoremap <silent><left> gT
+" nnoremap <silent><right> gt
+" nnoremap <silent><leader><left> :tabm -1<CR>
+" nnoremap <silent><leader><right> :tabm +1<CR>
+
+" nnoremap <leader>B :ls<cr>:bd<space>
+" nnoremap <leader><c-b> :%bd\|e#\|bd#<CR>
 
 " go to file in new tab
 nnoremap <silent> gF :tab split<CR>gf

@@ -42,6 +42,7 @@ vim.api.nvim_set_keymap('n', '<leader>hx', ":lua require'fzf-lua'.git_bcommits()
 vim.api.nvim_set_keymap('n', '<leader>hb', ":lua require'fzf-lua'.git_branches()<CR>", opts)
 
 vim.api.nvim_set_keymap('n', '<leader>b', ":lua require'fzf-lua'.buffers()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>t', ":lua require'fzf-lua'.buffers()<CR>", opts)
 
 vim.api.nvim_set_keymap('n', '<leader>nq', ":lua require'fzf-lua'.quickfix()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>nQ', ":lua require'fzf-lua'.loclist()<CR>", opts)

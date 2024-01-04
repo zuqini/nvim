@@ -11,6 +11,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 
   Plug 'nvim-lualine/lualine.nvim'
+  Plug 'romgrk/barbar.nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua' " https://github.com/kyazdani42/nvim-tree.lua/issues/877
 
@@ -93,6 +94,7 @@ lua require("plugins/lsp/additional")
 lua require("plugins/lsp/my")
 
 lua require("plugins/lualine")
+lua require("plugins/barbar")
 lua require("plugins/gitsigns")
 lua require("plugins/indent_blankline")
 lua require("plugins/leap")
