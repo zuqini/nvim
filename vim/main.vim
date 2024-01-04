@@ -4,6 +4,9 @@ let mapleader = "\<space>"
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
 
+" disable Q EX-mode
+nnoremap Q <nop>
+
 " Esc in Terminal emulator
 " See https://github.com/junegunn/fzf.vim/issues/544 for FZF
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
