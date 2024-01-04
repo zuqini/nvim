@@ -14,7 +14,7 @@ set hlsearch
 set ignorecase
 set smartcase
 set laststatus=2
-nnoremap <silent> <ESC><ESC> :nohlsearch \| match none \| 2match none \| call coc#float#close_all()<CR>
+nnoremap <silent> <ESC><ESC> :nohlsearch \| call coc#float#close_all()<CR>
 
 " Movement
 nnoremap <C-k> 10k
