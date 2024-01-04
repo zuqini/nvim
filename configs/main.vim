@@ -55,9 +55,6 @@ tnoremap <Esc> <C-\><C-n>
 " more logical Y command
 " because C => c$ and D => d$
 nnoremap Y y$
-" smaller scroll to be less jarring
-nnoremap <C-d> 20<C-d>
-nnoremap <C-u> 20<C-u>
 
 " Folding
 set foldenable
