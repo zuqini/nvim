@@ -18,7 +18,7 @@ require('which-key').register({
 })
 
 require('which-key').register({
-  [','] = '{Cound} Nav',
+  [','] = '{Count} Nav',
   p = 'Pin',
   h = 'Harpoon Menu',
   a = 'Nav 1',
