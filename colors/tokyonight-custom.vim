@@ -7,9 +7,10 @@
 " -----------------------------------------------------------------------------
 
 " Modified:
-" Grey: Original: #444b6a - brighter comments
-" Bg4: Original night:#3b3d57/storm:#3a405e - brighter SpecialKey
-" Bg1: Original night: #232433/storm:#282d42 - changed to Bg0
+" Grey: Original: "#444b6a" - brighter comments
+" Bg4: Original night: "#3b3d57" / storm: "#3a405e" - brighter SpecialKey
+" Bg1: Original night: "#232433" / storm: "#282d42" - changed to Bg0 for consistency
+" indentline: changed from "grey" -> "Bg4"
 
 " Initialization: {{{
 highlight clear
@@ -1714,8 +1715,8 @@ highlight! link CursorWord0 CocHighlightText
 highlight! link CursorWord1 CocHighlightText
 " }}}
 " Yggdroot/indentLine{{{
-let g:indentLine_color_gui = s:palette.grey[0]
-let g:indentLine_color_term = s:palette.grey[1]
+let g:indentLine_color_gui = s:palette.bg4[0]
+let g:indentLine_color_term = s:palette.bg4[1]
 " }}}
 " nathanaelkane/vim-indent-guides{{{
 if get(g:, 'indent_guides_auto_colors', 1) == 0

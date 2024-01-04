@@ -93,20 +93,13 @@ set autoindent
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-" Tabs Indicator for *WHITE SPACE* I.E. expandtab setting
-" Colors taken from tokyonight-custom bg4
-" Ideally should use default highlight group, but doesn't seem to work
-" See: https://github.com/Yggdroot/indentLine/issues/339
-" and https://github.com/ghifarit53/tokyonight-vim/issues/20
 let g:indentLine_char = '│'
-let g:indentLine_color_term = 237
-let g:indentLine_color_gui = '#444b6a'
 
 " whitespace characters
-set list
-set showbreak=↪\
-set listchars=tab:→\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
 " other listchars:
 "set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 "set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 "set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
+set list
+set showbreak=↪\
+set listchars=tab:→\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
