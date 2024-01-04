@@ -29,9 +29,14 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua' " deprecation notice: https://github.com/kyazdani42/nvim-tree.lua/issues/877
 
+  " Telescope
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " this might be shipped with telescope by default in the future
+
   " FZF
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim' " for :Ag and :Rg, See: https://github.com/junegunn/fzf.vim
+  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Plug 'junegunn/fzf.vim'
 
   " LSP
   Plug 'neovim/nvim-lspconfig'
@@ -68,8 +73,12 @@ if vim_plug_installed
 
   exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
   exec "source " . vim_configs_path . "/main.vim"
-  exec "source " . vim_configs_path . "/plugins/fzf.vim"
   exec "source " . vim_configs_path . "/plugins/surround.vim"
+
+  " exec "source " . vim_configs_path . "/plugins/fzf.vim"
+
+  lua require("plugins/telescope")
+  exec "source " . vim_configs_path . "/plugins/telescope.vim"
 
   exec "source " . vim_configs_path . "/plugins/nvim-tree.vim"
   lua require("plugins/nvim-tree")

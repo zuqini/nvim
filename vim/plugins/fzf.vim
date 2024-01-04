@@ -4,7 +4,6 @@ if has("win64") || has("win32") || has("win16")
 endif
 
 nnoremap S :Files<CR>
-nnoremap <c-p> :Files<space>
 
 nnoremap <leader>s :Rg<CR>
 nnoremap <leader>S :Ag<CR>
