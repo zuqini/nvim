@@ -56,11 +56,9 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " " Utils
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'rstacruz/vim-closer'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
   Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-endwise'
 
   Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
   Plug 'junegunn/vim-peekaboo'
