@@ -29,9 +29,17 @@ My custom NeoVim configuration and plugins. I recommend complementing this with 
 
 ## Symlink NeoVim configs to Vim8
 
+Sometimes we may want to use Vim8 features that are not available in NeoVim. For example, the following command:
+```
+nvim scp://user@host//path
+```
+cannot interactively prompt for password by design (see [issue](https://github.com/neovim/neovim/issues/8982) and [reasoning](https://github.com/neovim/neovim/wiki/FAQ#-and-system-do-weird-things-with-interactive-processes)), where as Vim8 supports `:!` and `system()` interactive commands. We may want to use this for [CTF](https://ctftime.org/ctf-wtf/) games where you need to `ssh` without key-based authentication.
+
+### Instructions
+
 [Source](https://gist.github.com/laggardkernel/9013f948345212563ede9c9ee56c6b42)
 
-We try to symlink `~/.config/nvim` to `~/.vim`, and make the conf compatible with `vim`.
+We try to symlink `~/.config/nvim` to `~/.vim`, and make the conf compatible with `vim`. Run the following commands into your shell.
 
 ```bash
 # nvim conf dir: ~/.config/nvim
