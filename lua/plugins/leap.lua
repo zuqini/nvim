@@ -1,5 +1,5 @@
 require('leap').setup{
-  highlight_unlabeled = true,
+  highlight_unlabeled_phase_one_targets = true,
 }
 
 -- leap_all_windows defined in helpers.lua and used nvim-tree.lua
