@@ -59,11 +59,11 @@ if vim_plug_installed
   let vim_configs_path = stdpath('config') . '/vim'
 
   " NOTE: order is important
-  " 1. helper.lua defines helper functions that other config files may use
+  " 1. helpers.lua defines helper functions that other config files may use
   " 2. theme should be before everything else since some plugins need the theme to be set prior to setup
   " 3. nvim-tree.vim needs to execute before nvim-tree
 
-  lua require("helper")
+  lua require("helpers")
 
   exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
   exec "source " . vim_configs_path . "/main.vim"
