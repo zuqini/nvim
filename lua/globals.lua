@@ -6,8 +6,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 
 vim.g.search_with_fzf_lua = not vim.g.is_windows
-vim.g.search_with_fzf_vim = not vim.g.search_with_fzf_lua
-vim.g.search_with_telescope = false
+vim.g.search_with_fzf_vim = false
+vim.g.search_with_telescope = not vim.g.search_with_fzf_lua
 
 _G.clear_floats_and_highlights = function ()
     vim.cmd[[ nohlsearch ]]

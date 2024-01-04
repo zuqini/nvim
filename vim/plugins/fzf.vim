@@ -1,3 +1,10 @@
+if g:is_windows
+  " I give up trying to make this work
+  " https://github.com/junegunn/fzf.vim/issues/1513
+  let g:fzf_vim = {}
+  let g:fzf_vim.preview_window = []
+endif
+
 " https://github.com/junegunn/fzf.vim/issues/185
 " CTRL-W CTRL-Q to select all and build quickfix list
 let $FZF_DEFAULT_OPTS = '--bind ctrl-w:select-all'

@@ -6,7 +6,6 @@ return {
   {
     'junegunn/fzf.vim',
     enabled = vim.g.search_with_fzf_vim,
-    event = 'VeryLazy', -- @TODO: replace with keys
     dependencies = { 'junegunn/fzf' },
     config = function()
       vrequire('plugins.fzf');
