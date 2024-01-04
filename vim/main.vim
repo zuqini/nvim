@@ -173,7 +173,7 @@ augroup mainMiscCommands
   " disable automatic comment insertion
   au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   " highlight yank
-  au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=250, on_visual=true}
+  au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
   " using // instead of /* */ for vim-commentary
   au FileType c,cpp,cs,java setlocal commentstring=//\ %s
 augroup END
