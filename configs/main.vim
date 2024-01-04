@@ -4,6 +4,7 @@ let mapleader = "\<space>"
 tnoremap <Esc> <C-\><C-n>
 
 set mouse=a
+set hidden
 set number
 set showcmd
 set wildmenu
