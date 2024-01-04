@@ -6,6 +6,17 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+set mouse=a
+set hidden
+set number
+set showcmd
+set wildmenu
+set showmatch " show matching brackets
+set incsearch
+set hlsearch
+set ignorecase smartcase
+set laststatus=2
+
 " disable F1 as it's easy to accidentally hit on the touchbar
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
@@ -26,17 +37,6 @@ nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
 " Esc in Terminal emulator
 " See https://github.com/junegunn/fzf.vim/issues/544 for FZF
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-
-set mouse=a
-set hidden
-set number
-set showcmd
-set wildmenu
-set showmatch " show matching brackets
-set incsearch
-set hlsearch
-set ignorecase smartcase
-set laststatus=2
 
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 
