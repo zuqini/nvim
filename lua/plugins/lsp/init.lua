@@ -17,6 +17,7 @@ return {
     config = function ()
       require("plugins/lsp/mason")
       require("plugins/lsp/lsp")
+      require("plugins/lsp/utils")
       pcall(function() require("plugins/lsp/my") end) -- this is for env specific lsp configs
     end
   },
