@@ -33,7 +33,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
-  Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'kyazdani42/nvim-tree.lua' " deprecation notice: https://github.com/kyazdani42/nvim-tree.lua/issues/877
 
 
   " for :Ag and :Rg, See: https://github.com/junegunn/fzf.vim
