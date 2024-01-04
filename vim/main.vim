@@ -53,9 +53,6 @@ nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
 vnoremap < <gv
 
-" highlight without moving
-nnoremap <silent><leader>u :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-
 " Using Tabs
 " See barbar.lua
 " nnoremap <silent><leader>t :tab split<CR>
