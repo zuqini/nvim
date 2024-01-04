@@ -2,8 +2,8 @@
 local themes = {
   { name = 'nightfox', lualine = 'auto' },
   { name = 'gruvbox', lualine = 'auto' },
-  { name = 'kanagawa', lualine = 'auto' },
-  { name = 'ayu', lualine = 'ayu' },
+  -- { name = 'kanagawa', lualine = 'auto' },
+  -- { name = 'ayu', lualine = 'ayu' },
 }
 local theme_index = 1
 local theme_timer_active = 0
@@ -29,13 +29,13 @@ function M.get_theme_index_by_time()
     index = 1
   elseif hour >= 14 and hour < 20 then
     -- dusk
-    index = 2
+    index = 1
   elseif hour >= 20 or hour < 2 then
     -- night
     index = 3
   elseif hour >= 2 and hour < 8 then
     -- dawn
-    index = 4
+    index = 2
   end
   return index
 end
