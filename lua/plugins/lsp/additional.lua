@@ -19,7 +19,6 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<Esc>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
     ['<Tab>'] = function(fallback)
