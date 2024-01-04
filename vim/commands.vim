@@ -1,6 +1,10 @@
 command! L :Lazy
 command! LS :Lazy sync
 
+" ctags
+command! MakeTags !ctags -R .
+command! MT !ctags -R .
+
 " set current dir
 command! CD :cd %:p:h
 
