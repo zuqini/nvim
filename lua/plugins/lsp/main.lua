@@ -31,6 +31,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
     vim.keymap.set('n', '<leader>rc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
     vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>', bufopts)
+    vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.references()<CR>', bufopts)
 
     vim.keymap.set('n', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
     vim.keymap.set('v', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
