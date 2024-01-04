@@ -1,29 +1,20 @@
 # nvim
-My Neovim setup
-
-![nvim](https://user-images.githubusercontent.com/5790854/153685073-25c68d35-9d88-4e78-a8ea-356c0807046e.gif)
 
 ## Install
-<details>
-<summary>MacOS / Linux</summary>
+MacOS / Linux
 
 ```
 brew install neovim    # or some other package manager
 git clone https://github.com/zuqini/nvim.git ~/.config/nvim
 nvim
 ```
-</details>
-
-<details>
-<summary>Windows (PowerShell)</summary>
+Windows
 
 ```
 choco install neovim    # or some other package manager
 git clone https://github.com/zuqini/nvim.git ~/AppData/Local/nvim
 nvim
 ```
-
-</details>
 
 ## Optional Setup
 <details>
@@ -57,7 +48,7 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
 </details>
 
 <details>
-<summary>LSP</summary>
+<summary>Unity LSP</summary>
 
 - Omnisharp Language Server on Unix/Linux for Unity
   - Install [Mono](https://www.mono-project.com/download/stable/#download-mac)
