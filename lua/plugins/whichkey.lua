@@ -6,5 +6,5 @@ require("which-key").setup {
     align = "left", -- align columns left, center or right
   },
 }
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 750
 
