@@ -39,7 +39,7 @@ require('lualine').setup {
     section_separators = separators1,
     icons_enabled = true,
     globalstatus = true,
-    disabled_filetypes = {'NvimTree'},
+    -- disabled_filetypes = {'NvimTree'},
 
     -- Uncomment to disable icons
     -- icons_enabled = false,
