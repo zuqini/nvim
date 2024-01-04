@@ -84,10 +84,17 @@ function M.select_theme_by_index(index)
     vim.cmd('hi NormalNC guibg=NONE ctermbg=NONE')
     vim.cmd('hi Terminal guibg=NONE ctermbg=NONE')
     vim.cmd('hi SignColumn guibg=NONE ctermbg=NONE')
+
     vim.cmd('hi TelescopeBorder guibg=NONE ctermbg=NONE')
     vim.cmd('hi TelescopePromptNormal guibg=NONE ctermbg=NONE')
     vim.cmd('hi TelescopePreviewNormal guibg=NONE ctermbg=NONE')
     vim.cmd('hi TelescopeResultsNormal guibg=NONE ctermbg=NONE')
+
+    vim.cmd('hi DiagnosticVirtualTextError guibg=NONE ctermbg=NONE')
+    vim.cmd('hi DiagnosticVirtualTextWarn guibg=NONE ctermbg=NONE')
+    vim.cmd('hi DiagnosticVirtualTextInfo guibg=NONE ctermbg=NONE')
+    vim.cmd('hi DiagnosticVirtualTextHint guibg=NONE ctermbg=NONE')
+    vim.cmd('hi DiagnosticVirtualTextOk guibg=NONE ctermbg=NONE')
   end
 end
 
