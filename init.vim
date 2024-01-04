@@ -30,20 +30,31 @@ set showmatch
 set incsearch
 set hlsearch
 
-" code folding
+" Folding
 set foldenable
-set foldlevelstart=10
 set foldmethod=indent
+set foldlevelstart=1
+set foldnestmax=10
 
 " CUSTOM BINDINGS ==================================================
-" \<space> to unhighlight search
-nnoremap <leader><esc> :nohlsearch<CR>
+" <space> to unhighlight search
+nnoremap <leader><space> :nohlsearch<CR>
 " Ctrl-p to search for file
 nnoremap <C-p> :Files<CR>
-" \p to search term within files
+" p to search term within files
 nnoremap <leader>p :Rg<CR>
-" space to fold/unfold code
-nnoremap <leader><space> za
+" z open/closes folds
+nnoremap <leader>z za
+" Z open/closes folds recursively
+nnoremap <leader>Z zA
+
+" Auto-toggle hybrid/absolute line numbers
+:set number relativenumber
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
 
 " hard mode to git gud ==================================================
 noremap <Up> <Nop>
