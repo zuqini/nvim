@@ -13,12 +13,6 @@ return {
     end
   },
   {
-    'darfink/vim-plist',
-    config = function()
-      vrequire("plugins/plist")
-    end
-  },
-  {
     'mbbill/undotree',
     keys = { '<leader>u' },
     config = function()
