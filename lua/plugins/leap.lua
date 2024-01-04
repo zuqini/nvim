@@ -1,6 +1,8 @@
 return {
   'ggandor/leap.nvim', -- breaking changes: https://github.com/ggandor/leap.nvim/issues/18
-  event = 'VeryLazy',
+  keys = {
+    { "s", mode = { "x", "v", "n" } },
+  },
   config = function ()
     require('leap').setup{
       highlight_unlabeled_phase_one_targets = true,
