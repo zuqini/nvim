@@ -1,5 +1,6 @@
 # nvim
 My custom NeoVim configuration and plugins. I recommend complementing this with [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
+![image](https://user-images.githubusercontent.com/5790854/103149736-22e72a80-4721-11eb-9519-019522241c2a.png)
 
 ## Set-up Instructions
 - (macOs) Clone this into `~/.config/nvim`
