@@ -6,7 +6,9 @@
 " License:      MIT
 " -----------------------------------------------------------------------------
 
-" Modified: bright comments - Original: #444b6a
+" Modified:
+" Grey: Original: #444b6a - brighter comments
+" Bg4: Original night:#3b3d57/storm:#3a405e - brighter SpecialKey
 
 " Initialization: {{{
 highlight clear
@@ -39,7 +41,7 @@ if s:configuration.style ==# 'night'
         \ 'bg1':        ['#232433',   '236',  'DarkGrey'],
         \ 'bg2':        ['#2a2b3d',   '236',  'DarkGrey'],
         \ 'bg3':        ['#32344a',   '237',  'DarkGrey'],
-        \ 'bg4':        ['#3b3d57',   '237',  'Grey'],
+        \ 'bg4':        ['#444b6a',   '237',  'Grey'],
         \ 'bg_red':     ['#ff7a93',   '203',  'Red'],
         \ 'diff_red':   ['#803d49',   '52',   'DarkRed'],
         \ 'bg_green':   ['#b9f27c',   '107',  'Green'],
@@ -63,7 +65,7 @@ elseif s:configuration.style ==# 'storm'
         \ 'bg1':        ['#282d42',   '236',  'DarkGrey'],
         \ 'bg2':        ['#2f344d',   '236',  'DarkGrey'],
         \ 'bg3':        ['#333954',   '237',  'DarkGrey'],
-        \ 'bg4':        ['#3a405e',   '237',  'Grey'],
+        \ 'bg4':        ['#3b3d57',   '237',  'Grey'],
         \ 'bg_red':     ['#ff7a93',   '203',  'Red'],
         \ 'diff_red':   ['#803d49',   '52',   'DarkRed'],
         \ 'bg_green':   ['#b9f27c',   '107',  'Green'],

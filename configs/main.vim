@@ -6,6 +6,7 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 Plug 'takac/vim-hardtime'
+Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
@@ -83,12 +84,27 @@ vnoremap <leader>x "*d
 vnoremap <leader>c "*y
 vnoremap <leader>v "*p
 
-" Indentation with mixed tabs and spaces
+" Indentation without hard tabs
 " https://vim.fandom.com/wiki/Indenting_source_code
 set autoindent
-set noexpandtab
+set expandtab
 set shiftwidth=4
 set softtabstop=4
+" Tabs Indicator for *WHITE SPACE* I.E. expandtab setting
+" Colors taken from tokyonight-custom bg4
+" Ideally should use default highlight group, but doesn't seem to work
+" See: https://github.com/Yggdroot/indentLine/issues/339
+let g:indentLine_char = '│'
+let g:indentLine_color_term = 237
+let g:indentLine_color_gui = '#444b6a'
+
+" whitespace characters
+set list
+set showbreak=↪\
+"set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+"set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+"set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
+set listchars=tab:→\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
 
 " Auto-toggle hybrid/absolute line numbers
 :set number relativenumber
@@ -97,4 +113,3 @@ set softtabstop=4
 :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
-
