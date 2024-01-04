@@ -13,8 +13,6 @@ My custom NeoVim configuration and plugins.
 
 \*`init.vim` will automatically install Vim-Plug and plugins.
 
-\*The theme sets background to transparent because I use a background image in the terminal. To use the default theme background, see `configs/main.vim`.
-
 ### Windows (nvim-qt)
 \*Windows requires manual Vim-Plug and plugins installation.
 - Follow the [Windows installation instructions](https://github.com/neovim/neovim/releases/)

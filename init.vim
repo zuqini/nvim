@@ -12,6 +12,12 @@ if !is_windows && !vim_plug_installed
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 call plug#begin(g:std_path_data . '/plugged')
   " Themes
   Plug 'ghifarit53/tokyonight-vim'
@@ -46,8 +52,8 @@ call plug#begin(g:std_path_data . '/plugged')
 call plug#end()
 
 if vim_plug_installed
-  exec "source " . g:std_path_config . "/configs/main.vim"
   exec "source " . g:std_path_config . "/configs/themes/tokyonight.vim"
+  exec "source " . g:std_path_config . "/configs/main.vim"
 
   exec "source " . g:std_path_config . "/configs/goyolime.vim"
   exec "source " . g:std_path_config . "/configs/coc.vim"

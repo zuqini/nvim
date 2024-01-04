@@ -1,8 +1,5 @@
 let mapleader = "\<space>"
 
-" enable true color
-set termguicolors
-
 " Terminal emulator
 tnoremap <Esc> <C-\><C-n>
 
