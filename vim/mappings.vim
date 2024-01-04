@@ -7,8 +7,8 @@ nnoremap <silent> <c-s> :cd %:p:h<CR>
 nnoremap <leader>R :put=execute(':')<left><left>
 
 " format json
-nnoremap <leader>nq :%!jq<CR>
-vnoremap <leader>nq :%!jq<CR>
+nnoremap <leader>gq :%!jq<CR>
+vnoremap <leader>gq :%!jq<CR>
 
 " centering
 " set scrolloff=999

@@ -67,12 +67,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', bufopts)
   vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', bufopts)
   vim.keymap.set('n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>na', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>nr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>nl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', bufopts)
-  vim.keymap.set('n', '<leader>nd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>nn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
-  vim.keymap.set('n', '<leader>nc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>ga', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>gr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>gl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', bufopts)
+  vim.keymap.set('n', '<leader>gd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>gn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
+  vim.keymap.set('n', '<leader>gc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
   vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>', bufopts)
   vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.references()<CR>', bufopts)
 
@@ -93,7 +93,7 @@ local on_attach = function(client, bufnr)
 
   wk.register({
     K = 'Signature Help',
-    n = {
+    g = {
       name = 'Lang.',
       a = 'Add Workspace',
       r = 'Remove Workspace',
@@ -103,6 +103,8 @@ local on_attach = function(client, bufnr)
       c = 'Code Action',
       f = 'Format',
       q = 'jq',
+      p = 'Peek func',
+      P = 'Peek class',
     }
   }, { prefix='<leader>' })
 end
