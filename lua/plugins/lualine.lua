@@ -1,13 +1,17 @@
-local custom_spaceduck = require'lualine.themes.spaceduck'
-
+local theme = require'lualine.themes.spaceduck'
 -- change background color so horizontal splits have cleaner separation.
 -- May cause some visual weirdness with tabs/buffers
-custom_spaceduck.inactive.b.bg = custom_spaceduck.normal.b.bg
-custom_spaceduck.inactive.c.bg = '#16172d'
+theme.inactive.b.bg = theme.normal.b.bg
+theme.inactive.c.bg = '#16172d'
+
+if vim.g.theme == "gruvbox" then
+    theme = require'lualine.themes.gruvbox'
+end
+
 
 require('lualine').setup {
     options = {
-        theme = custom_spaceduck,
+        theme,
         -- component_separators = { left = '', right = '' },
         -- section_separators = { left = '', right = ''},
 

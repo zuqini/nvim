@@ -1,8 +1,7 @@
-let theme = 'spaceduck'
+" Themes: spaceduck-custom, gruvbox
+let theme = "gruvbox"
 
-" BOOTSTRAP PLUG =============================================================
 let is_windows = has("win64") || has("win32") || has("win16")
-
 let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
 let vim_plug_installed = !empty(glob(autoload_plug_path))
 if !is_windows
@@ -12,19 +11,16 @@ if !is_windows
   endif
 endif
 
-" Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
-
-unlet autoload_plug_path
-" END ========================================================================
 
 call plug#begin(stdpath('data') . '/plugged')
   Plug 'junegunn/vim-plug'
 
   " Themes
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+  Plug 'morhetz/gruvbox'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua' " deprecation notice: https://github.com/kyazdani42/nvim-tree.lua/issues/877
@@ -65,36 +61,35 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'sheerun/vim-polyglot'
 call plug#end()
 
+function! RequireVim(path)
+  exec "source " . stdpath('config') . '/vim/' . a:path . '.vim'
+endfunction
+
 if vim_plug_installed
   let vim_configs_path = stdpath('config') . '/vim'
 
-  " NOTE: order is important
+  " Order is important
   " 1. helpers.lua defines helper functions that other config files may use
   " 2. theme should be before everything else since some plugins need the theme to be set prior to setup
   " 3. nvim-tree.vim needs to execute before nvim-tree
 
   lua require("helpers")
+  call RequireVim("main")
 
-  exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
-  exec "source " . vim_configs_path . "/main.vim"
-  exec "source " . vim_configs_path . "/plugins/surround.vim"
+  call RequireVim("plugins/nvim-tree")
+  lua require("plugins/nvim-tree")
+
+  lua require("plugins/treesitter")
+  lua require("plugins/lsp")
+  lua require("plugins/lualine")
+  lua require("plugins/hop")
+  lua require("plugins/indent_blankline")
+  call RequireVim("plugins/surround")
 
   if !is_windows
     lua require("plugins/fzf-lua")
-    exec "source " . vim_configs_path . "/plugins/fzf-lua.vim"
+    call RequireVim("plugins/fzf-lua")
   else
-    exec "source " . vim_configs_path . "/plugins/fzf.vim"
+    call RequireVim("plugins/fzf")
   endif
-
-  exec "source " . vim_configs_path . "/plugins/nvim-tree.vim"
-  lua require("plugins/nvim-tree")
-
-  lua require("plugins/indent_blankline")
-  lua require("plugins/lualine")
-  lua require("plugins/hop")
-  lua require("plugins/lsp")
-  lua require("plugins/treesitter")
-
-  " lua require("plugins/telescope")
-  " exec "source " . vim_configs_path . "/plugins/telescope.vim"
 endif

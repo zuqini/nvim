@@ -6,6 +6,8 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+exec "colorscheme " . theme
+
 set mouse=a
 set hidden
 set number
