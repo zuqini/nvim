@@ -54,6 +54,7 @@ function M.select_theme_by_index(index)
     end
     if package_name:match('indent_blankline') or
         package_name:match('indent%-blankline') or
+        package_name:match('tabby') or
         package_name:match('lualine') then
       package.loaded[package_name] = nil
     end
@@ -62,6 +63,7 @@ function M.select_theme_by_index(index)
   theme_index = index
   require('plugins.themes.' .. M.get_current_theme())
   require('plugins.indent-blankline.config')
+  require('plugins.tabby.config')
   require('plugins.lualine.config')
 end
 

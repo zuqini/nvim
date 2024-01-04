@@ -36,7 +36,6 @@ nnoremap <silent><bs>7 7gt
 nnoremap <silent><bs>8 8gt
 nnoremap <silent><bs>9 9gt
 nnoremap <silent><bs>0 :tablast<cr>
-nnoremap <silent><leader>ts :tab split<CR>
 nnoremap <silent><leader>th :tabm -1<CR>
 nnoremap <silent><leader>tl :tabm +1<CR>
 nnoremap <silent>[t gT

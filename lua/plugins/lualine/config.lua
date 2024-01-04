@@ -115,9 +115,9 @@ require('lualine').setup {
     -- Uncomment to disable icons
     -- icons_enabled = false,
   },
-  winbar = { lualine_b = winbar },
+  winbar = { lualine_c = winbar },
   inactive_winbar = { lualine_c = winbar },
-  tabline = tabline,
+  -- tabline = tabline,
   sections = sections,
   extensions = { 'fzf' },
 }
