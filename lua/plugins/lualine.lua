@@ -1,3 +1,4 @@
+local angle_down_separators = { left = '', right = '' }
 local winbar = {
   {
     'filetype',
@@ -5,7 +6,7 @@ local winbar = {
     icon_only = true, -- Display only an icon for filetype
     padding = { left = 2, right = 0 },
     component_separators = '',
-    section_separators = { left = '', right = '' },
+    -- section_separators = angle_down_separators,
   },
   {
     'filename',
@@ -28,14 +29,14 @@ require('lualine').setup {
     -- component_separators = { left = '\\', right = '/'},
     -- section_separators = { left = '', right = '' },
 
-    component_separators = { left = '/', right = '\\'},
-    section_separators = { left = '', right = '' },
+    -- component_separators = { left = '/', right = '\\'},
+    -- section_separators = { left = '', right = '' },
 
     -- component_separators = { left = '', right = ''},
     -- section_separators = { left = '', right = ''},
 
-    -- component_separators = { left = '', right = '' },
-    -- section_separators = { left = '', right = '' },
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
 
     icons_enabled = true,
     globalstatus = true,
@@ -47,22 +48,33 @@ require('lualine').setup {
     -- icons_enabled = false,
   },
   winbar = {
-    lualine_a = {},
     lualine_b = winbar,
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
   },
   inactive_winbar = {
-    lualine_a = {},
     lualine_b = winbar,
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
   },
-  tabline = {},
+  tabline = {
+    lualine_a = {
+      {
+        'buffers',
+        filetype_names = {
+          TelescopePrompt = 'Telescope',
+          dashboard = 'Dashboard',
+          packer = 'Packer',
+          fzf = 'FZF',
+          alpha = 'Alpha'
+        },
+        show_filename_only = true,   -- Shows shortened relative path when set to false.
+        hide_filename_extension = true,   -- Hide filename extension when set to true.
+        -- section_separators = angle_down_separators,
+        symbols = {
+          modified = '[+]',
+          unnamed = '[]',
+          readonly = '[-]',
+        },
+      }
+    },
+  },
   sections = {
     lualine_a = {
       {

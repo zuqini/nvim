@@ -54,7 +54,6 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Using Tabs
-" See barbar.lua
 " nnoremap <silent><leader>t :tab split<CR>
 " nnoremap <silent><leader>T :tab new<CR>
 " nnoremap <silent><left> gT
@@ -62,8 +61,11 @@ vnoremap < <gv
 " nnoremap <silent><leader><left> :tabm -1<CR>
 " nnoremap <silent><leader><right> :tabm +1<CR>
 
-" nnoremap <leader>B :ls<cr>:bd<space>
-" nnoremap <leader><c-b> :%bd\|e#\|bd#<CR>
+" Buffer management
+nnoremap ,q :bd<CR>
+nnoremap ,Q :bd!<CR>
+nnoremap ,b :ls<cr>:bd<space>
+nnoremap ,B :%bd\|e#\|bd#<CR>
 
 " go to file in new tab
 nnoremap <silent> gF :tab split<CR>gf
