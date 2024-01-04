@@ -2,7 +2,13 @@ return {
   'ibhagwan/fzf-lua',
   enabled = not vim.g.is_windows,
   event = 'VeryLazy',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    {
+      'junegunn/fzf',
+      build = './install --bin',
+    },
+  },
   config = function ()
     require'fzf-lua'.setup {
       winopts = {

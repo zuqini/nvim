@@ -1,11 +1,13 @@
 local vrequire = require("utils").vrequire
 return {
-  -- FZF
-  { 'junegunn/fzf', build = (vim.g.is_window and '' or './install --bin') },
+  -- FZF, consider replacing/complementing with telescope
+  -- even though telescope is slower, it's much better integrated with other plugins
+  -- see: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
   {
     'junegunn/fzf.vim',
     enabled = vim.g.is_windows,
     event = 'VeryLazy',
+    dependencies = { 'junegunn/fzf' },
     config = function ()
       vrequire('plugins.fzf');
     end
