@@ -2,8 +2,8 @@ command! L :Lazy
 command! LS :Lazy sync
 
 " ctags
-command! MakeTags !ctags -R .
-command! MT silent !ctags -R .
+command! MakeTags !ctags -R --exclude=.git --exclude=node_modules --exclude=test
+command! MT silent :MakeTags
 
 " set current dir
 command! CD :cd %:p:h
