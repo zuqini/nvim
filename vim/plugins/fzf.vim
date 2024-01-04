@@ -1,5 +1,6 @@
 if is_windows
-  " use git bash for windows win32
+  " use git bash for windows win32 to show fzf preview
+  " https://stackoverflow.com/a/67863045
   let $PATH = "C:\\Program\ Files\\Git\\usr\\bin;" . $PATH
 endif
 
