@@ -116,19 +116,19 @@ vnoremap <silent><leader>P "0P
 
 " quickfix
 function! ToggleQuickFix()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-        copen
-    else
-        cclose
-    endif
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    copen
+  else
+    cclose
+  endif
 endfunction
 
 function! ToggleLocList()
-    if empty(filter(getwininfo(), 'v:val.loclist'))
-        lua vim.diagnostic.setloclist()
-    else
-        lclose
-    endif
+  if empty(filter(getwininfo(), 'v:val.loclist'))
+    lua vim.diagnostic.setloclist()
+  else
+    lclose
+  endif
 endfunction
 
 nnoremap <silent><leader>q :call ToggleQuickFix()<CR>
