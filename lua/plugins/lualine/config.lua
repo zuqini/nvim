@@ -1,3 +1,5 @@
+local theme = require('utils.theme-hot-reload').get_current_lualine_theme()
+
 local separators0 = { left = '', right = '' }
 local separators1 = { left = '', right = '' }
 local separators2 = { left = '', right = '' }
@@ -48,6 +50,7 @@ local winbar = {
 };
 require('lualine').setup {
   options = {
+    theme = theme,
     component_separators = separators9,
     section_separators = separators1,
     icons_enabled = true,
