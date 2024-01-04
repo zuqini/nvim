@@ -35,6 +35,10 @@ nnoremap <C-h> 10h
 nnoremap <C-l> 10l
 nnoremap <C-k> 10k
 nnoremap <C-j> 10j
+vnoremap <C-h> 10h
+vnoremap <C-l> 10l
+vnoremap <C-k> 10k
+vnoremap <C-j> 10j
 
 " more logical Y command
 " because C => c$ and D => d$
