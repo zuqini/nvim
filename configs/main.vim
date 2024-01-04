@@ -37,8 +37,8 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-" <space> to unhighlight search
-nnoremap <leader><esc> :nohlsearch<CR>
+" <space> to unhighlight search and close coc float menus
+nnoremap <silent> <ESC><ESC> :nohlsearch \| match none \| 2match none \| call coc#float#close_all()<CR>
 
 " smaller scroll to be less jarring
 nnoremap <C-d> 20<C-d>
