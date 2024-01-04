@@ -19,6 +19,11 @@ nnoremap <leader>B :ls<cr>:bd<space>
 nnoremap <leader>q :%bd\|e#\|bd#<CR>
 nnoremap <leader>Q :so $MYVIMRC<CR>
 
+nnoremap <silent><up> :cp<CR>
+nnoremap <silent><down> :cn<CR>
+nnoremap <silent><leader><up> :lp<CR>
+nnoremap <silent><leader><down> :lne<CR>
+
 " centering
 nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
 
