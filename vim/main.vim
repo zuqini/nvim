@@ -15,7 +15,7 @@ set showmatch " show matching brackets
 set incsearch
 set hlsearch
 set ignorecase smartcase
-set laststatus=2
+set laststatus=3
 set nofixendofline
 
 " disable automatic comment insertion

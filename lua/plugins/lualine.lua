@@ -6,6 +6,7 @@ require('lualine').setup {
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         icons_enabled = true,
+        globalstatus = true,
 
         -- Uncomment to disable icons
         -- component_separators = { left = '', right = ''},
@@ -113,14 +114,6 @@ require('lualine').setup {
         },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
-    },
-    inactive_sections = {
-        lualine_a = {  },
-        lualine_b = { 'filename' },
-        lualine_c = {  },
-        lualine_x = {  },
-        lualine_y = { 'location' },
-        lualine_z = {  },
     },
     extensions = { 'fzf' },
 }
