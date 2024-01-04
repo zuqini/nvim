@@ -39,7 +39,6 @@ local winbar = {
     'filename',
     file_status = true,
     path = 1,
-    -- shorting_target = 40,
     symbols = {
       modified = '[+]',
       readonly = '[-]',
@@ -55,7 +54,6 @@ require('lualine').setup {
     section_separators = separators1,
     icons_enabled = true,
     globalstatus = true,
-    -- disabled_filetypes = {'NvimTree'},
 
     -- Uncomment to disable icons
     -- icons_enabled = false,
@@ -112,13 +110,11 @@ require('lualine').setup {
       { 'diff' },
     },
     lualine_c = {
-      -- { 'diff', separator = '|' },
       {
         'diagnostics',
         sources = { 'nvim_diagnostic', },
 
         sections = { 'error', 'warn', 'info', 'hint' },
-        -- separator = '|',
 
         symbols = symbols,
         colored = true,           -- Displays diagnostics status in color if set to true.
@@ -129,22 +125,18 @@ require('lualine').setup {
     lualine_x = {
       {
         'filetype',
-        -- separator = '|',
         separator = '·',
       },
       {
         'fileformat',
-        -- separator = '|',
         separator = '·',
       },
       {
         'encoding',
-        -- separator = '|',
         separator = '·',
       },
       {
         'filesize',
-        -- separator = '|',
         separator = '·',
       },
     },

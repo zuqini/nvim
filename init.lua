@@ -6,5 +6,5 @@ vrequire("commands")
 vrequire("neovide")
 
 require("utils.globals")
-require("utils.lazy")
+require("utils.lazy") -- make sure to set `mapleader` before lazy
 require("utils.theme-hot-reload")
