@@ -43,9 +43,11 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " " Utils
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'windwp/nvim-autopairs'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
   Plug 'tpope/vim-repeat'
+  Plug 'alvan/vim-closetag'
 
   Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
   Plug 'junegunn/vim-peekaboo'
@@ -76,6 +78,7 @@ lua require("plugins/hop")
 lua require("plugins/indent_blankline")
 call RequireVim("plugins/surround")
 call RequireVim("plugins/wilder")
+call RequireVim("plugins/closetag")
 
 if !is_windows
   lua require("plugins/fzf-lua")
