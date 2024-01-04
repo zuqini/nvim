@@ -12,6 +12,7 @@ require('nvim-tree').setup({
     mappings = {
       custom_only = false,
       list = {
+        { key = "S", cb = ":lua require'fzf-lua'.files()<CR>" },
         { key = "s", cb = ":lua leap_all_windows()<CR>" },
         { key = "<c-s>", cb = tree_cb("system_open") },
       }
