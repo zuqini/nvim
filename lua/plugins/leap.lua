@@ -1,5 +1,6 @@
 return {
   'ggandor/leap.nvim', -- breaking changes: https://github.com/ggandor/leap.nvim/issues/18
+  enabled = false,
   keys = {
     { "s", mode = { "x", "v", "n" } },
   },

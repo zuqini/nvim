@@ -1,5 +1,8 @@
-command! L :Lazy<CR>
-command! LS :Lazy sync<CR>
+command! L :Lazy
+command! LS :Lazy sync
+
+" set current dir
+command! CD :cd %:p:h
 
 " literal search
 command! -nargs=1 Search :let @/='\V'.escape(<q-args>, '\\')| normal! n

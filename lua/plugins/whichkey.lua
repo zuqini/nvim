@@ -15,7 +15,6 @@ return {
     vim.api.nvim_set_keymap('n', '<leader><leader>', '<Cmd>WhichKey<CR>', { noremap = true, silent = true })
 
     wk.register({
-      ['<C-S>'] = 'Set Working Dir',
       ['!'] = 'which_key_ignore',
     })
 
