@@ -12,3 +12,8 @@ nnoremap <s-tab> :NvimTreeToggle<CR>
 nnoremap <c-m> :NvimTreeToggle<CR>
 nnoremap <c-r> :NvimTreeRefresh<CR>
 nnoremap <c-n> :NvimTreeFindFile<CR>
+
+function! DisableST()
+  return " "
+endfunction
+au BufEnter NvimTree setlocal statusline=%!DisableST()
