@@ -12,6 +12,7 @@ return {
           },
         },
       },
+      'folke/neodev.nvim',
     },
     config = function ()
       require("plugins/lsp/mason")
@@ -27,9 +28,9 @@ return {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lua',
-      'saadparwaiz1/cmp_luasnip',
+      -- consider https://github.com/petertriho/cmp-git
 
+      'saadparwaiz1/cmp_luasnip',
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
     },
