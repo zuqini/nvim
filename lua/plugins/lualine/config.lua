@@ -13,13 +13,8 @@ local angle_up_thin2_seps = { left = '', right = '' }
 local triangle_thin_seps = { left = '', right = '' }
 local circle_thin_seps = { left = '', right = '' }
 
--- local signs = { Error = '', Warn = '', Info = '', Hint = 'ﯦ' }
--- local symbols = { error = ' ', warn = ' ', info = ' ', hint = 'ﯦ ' }
-
--- @TODO: With Release v3.0.0 the Material Design Icons were updated and moved to new codepoints
--- need to find alternative icons
-local signs = { Error = "", Warn = "", Hint = "", Info = "" }
-local symbols = { error = " ", warn = " ", hint = " ", info = " " }
+local signs = { Error = "󰅚", Warn = "󰀪", Hint = "󰌶", Info = "󰋽" }
+local symbols = { error = "󰅚 ", warn = "󰀪 ", hint = "󰌶 ", info = "󰋽 " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
