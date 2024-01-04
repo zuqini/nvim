@@ -1,15 +1,28 @@
-local separators0 = { left = '', right = ''}
+local separators0 = { left = '', right = '' }
 local separators1 = { left = '', right = '' }
 local separators2 = { left = '', right = '' }
-local separators3 = { left = '', right = ''}
+local separators3 = { left = '', right = '' }
 local separators4 = { left = '', right = '' }
 
 local separators5 = { left = '\\', right = '/'}
 local separators6 = { left = '/', right = '\\'}
-local separators7 = { left = '', right = ''}
+local separators7 = { left = '', right = '' }
 local separators8 = { left = '', right = '' }
-local separators9 = { left = '', right = ''}
+local separators9 = { left = '', right = '' }
 local separators10 = { left = '', right = ''}
+
+-- local signs = { Error = '', Warn = '', Info = '', Hint = 'ﯦ' }
+-- local symbols = { error = ' ', warn = ' ', info = ' ', hint = 'ﯦ ' }
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+local symbols = { error = " ", warn = " ", hint = " ", info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 local winbar = {
   {
@@ -104,7 +117,7 @@ require('lualine').setup {
         sections = { 'error', 'warn', 'info', 'hint' },
         -- separator = '|',
 
-        symbols = { error = ' ', warn = ' ', info = ' ', hint = 'ﯦ ' },
+        symbols = symbols,
         colored = true,           -- Displays diagnostics status in color if set to true.
         update_in_insert = false, -- Update diagnostics in insert mode.
         always_visible = false,   -- Show diagnostics even if there are none.
