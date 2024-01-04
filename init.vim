@@ -6,6 +6,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'sainnhe/gruvbox-material'
   Plug 'EdenEast/nightfox.nvim'
   Plug 'rebelot/kanagawa.nvim'
+  Plug 'sam4llis/nvim-tundra'
   Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 
