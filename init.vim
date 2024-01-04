@@ -19,6 +19,8 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'cocopon/iceberg.vim'
 
   Plug 'junegunn/vim-plug'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
   Plug 'takac/vim-hardtime'
   Plug 'Yggdroot/indentLine'
   Plug 'easymotion/vim-easymotion'

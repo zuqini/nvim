@@ -40,9 +40,6 @@ set foldnestmax=10
 nnoremap <leader>z za
 nnoremap <leader>Z zA
 
-" Kill buffers
-nnoremap <silent> <leader>Q :Bdelete! menu<CR>
-
 " Using Tabs
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>T :windo bd!<CR> " close tab and kill all buffers within tab
@@ -100,3 +97,7 @@ let g:vim_markdown_conceal_code_blocks = 0
 set list
 set showbreak=↪\
 set listchars=tab:→\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
+
+" small plugins configs
+nnoremap <silent> <leader>Q :Bdelete! menu<CR>
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
