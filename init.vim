@@ -1,3 +1,12 @@
+let theme = 'tokyonight'
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+" SETUP =======================================================================
 let is_windows = has("win64") || has("win32") || has("win16")
 " set std_path for vim8 explicitly
 let g:std_path_data = has('nvim') ? stdpath('data') : '~/.local/share/nvim'
@@ -11,12 +20,7 @@ if !is_windows && !vim_plug_installed
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+" END =======================================================================
 
 call plug#begin(g:std_path_data . '/plugged')
   " Themes
@@ -24,6 +28,7 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'cocopon/iceberg.vim'
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+  Plug 'embark-theme/vim', { 'as': 'embark' }
 
   Plug 'junegunn/vim-plug'
   Plug 'junegunn/goyo.vim'
@@ -52,7 +57,7 @@ call plug#begin(g:std_path_data . '/plugged')
 call plug#end()
 
 if vim_plug_installed
-  exec "source " . g:std_path_config . "/configs/themes/tokyonight.vim"
+  exec "source " . g:std_path_config . "/configs/themes/" . theme . ".vim"
   exec "source " . g:std_path_config . "/configs/main.vim"
 
   exec "source " . g:std_path_config . "/configs/goyolime.vim"
