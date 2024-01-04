@@ -38,6 +38,12 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'L3MON4D3/LuaSnip' " Snippets plugin
   Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 
+  " Treesitter
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-context'
+  " Additional language packs that treesitter doesn't support
+  Plug 'elubow/cql-vim' "CQL syntax highlight for cassandra
+
   " Wildmenu
   " see https://github.com/gelguy/wilder.nvim/issues/109
   function! UpdateRemotePlugins(...)
@@ -48,8 +54,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
   " Utils
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'nvim-treesitter/nvim-treesitter-context'
+  Plug 'lewis6991/gitsigns.nvim'
   Plug 'windwp/nvim-autopairs'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
@@ -86,6 +91,7 @@ lua require("plugins/lsp/additional")
 lua require("plugins/lsp/my")
 
 lua require("plugins/lualine")
+lua require("plugins/gitsigns")
 lua require("plugins/indent_blankline")
 call RequireVim("plugins/surround")
 call RequireVim("plugins/wilder")
