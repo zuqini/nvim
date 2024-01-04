@@ -1,17 +1,17 @@
-source configs/vimcompativility.vim
+source $HOME/.config/nvim/configs/vimcompativility.vim
 
 if argv(0) == "scratch"
     " use scratch playground settings for testing purposes
-    source configs/playground.vim
+    source $HOME/.config/nvim/configs/playground.vim
     finish
 endif
 
-source configs/main.vim
-source configs/coc.vim
-source configs/fzf.vim
-source configs/nerdtree.vim
-source configs/easymotion.vim
-source configs/hardmode.vim
+source $HOME/.config/nvim/configs/main.vim
+source $HOME/.config/nvim/configs/coc.vim
+source $HOME/.config/nvim/configs/fzf.vim
+source $HOME/.config/nvim/configs/nerdtree.vim
+source $HOME/.config/nvim/configs/easymotion.vim
+source $HOME/.config/nvim/configs/hardmode.vim
 
 " Disabled
-" source configs/absrelnumtoggle.vim
+" source $HOME/.config/nvim/configs/absrelnumtoggle.vim
