@@ -9,7 +9,7 @@ local keymap_opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', keymap_opts)
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', keymap_opts)
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', keymap_opts)
--- Q loclist is set in plugins/vim/main.vim
+-- Q loclist is set in plugins/vim/mappings.vim
 
 local border = {
   { "╭", "FloatBorder" },
