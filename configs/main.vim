@@ -15,10 +15,6 @@ colorscheme tokyonight-custom
 let g:lightline = {'colorscheme' : 'tokyonight'}
 set laststatus=2
 
-" disable <F1>
-nmap <F1> <nop>
-imap <F1> <nop>
-
 set mouse=a
 set number
 set showcmd
@@ -54,8 +50,13 @@ nnoremap <leader>z za
 nnoremap <leader>Z zA
 
 " Using Tabs
-nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>T :windo bd!<CR> " close tab and kill all buffers within tab
+nnoremap <silent><leader>t :tabnew<CR>
+nnoremap <silent><leader>T :windo bd!<CR> " close tab and kill all buffers within tab
+nnoremap <F3> gt
+nnoremap <F4> gT
+nnoremap <silent><F7> :tabm -1<CR>
+nnoremap <silent><F8> :tabm +1<CR>
+nnoremap <silent><F6> <C-W>T
 
 " Windows
 set splitbelow
