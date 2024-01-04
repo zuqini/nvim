@@ -4,20 +4,20 @@ require('luasnip.loaders.from_vscode').lazy_load()
 ---#Mappings
 -- Previous snippet region
 vim.keymap.set({ "i", "s" }, "<C-k>", function()
-    if luasnip.jumpable(-1) then luasnip.jump(-1) end
+  if luasnip.jumpable(-1) then luasnip.jump(-1) end
 end, { silent = true })
 
 -- Next snippet region
 vim.keymap.set({ "i", "s" }, "<C-j>", function()
-    if luasnip.jumpable(1) then luasnip.jump(1) end
+  if luasnip.jumpable(1) then luasnip.jump(1) end
 end, { silent = true })
 
 -- Cycle "choices" for current snippet region
 vim.keymap.set({ "i", "s" }, "<c-l>", function()
-    if luasnip.choice_active() then luasnip.change_choice(1) end
+  if luasnip.choice_active() then luasnip.change_choice(1) end
 end)
 vim.keymap.set({ "i", "s" }, "<c-h>", function()
-    if luasnip.choice_active() then luasnip.change_choice(-1) end
+  if luasnip.choice_active() then luasnip.change_choice(-1) end
 end)
 
 -- nvim-cmp setup
@@ -27,18 +27,18 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local cmp = require 'cmp'
+local cmp = require('cmp')
 cmp.setup {
   window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
   view = {
-    entries = {name = 'custom', selection_order = 'near_cursor' }
+    entries = { name = 'custom', selection_order = 'near_cursor' }
   },
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
