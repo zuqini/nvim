@@ -48,7 +48,6 @@ local colors = {
                 'filetype',
                 colored = true,   -- Displays filetype icon in color if set to true
                 icon_only = true, -- Display only an icon for filetype
-                padding = { left = 1, right = 0 },
             },
         },
         lualine_c = {},
