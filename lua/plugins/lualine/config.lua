@@ -1,7 +1,6 @@
 local theme = require('utils.theme-hot-reload').get_current_lualine_theme()
 
 local no_seps = { left = '', right = '' }
-local bar_seps = { left = '|', right = '|' }
 local angle_down_seps = { left = '', right = '' }
 local angle_up_seps = { left = '', right = '' }
 local triangle_seps = { left = '', right = '' }
@@ -60,16 +59,13 @@ local sections = {
     {
       'mode',
       fmt = string.upper,
-      separator = { left = ' ' },
-      padding = { left = 1, right = 1 },
     }
   },
   lualine_b = {
     {
       'branch',
       icon = '',
-      separator = ':',
-      padding = { left = 1, right = 1 },
+      separator = ':'
     },
     { 'diff' },
   },
@@ -104,35 +100,24 @@ local sections = {
       separator = '·',
     },
   },
-  lualine_y = { {
-    'progress',
-      padding = { left = 1, right = 1 },
-  }
-  },
-  lualine_z = {
-    {
-      'location',
-      separator = {
-        right = " "
-      },
-      padding = { left = 1, right = 0 },
-    }
-  },
+  lualine_y = { 'progress' },
+  lualine_z = { 'location' },
 }
 
 require('lualine').setup {
   options = {
     theme = theme,
-    component_separators = bar_seps,
-    section_separators = circle_seps,
+    component_separators = angle_down_thin2_seps,
+    section_separators = angle_down_seps,
     icons_enabled = true,
     globalstatus = true,
 
     -- Uncomment to disable icons
     -- icons_enabled = false,
   },
-  winbar = { lualine_c = winbar },
+  winbar = { lualine_b = winbar },
   inactive_winbar = { lualine_c = winbar },
   -- tabline = tabline,
   sections = sections,
+  extensions = { 'fzf' },
 }
