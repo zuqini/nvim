@@ -64,7 +64,7 @@ local sections = {
   lualine_b = {
     {
       'branch',
-      icon = '',
+      icon = '󰘬',
       separator = ':'
     },
     { 'diff' },
@@ -89,6 +89,11 @@ local sections = {
     },
     {
       'fileformat',
+      symbols = {
+        unix = ' ',
+        dos = '󰨡',
+        mac = '󰀶',
+      },
       separator = '·',
     },
     {
