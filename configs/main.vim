@@ -40,8 +40,8 @@ nnoremap <silent><leader>gt :tab split<CR>
 nnoremap <silent><leader>gT :tab new<CR>
 nnoremap <silent><left> gT
 nnoremap <silent><right> gt
-nnoremap <silent><leader>h :tabm -1<CR>
-nnoremap <silent><leader>l :tabm +1<CR>
+nnoremap <silent><leader><left> :tabm -1<CR>
+nnoremap <silent><leader><right> :tabm +1<CR>
 
 " Windows
 set splitbelow
