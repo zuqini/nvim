@@ -1,4 +1,4 @@
-let mapleader = "\<space>"
+let mapleader = " "
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -91,11 +91,6 @@ nnoremap <S-up> <C-W>4+
 nnoremap <S-down> <C-W>4-
 
 " Clipboard Copy Pasting
-nnoremap <C-v> "+p
-vnoremap <C-x> "+d
-vnoremap <C-c> "+y
-vnoremap <C-v> "+p
-
 nnoremap <silent><leader>y "+y
 nnoremap <silent><leader>Y "+Y
 vnoremap <silent><leader>y "+y
