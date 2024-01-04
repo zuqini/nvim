@@ -13,7 +13,6 @@ let g:std_path_data = has('nvim') ? stdpath('data') : '~/.local/share/nvim'
 let g:std_path_config = has('nvim') ? stdpath('config') : '~/.config/nvim'
 
 let vim_plug_installed = !empty(glob(g:std_path_data . '/site/autoload/plug.vim'))
-exec "source " . g:std_path_config . "/configs/vimcompatibility.vim"
 
 if !is_windows && !vim_plug_installed
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
