@@ -1,8 +1,15 @@
-" vim8 does not have stdpath, manually fill in nvim plugin path
-" note for Windows: nvim should continue to work, but symlink'ed vim8 will not
-let nvimPluggedPath = g:is_nvim ? stdpath('data') . '/plugged' : '~/.local/share/nvim/plugged'
+" Install vim-plug if not found
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
-call plug#begin(nvimPluggedPath)
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin('~/.local/share/nvim/plugged')
     " Themes
     Plug 'ghifarit53/tokyonight-vim'
     Plug 'dracula/vim', { 'as': 'dracula' }
