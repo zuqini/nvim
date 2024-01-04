@@ -51,6 +51,14 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert({
     ['<up>'] = cmp.mapping.select_prev_item(),
     ['<down>'] = cmp.mapping.select_next_item(),
+    ['<C-l>'] = function()
+      -- close docs if it's blocking completion list
+      if cmp.visible_docs() then
+        cmp.close_docs()
+      else
+        cmp.open_docs()
+      end
+    end,
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
