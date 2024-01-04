@@ -4,7 +4,7 @@ let g:goyo_linenr = 1
 nnoremap <leader>g :Goyo<CR>
 nnoremap <leader>G :Limelight!!<CR>
 
-let g:limelight_paragraph_span = 2
+let g:limelight_paragraph_span = 3
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 246
 " Color name (:help gui-colors) or RGB color
