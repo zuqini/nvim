@@ -38,12 +38,14 @@ set showcmd
 set wildmenu
 set showmatch " show matching brackets
 
+" shortcut to run macro @q. qq to record, q to stop recording.
+nnoremap <F1> @q
+
 " highlight search
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-" <space> to unhighlight search and close coc float menus
 nnoremap <silent> <ESC><ESC> :nohlsearch \| match none \| 2match none \| call coc#float#close_all()<CR>
 
 " Terminal emulator
