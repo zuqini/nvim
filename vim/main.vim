@@ -62,12 +62,12 @@ vnoremap < <gv
 " nnoremap <silent><leader><right> :tabm +1<CR>
 
 " Buffer management
-nnoremap ,q :bd<CR>
-nnoremap ,Q :bd!<CR>
-nnoremap ,b :ls<cr>:bd<space>
-nnoremap ,B :%bd\|e#\|bd#<CR>
-nnoremap <left> :bp<CR>
-nnoremap <right> :bn<CR>
+nnoremap <silent>,q :bd<CR>
+nnoremap <silent>,Q :bd!<CR>
+nnoremap <silent>,b :ls<cr>:bd<space>
+nnoremap <silent>,B :%bd\|e#\|bd#<CR>
+nnoremap <silent><left> :bp<CR>
+nnoremap <silent><right> :bn<CR>
 
 " go to file in new tab
 nnoremap <silent> gF :tab split<CR>gf
