@@ -10,6 +10,7 @@ require('indent_blankline').setup {
   show_current_context_start = true,
   char_highlight_list = hl_list,
 }
-
-vim.cmd [[highlight IndentBlanklineContextStart guisp=#008800 gui=underline]]
+vim.g.indent_blankline_char = '▏'
+vim.g.indent_blankline_context_char = '▎'
+vim.cmd [[highlight IndentBlanklineContextStart guisp=#00FF00 gui=underline]]
 vim.cmd [[highlight IndentBlanklineContextChar guifg=#00FF00 gui=nocombine]]
