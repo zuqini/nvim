@@ -64,6 +64,7 @@ require('lualine').setup {
         },
         show_filename_only = true,   -- Shows shortened relative path when set to false.
         hide_filename_extension = true,   -- Hide filename extension when set to true.
+        max_length = vim.o.columns - 15 - 5; -- 15 is the length of tabs defined below + 5 for padding
 
         symbols = {
           modified = '[+]',
@@ -76,6 +77,7 @@ require('lualine').setup {
       {
         'tabs',
         mode = 0,
+        max_length = 15;
       },
     },
   },
