@@ -46,13 +46,15 @@ call plug#begin(stdpath('data') . '/plugged')
   " note for fzf.vim: for special commands like :Ag and :Rg, need to install additional
   " dependencies. See: https://github.com/junegunn/fzf.vim
 
-  " ds,cs,ts
+  " ys,ds,cs,ts
   Plug 'tpope/vim-surround'
   " gc
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
 
+  " ii, ai, iI, aI
+  Plug 'michaeljsmith/vim-indent-object'
   Plug 'psliwka/vim-smoothie'
   Plug 'jiangmiao/auto-pairs'
   Plug 'takac/vim-hardtime'
