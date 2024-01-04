@@ -5,6 +5,8 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+Plug 'takac/vim-hardtime'
+Plug 'easymotion/vim-easymotion'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
@@ -36,7 +38,7 @@ set hlsearch
 set ignorecase
 set smartcase
 " <space> to unhighlight search
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader><esc> :nohlsearch<CR>
 
 " FZF
 " Ctrl-p to search for file
@@ -112,6 +114,11 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd BufWinEnter * silent NERDTreeMirror
 
 " hard mode to git gud =============================================
+let g:hardtime_default_on = 1
+let g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+"]
+let g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+"]
+let g:list_of_insert_keys = []
+let g:list_of_disabled_keys = []
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Left> <Nop>
