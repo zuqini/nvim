@@ -12,7 +12,7 @@ return {
   config = function()
     require 'fzf-lua'.setup {
       winopts = {
-        height = 0.90,
+        height = 0.95,
         width = 0.85,
         preview = {
           layout = 'vertical',
