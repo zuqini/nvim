@@ -64,8 +64,6 @@ require'nvim-treesitter.configs'.setup {
         -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
-        ["am"] = "@function.outer",
-        ["im"] = "@function.inner",
         ["ac"] = "@class.outer",
         -- You can optionally set descriptions to the mappings (used in the desc parameter of
         -- nvim_buf_set_keymap) which plugins like which-key display
@@ -94,38 +92,25 @@ require'nvim-treesitter.configs'.setup {
       -- and should return true of false
       include_surrounding_whitespace = true,
     },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>a"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<leader>A"] = "@parameter.inner",
-      },
-    },
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        ["]m"] = "@function.outer",
         ["]f"] = "@function.outer",
         ["]["] = "@function.outer",
         ["]c"] = { query = "@class.outer", desc = "Next class start" },
       },
       goto_next_end = {
-        ["]M"] = "@function.outer",
         ["]F"] = "@function.outer",
         ["]]"] = "@function.outer",
         ["]C"] = "@class.outer",
       },
       goto_previous_start = {
-        ["[m"] = "@function.outer",
         ["[f"] = "@function.outer",
         ["[["] = "@function.outer",
         ["[c"] = "@class.outer",
       },
       goto_previous_end = {
-        ["[M"] = "@function.outer",
         ["[F"] = "@function.outer",
         ["[]"] = "@function.outer",
         ["[C"] = "@class.outer",
@@ -143,10 +128,6 @@ require'nvim-treesitter.configs'.setup {
 }
 
 require('which-key').register({
-  ['[m'] = 'Prev Method Start',
-  [']m'] = 'Next Method Start',
-  ['[M'] = 'Prev Method End',
-  [']M'] = 'Next Method End',
   ['[f'] = 'Prev Method Start',
   [']f'] = 'Next Method Start',
   ['[F'] = 'Prev Method End',

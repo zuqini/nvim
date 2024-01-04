@@ -12,7 +12,7 @@ vim.g.theme_timer_active = 1
 require('themes/' .. vim.g.theme)
 
 local timer = vim.loop.new_timer()
-local min = 60 * 1000;
+local min = 60 * 1000
 
 local M = {}
 function M.selectThemeByIndex(index)

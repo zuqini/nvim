@@ -47,6 +47,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nvim-treesitter/nvim-treesitter-context'
+  Plug 'drybalka/tree-climber.nvim'
   " Additional language packs that treesitter doesn't support
   Plug 'elubow/cql-vim' "CQL syntax highlight for cassandra
 
@@ -85,6 +86,7 @@ lua require("plugins/nvim-tree")
 
 lua require("plugins/treesitter/main")
 lua require("plugins/treesitter/context")
+lua require("plugins/treesitter/treeclimber")
 
 lua require("plugins/lsp/mason")
 lua require("plugins/lsp/main")

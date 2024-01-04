@@ -1,4 +1,5 @@
 if exists("g:neovide")
+  let g:neovide_input_macos_alt_is_meta=v:true
   set guifont=FiraCode\ Nerd\ Font\ Mono:h18
   let g:neovide_transparency=0.95
   let g:neovide_scroll_animation_length=0.3
