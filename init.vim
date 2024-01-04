@@ -36,7 +36,11 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " FZF
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'ibhagwan/fzf-lua'
+  if !is_windows
+    Plug 'ibhagwan/fzf-lua' " fzf-lua is not supported on windows
+  else
+    Plug 'junegunn/fzf.vim'
+  endif
 
   " LSP
   Plug 'neovim/nvim-lspconfig'
@@ -74,7 +78,12 @@ if vim_plug_installed
   exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
   exec "source " . vim_configs_path . "/main.vim"
   exec "source " . vim_configs_path . "/plugins/surround.vim"
-  exec "source " . vim_configs_path . "/plugins/fzf.vim"
+
+  if !is_windows
+    exec "source " . vim_configs_path . "/plugins/fzf-lua.vim"
+  else
+    exec "source " . vim_configs_path . "/plugins/fzf.vim"
+  endif
 
   exec "source " . vim_configs_path . "/plugins/nvim-tree.vim"
   lua require("plugins/nvim-tree")

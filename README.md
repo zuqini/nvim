@@ -53,16 +53,13 @@ Alternatively if you don't want to setup icons, you can disable them at `lua/con
 </details>
 
 <details>
-<summary>Fzf.vim</summary>
+<summary>Fzf</summary>
 <br/>
-  
-- [fzf](https://github.com/junegunn/fzf) 0.23.0 or above
-- For syntax-highlighted preview, install [bat](https://github.com/sharkdp/bat)
-- If [delta](https://github.com/dandavison/delta) is available, `GF?`,
-  `Commits` and `BCommits` will use it to format `git diff` output.
-- `Ag` requires [The Silver Searcher (ag)](https://github.com/ggreer/the_silver_searcher)
-- `Rg` requires[ ripgrep (rg)](https://github.com/BurntSushi/ripgrep)
-- `Tags` and `Helptags` require Perl
+
+- fd - better find utility
+- rg - better grep utility
+- bat - syntax highlighted previews when using fzf's native previewer
+- delta - syntax highlighted git pager for git status previews
 </details>
 
 <details>
