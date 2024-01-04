@@ -4,6 +4,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Themes
     Plug 'ghifarit53/tokyonight-vim'
     Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'cocopon/iceberg.vim'
 
     Plug 'takac/vim-hardtime'
     Plug 'Yggdroot/indentLine'
@@ -70,10 +71,19 @@ nnoremap <leader>T :windo bd!<CR> " close tab and kill all buffers within tab
 " Windows
 set splitbelow
 set splitright
+nnoremap <C-h> <C-W><
+nnoremap <C-l> <C-W>>
+nnoremap <C-k> <C-W>+
+nnoremap <C-j> <C-W>-
 nnoremap <left> <C-W>h
 nnoremap <right> <C-W>l
 nnoremap <up> <C-W>k
 nnoremap <down> <C-W>j
+nnoremap <leader><left> <C-W>H
+nnoremap <leader><right> <C-W>L
+nnoremap <leader><up> <C-W>K
+nnoremap <leader><down> <C-W>J
+nnoremap <silent><F5> :mod<CR>
 
 " copied from ITerm2 Hotkey
 nnoremap <leader>D :sp<CR>
