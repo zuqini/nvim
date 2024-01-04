@@ -9,7 +9,7 @@ vim.g.search_with_fzf_lua = not vim.g.is_windows
 vim.g.search_with_fzf_vim = false
 vim.g.search_with_telescope = not vim.g.search_with_fzf_lua
 
-vim.g.transparent_background = vim.g.is_windows
+vim.g.transparent_background = true
 
 _G.clear_floats_and_highlights = function ()
     vim.cmd[[ nohlsearch ]]
