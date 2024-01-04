@@ -33,7 +33,7 @@ call plug#begin(g:std_path_data . '/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
 
-  Plug 'rstacruz/vim-closer'
+  Plug 'jiangmiao/auto-pairs'
   Plug 'takac/vim-hardtime'
   Plug 'Yggdroot/indentLine'
   Plug 'easymotion/vim-easymotion'
