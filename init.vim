@@ -1,15 +1,18 @@
-" set std_path_data for vim explicitly
-let std_path_data = has('nvim') ? stdpath('data') : '~/.local/share/nvim'
-let vim_plug_installed = !empty(glob(std_path_data . '/site/autoload/plug.vim'))
-source $HOME/.config/nvim/configs/vimcompativility.vim
+let is_windows = has("win64") || has("win32") || has("win16")
+" set std_path for vim8 explicitly
+let g:std_path_data = has('nvim') ? stdpath('data') : '~/.local/share/nvim'
+let g:std_path_config = has('nvim') ? stdpath('config') : '~/.config/nvim'
 
-if !vim_plug_installed
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+let vim_plug_installed = !empty(glob(g:std_path_data . '/site/autoload/plug.vim'))
+exec "source " . g:std_path_config . "/configs/vimcompatibility.vim"
+
+if !is_windows && !vim_plug_installed
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin(std_path_data . '/plugged')
+call plug#begin(g:std_path_data . '/plugged')
     " Themes
     Plug 'ghifarit53/tokyonight-vim'
     Plug 'dracula/vim', { 'as': 'dracula' }
@@ -31,5 +34,5 @@ call plug#begin(std_path_data . '/plugged')
 call plug#end()
 
 if vim_plug_installed
-  source $HOME/.config/nvim/loader.vim
+    exec "source " . g:std_path_config . "/loader.vim"
 endif

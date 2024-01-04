@@ -1,9 +1,9 @@
-source $HOME/.config/nvim/configs/main.vim
-source $HOME/.config/nvim/configs/coc.vim
-source $HOME/.config/nvim/configs/fzf.vim
-source $HOME/.config/nvim/configs/nerdtree.vim
-source $HOME/.config/nvim/configs/easymotion.vim
-source $HOME/.config/nvim/configs/hardmode.vim
+exec "source " . g:std_path_config . "/configs/main.vim"
+exec "source " . g:std_path_config . "/configs/coc.vim"
+exec "source " . g:std_path_config . "/configs/fzf.vim"
+exec "source " . g:std_path_config . "/configs/nerdtree.vim"
+exec "source " . g:std_path_config . "/configs/easymotion.vim"
 
 " Disabled
-" source $HOME/.config/nvim/configs/absrelnumtoggle.vim
+" exec "source " . g:std_path_config . "/configs/absrelnumtoggle.vim"
+" exec "source " . g:std_path_config . "/configs/hardmode.vim"
