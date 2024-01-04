@@ -2,7 +2,7 @@ return {
   'stevearc/oil.nvim',
   config = function()
     vim.api.nvim_create_user_command('E', ':Oil --float .', { nargs = 0 })
-    vim.api.nvim_create_user_command('EH', ':Oil --float %:p:h<args>', { nargs = 0 })
+    vim.api.nvim_create_user_command('EN', ':Oil --float %:p:h<args>', { nargs = 0 })
     vim.api.nvim_create_user_command('EP', ':Oil --float <args>', { nargs = 1 })
     require("oil").setup({
       keymaps = {
