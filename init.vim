@@ -1,11 +1,5 @@
 let theme = 'spaceduck'
 
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
 " BOOTSTRAP PLUG =============================================================
 let is_windows = has("win64") || has("win32") || has("win16")
 
@@ -15,14 +9,9 @@ if !is_windows
   if !vim_plug_installed
     silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
       \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
+    autocmd VimEnter * PlugInstall
   endif
-
-  " Run PlugInstall if there are missing plugins
-  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-    \| PlugInstall --sync | source $MYVIMRC
-  \| endif
 endif
-
 unlet autoload_plug_path
 " END ========================================================================
 
@@ -35,11 +24,13 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua' " deprecation notice: https://github.com/kyazdani42/nvim-tree.lua/issues/877
 
-
-  " for :Ag and :Rg, See: https://github.com/junegunn/fzf.vim
+  " FZF
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf.vim' " for :Ag and :Rg, See: https://github.com/junegunn/fzf.vim
 
+  " LSP
+
+  " Utils
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
   Plug 'tpope/vim-repeat'
@@ -55,11 +46,23 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'sheerun/vim-polyglot'
 call plug#end()
 
-let vim_configs_path = stdpath('config') . '/vim'
 if vim_plug_installed
+  " VIMSCRIPT configs
+  let vim_configs_path = stdpath('config') . '/vim'
   exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
   exec "source " . vim_configs_path . "/main.vim"
+  exec "source " . vim_configs_path . "/configs/fzf.vim"
+  exec "source " . vim_configs_path . "/configs/nvim-tree.vim"
+  exec "source " . vim_configs_path . "/configs/surround.vim"
 
+  " LUA configs
   lua require('main')
+  lua require("configs/lualine")
+  lua require("configs/hop")
+  lua require("configs/nvim-tree")
+
+  " Disabled configs
+  " exec "source " . vim_configs_path . "/configs/configs/hardmode.vim"
+  " exec "source " . vim_configs_path . "/configs/nutoggle.vim"
 endif
 

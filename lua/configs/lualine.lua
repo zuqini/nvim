@@ -78,6 +78,8 @@ require('lualine').setup {
         lualine_b = {
             {
                 'branch',
+                icon = '',
+                separator = ':'
             },
             {
                 'filename',
