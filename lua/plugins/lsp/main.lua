@@ -1,27 +1,5 @@
 local lspconfig = require('lspconfig')
 
-require('mason').setup({
-    ui = {
-        icons = {
-            server_installed = "✓",
-            server_pending = "➜",
-            server_uninstalled = "✗"
-        }
-    }
-})
-
-require("mason-lspconfig").setup({
-  automatic_installation = { exclude = { "omnisharp" } }
-})
-
-lspconfig.tsserver.setup {}
-lspconfig.rust_analyzer.setup {}
-lspconfig.pyright.setup {}
-lspconfig.sumneko_lua.setup {}
-lspconfig.omnisharp.setup {}
-lspconfig.jdtls.setup {}
-lspconfig.jsonls.setup {}
-
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -70,58 +48,34 @@ lspconfig.util.default_config = vim.tbl_extend(
   }
 )
 
-require('lsp_lines').register_lsp_virtual_lines()
-
--- luasnip setup
-local luasnip = require 'luasnip'
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ['<up>'] = cmp.mapping.select_prev_item(),
-    ['<down>'] = cmp.mapping.select_next_item(),
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<Esc>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+lspconfig.rust_analyzer.setup({
+  commands = {
+    RustOpenDocs = {
+      function()
+        vim.lsp.buf_request(vim.api.nvim_get_current_buf(), 'experimental/externalDocs', vim.lsp.util.make_position_params(), function(err, url)
+          if err then
+            error(tostring(err))
+          elseif url == nil then
+            print("No documentation found.")
+          else
+            vim.fn['netrw#BrowseX'](url, 0)
+          end
+        end)
+      end,
+      description = 'Open documentation for the symbol under the cursor in default browser',
     },
-    ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end,
-    ['<S-Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end,
   },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
-}
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
 
-require 'nvim-autopairs'.setup {}
-local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
+      local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+      local opts = { noremap=true, silent=true }
+      buf_set_keymap('n', '<leader>re', ':RustOpenDocs<CR>', opts)
+    end,
+})
+lspconfig.tsserver.setup {}
+lspconfig.pyright.setup {}
+lspconfig.sumneko_lua.setup {}
+lspconfig.omnisharp.setup {}
+lspconfig.jdtls.setup {}
+lspconfig.jsonls.setup {}

@@ -64,7 +64,7 @@ require('lualine').setup {
     sections = {
         lualine_a = {
             {
-                'mode', 
+                'mode',
                 fmt = string.upper,
             }
         },

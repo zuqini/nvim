@@ -59,6 +59,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'ggandor/leap.nvim'
   Plug 'sheerun/vim-polyglot'
 call plug#end()
+command! PU PlugUpdate | PlugUpgrade
 
 function! RequireVim(path)
   exec "source " . stdpath('config') . '/vim/' . a:path . '.vim'
@@ -76,7 +77,11 @@ lua require("plugins/nvim-tree")
 
 lua require("plugins/treesitter")
 lua require("plugins/leap")
-lua require("plugins/lsp")
+
+lua require("plugins/lsp/main")
+lua require("plugins/lsp/additional")
+lua require("plugins/lsp/mason")
+
 lua require("plugins/lualine")
 lua require("plugins/indent_blankline")
 call RequireVim("plugins/surround")
