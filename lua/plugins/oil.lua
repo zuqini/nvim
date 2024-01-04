@@ -6,6 +6,9 @@ return {
     vim.api.nvim_create_user_command('EC', ':Oil --float %:p:h<args>', { nargs = 0 }) --Edit current path
     vim.api.nvim_create_user_command('ED', ':Oil --float <args>', { nargs = 1 }) --Edit given path
     require("oil").setup({
+      view_options = {
+        show_hidden = true,
+      },
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
