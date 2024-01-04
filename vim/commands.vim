@@ -1,6 +1,10 @@
 command! L :Lazy<CR>
 command! LS :Lazy sync<CR>
 
+" literal search
+command! -nargs=1 Search :let @/='\V'.escape(<q-args>, '\\')| normal! n
+command! -nargs=1 S :let @/='\V'.escape(<q-args>, '\\')| normal! n
+
 " Search for the ... arguments separated with whitespace (if no '!'),
 " or with non-word characters (if '!' added to command).
 function! SearchMultiLine(bang, ...)
@@ -9,7 +13,8 @@ function! SearchMultiLine(bang, ...)
     let @/ = join(a:000, sep)
   endif
 endfunction
-command! -bang -nargs=* S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
+command! -bang -nargs=* SearchMulti call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
+command! -bang -nargs=* SM call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 
 " Augroups
 augroup mainMiscCommands

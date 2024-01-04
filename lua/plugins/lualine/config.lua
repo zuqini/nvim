@@ -6,12 +6,12 @@ local separators2 = { left = '', right = '' }
 local separators3 = { left = '', right = '' }
 local separators4 = { left = '', right = '' }
 
-local separators5 = { left = '\\', right = '/'}
-local separators6 = { left = '/', right = '\\'}
+local separators5 = { left = '\\', right = '/' }
+local separators6 = { left = '/', right = '\\' }
 local separators7 = { left = '', right = '' }
 local separators8 = { left = '', right = '' }
 local separators9 = { left = '', right = '' }
-local separators10 = { left = '', right = ''}
+local separators10 = { left = '', right = '' }
 
 -- local signs = { Error = '', Warn = '', Info = '', Hint = 'ﯦ' }
 -- local symbols = { error = ' ', warn = ' ', info = ' ', hint = 'ﯦ ' }
