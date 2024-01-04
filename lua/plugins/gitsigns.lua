@@ -9,14 +9,14 @@ require('gitsigns').setup({
     end
 
     -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
+    map('n', ']g', function()
+      if vim.wo.diff then return ']g' end
       vim.schedule(function() gs.next_hunk() end)
       return '<Ignore>'
     end, {expr=true})
 
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
+    map('n', '[g', function()
+      if vim.wo.diff then return '[g' end
       vim.schedule(function() gs.prev_hunk() end)
       return '<Ignore>'
     end, {expr=true})
@@ -39,8 +39,8 @@ require('gitsigns').setup({
 })
 
 require('which-key').register({
-  ['[c'] = 'Prev Hunk',
-  [']c'] = 'Next Hunk',
+  ['[g'] = 'Prev Hunk',
+  [']g'] = 'Next Hunk',
 })
 require('which-key').register({
   w = 'Save',
