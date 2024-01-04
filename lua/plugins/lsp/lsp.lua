@@ -107,6 +107,13 @@ lspconfig.util.default_config = vim.tbl_extend(
 
 local open_url = require('utils').open_url;
 lspconfig.rust_analyzer.setup({
+  settings = {
+    ['rust-analyzer'] = {
+      check = {
+        command = "clippy"
+      }
+    }
+  },
   commands = {
     RustOpenExternalDocs = {
       function()
