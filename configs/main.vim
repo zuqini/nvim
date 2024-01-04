@@ -38,18 +38,18 @@ vnoremap < <gv
 " Using Tabs
 nnoremap <silent><leader>gt :tab split<CR>
 nnoremap <silent><leader>gT :tab new<CR>
-nnoremap <C-h> gT
-nnoremap <C-l> gt
+nnoremap <silent><left> gT
+nnoremap <silent><right> gt
 nnoremap <silent><leader>h :tabm -1<CR>
 nnoremap <silent><leader>l :tabm +1<CR>
 
 " Windows
 set splitbelow
 set splitright
-nnoremap <left> <C-W>4<
-nnoremap <right> <C-W>4>
-nnoremap <up> <C-W>4+
-nnoremap <down> <C-W>4-
+nnoremap <S-left> <C-W>4<
+nnoremap <S-right> <C-W>4>
+nnoremap <S-up> <C-W>4+
+nnoremap <S-down> <C-W>4-
 
 " Clipboard Copy Pasting
 nnoremap <C-v> "+p
