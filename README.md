@@ -1,7 +1,7 @@
 # nvim
 My Neovim setup
-![image](https://user-images.githubusercontent.com/5790854/152670155-c0ff577c-22db-45fe-8d02-485771b228e3.png)
 
+![nvim](https://user-images.githubusercontent.com/5790854/153685073-25c68d35-9d88-4e78-a8ea-356c0807046e.gif)
 
 ## Install
 <details>
