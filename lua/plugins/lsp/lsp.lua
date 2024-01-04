@@ -90,17 +90,7 @@ local on_attach = function(client, bufnr)
   }, { prefix = '<leader>' })
 end
 
--- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
-  },
-}
-
 lspconfig.util.default_config = vim.tbl_extend(
   "force",
   lspconfig.util.default_config,
@@ -134,9 +124,7 @@ lspconfig.rust_analyzer.setup({
   },
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
-
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
     buf_set_keymap('n', '<leader>ge', ':RustOpenExternalDocs<CR>', keymap_opts)
     wk.register({
       g = {
