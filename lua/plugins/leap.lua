@@ -3,10 +3,18 @@ return {
   keys = {
     { "s", mode = { "x", "v", "n" } },
   },
-  config = function ()
-    require('leap').setup{
+  config = function()
+    require('leap').setup {
       highlight_unlabeled_phase_one_targets = true,
     }
+
+    -- Searching in all windows (including the current one) on the tab page.
+    local leap_all_windows = function()
+      require('leap').leap { target_windows = vim.tbl_filter(
+        function(win) return vim.api.nvim_win_get_config(win).focusable end,
+        vim.api.nvim_tabpage_list_wins(0)
+      ) }
+    end
 
     -- leap_all_windows defined in helpers.lua and used nvim-tree.lua
     vim.keymap.set('x', 's', leap_all_windows, { silent = true })

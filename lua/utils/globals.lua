@@ -17,17 +17,3 @@ _G.close_all_float = function ()
       end
     end
 end
-
--- Searching in all windows (including the current one) on the tab page.
-_G.leap_all_windows = function ()
-  require('leap').leap { target_windows = vim.tbl_filter(
-    function (win) return vim.api.nvim_win_get_config(win).focusable end,
-    vim.api.nvim_tabpage_list_wins(0)
-  )}
-end
-
--- Bidirectional search in the current window is just a specific case of the
--- multi-window mode.
-_G.leap_bidirectional = function ()
-  require('leap').leap { target_windows = { vim.fn.win_getid() } }
-end
