@@ -32,6 +32,7 @@
   "nvim-treesitter-context": { "branch": "master", "commit": "895ec44f5c89bc67ba5440aef3d1f2efa3d59a41" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "2f3583001e2bf793480f38cf0d055571787b0259" },
   "nvim-ts-autotag": { "branch": "main", "commit": "fdefe46c6807441460f11f11a167a2baf8e4534b" },
+  "nvim-various-textobjs": { "branch": "main", "commit": "623ef1f191754452605a921258cc1b9c84a805d3" },
   "nvim-web-devicons": { "branch": "master", "commit": "4709a504d2cd2680fb511675e64ef2790d491d36" },
   "oil.nvim": { "branch": "master", "commit": "f1ea6e0ad03e1d7b1acad4d0796d39c4a82b3463" },
   "openingh.nvim": { "branch": "main", "commit": "602cae773bafd61243f7ffe951bebf5721bdca56" },
@@ -41,7 +42,6 @@
   "tree-climber.nvim": { "branch": "main", "commit": "9b0c8c8358f575f924008945c74fd4f40d814cd7" },
   "undotree": { "branch": "master", "commit": "b6fdb95db53b7ceb23ddfe8a8211a3135d98eef0" },
   "vim-arduino": { "branch": "master", "commit": "4651b712239d46558c764d73e056815018af8e98" },
-  "vim-indent-object": { "branch": "master", "commit": "5c5b24c959478929b54a9e831a8e2e651a465965" },
   "vim-plist": { "branch": "master", "commit": "60e69bec50dfca32f0a62ee2dacdfbe63fd92038" },
   "which-key.nvim": { "branch": "main", "commit": "5224c261825263f46f6771f1b644cae33cd06995" },
   "zen-mode.nvim": { "branch": "main", "commit": "3c92f503823088862ca2a7809d1c7edc90fb92fa" }
