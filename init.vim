@@ -82,6 +82,7 @@ lua require("plugins/leap")
 lua require("plugins/lsp/mason")
 lua require("plugins/lsp/main")
 lua require("plugins/lsp/additional")
+lua require("plugins/lsp/my")
 
 lua require("plugins/lualine")
 lua require("plugins/indent_blankline")

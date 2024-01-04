@@ -6,6 +6,8 @@ local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+vim.keymap.set('n', '<up>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+vim.keymap.set('n', '<down>', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 -- Q loclist is set in plugins/vim/main.vim
 
 -- Use an on_attach function to only map the following keys
@@ -85,18 +87,24 @@ lspconfig.sumneko_lua.setup {
   }
 }
 
+-- expose on_attach and capabilities to other config files
+lspconfig.zuqini_custom = {}
+lspconfig.zuqini_custom.on_attach = on_attach
+lspconfig.zuqini_custom.capavilities = capabilities
+
+-- setup servers
 lspconfig.tsserver.setup {}
 lspconfig.pyright.setup {}
 lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
 
--- either use omnisharp or omnisharp_mono, uncomment based on which is needed
+-- either use omnisharp or omnisharp_mono, add to my.lua based on which is needed
 -- lspconfig.omnisharp.setup {}
 
 -- omnisharp_mono comes from mason so need to setup defaults manually
 -- lspconfig.omnisharp_mono.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
+--     on_attach = lspconfig.zuqini_custom.on_attach,
+--     capabilities = lspconfig.zuqini_custom.capabilities,
 --     flags = {
 --         debounce_text_changes = 150,
 --     }
