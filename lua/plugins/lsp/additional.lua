@@ -52,24 +52,6 @@ cmp.setup {
 local feedkeys = require('cmp.utils.feedkeys')
 local keymap = require('cmp.utils.keymap')
 local cmdline_mapping = {
-   ['<down>'] = {
-      c = function()
-        if cmp.visible() then
-          cmp.select_next_item()
-        else
-          feedkeys.call(keymap.t('<C-z>'), 'n')
-        end
-      end,
-    },
-    ['<up>'] = {
-      c = function()
-        if cmp.visible() then
-          cmp.select_prev_item()
-        else
-          feedkeys.call(keymap.t('<C-z>'), 'n')
-        end
-      end,
-    },
 }
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
