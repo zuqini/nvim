@@ -22,12 +22,16 @@ function M.selectThemeByIndex(index)
       if package_name:match(theme_name) then
         package.loaded[package_name] = nil
       end
+      if package_name:match('indent_blankline') then
+        package.loaded[package_name] = nil
+      end
     end
   end
 
   vim.g.theme_index = index
   vim.g.theme = vim.g.themes[vim.g.theme_index]
   require('themes/' .. vim.g.theme)
+  require('plugins/indent_blankline')
 end
 
 function M.clearTimer()
