@@ -40,6 +40,7 @@ augroup TransparentBackground
   autocmd vimenter * if g:transparent_background | hi Normal guibg=NONE ctermbg=NONE
   autocmd vimenter * if g:transparent_background | hi NormalNC guibg=NONE ctermbg=NONE
   autocmd vimenter * if g:transparent_background | hi Terminal guibg=NONE ctermbg=NONE
+  autocmd vimenter * if g:transparent_background | hi SignColumn guibg=NONE ctermbg=NONE
   autocmd vimenter * if g:transparent_background | hi TelescopeBorder guibg=NONE ctermbg=NONE
   autocmd vimenter * if g:transparent_background | hi TelescopePromptNormal guibg=NONE ctermbg=NONE
   autocmd vimenter * if g:transparent_background | hi TelescopePreviewNormal guibg=NONE ctermbg=NONE

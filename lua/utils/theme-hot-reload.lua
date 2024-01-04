@@ -1,10 +1,11 @@
 -- '  ﳟ          ﲵ    ﴫ  '
 local themes = {
-  { name = 'nightfox', lualine = 'auto', tabby_header = ' 木' },
   { name = 'gruvbox', lualine = 'auto', tabby_header = ' 火' },
-  { name = 'kanagawa', lualine = 'auto', tabby_header = ' 水' },
-  { name = 'ayu', lualine = 'ayu', tabby_header = ' 土' },
-  { name = 'citruszest', lualine = 'citruszest', tabby_header = ' 金' },
+  { name = 'terafox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 木' },
+  { name = 'duskfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 水' },
+  { name = 'nightfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 水' },
+  { name = 'tokyonight', lualine = 'auto', tabby_header = ' 水' },
+  { name = 'carbonfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 土' },
 }
 local theme_index = 1
 local theme_timer_active = 0
@@ -29,18 +30,24 @@ end
 function M.get_theme_index_by_time()
   local hour = tonumber(os.date("%H"))
   local index = 2
-  if hour >= 8 and hour < 14 then
+  if hour >= 6 and hour < 11 then
     -- morning
     index = 1
-  elseif hour >= 14 and hour < 20 then
+  elseif hour >= 11 and hour < 17 then
+    -- day
+    index = 2
+  elseif hour >= 17 or hour < 19 then
     -- dusk
-    index = 1
-  elseif hour >= 20 or hour < 2 then
-    -- night
-    index = 2
-  elseif hour >= 2 and hour < 8 then
-    -- dawn
-    index = 2
+    index = 3
+  elseif hour >= 19 and hour < 22 then
+    -- early night
+    index = 4
+  elseif hour >= 22 and hour < 1 then
+    -- late night
+    index = 4
+  elseif hour >= 1 and hour < 6 then
+    -- Deep night
+    index = 6
   end
   return index
 end
@@ -53,7 +60,8 @@ function M.select_theme_by_index(index)
   -- hacky and buggy: unload theme packages for hot-reloading
   for package_name, _ in pairs(package.loaded) do
     for _, theme in pairs(themes) do
-      if package_name:match(theme.name) then
+      if package_name:match(theme.name) or
+          (theme['alt_name'] ~= nil and package_name:match(theme.alt_name)) then
         package.loaded[package_name] = nil
       end
     end
@@ -75,6 +83,7 @@ function M.select_theme_by_index(index)
     vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
     vim.cmd('hi NormalNC guibg=NONE ctermbg=NONE')
     vim.cmd('hi Terminal guibg=NONE ctermbg=NONE')
+    vim.cmd('hi SignColumn guibg=NONE ctermbg=NONE')
     vim.cmd('hi TelescopeBorder guibg=NONE ctermbg=NONE')
     vim.cmd('hi TelescopePromptNormal guibg=NONE ctermbg=NONE')
     vim.cmd('hi TelescopePreviewNormal guibg=NONE ctermbg=NONE')
