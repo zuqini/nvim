@@ -108,7 +108,12 @@ lspconfig.rust_analyzer.setup({
       on_attach(client, bufnr)
 
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-      buf_set_keymap('n', '<leader>re', ':RustOpenExternalDocs<CR>', opts)
+      buf_set_keymap('n', '<leader>ne', ':RustOpenExternalDocs<CR>', opts)
+      wk.register({
+        n = {
+          e = 'RustOpenExtDocs',
+        }
+      }, { prefix='<leader>' })
     end,
 })
 

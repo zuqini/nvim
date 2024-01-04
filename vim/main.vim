@@ -53,7 +53,7 @@ nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
 " See https://github.com/junegunn/fzf.vim/issues/544 for FZF
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
-nnoremap <silent> <ESC><ESC> :nohlsearch \| :lua close_all_float()<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch \| :lua close_all_float()<CR>
 
 nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv

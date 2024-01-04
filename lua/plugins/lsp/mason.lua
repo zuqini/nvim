@@ -13,4 +13,14 @@ require("mason-lspconfig").setup({
 })
 
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<leader>rt', ":LspRestart<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>nt', ":LspRestart<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>ns', ":LspStop<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>nS', ":Lsp<CR>", opts)
+
+require('which-key').register({
+  n = {
+    t = 'LspRestart',
+    s = 'LspStop',
+    S = 'LspStart',
+  }
+}, { prefix='<leader>' })
