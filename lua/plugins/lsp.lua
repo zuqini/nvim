@@ -1,4 +1,4 @@
-require("nvim-lsp-installer").setup({
+require('nvim-lsp-installer').setup({
     automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
     ui = {
         icons = {
@@ -8,7 +8,7 @@ require("nvim-lsp-installer").setup({
         }
     }
 })
-local lspconfig = require("lspconfig")
+local lspconfig = require('lspconfig')
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -65,6 +65,8 @@ lspconfig.sumneko_lua.setup {}
 -- lspconfig.omnisharp.setup {}
 lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
+
+require('lsp_lines').register_lsp_virtual_lines()
 
 -- luasnip setup
 local luasnip = require 'luasnip'
