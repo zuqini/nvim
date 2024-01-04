@@ -63,6 +63,7 @@ lspconfig.rust_analyzer.setup {}
 lspconfig.pyright.setup {}
 lspconfig.sumneko_lua.setup {}
 lspconfig.omnisharp.setup {}
+lspconfig.jdtls.setup {}
 
 -- luasnip setup
 local luasnip = require 'luasnip'
