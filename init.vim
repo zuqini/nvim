@@ -50,7 +50,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
   Plug 'junegunn/vim-peekaboo'
   Plug 'jiangmiao/auto-pairs'
-  Plug 'takac/vim-hardtime'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'phaazon/hop.nvim'
   Plug 'sheerun/vim-polyglot'
@@ -58,6 +57,14 @@ call plug#end()
 
 if vim_plug_installed
   let vim_configs_path = stdpath('config') . '/vim'
+
+  " NOTE: order is important
+  " 1. helper.lua defines helper functions that other config files may use
+  " 2. theme should be before everything else since some plugins need the theme to be set prior to setup
+  " 3. nvim-tree.vim needs to execute before nvim-tree
+
+  lua require("helper")
+
   exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
   exec "source " . vim_configs_path . "/main.vim"
   exec "source " . vim_configs_path . "/configs/fzf.vim"
@@ -66,12 +73,8 @@ if vim_plug_installed
   exec "source " . vim_configs_path . "/configs/nvim-tree.vim"
   lua require("configs/nvim-tree")
 
-  lua require('main')
+  lua require("main")
   lua require("configs/lualine")
   lua require("configs/hop")
   lua require("configs/lsp")
-
-  " Disabled configs
-  " exec "source " . vim_configs_path . "/configs/configs/hardmode.vim"
-  " exec "source " . vim_configs_path . "/configs/nutoggle.vim"
 endif

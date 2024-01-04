@@ -17,6 +17,9 @@ set hlsearch
 set ignorecase smartcase
 set laststatus=2
 
+nnoremap <down> gj
+nnoremap <up> gk
+
 " disable F1 as it's easy to accidentally hit on the touchbar
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
@@ -38,7 +41,7 @@ nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
 " See https://github.com/junegunn/fzf.vim/issues/544 for FZF
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
-nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
+nnoremap <silent> <ESC><ESC> :nohlsearch \| :lua close_all_float()<CR>
 
 " Movement
 " nnoremap <C-k> 10k
