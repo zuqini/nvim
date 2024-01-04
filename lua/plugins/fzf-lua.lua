@@ -9,8 +9,9 @@ return {
       build = './install --bin',
     },
   },
-  config = function ()
-    require'fzf-lua'.setup {
+  config = function()
+    local actions = require "fzf-lua.actions"
+    require 'fzf-lua'.setup {
       winopts = {
         height = 0.90,
         width = 0.85,
@@ -24,27 +25,33 @@ return {
         ['--keep-right'] = '',
       },
       fzf_colors = {
-        ["fg"]          = { "fg", "CursorLine" },
-        ["bg"]          = { "bg", "Normal" },
-        ["hl"]          = { "fg", "Comment" },
-        ["fg+"]         = { "fg", "Normal" },
-        ["bg+"]         = { "bg", "CursorLine" },
-        ["hl+"]         = { "fg", "Statement" },
-        ["info"]        = { "fg", "PreProc" },
-        ["prompt"]      = { "fg", "Conditional" },
-        ["pointer"]     = { "fg", "Exception" },
-        ["marker"]      = { "fg", "Keyword" },
-        ["spinner"]     = { "fg", "Label" },
-        ["header"]      = { "fg", "Comment" },
-        ["gutter"]      = { "bg", "Normal" },
+        ["fg"]      = { "fg", "CursorLine" },
+        ["bg"]      = { "bg", "Normal" },
+        ["hl"]      = { "fg", "Comment" },
+        ["fg+"]     = { "fg", "Normal" },
+        ["bg+"]     = { "bg", "CursorLine" },
+        ["hl+"]     = { "fg", "Statement" },
+        ["info"]    = { "fg", "PreProc" },
+        ["prompt"]  = { "fg", "Conditional" },
+        ["pointer"] = { "fg", "Exception" },
+        ["marker"]  = { "fg", "Keyword" },
+        ["spinner"] = { "fg", "Label" },
+        ["header"]  = { "fg", "Comment" },
+        ["gutter"]  = { "bg", "Normal" },
+      },
+      keymap = {
+        fzf = {
+          ["ctrl-q"] = "select-all+accept",
+        }
       }
     }
 
-    local opts = { noremap=true, silent=true }
+    local opts = { noremap = true, silent = true }
     vim.api.nvim_set_keymap('n', 'S', ":lua require'fzf-lua'.files()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>s', ":lua require'fzf-lua'.grep({ search = ''})<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>S', ":lua require'fzf-lua'.live_grep_native()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>ns', ":lua require'fzf-lua'.files({ cmd = 'fd --no-ignore --hidden' })<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>ns', ":lua require'fzf-lua'.files({ cmd = 'fd --no-ignore --hidden' })<CR>",
+      opts)
 
     vim.api.nvim_set_keymap('n', '<leader>o', ":lua require'fzf-lua'.oldfiles()<CR>", opts)
 
@@ -133,6 +140,6 @@ return {
         d = 'Dotfiles',
         t = 'Tabs',
       },
-    }, { prefix='<leader>' })
+    }, { prefix = '<leader>' })
   end
 }
