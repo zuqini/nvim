@@ -15,6 +15,10 @@ colorscheme tokyonight-custom
 let g:lightline = {'colorscheme' : 'tokyonight'}
 set laststatus=2
 
+" disable <F1>
+nmap <F1> <nop>
+imap <F1> <nop>
+
 set mouse=a
 set number
 set showcmd
@@ -26,11 +30,15 @@ set ignorecase
 set smartcase
 nnoremap <silent> <ESC><ESC> :nohlsearch \| match none \| 2match none \| call coc#float#close_all()<CR>
 
+" Movement
+nnoremap <C-h> 10h
+nnoremap <C-l> 10l
+nnoremap <C-k> 10k
+nnoremap <C-j> 10j
+
 " more logical Y command
 " because C => c$ and D => d$
 nnoremap Y y$
-" shortcut to run macro @q. qq to record, q to stop recording.
-nnoremap <F1> @q
 
 " Folding
 set foldenable
@@ -44,11 +52,6 @@ nnoremap <leader>Z zA
 " Using Tabs
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>T :windo bd!<CR> " close tab and kill all buffers within tab
-
-nnoremap <C-h> 10h
-nnoremap <C-l> 10l
-nnoremap <C-k> 10k
-nnoremap <C-j> 10j
 
 " Windows
 set splitbelow
@@ -64,8 +67,8 @@ nnoremap <leader><C-j> <C-W>J
 nnoremap <silent><F5> :mod<CR>
 
 " copied from ITerm2 Hotkey
-nnoremap <leader>D :sp<CR>
-nnoremap <leader>d :vs<CR>
+nnoremap <silent><leader>D :sp<CR>
+nnoremap <silent><leader>d :vs<CR>
 
 " Clipboard Copy Pasting
 nnoremap <C-v> "*p
@@ -73,8 +76,8 @@ vnoremap <C-x> "*d
 vnoremap <C-c> "*y
 vnoremap <C-v> "*p
 " Yank Pasting only
-nnoremap <leader>v "0p
-nnoremap <leader>V "0P
+nnoremap <silent><leader>v "0p
+nnoremap <silent><leader>V "0P
 
 " Indentation without hard tabs
 " https://vim.fandom.com/wiki/Indenting_source_code
