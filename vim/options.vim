@@ -21,6 +21,7 @@ set synmaxcol=512
 
 set cursorline
 
+" Neovim bug, see https://github.com/neovim/neovim/issues/18576
 if !g:transparent_background
   set pumblend=6
   set winblend=6
