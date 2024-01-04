@@ -41,12 +41,12 @@ cmp.setup {
       end
     end,
   }),
-  sources = {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   }, {
     { name = 'buffer' },
-  }
+  })
 }
 
 local feedkeys = require('cmp.utils.feedkeys')
