@@ -1,6 +1,6 @@
 if exists("g:neovide")
   let g:neovide_input_macos_alt_is_meta=v:true
-  if !is_windows
+  if !g:is_windows
     set guifont=FiraCode\ Nerd\ Font\ Mono:h18
   else
     set guifont=FiraCode\ NF:h12

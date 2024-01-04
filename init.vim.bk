@@ -1,4 +1,4 @@
-let is_windows = has("win64") || has("win32") || has("win16")
+let g:is_windows = has("win64") || has("win32") || has("win16")
 
 call plug#begin(stdpath('data') . '/plugged')
   Plug 'junegunn/vim-plug'
@@ -21,7 +21,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " FZF
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  if !is_windows
+  if !g:is_windows
     Plug 'ibhagwan/fzf-lua' " fzf-lua is not supported on windows
   else
     Plug 'junegunn/fzf.vim'
@@ -104,7 +104,7 @@ call RequireVim("plugins/closetag")
 " call RequireVim("plugins/nutoggle")
 call RequireVim("plugins/plist")
 
-if !is_windows
+if !g:is_windows
   lua require("plugins/fzf-lua")
 else
   call RequireVim("plugins/fzf")
