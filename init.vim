@@ -54,7 +54,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-endwise'
 
   Plug 'psliwka/vim-smoothie'
-  Plug 'machakann/vim-highlightedyank'
   Plug 'jiangmiao/auto-pairs'
   Plug 'takac/vim-hardtime'
   Plug 'lukas-reineke/indent-blankline.nvim'

@@ -31,11 +31,11 @@ nnoremap <C-j> 10j
 vnoremap <C-k> 10k
 vnoremap <C-j> 10j
 
-" more logical Y command
-" because C => c$ and D => d$
+" more logical Y command (C => c$ and D => d$
+" note: this is default in nvim. keeping mapping for vim compatibility
 nnoremap Y y$
 
-let g:highlightedyank_highlight_duration = 350
+au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=350, on_visual=true}
 
 nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
