@@ -45,9 +45,6 @@ vim.api.nvim_set_keymap('n', '<leader>hb', ":lua require'fzf-lua'.git_branches()
 vim.api.nvim_set_keymap('n', '<leader>b', ":lua require'fzf-lua'.buffers()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>t', ":lua require'fzf-lua'.buffers()<CR>", opts)
 
-vim.api.nvim_set_keymap('n', '<leader>nq', ":lua require'fzf-lua'.quickfix()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>nQ', ":lua require'fzf-lua'.loclist()<CR>", opts)
-
 vim.api.nvim_set_keymap('n', '<leader>lr', ":lua require'fzf-lua'.lsp_references()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>ld', ":lua require'fzf-lua'.lsp_definitions()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>lD', ":lua require'fzf-lua'.lsp_declarations()<CR>", opts)
@@ -59,6 +56,9 @@ vim.api.nvim_set_keymap('n', '<leader>lsw', ":lua require'fzf-lua'.lsp_workspace
 vim.api.nvim_set_keymap('n', '<leader>lsW', ":lua require'fzf-lua'.lsp_live_workspace_symbols()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>lg', ":lua require'fzf-lua'.lsp_document_diagnostics()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>lG', ":lua require'fzf-lua'.lsp_workspace_diagnostics()<CR>", opts)
+
+vim.api.nvim_set_keymap('n', '<leader>lq', ":lua require'fzf-lua'.quickfix()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>lQ', ":lua require'fzf-lua'.loclist()<CR>", opts)
 
 vim.api.nvim_set_keymap('n', '<leader>fc', ":lua require'fzf-lua'.commands()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>fn', ":lua require'fzf-lua'.resume()<CR>", opts)
@@ -105,6 +105,8 @@ require('which-key').register({
     },
     g = 'Diagnostics',
     G = 'Workspace Diagnostics',
+    q = 'Quickfix',
+    Q = 'Loclist',
   },
   f = {
     name = 'Fzf-Misc',
