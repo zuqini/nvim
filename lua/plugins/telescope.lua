@@ -16,7 +16,7 @@ return {
         layout_config = {
           height = 0.95,
           width = 0.85,
-          preview_height = 0.70,
+          preview_height = 0.65,
           preview_cutoff = 30,
           mirror = true,
         },
