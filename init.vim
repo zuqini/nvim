@@ -78,9 +78,9 @@ lua require("plugins/nvim-tree")
 lua require("plugins/treesitter")
 lua require("plugins/leap")
 
+lua require("plugins/lsp/mason")
 lua require("plugins/lsp/main")
 lua require("plugins/lsp/additional")
-lua require("plugins/lsp/mason")
 
 lua require("plugins/lualine")
 lua require("plugins/indent_blankline")
