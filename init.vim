@@ -81,7 +81,6 @@ call RequireVim("plugins/closetag")
 
 if !is_windows
   lua require("plugins/fzf-lua")
-  call RequireVim("plugins/fzf-lua")
 else
   call RequireVim("plugins/fzf")
 endif
