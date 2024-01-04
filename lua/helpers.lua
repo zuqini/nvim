@@ -3,7 +3,7 @@ function _G.close_all_float()
         local config = vim.api.nvim_win_get_config(win);
         if config.relative ~= "" then
             vim.api.nvim_win_close(win, false);
-            print('Closing window', win);
+            -- print('Closing window', win);
         end
     end
 end
