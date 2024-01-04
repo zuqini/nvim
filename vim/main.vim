@@ -61,7 +61,7 @@ nnoremap <silent> <ESC><ESC> :nohlsearch \| :lua close_all_float()<CR>
 " note: this is default in nvim. keeping mapping for vim compatibility
 nnoremap Y y$
 
-au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=350, on_visual=true}
+au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=250, on_visual=true}
 
 nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
