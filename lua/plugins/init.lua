@@ -14,7 +14,6 @@ return {
   },
   {
     'darfink/vim-plist',
-    ft={ "plist", "strings" },
     config = function ()
       vrequire("plugins/plist")
     end
