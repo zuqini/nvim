@@ -21,7 +21,7 @@ unlet autoload_plug_path
 
 call plug#begin(stdpath('data') . '/plugged')
   " Themes
-  Plug 'ghifarit53/tokyonight-vim'
+  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'cocopon/iceberg.vim'
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
