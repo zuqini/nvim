@@ -64,7 +64,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'preservim/nerdtree'
   Plug 'PhilRunninger/nerdtree-visual-selection'
-  Plug 'Asheq/close-buffers.vim'
 call plug#end()
 
 let vim_configs_path = stdpath('config') . '/vim'

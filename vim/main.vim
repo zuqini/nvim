@@ -98,5 +98,3 @@ else
   set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
 endif
 
-" small plugins configs
-nnoremap <silent> <leader>Q :Bdelete! menu<CR>
