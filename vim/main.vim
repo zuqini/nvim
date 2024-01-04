@@ -12,6 +12,7 @@ set number
 set showcmd
 set wildmenu
 set showmatch " show matching brackets
+set noshowmode
 set incsearch
 set hlsearch
 set ignorecase smartcase
