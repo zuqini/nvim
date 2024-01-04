@@ -1,3 +1,5 @@
+local header = require('utils.theme-hot-reload').get_current_tabby_header()
+
 vim.o.showtabline = 2
 local theme = {
   fill = 'TabLineFill',
@@ -10,7 +12,7 @@ local theme = {
 require('tabby.tabline').set(function(line)
   return {
     {
-      { '  ', hl = theme.head },
+      { header, hl = theme.head },
       line.sep('', theme.head, theme.fill),
     },
     line.tabs().foreach(function(tab)

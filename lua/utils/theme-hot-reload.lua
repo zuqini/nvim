@@ -1,9 +1,9 @@
--- TODO: Instead of using vim variables, convert to full lua 
+-- '  ﳟ          ﲵ    ﴫ  '
 local themes = {
-  { name = 'nightfox', lualine = 'auto' },
-  { name = 'gruvbox', lualine = 'auto' },
-  { name = 'kanagawa', lualine = 'auto' },
-  { name = 'ayu', lualine = 'ayu' },
+  { name = 'nightfox', lualine = 'auto', tabby_header = ' 木 ' },
+  { name = 'gruvbox', lualine = 'auto', tabby_header = ' 火 ' },
+  { name = 'kanagawa', lualine = 'auto', tabby_header = ' 水 ' },
+  { name = 'ayu', lualine = 'ayu', tabby_header = ' 土 ' },
 }
 local theme_index = 1
 local theme_timer_active = 0
@@ -19,6 +19,10 @@ end
 
 function M.get_current_lualine_theme()
   return themes[theme_index].lualine
+end
+
+function M.get_current_tabby_header()
+  return themes[theme_index].tabby_header
 end
 
 function M.get_theme_index_by_time()
