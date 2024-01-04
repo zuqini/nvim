@@ -28,7 +28,6 @@ inoremap <F1> <nop>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
 
-nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>B :ls<cr>:bd<space>
 nnoremap <leader><c-b> :%bd\|e#\|bd#<CR>
 
@@ -106,10 +105,10 @@ function! ToggleLocList()
     endif
 endfunction
 
-nnoremap <silent>Q :call ToggleQuickFix()<CR>
+nnoremap <silent><leader>q :call ToggleQuickFix()<CR>
 nnoremap <silent><c-k> :cp<CR>
 nnoremap <silent><c-j> :cn<CR>
-nnoremap <silent><leader>q :call ToggleLocList()<CR>
+nnoremap <silent>Q :call ToggleLocList()<CR>
 nnoremap <silent><leader>k :lp<CR>
 nnoremap <silent><leader>j :lne<CR>
 

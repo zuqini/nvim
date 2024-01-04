@@ -36,7 +36,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " FZF
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  Plug 'ibhagwan/fzf-lua'
 
   " LSP
   Plug 'neovim/nvim-lspconfig'
