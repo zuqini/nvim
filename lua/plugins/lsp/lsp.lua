@@ -20,14 +20,6 @@ vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', keymap_opts
 --       {"▏", "FloatBorder"},
 -- }
 
--- convert this to lua later
-vim.cmd [[
-augroup CustomFloatColors
-  autocmd!
-  autocmd ColorScheme * highlight! link NormalFloat Normal
-  autocmd ColorScheme * highlight! link FloatBorder Normal
-augroup END
-]]
 local border = {
       {"╭", "FloatBorder"},
       {"─", "FloatBorder"},

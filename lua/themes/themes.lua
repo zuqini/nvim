@@ -12,6 +12,16 @@ vim.g.theme_timer_active = 0
 
 local min = 60 * 1000
 
+-- convert this to lua later
+-- custom float colors for LSP. Need to be set before setting the actual colorscheme
+vim.cmd [[
+augroup CustomFloatColors
+  autocmd!
+  autocmd ColorScheme * highlight! link NormalFloat Normal
+  autocmd ColorScheme * highlight! link FloatBorder Normal
+augroup END
+]]
+
 local M = {}
 function M.selectThemeByIndex(index)
   -- this disables lualine and stops its timers
@@ -38,7 +48,7 @@ function M.selectThemeByIndex(index)
   require('plugins/lualine')
 end
 
-function M.selectThemeByTime()
+function M.getThemeIndexByTime()
   local hour = tonumber(os.date("%H"))
   local index = 2
   if hour > 7 and hour < 19 then
@@ -46,6 +56,11 @@ function M.selectThemeByTime()
   else
     index = 2
   end
+  return index
+end
+
+function M.selectThemeByTime()
+  local index = M.getThemeIndexByTime()
   if vim.g.theme_index ~= index then
     M.selectThemeByIndex(index)
   end
@@ -80,6 +95,8 @@ vim.api.nvim_create_user_command('TN', M.next, {})
 vim.api.nvim_create_user_command('TP', M.prev, {})
 
 -- M.selectThemeByTime()
-M.selectThemeByIndex(vim.g.theme_index)
+-- M.selectThemeByIndex(vim.g.theme_index)
+-- vim.g.theme_index = M.getThemeIndexByTime()
+require('themes/' .. vim.g.theme)
 
 return M

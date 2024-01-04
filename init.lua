@@ -163,6 +163,7 @@ require("lazy").setup({
 
 -- require helpers.lua first - it defines helper functions that other config files may use
 require("helpers")
+require("themes/themes")
 
 vRequire("main")
 
@@ -175,9 +176,6 @@ require('plugins/indent_blankline')
 require("plugins/lsp/mason")
 require("plugins/lsp/lsp")
 pcall(function() require("plugins/lsp/my") end) -- this is for env specific lsp configs
-
--- theme needs to be at the end so the ColorScheme autocmds take effect
-require("themes/theme")
 
 -- client specific configs
 vRequire("neovide")
