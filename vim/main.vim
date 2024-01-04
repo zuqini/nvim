@@ -30,6 +30,11 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
+nnoremap <left> h
+nnoremap <down> j
+nnoremap <up> k
+nnoremap <right> l
+
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
 
@@ -67,8 +72,8 @@ nnoremap <silent>,q :bd<CR>
 nnoremap <silent>,Q :bd!<CR>
 nnoremap <silent>,b :ls<cr>:bd<space>
 nnoremap <silent>,B :%bd!\|e#\|bd!#<CR>
-nnoremap <silent><left> :bp<CR>
-nnoremap <silent><right> :bn<CR>
+nnoremap <silent>[b :bp<CR>
+nnoremap <silent>]b :bn<CR>
 
 " go to file in new tab
 nnoremap <silent> gF :tab split<CR>gf

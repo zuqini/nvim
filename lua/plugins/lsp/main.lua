@@ -7,13 +7,9 @@ local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.keymap.set('n', '<up>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.keymap.set('n', '<down>', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 -- Q loclist is set in plugins/vim/main.vim
 
 wk.register({
-  ['<up>'] = 'Prev Diagnostic',
-  ['<down>'] = 'Next Diagnostic',
   ['[d'] = 'Prev Diagnostic',
   [']d'] = 'Next Diagnostic',
 })
@@ -63,7 +59,7 @@ local on_attach = function(client, bufnr)
   wk.register({
     K = 'Signature Help',
     r = {
-      name = 'Misc',
+      name = 'Lang.',
       a = 'Add Workspace',
       r = 'Remove Workspace',
       l = 'Show Workspace',
@@ -71,6 +67,7 @@ local on_attach = function(client, bufnr)
       n = 'Rename',
       c = 'Code Action',
       f = 'Format',
+      j = 'jq',
     }
   }, { prefix='<leader>' })
 end

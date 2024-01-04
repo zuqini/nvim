@@ -20,7 +20,6 @@ wk.register({
   w = 'Save',
   W = 'Save & Quit',
   z = 'Auto Center',
-  r = 'LSP',
   u = 'Highlight',
   R = 'Source Nvim',
   k = 'Quickfix Prev',
@@ -36,3 +35,8 @@ wk.register({
   p = 'Last Yanked p',
   P = 'Last Yanked P',
 }, { prefix='<leader>' })
+
+require('which-key').register({
+  ['[b'] = 'Prev Buffer',
+  [']b'] = 'Next Buffer',
+})
