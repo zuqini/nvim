@@ -11,13 +11,13 @@ cmp.setup {
       require('luasnip').lsp_expand(args.body)
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ['<up>'] = cmp.mapping.select_prev_item(),
     ['<down>'] = cmp.mapping.select_next_item(),
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<Esc>'] = cmp.mapping.close(),
+    ['<Esc>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -40,9 +40,51 @@ cmp.setup {
         fallback()
       end
     end,
-  },
+  }),
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-  },
+  }, {
+    { name = 'buffer' },
+  }
 }
+
+local feedkeys = require('cmp.utils.feedkeys')
+local keymap = require('cmp.utils.keymap')
+local cmdline_mapping = {
+   ['<down>'] = {
+      c = function()
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          feedkeys.call(keymap.t('<C-z>'), 'n')
+        end
+      end,
+    },
+    ['<up>'] = {
+      c = function()
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          feedkeys.call(keymap.t('<C-z>'), 'n')
+        end
+      end,
+    },
+}
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(cmdline_mapping),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(cmdline_mapping),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})

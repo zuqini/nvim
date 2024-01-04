@@ -31,10 +31,15 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
+
   Plug 'hrsh7th/nvim-cmp' " Autocompletion plugin
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp
   Plug 'saadparwaiz1/cmp_luasnip' " Snippets source for nvim-cmp
   Plug 'L3MON4D3/LuaSnip' " Snippets plugin
+
   " Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
   Plug 'stevearc/vim-arduino'
 
@@ -43,15 +48,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'nvim-treesitter/nvim-treesitter-context'
   " Additional language packs that treesitter doesn't support
   Plug 'elubow/cql-vim' "CQL syntax highlight for cassandra
-
-  " Wildmenu
-  " see https://github.com/gelguy/wilder.nvim/issues/109
-  function! UpdateRemotePlugins(...)
-    " Needed to refresh runtime files
-    let &rtp=&rtp
-    UpdateRemotePlugins
-  endfunction
-  Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
   " Utils
   Plug 'nvim-lua/plenary.nvim'
@@ -101,7 +97,6 @@ lua require("plugins/whichkey")
 lua require("plugins/harpoon")
 call RequireVim("plugins/undotree")
 call RequireVim("plugins/surround")
-call RequireVim("plugins/wilder")
 call RequireVim("plugins/closetag")
 call RequireVim("plugins/nutoggle")
 
