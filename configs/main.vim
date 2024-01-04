@@ -81,9 +81,9 @@ vnoremap <C-c> "*y
 vnoremap <C-v> "*p
 " Yank Pasting only
 nnoremap <silent><leader>p "0p
-nnoremap <silent><leader>p "0P
+nnoremap <silent><leader>P "0P
 vnoremap <silent><leader>p "0p
-vnoremap <silent><leader>p "0P
+vnoremap <silent><leader>P "0P
 
 " Indentation without hard tabs
 " https://vim.fandom.com/wiki/Indenting_source_code
