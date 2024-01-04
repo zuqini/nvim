@@ -17,6 +17,9 @@ set hlsearch
 set ignorecase smartcase
 set laststatus=2
 
+" disable automatic comment insertion
+au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " disable F1 as it's easy to accidentally hit on the touchbar
 nnoremap <F1> <nop>
 inoremap <F1> <nop>

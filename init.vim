@@ -46,8 +46,18 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'saadparwaiz1/cmp_luasnip' " Snippets source for nvim-cmp
   Plug 'L3MON4D3/LuaSnip' " Snippets plugin
 
-  " Utils
+  " Wildmenu
+  " see https://github.com/gelguy/wilder.nvim/issues/109
+  function! UpdateRemotePlugins(...)
+    " Needed to refresh runtime files
+    let &rtp=&rtp
+
+  endfunction
+  Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+
+  " " Utils
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'rstacruz/vim-closer'
   Plug 'tpope/vim-surround' " ys,ds,cs,ts
   Plug 'tpope/vim-commentary' " gc
   Plug 'tpope/vim-repeat'
@@ -55,7 +65,6 @@ call plug#begin(stdpath('data') . '/plugged')
 
   Plug 'michaeljsmith/vim-indent-object' " ii, ai, iI, aI
   Plug 'junegunn/vim-peekaboo'
-  Plug 'jiangmiao/auto-pairs'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'phaazon/hop.nvim'
   Plug 'sheerun/vim-polyglot'
@@ -86,6 +95,7 @@ if vim_plug_installed
   lua require("plugins/hop")
   lua require("plugins/indent_blankline")
   call RequireVim("plugins/surround")
+  call RequireVim("plugins/wilder")
 
   if !is_windows
     lua require("plugins/fzf-lua")
