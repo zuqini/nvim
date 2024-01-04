@@ -25,6 +25,10 @@ return {
       vrequire('plugins/undotree')
     end
   },
+  {
+    'RRethy/vim-illuminate',
+    event = 'VeryLazy',
+  },
   { 'kylechui/nvim-surround', event = 'VeryLazy', config = true }, -- @TODO: lazy load with keys
   { 'stevearc/vim-arduino', ft = "arduino", },
 }
