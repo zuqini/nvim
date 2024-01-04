@@ -32,4 +32,6 @@ nnoremap <leader>hs :GFiles?<CR>
 nnoremap <leader>hc :Commits<CR>
 nnoremap <leader>hx :BCommits<CR>
 
-nnoremap <leader>nh :Helptags<CR>
+nnoremap <leader>fh :Helptags<CR>
+nnoremap <leader>f; :History;<CR>
+nnoremap <leader>f/ :History/<CR>
