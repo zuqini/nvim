@@ -2,6 +2,7 @@ nnoremap <s-tab> :NERDTreeToggle<CR>
 nnoremap <c-n> :NERDTreeFind<CR>
 
 let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
 
 " Start NERDTree and put the cursor back in the other window.
 "autocmd VimEnter * NERDTree | wincmd p
