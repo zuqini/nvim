@@ -1,9 +1,3 @@
-if g:is_windows
-  " use git bash for windows win32 to show fzf preview
-  " https://stackoverflow.com/a/67863045
-  let $PATH = "C:\\Program\ Files\\Git\\usr\\bin;" . $PATH
-endif
-
 " https://github.com/junegunn/fzf.vim/issues/185
 " CTRL-W CTRL-Q to select all and build quickfix list
 let $FZF_DEFAULT_OPTS = '--bind ctrl-w:select-all'
