@@ -166,6 +166,7 @@ lspconfig.jsonls.setup {}
 
 if vim.g.is_windows then
   -- windows specific bug, see https://www.reddit.com/r/neovim/comments/114z8he/comment/j8z2w0k/?utm_source=share&utm_medium=web2x&context=3
+  -- remember to run `scoop install nmap`
   lspconfig.gdscript.setup { cmd = { "ncat", "localhost", "6005" } }
 else
   lspconfig.gdscript.setup {}
