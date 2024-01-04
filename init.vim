@@ -54,6 +54,8 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
   " Utils
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'ThePrimeagen/harpoon' " needs plenary
   Plug 'dstein64/vim-startuptime'
   Plug 'folke/which-key.nvim'
   Plug 'mbbill/undotree'
@@ -96,6 +98,7 @@ lua require("plugins/gitsigns")
 lua require("plugins/indent_blankline")
 lua require("plugins/leap")
 lua require("plugins/whichkey")
+lua require("plugins/harpoon")
 call RequireVim("plugins/undotree")
 call RequireVim("plugins/surround")
 call RequireVim("plugins/wilder")
