@@ -55,7 +55,6 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>,b', ":lua require'fzf-lua'.git_branches()<CR>", opts)
 
     vim.api.nvim_set_keymap('n', '<leader>b', ":lua require'fzf-lua'.buffers()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>t', ":lua require'fzf-lua'.buffers()<CR>", opts)
 
     vim.api.nvim_set_keymap('n', '<leader>lr', ":lua require'fzf-lua'.lsp_references()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>ld', ":lua require'fzf-lua'.lsp_definitions()<CR>", opts)
@@ -92,7 +91,6 @@ return {
       S = 'Native Grep',
       o = 'Old Files (History)',
       b = 'Buffers',
-      t = 'Buffers',
       h = {
         name = 'Fzf-Git',
         b = 'Branches',

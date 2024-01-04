@@ -25,6 +25,23 @@ nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
 vnoremap < <gv
 
+" Tabs
+nnoremap <silent><bs>1 1gt
+nnoremap <silent><bs>2 2gt
+nnoremap <silent><bs>3 3gt
+nnoremap <silent><bs>4 4gt
+nnoremap <silent><bs>5 5gt
+nnoremap <silent><bs>6 6gt
+nnoremap <silent><bs>7 7gt
+nnoremap <silent><bs>8 8gt
+nnoremap <silent><bs>9 9gt
+nnoremap <silent><bs>0 :tablast<cr>
+nnoremap <silent><leader>ts :tab split<CR>
+nnoremap <silent><leader>th :tabm -1<CR>
+nnoremap <silent><leader>tl :tabm +1<CR>
+nnoremap <silent>[t gT
+nnoremap <silent>]t gt
+
 " Buffer management
 nnoremap <silent><BS>q :bd<CR>
 nnoremap <silent><BS>Q :bd!<CR>

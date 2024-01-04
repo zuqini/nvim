@@ -23,26 +23,88 @@ for type, icon in pairs(signs) do
 end
 
 local winbar = {
-  {
-    'filetype',
-    colored = true,   -- Displays filetype icon in color if set to true
-    icon_only = true, -- Display only an icon for filetype
-    padding = { left = 1, right = 0 },
-    component_separators = separators0,
-    section_separators = separators2,
-  },
-  {
-    'filename',
-    file_status = true,
-    path = 1,
-    symbols = {
-      modified = '[+]',
-      readonly = '[-]',
-      unnamed = '[]',
+  lualine_b = {
+    {
+      'filetype',
+      colored = true, -- Displays filetype icon in color if set to true
+      icon_only = true, -- Display only an icon for filetype
+      padding = { left = 1, right = 0 },
+      component_separators = separators0,
+      section_separators = separators2,
     },
-    separator = '',
-  },
+    {
+      'filename',
+      file_status = true,
+      path = 1,
+      symbols = {
+        modified = '[+]',
+        readonly = '[-]',
+        unnamed = '[]',
+      },
+      separator = '',
+    },
+  }
 };
+
+local tabline = {
+  lualine_a = {
+    {
+      'tabs',
+      mode = 0,
+    },
+  }
+};
+
+local sections = {
+  lualine_a = {
+    {
+      'mode',
+      fmt = string.upper,
+    }
+  },
+  lualine_b = {
+    {
+      'branch',
+      icon = '',
+      separator = ':'
+    },
+    { 'diff' },
+  },
+  lualine_c = {
+    {
+      'diagnostics',
+      sources = { 'nvim_diagnostic', },
+
+      sections = { 'error', 'warn', 'info', 'hint' },
+
+      symbols = symbols,
+      colored = true, -- Displays diagnostics status in color if set to true.
+      update_in_insert = false, -- Update diagnostics in insert mode.
+      always_visible = false, -- Show diagnostics even if there are none.
+    },
+  },
+  lualine_x = {
+    {
+      'filetype',
+      separator = '·',
+    },
+    {
+      'fileformat',
+      separator = '·',
+    },
+    {
+      'encoding',
+      separator = '·',
+    },
+    {
+      'filesize',
+      separator = '·',
+    },
+  },
+  lualine_y = { 'progress' },
+  lualine_z = { 'location' },
+}
+
 require('lualine').setup {
   options = {
     theme = theme,
@@ -54,60 +116,9 @@ require('lualine').setup {
     -- Uncomment to disable icons
     -- icons_enabled = false,
   },
-  winbar = {
-    lualine_b = winbar,
-  },
-  inactive_winbar = {
-    lualine_b = winbar,
-  },
-  sections = {
-    lualine_a = {
-      {
-        'mode',
-        fmt = string.upper,
-      }
-    },
-    lualine_b = {
-      {
-        'branch',
-        icon = '',
-        separator = ':'
-      },
-      { 'diff' },
-    },
-    lualine_c = {
-      {
-        'diagnostics',
-        sources = { 'nvim_diagnostic', },
-
-        sections = { 'error', 'warn', 'info', 'hint' },
-
-        symbols = symbols,
-        colored = true,           -- Displays diagnostics status in color if set to true.
-        update_in_insert = false, -- Update diagnostics in insert mode.
-        always_visible = false,   -- Show diagnostics even if there are none.
-      },
-    },
-    lualine_x = {
-      {
-        'filetype',
-        separator = '·',
-      },
-      {
-        'fileformat',
-        separator = '·',
-      },
-      {
-        'encoding',
-        separator = '·',
-      },
-      {
-        'filesize',
-        separator = '·',
-      },
-    },
-    lualine_y = { 'progress' },
-    lualine_z = { 'location' },
-  },
+  winbar = winbar,
+  inactive_winbar = winbar,
+  tabline = tabline,
+  sections = sections,
   extensions = { 'fzf' },
 }
