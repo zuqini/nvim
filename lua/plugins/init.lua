@@ -39,7 +39,6 @@ return {
     config = true,
   },
   { "dstein64/vim-startuptime", cmd = "StartupTime", },
-  'tpope/vim-commentary', -- gc, consider replacing this with the nvim version?
   'tpope/vim-repeat',
   'michaeljsmith/vim-indent-object', -- ii, ai, iI, aI
 }
