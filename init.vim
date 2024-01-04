@@ -80,6 +80,7 @@ if vim_plug_installed
   exec "source " . vim_configs_path . "/plugins/surround.vim"
 
   if !is_windows
+    lua require("plugins/fzf-lua")
     exec "source " . vim_configs_path . "/plugins/fzf-lua.vim"
   else
     exec "source " . vim_configs_path . "/plugins/fzf.vim"
