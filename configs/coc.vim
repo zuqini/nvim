@@ -1,6 +1,6 @@
 " Taken directly from https://github.com/neoclide/coc.nvim#example-vim-configuration
 
-let g:coc_global_extensions = ['coc-marketplace', 'coc-json', 'coc-css', 'coc-html', 'coc-tsserver', 'coc-omnisharp', 'coc-flutter']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-python', 'coc-json', 'coc-css', 'coc-html', 'coc-tsserver', 'coc-omnisharp', 'coc-flutter']
 " TextEdit might fail if hidden is not set.
 set hidden
 
