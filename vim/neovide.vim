@@ -1,6 +1,6 @@
 if exists("g:neovide")
   set guifont=FiraCode\ Nerd\ Font\ Mono:h18
-  let g:neovide_transparency=0.90
+  let g:neovide_transparency=0.95
   let g:neovide_scroll_animation_length=0.3
   let g:neovide_cursor_animation_length=0.15
   let g:neovide_cursor_trail_size=0.1

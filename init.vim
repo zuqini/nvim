@@ -26,9 +26,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'junegunn/fzf.vim'
   endif
 
-  Plug 'stevearc/vim-arduino'
-
-  " LSP
+  " Languages stuff
   Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
@@ -37,6 +35,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'saadparwaiz1/cmp_luasnip' " Snippets source for nvim-cmp
   Plug 'L3MON4D3/LuaSnip' " Snippets plugin
   " Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+  Plug 'stevearc/vim-arduino'
 
   " Treesitter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -84,7 +83,6 @@ lua require("themes/theme")
 lua require("plugins/nvim-tree")
 
 lua require("plugins/treesitter")
-lua require("plugins/leap")
 
 lua require("plugins/lsp/mason")
 lua require("plugins/lsp/main")
@@ -94,6 +92,7 @@ lua require("plugins/lsp/my")
 lua require("plugins/lualine")
 lua require("plugins/gitsigns")
 lua require("plugins/indent_blankline")
+lua require("plugins/leap")
 call RequireVim("plugins/surround")
 call RequireVim("plugins/wilder")
 call RequireVim("plugins/closetag")
