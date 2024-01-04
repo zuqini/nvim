@@ -68,15 +68,15 @@ if vim_plug_installed
 
   exec "source " . vim_configs_path . "/themes/" . theme . ".vim"
   exec "source " . vim_configs_path . "/main.vim"
-  exec "source " . vim_configs_path . "/configs/fzf.vim"
-  exec "source " . vim_configs_path . "/configs/surround.vim"
+  exec "source " . vim_configs_path . "/plugins/fzf.vim"
+  exec "source " . vim_configs_path . "/plugins/surround.vim"
 
-  exec "source " . vim_configs_path . "/configs/nvim-tree.vim"
-  lua require("configs/nvim-tree")
+  exec "source " . vim_configs_path . "/plugins/nvim-tree.vim"
+  lua require("plugins/nvim-tree")
 
-  lua require("configs/indent_blankline")
-  lua require("configs/lualine")
-  lua require("configs/hop")
-  lua require("configs/lsp")
-  lua require("configs/treesitter")
+  lua require("plugins/indent_blankline")
+  lua require("plugins/lualine")
+  lua require("plugins/hop")
+  lua require("plugins/lsp")
+  lua require("plugins/treesitter")
 endif
