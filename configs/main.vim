@@ -96,7 +96,11 @@ let g:vim_markdown_conceal_code_blocks = 0
 "set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
 set list
 set showbreak=↪\
-set listchars=tab:→\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
+if &encoding == "utf-8"
+  set listchars=tab:│\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
+else
+  set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
+endif
 
 " small plugins configs
 nnoremap <silent> <leader>Q :Bdelete! menu<CR>
