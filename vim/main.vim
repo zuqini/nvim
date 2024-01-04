@@ -26,9 +26,6 @@ set guicursor=n-v-c-i-ci-ve:block,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-" disable automatic comment insertion
-au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 " disable F1 as it's easy to accidentally hit on the touchbar
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
@@ -51,8 +48,6 @@ nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 nnoremap <silent> <ESC><ESC> :nohlsearch \| :lua close_all_float()<CR>
-
-au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=250, on_visual=true}
 
 nnoremap <silent><F5> :mod<CR>
 vnoremap > >gv
@@ -147,9 +142,6 @@ set foldmethod=indent
 set foldlevelstart=99
 set foldnestmax=10
 
-" using // instead of /* */ for vim-commentary
-autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
-
 " whitespace characters
 " other listchars:
 "set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
@@ -162,3 +154,14 @@ if &encoding == "utf-8"
 else
   set listchars=tab:\|\ ,nbsp:·,trail:·,extends:⟩,precedes:⟨
 endif
+
+" Augroups
+augroup mainMiscCommands
+  au!
+  " disable automatic comment insertion
+  au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+  " highlight yank
+  au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=250, on_visual=true}
+  " using // instead of /* */ for vim-commentary
+  au FileType c,cpp,cs,java setlocal commentstring=//\ %s
+augroup END
