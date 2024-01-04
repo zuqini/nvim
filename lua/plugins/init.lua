@@ -5,7 +5,7 @@ return {
   -- see: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
   {
     'junegunn/fzf.vim',
-    enabled = vim.g.is_windows,
+    enabled = vim.g.search_with_fzf_vim,
     event = 'VeryLazy', -- @TODO: replace with keys
     dependencies = { 'junegunn/fzf' },
     config = function()

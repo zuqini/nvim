@@ -1,6 +1,6 @@
 return {
   'ibhagwan/fzf-lua',
-  enabled = not vim.g.is_windows,
+  enabled = vim.g.search_with_fzf_lua,
   event = 'VeryLazy', -- @TODO: replace with keys
   dependencies = {
     'nvim-tree/nvim-web-devicons',
