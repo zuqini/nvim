@@ -21,13 +21,15 @@ function M.selectThemeByIndex(index)
 
   -- experimental code for hot reloading
   -- hacky and buggy: unload theme packages for hot-reloading
-  for _, theme_name in pairs(vim.g.themes) do
-    for package_name, _ in pairs(package.loaded) do
-      if package_name:match(theme_name) or
-          package_name:match('indent_blankline') or
-          package_name:match('lualine') then
+  for package_name, _ in pairs(package.loaded) do
+    for _, theme_name in pairs(vim.g.themes) do
+      if package_name:match(theme_name) then
         package.loaded[package_name] = nil
       end
+    end
+    if package_name:match('indent_blankline') or
+        package_name:match('lualine') then
+      package.loaded[package_name] = nil
     end
   end
 
