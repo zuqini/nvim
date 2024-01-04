@@ -1,3 +1,4 @@
 {
-    "omnisharp.version": "v1.37.6" // latest has autocomplete issues, see https://github.com/coc-extensions/coc-omnisharp/issues/54
+    "omnisharp.version": "v1.37.6", // latest has autocomplete issues, see https://github.com/coc-extensions/coc-omnisharp/issues/54
+    /* "omnisharp.trace.server": "verbose", */
 }

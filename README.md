@@ -22,8 +22,13 @@ My custom NeoVim configuration and plugins.
 - `Rg` requires[ ripgrep (rg)](https://github.com/BurntSushi/ripgrep)
 - `Tags` and `Helptags` require Perl
 ### [coc.nvim](https://github.com/neoclide/coc.nvim)
-#### Setup Unity Language Server on Unix/Linux
-- Add the following override to your `.zshrc`/`.bashrc` ([source](https://www.reddit.com/r/vim/comments/i4tuay/anyone_has_managed_to_get_c_and_unity_completion/g0m7wlh/?utm_source=reddit&utm_medium=web2x&context=3)):
+#### Unity Language Server on Unix/Linux
+- Install [Mono](https://www.mono-project.com/download/stable/#download-mac)
+- In Unity, `Unity > Preferences > External Tools`, check off the options below and regenerate project files:
+  - Embedded Packages
+  - Registry Packages
+  - Local Packages
+- You may need to add the following override to your `.zshrc`/`.bashrc` to point to the latest Mono version:
 ```
-export FrameworkPathOverride=~/.config/coc/extensions/coc-omnisharp-data/server/omnisharp
+export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
 ```
