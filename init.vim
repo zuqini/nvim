@@ -8,11 +8,8 @@ endif
 
 " SETUP =======================================================================
 let is_windows = has("win64") || has("win32") || has("win16")
-" set std_path for vim8 explicitly
-let g:std_path_data = has('nvim') ? stdpath('data') : '~/.local/share/nvim'
-let g:std_path_config = has('nvim') ? stdpath('config') : '~/.config/nvim'
 
-let vim_plug_installed = !empty(glob(g:std_path_data . '/site/autoload/plug.vim'))
+let vim_plug_installed = !empty(glob(stdpath('data') . '/site/autoload/plug.vim'))
 
 if !is_windows && !vim_plug_installed
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
@@ -21,7 +18,7 @@ if !is_windows && !vim_plug_installed
 endif
 " END =======================================================================
 
-call plug#begin(g:std_path_data . '/plugged')
+call plug#begin(stdpath('data') . '/plugged')
   " Themes
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'dracula/vim', { 'as': 'dracula' }
@@ -62,17 +59,17 @@ call plug#begin(g:std_path_data . '/plugged')
 call plug#end()
 
 if vim_plug_installed
-  exec "source " . g:std_path_config . "/configs/themes/" . theme . ".vim"
-  exec "source " . g:std_path_config . "/configs/main.vim"
+  exec "source " . stdpath('config') . "/configs/themes/" . theme . ".vim"
+  exec "source " . stdpath('config') . "/configs/main.vim"
 
-  exec "source " . g:std_path_config . "/configs/goyolime.vim"
-  exec "source " . g:std_path_config . "/configs/coc.vim"
-  exec "source " . g:std_path_config . "/configs/fzf.vim"
-  exec "source " . g:std_path_config . "/configs/nerdtree.vim"
-  exec "source " . g:std_path_config . "/configs/easymotion.vim"
-  exec "source " . g:std_path_config . "/configs/surround.vim"
-  exec "source " . g:std_path_config . "/configs/nutoggle.vim"
+  exec "source " . stdpath('config') . "/configs/goyolime.vim"
+  exec "source " . stdpath('config') . "/configs/coc.vim"
+  exec "source " . stdpath('config') . "/configs/fzf.vim"
+  exec "source " . stdpath('config') . "/configs/nerdtree.vim"
+  exec "source " . stdpath('config') . "/configs/easymotion.vim"
+  exec "source " . stdpath('config') . "/configs/surround.vim"
+  exec "source " . stdpath('config') . "/configs/nutoggle.vim"
 
   " Disabled
-  " exec "source " . g:std_path_config . "/configs/hardmode.vim"
+  " exec "source " . stdpath('config') . "/configs/hardmode.vim"
 endif

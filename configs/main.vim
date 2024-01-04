@@ -1,7 +1,8 @@
 let mapleader = "\<space>"
 
-" Terminal emulator
-tnoremap <Esc> <C-\><C-n>
+" Esc in Terminal emulator
+" See https://github.com/junegunn/fzf.vim/issues/544 for FZF
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 set mouse=a
 set hidden
