@@ -67,7 +67,7 @@ local on_attach = function(client, bufnr)
       n = 'Rename',
       c = 'Code Action',
       f = 'Format',
-      j = 'jq',
+      q = 'jq',
     }
   }, { prefix='<leader>' })
 end
