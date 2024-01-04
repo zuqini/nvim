@@ -1,9 +1,11 @@
+call plug#begin(stdpath('data') . '/plugged')
+Plug 'dracula/vim', { 'as': 'dracula' }
+call plug#end()
+
 " enable true color
 set termguicolors
 
 " theme
-packadd! dracula
-syntax enable
 colorscheme dracula
 
 set number
