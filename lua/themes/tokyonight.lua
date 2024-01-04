@@ -7,3 +7,5 @@ vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 
 -- Load the colorscheme
 vim.cmd('colorscheme tokyonight')
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#272833" })
+vim.api.nvim_set_hl(0, "Cursor", { bg = "#7E9CD8" })
