@@ -34,3 +34,8 @@ augroup CustomFloatColors
   au ColorScheme * highlight! link NormalFloat Normal
   au ColorScheme * highlight! link FloatBorder Normal
 augroup END
+
+augroup TransparentBackground
+  " transparent bg
+  autocmd vimenter * if g:transparent_background | hi Normal guibg=NONE ctermbg=NONE
+augroup END

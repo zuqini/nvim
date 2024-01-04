@@ -72,6 +72,9 @@ function M.select_theme_by_index(index)
   require('plugins.indent-blankline.config')
   require('plugins.tabby.config')
   require('plugins.lualine.config')
+  if vim.g.transparent_background then
+    vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
+  end
 end
 
 function M.select_theme_by_time()
