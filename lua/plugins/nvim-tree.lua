@@ -1,8 +1,9 @@
 return {
   'nvim-tree/nvim-tree.lua', -- https://github.com/kyazdani42/nvim-tree.lua/issues/877,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  enabled = false,
   keys = {
-    "<S-Tab>",
+    "<Tab>",
     "<Leader><Tab>",
   },
   config = function()
@@ -29,7 +30,7 @@ return {
     })
 
     local opts = { noremap=true, silent=true }
-    vim.api.nvim_set_keymap('n', '<s-tab>', ':NvimTreeToggle<CR>', opts)
+    vim.api.nvim_set_keymap('n', '<tab>', ':NvimTreeToggle<CR>', opts)
     vim.api.nvim_set_keymap('n', '<leader><tab>', ':NvimTreeFindFileToggle!<CR>', opts)
   end,
 }
