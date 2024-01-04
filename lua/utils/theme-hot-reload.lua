@@ -36,15 +36,15 @@ function M.get_theme_index_by_time()
   elseif hour >= 11 and hour < 17 then
     -- day
     index = 2
-  elseif hour >= 17 or hour < 19 then
+  elseif hour >= 17 and hour < 19 then
     -- dusk
     index = 3
   elseif hour >= 19 and hour < 22 then
     -- early night
     index = 4
-  elseif hour >= 22 and hour < 1 then
+  elseif hour >= 22 or hour < 1 then
     -- late night
-    index = 4
+    index = 5
   elseif hour >= 1 and hour < 6 then
     -- Deep night
     index = 6
