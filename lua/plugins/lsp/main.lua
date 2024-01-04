@@ -27,7 +27,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', bufopts)
     vim.keymap.set('n', '<leader>rd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
     vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
-    vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
+    vim.keymap.set('n', '<leader>rc', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
     vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>', bufopts)
 
     vim.keymap.set('n', '<leader>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)

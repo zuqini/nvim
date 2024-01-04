@@ -95,15 +95,23 @@ nnoremap <silent><leader>y "+y
 nnoremap <silent><leader>Y "+y$
 vnoremap <silent><leader>y "+y
 vnoremap <silent><leader>Y "+Y
-nnoremap <silent><leader>d "+d
-nnoremap <silent><leader>D "+D
-vnoremap <silent><leader>d "+d
-vnoremap <silent><leader>D "+D
+nnoremap <silent><leader>c "+y
+nnoremap <silent><leader>C "+y$
+vnoremap <silent><leader>c "+y
+vnoremap <silent><leader>C "+Y
+nnoremap <silent><leader>x "+d
+nnoremap <silent><leader>X "+D
+vnoremap <silent><leader>x "+d
+vnoremap <silent><leader>X "+D
 nnoremap <silent><leader>v "+p
 nnoremap <silent><leader>V "+P
 vnoremap <silent><leader>v "+p
 vnoremap <silent><leader>V "+P
 " Yank Pasting only
+nnoremap <silent><leader>d "0d
+nnoremap <silent><leader>D "0D
+vnoremap <silent><leader>d "0d
+vnoremap <silent><leader>D "0D
 nnoremap <silent><leader>p "0p
 nnoremap <silent><leader>P "0P
 vnoremap <silent><leader>p "0p
