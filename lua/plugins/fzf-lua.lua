@@ -10,7 +10,6 @@ return {
     },
   },
   config = function()
-    local actions = require "fzf-lua.actions"
     require 'fzf-lua'.setup {
       winopts = {
         height = 0.90,
@@ -41,7 +40,7 @@ return {
       },
       keymap = {
         fzf = {
-          ["ctrl-q"] = "select-all+accept",
+          ["ctrl-q"] = "select-all+accept", -- https://github.com/ibhagwan/fzf-lua/issues/324
         }
       }
     }

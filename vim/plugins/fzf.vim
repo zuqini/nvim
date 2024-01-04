@@ -4,6 +4,22 @@ if g:is_windows
   let $PATH = "C:\\Program\ Files\\Git\\usr\\bin;" . $PATH
 endif
 
+" https://github.com/junegunn/fzf.vim/issues/185
+" CTRL-W CTRL-Q to select all and build quickfix list
+let $FZF_DEFAULT_OPTS = '--bind ctrl-w:select-all'
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit'
+  \ }
+
 " junegunn/fzf.vim{{{
 let g:fzf_colors = {
       \ 'fg': ['fg', 'CursorLine'],
