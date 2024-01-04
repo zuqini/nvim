@@ -1,6 +1,3 @@
-let themes = ["spaceduck-custom", "gruvbox"]
-let theme = themes[1]
-
 let is_windows = has("win64") || has("win32") || has("win16")
 let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
 let vim_plug_installed = !empty(glob(autoload_plug_path))
@@ -21,6 +18,8 @@ call plug#begin(stdpath('data') . '/plugged')
   " Themes
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
   Plug 'morhetz/gruvbox'
+  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+  Plug 'rebelot/kanagawa.nvim'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua' " deprecation notice: https://github.com/kyazdani42/nvim-tree.lua/issues/877
@@ -51,7 +50,7 @@ call plug#begin(stdpath('data') . '/plugged')
   function! UpdateRemotePlugins(...)
     " Needed to refresh runtime files
     let &rtp=&rtp
-
+    UpdateRemotePlugins
   endfunction
   Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
@@ -83,8 +82,8 @@ if vim_plug_installed
   " 3. nvim-tree.vim needs to execute before nvim-tree
 
   lua require("helpers")
-  call RequireVim("themes/" . theme)
   call RequireVim("main")
+  lua require("themes/theme")
 
   call RequireVim("plugins/nvim-tree")
   lua require("plugins/nvim-tree")
