@@ -17,7 +17,7 @@ return {
           height = 0.95,
           width = 0.85,
           preview_height = 0.65,
-          preview_cutoff = 30,
+          preview_cutoff = 25,
           mirror = true,
         },
       },
