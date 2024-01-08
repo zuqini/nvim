@@ -20,8 +20,5 @@ return {
   },
   { 'kylechui/nvim-surround', event = 'VeryLazy', config = true }, -- @TODO: lazy load with keys
   { 'stevearc/vim-arduino',   ft = "arduino", },
-  {
-    'habamax/vim-godot',
-    event = "VeryLazy",
-  },
+  { 'habamax/vim-godot',      ft = "gdscript" },
 }
