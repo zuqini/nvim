@@ -19,5 +19,9 @@ return {
     end
   },
   { 'kylechui/nvim-surround', event = 'VeryLazy', config = true }, -- @TODO: lazy load with keys
-  { 'stevearc/vim-arduino', ft = "arduino", },
+  { 'stevearc/vim-arduino',   ft = "arduino", },
+  {
+    'habamax/vim-godot',
+    event = "VeryLazy",
+  },
 }

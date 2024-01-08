@@ -35,6 +35,7 @@ set undofile
 
 " Indentation without hard tabs
 " https://vim.fandom.com/wiki/Indenting_source_code
+filetype plugin indent on
 set autoindent
 set expandtab
 set shiftwidth=2
