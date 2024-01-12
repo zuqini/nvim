@@ -11,7 +11,22 @@ return {
   },
   config = function()
     require 'fzf-lua'.setup {
-      file_ignore_patterns = { 'node_modules/.*', '.eslintcache', 'tags', '.*%.jpg', '.*%.png', '.*%.gif', '.*%.jpeg' },
+      file_ignore_patterns = {
+        'node_modules/.*',
+        '.godot/.*',
+        '.eslintcache',
+        'tags',
+        -- images
+        '.*%.svg.*',
+        '.*%.jpg.*',
+        '.*%.png.*',
+        '.*%.gif.*',
+        '.*%.jpeg.*',
+        -- audio
+        '.*%.mp3.*',
+        '.*%.ogg.*',
+        '.*%.wav.*',
+      },
       winopts = {
         height = 0.95,
         width = 0.85,
