@@ -16,6 +16,7 @@ return {
         '.godot/.*',
         '.eslintcache',
         'tags',
+        '.*%.tscn',
         -- images
         '.*%.svg.*',
         '.*%.jpg.*',

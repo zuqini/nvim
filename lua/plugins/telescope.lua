@@ -1,6 +1,7 @@
 return {
   enabled = vim.g.search_with_telescope,
-  'nvim-telescope/telescope.nvim', tag = '0.1.4',
+  'nvim-telescope/telescope.nvim',
+  tag = '0.1.4',
   -- or                              , branch = '0.1.x',
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
@@ -10,7 +11,7 @@ return {
     }
   },
   config = function()
-    require('telescope').setup{
+    require('telescope').setup {
       defaults = {
         layout_strategy = 'vertical',
         layout_config = {
@@ -19,6 +20,9 @@ return {
           preview_height = 0.65,
           preview_cutoff = 25,
           mirror = true,
+        },
+        file_ignore_patterns = {
+          "%.tscn",
         },
       },
       pickers = {
@@ -31,7 +35,9 @@ return {
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', 'S', builtin.find_files, {})
     vim.keymap.set('n', '<leader>S', builtin.live_grep, {})
-    vim.keymap.set('n', '<leader>s', function() builtin.grep_string { shorten_path = true, word_match = "-w", only_sort_text = true, search = '' } end, {})
+    vim.keymap.set('n', '<leader>s',
+      function() builtin.grep_string { shorten_path = true, word_match = "-w", only_sort_text = true, search = '' } end,
+      {})
 
     vim.keymap.set('n', '<leader>o', builtin.oldfiles, {})
 
