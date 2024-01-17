@@ -1,9 +1,15 @@
 -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+-- vim.lsp.set_log_level("debug")
+
 require("neodev").setup({})
 local lspconfig = require('lspconfig')
 local wk = require('which-key') -- For documentation
 
--- vim.lsp.set_log_level("debug")
+require("nvim-navic").setup({
+  lsp = {
+    auto_attach = true,
+  },
+})
 
 local keymap_opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', keymap_opts)

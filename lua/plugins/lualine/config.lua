@@ -20,15 +20,27 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local winbar =
-{
+local navic = require("nvim-navic")
+local winbar_navic = {
+  {
+    function()
+      return navic.get_location()
+    end,
+    cond = function()
+      return navic.is_available()
+    end,
+    section_separators = angle_up_seps,
+  },
   {
     'filetype',
-    colored = true, -- Displays filetype icon in color if set to true
+    colored = true,   -- Displays filetype icon in color if set to true
     icon_only = true, -- Display only an icon for filetype
-    padding = { left = 1, right = 0 },
+    padding = { left = 1, right = 1 },
     component_separators = no_seps,
     section_separators = angle_up_seps,
+    cond = function()
+      return not navic.is_available()
+    end,
   },
   {
     'filename',
@@ -40,16 +52,38 @@ local winbar =
       unnamed = '[]',
     },
     separator = '',
+    cond = function()
+      return not navic.is_available()
+    end,
   },
 };
 
-local tabline = {
-  lualine_a = {
-    {
-      'tabs',
-      mode = 0,
+local winbar_file_info = {
+  {
+    'filetype',
+    colored = true,   -- Displays filetype icon in color if set to true
+    icon_only = true, -- Display only an icon for filetype
+    padding = { left = 1, right = 1 },
+    component_separators = no_seps,
+    section_separators = angle_up_seps,
+    cond = function()
+      return navic.is_available()
+    end,
+  },
+  {
+    'filename',
+    file_status = true,
+    path = 0,
+    symbols = {
+      modified = '[+]',
+      readonly = '[-]',
+      unnamed = '[]',
     },
-  }
+    separator = '',
+    cond = function()
+      return navic.is_available()
+    end,
+  },
 };
 
 local sections = {
@@ -75,9 +109,9 @@ local sections = {
       sections = { 'error', 'warn', 'info', 'hint' },
 
       symbols = symbols,
-      colored = true, -- Displays diagnostics status in color if set to true.
+      colored = true,           -- Displays diagnostics status in color if set to true.
       update_in_insert = false, -- Update diagnostics in insert mode.
-      always_visible = false, -- Show diagnostics even if there are none.
+      always_visible = false,   -- Show diagnostics even if there are none.
     },
   },
   lualine_x = {
@@ -118,9 +152,39 @@ require('lualine').setup {
     -- Uncomment to disable icons
     -- icons_enabled = false,
   },
-  winbar = { lualine_b = winbar },
-  inactive_winbar = { lualine_c = winbar },
-  -- tabline = tabline,
+  tabline = {
+    lualine_a = {
+      {
+        'filetype',
+        colored = false,
+        icon_only = true,
+        padding = { left = 1, right = 0 },
+        component_separators = no_seps,
+        section_separators = angle_down_seps,
+      },
+      {
+        'filename',
+        file_status = true,
+        path = 1,
+        symbols = {
+          modified = '[+]',
+          readonly = '[-]',
+          unnamed = '[]',
+        },
+        separator = '',
+      },
+    },
+    lualine_z = {
+      {
+        'tabs',
+        mode = 0,
+        show_modified_status = false,
+      },
+    }
+  },
+  winbar = { lualine_b = winbar_navic, lualine_y = winbar_file_info },
+  inactive_winbar = { lualine_c = winbar_navic, lualine_x = winbar_file_info },
   sections = sections,
   extensions = { 'fzf' },
 }
+vim.cmd("set showtabline=1") --https://github.com/nvim-lualine/lualine.nvim/issues/395

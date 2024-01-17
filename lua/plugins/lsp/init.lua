@@ -13,6 +13,7 @@ return {
         },
       },
       'folke/neodev.nvim',
+      'SmiteshP/nvim-navic',
     },
     config = function ()
       require("plugins/lsp/mason")

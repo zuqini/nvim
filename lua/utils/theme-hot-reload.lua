@@ -1,11 +1,10 @@
 -- '  ﳟ          ﲵ    ﴫ  '
 local themes = {
-  { name = 'gruvbox', lualine = 'auto', tabby_header = ' 火 ' },
-  { name = 'terafox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 木 ' },
-  { name = 'duskfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 水 ' },
-  { name = 'nightfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 水 ' },
-  { name = 'tokyonight', lualine = 'auto', tabby_header = ' 水 ' },
-  { name = 'carbonfox', alt_name = 'nightfox', lualine = 'auto', tabby_header = ' 土 ' },
+  { name = 'gruvbox',   lualine = 'auto' },
+  { name = 'terafox',   alt_name = 'nightfox', lualine = 'auto' },
+  { name = 'duskfox',   alt_name = 'nightfox', lualine = 'auto' },
+  { name = 'nightfox',  alt_name = 'nightfox', lualine = 'auto' },
+  { name = 'carbonfox', alt_name = 'nightfox', lualine = 'auto' },
 }
 local theme_index = 1
 local theme_timer_active = 0
@@ -23,10 +22,6 @@ function M.get_current_lualine_theme()
   return themes[theme_index].lualine
 end
 
-function M.get_current_tabby_header()
-  return themes[theme_index].tabby_header
-end
-
 function M.get_theme_index_by_time()
   local hour = tonumber(os.date("%H"))
   local index = 2
@@ -36,18 +31,15 @@ function M.get_theme_index_by_time()
   elseif hour >= 11 and hour < 17 then
     -- day
     index = 2
-  elseif hour >= 17 and hour < 19 then
+  elseif hour >= 17 and hour < 21 then
     -- dusk
     index = 3
-  elseif hour >= 19 and hour < 22 then
+  elseif hour >= 21 and hour < 1 then
     -- early night
     index = 4
-  elseif hour >= 22 or hour < 1 then
-    -- late night
-    index = 5
   elseif hour >= 1 and hour < 6 then
     -- Deep night
-    index = 6
+    index = 5
   end
   return index
 end
@@ -68,7 +60,6 @@ function M.select_theme_by_index(index)
     if package_name:match('indent_blankline') or
         package_name:match('indent%-blankline') or
         package_name:match('ibl') or
-        package_name:match('tabby') or
         package_name:match('lualine') then
       package.loaded[package_name] = nil
     end
@@ -77,7 +68,6 @@ function M.select_theme_by_index(index)
   theme_index = index
   require('plugins.themes.' .. M.get_current_theme())
   require('plugins.indent-blankline.config')
-  require('plugins.tabby.config')
   require('plugins.lualine.config')
   if vim.g.transparent_background then
     vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
