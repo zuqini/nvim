@@ -5,12 +5,6 @@ require("neodev").setup({})
 local lspconfig = require('lspconfig')
 local wk = require('which-key') -- For documentation
 
-require("nvim-navic").setup({
-  lsp = {
-    auto_attach = true,
-  },
-})
-
 local keymap_opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', keymap_opts)
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', keymap_opts)

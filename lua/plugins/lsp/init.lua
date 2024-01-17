@@ -16,10 +16,10 @@ return {
       'SmiteshP/nvim-navic',
     },
     config = function ()
-      require("plugins/lsp/mason")
-      require("plugins/lsp/lsp")
-      require("plugins/lsp/utils")
-      pcall(function() require("plugins/lsp/my") end) -- this is for env specific lsp configs
+      require("plugins.lsp.mason")
+      require("plugins.lsp.lsp")
+      require("plugins.lsp.misc")
+      pcall(function() require("plugins.lsp.my") end) -- this is for env specific lsp configs
     end
   },
   {

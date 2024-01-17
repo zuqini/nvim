@@ -61,11 +61,11 @@ local winbar_navic = {
 local winbar_file_info = {
   {
     'filetype',
-    colored = true,   -- Displays filetype icon in color if set to true
-    icon_only = true, -- Display only an icon for filetype
+    colored = false, -- color icon issue: https://github.com/nvim-lualine/lualine.nvim/pull/1172
+    icon_only = true,
     padding = { left = 1, right = 1 },
     component_separators = no_seps,
-    section_separators = angle_up_seps,
+    section_separators = angle_down_seps,
   },
   {
     'filename',
@@ -103,14 +103,15 @@ local sections = {
       sections = { 'error', 'warn', 'info', 'hint' },
 
       symbols = symbols,
-      colored = true,           -- Displays diagnostics status in color if set to true.
+      colored = true, -- Displays diagnostics status in color if set to true.
       update_in_insert = false, -- Update diagnostics in insert mode.
-      always_visible = false,   -- Show diagnostics even if there are none.
+      always_visible = false, -- Show diagnostics even if there are none.
     },
   },
   lualine_x = {
     {
       'filetype',
+      padding = { left = 1, right = 1 },
       separator = '·',
     },
     {
