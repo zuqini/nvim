@@ -153,27 +153,6 @@ require('lualine').setup {
     -- icons_enabled = false,
   },
   tabline = {
-    lualine_a = {
-      {
-        'filetype',
-        colored = false,
-        icon_only = true,
-        padding = { left = 1, right = 0 },
-        component_separators = no_seps,
-        section_separators = angle_down_seps,
-      },
-      {
-        'filename',
-        file_status = true,
-        path = 1,
-        symbols = {
-          modified = '[+]',
-          readonly = '[-]',
-          unnamed = '[]',
-        },
-        separator = '',
-      },
-    },
     lualine_z = {
       {
         'tabs',
