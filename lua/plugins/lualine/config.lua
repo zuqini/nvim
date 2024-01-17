@@ -31,31 +31,31 @@ local winbar_navic = {
     end,
     section_separators = angle_up_seps,
   },
-  {
-    'filetype',
-    colored = true,   -- Displays filetype icon in color if set to true
-    icon_only = true, -- Display only an icon for filetype
-    padding = { left = 1, right = 1 },
-    component_separators = no_seps,
-    section_separators = angle_up_seps,
-    cond = function()
-      return not navic.is_available()
-    end,
-  },
-  {
-    'filename',
-    file_status = true,
-    path = 1,
-    symbols = {
-      modified = '[+]',
-      readonly = '[-]',
-      unnamed = '[]',
-    },
-    separator = '',
-    cond = function()
-      return not navic.is_available()
-    end,
-  },
+  -- {
+  --   'filetype',
+  --   colored = true,   -- Displays filetype icon in color if set to true
+  --   icon_only = true, -- Display only an icon for filetype
+  --   padding = { left = 1, right = 1 },
+  --   component_separators = no_seps,
+  --   section_separators = angle_up_seps,
+  --   cond = function()
+  --     return not navic.is_available()
+  --   end,
+  -- },
+  -- {
+  --   'filename',
+  --   file_status = true,
+  --   path = 1,
+  --   symbols = {
+  --     modified = '[+]',
+  --     readonly = '[-]',
+  --     unnamed = '[]',
+  --   },
+  --   separator = '',
+  --   cond = function()
+  --     return not navic.is_available()
+  --   end,
+  -- },
 };
 
 local winbar_file_info = {
@@ -66,9 +66,6 @@ local winbar_file_info = {
     padding = { left = 1, right = 1 },
     component_separators = no_seps,
     section_separators = angle_up_seps,
-    cond = function()
-      return navic.is_available()
-    end,
   },
   {
     'filename',
@@ -80,9 +77,6 @@ local winbar_file_info = {
       unnamed = '[]',
     },
     separator = '',
-    cond = function()
-      return navic.is_available()
-    end,
   },
 };
 
@@ -153,6 +147,27 @@ require('lualine').setup {
     -- icons_enabled = false,
   },
   tabline = {
+    lualine_a = {
+      {
+        'filetype',
+        colored = false,
+        icon_only = true,
+        padding = { left = 1, right = 0 },
+        component_separators = no_seps,
+        section_separators = angle_down_seps,
+      },
+      {
+        'filename',
+        file_status = true,
+        path = 1,
+        symbols = {
+          modified = '[+]',
+          readonly = '[-]',
+          unnamed = '[]',
+        },
+        separator = '',
+      },
+    },
     lualine_z = {
       {
         'tabs',
@@ -161,9 +176,15 @@ require('lualine').setup {
       },
     }
   },
-  winbar = { lualine_b = winbar_navic, lualine_y = winbar_file_info },
-  inactive_winbar = { lualine_c = winbar_navic, lualine_x = winbar_file_info },
+  winbar = {
+    lualine_b = winbar_navic,
+    lualine_y = winbar_file_info
+  },
+  inactive_winbar = {
+    lualine_c = winbar_navic,
+    lualine_x = winbar_file_info,
+  },
   sections = sections,
   extensions = { 'fzf' },
 }
-vim.cmd("set showtabline=1") --https://github.com/nvim-lualine/lualine.nvim/issues/395
+-- vim.cmd("set showtabline=1") --https://github.com/nvim-lualine/lualine.nvim/issues/395
