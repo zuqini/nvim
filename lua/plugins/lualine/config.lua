@@ -31,31 +31,6 @@ local winbar_navic = {
     end,
     section_separators = angle_up_seps,
   },
-  -- {
-  --   'filetype',
-  --   colored = true,   -- Displays filetype icon in color if set to true
-  --   icon_only = true, -- Display only an icon for filetype
-  --   padding = { left = 1, right = 1 },
-  --   component_separators = no_seps,
-  --   section_separators = angle_up_seps,
-  --   cond = function()
-  --     return not navic.is_available()
-  --   end,
-  -- },
-  -- {
-  --   'filename',
-  --   file_status = true,
-  --   path = 1,
-  --   symbols = {
-  --     modified = '[+]',
-  --     readonly = '[-]',
-  --     unnamed = '[]',
-  --   },
-  --   separator = '',
-  --   cond = function()
-  --     return not navic.is_available()
-  --   end,
-  -- },
 };
 
 local winbar_file_info = {
@@ -65,7 +40,7 @@ local winbar_file_info = {
     icon_only = true,
     padding = { left = 1, right = 1 },
     component_separators = no_seps,
-    section_separators = angle_down_seps,
+    section_separators = angle_up_seps,
   },
   {
     'filename',
@@ -174,6 +149,7 @@ require('lualine').setup {
         'tabs',
         mode = 0,
         show_modified_status = false,
+        section_separators = angle_down_seps,
       },
     }
   },
