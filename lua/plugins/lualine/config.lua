@@ -152,7 +152,7 @@ require('lualine').setup {
         'filetype',
         colored = false,
         icon_only = true,
-        padding = { left = 1, right = 0 },
+        padding = { left = 1, right = 1 },
         component_separators = no_seps,
         section_separators = angle_down_seps,
       },
