@@ -66,7 +66,7 @@ return {
     vim.api.nvim_set_keymap('n', 'S', ":lua require'fzf-lua'.files()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>s', ":lua require'fzf-lua'.grep({ search = ''})<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>S', ":lua require'fzf-lua'.live_grep_native()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>ns', ":lua require'fzf-lua'.files({ cmd = 'fd --no-ignore --hidden' })<CR>",
+    vim.api.nvim_set_keymap('n', '<leader>fs', ":lua require'fzf-lua'.files({ cmd = 'fd --no-ignore --hidden' })<CR>",
       opts)
 
     vim.api.nvim_set_keymap('n', '<leader>o', ":lua require'fzf-lua'.oldfiles()<CR>", opts)
