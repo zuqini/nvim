@@ -24,26 +24,24 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Tabs
-nnoremap <silent><bs>1 1gt
-nnoremap <silent><bs>2 2gt
-nnoremap <silent><bs>3 3gt
-nnoremap <silent><bs>4 4gt
-nnoremap <silent><bs>5 5gt
-nnoremap <silent><bs>6 6gt
-nnoremap <silent><bs>7 7gt
-nnoremap <silent><bs>8 8gt
-nnoremap <silent><bs>9 9gt
-nnoremap <silent><bs>0 :tablast<cr>
+nnoremap <silent><leader>t1 1gt
+nnoremap <silent><leader>t2 2gt
+nnoremap <silent><leader>t3 3gt
+nnoremap <silent><leader>t4 4gt
+nnoremap <silent><leader>t5 5gt
+nnoremap <silent><leader>6 6gt
+nnoremap <silent><leader>t7 7gt
+nnoremap <silent><leader>t8 8gt
+nnoremap <silent><leader>t9 9gt
+nnoremap <silent><leader>t0 :tablast<cr>
 nnoremap <silent><leader>th :tabm -1<CR>
 nnoremap <silent><leader>tl :tabm +1<CR>
 nnoremap <silent>[t gT
 nnoremap <silent>]t gt
 
 " Buffer management
-nnoremap <silent><BS>q :bd<CR>
-nnoremap <silent><BS>Q :bd!<CR>
-nnoremap <silent><BS>b :ls<cr>:bd<space>
-nnoremap <silent><BS>B :%bd!\|e#\|bd!#<CR>
+nnoremap <silent><BS> <c-^>
+nnoremap <silent><leader><BS> :%bd!\|e#\|bd!#<CR>
 nnoremap <silent>[b :bp<CR>
 nnoremap <silent>]b :bn<CR>
 
