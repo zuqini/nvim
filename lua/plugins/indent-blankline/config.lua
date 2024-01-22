@@ -27,12 +27,13 @@ require("ibl").setup {
   },
   scope = {
     char =  '▎',
-    show_start = false,
-    show_end = false,
-    include = {
-      node_type = {
-        ['*'] = { '*' }
-      }
-    },
+    -- show_start = false,
+    -- show_end = false,
+    -- -- https://github.com/lukas-reineke/indent-blankline.nvim/issues/643#issuecomment-1740384318
+    -- include = {
+    --   node_type = {
+    --     ['*'] = { '*' }
+    --   }
+    -- },
   }
 }
