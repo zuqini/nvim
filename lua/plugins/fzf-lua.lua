@@ -12,7 +12,7 @@ return {
   config = function()
     require 'fzf-lua'.setup {
       -- this seems to be super slow,
-      -- try this instead: https://github.com/ibhagwan/fzf-lua/wiki#file-ignore-patterns
+      -- try this instead: https://github.com/ibhagwan/fzf-lua/wiki#how-do-i-exclude-paths-eg-node_modules
       -- file_ignore_patterns = {
       --   'node_modules/.*',
       --   '.godot/.*',
@@ -59,6 +59,7 @@ return {
       },
       keymap = {
         fzf = {
+          -- Send all current search results to QuickFix list
           ["ctrl-q"] = "select-all+accept", -- https://github.com/ibhagwan/fzf-lua/issues/324
         }
       }
