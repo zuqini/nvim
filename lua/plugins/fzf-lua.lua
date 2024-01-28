@@ -67,7 +67,8 @@ return {
 
     local opts = { noremap = true, silent = true }
     vim.api.nvim_set_keymap('n', 'S', ":lua require'fzf-lua'.files()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>s', ":lua require'fzf-lua'.grep({ search = ''})<CR>", opts)
+    -- vim.api.nvim_set_keymap('n', '<leader>s', ":lua require'fzf-lua'.grep({ search = ''})<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>s', ":lua require'fzf-lua'.grep_project()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>S', ":lua require'fzf-lua'.live_grep_native()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fs', ":lua require'fzf-lua'.files({ cmd = 'fd --no-ignore --hidden' })<CR>",
       opts)
@@ -159,6 +160,7 @@ return {
         h = 'Help',
         d = 'Dotfiles',
         t = 'Tabs',
+        f = 'Resume',
       },
     }, { prefix = '<leader>' })
   end
