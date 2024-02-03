@@ -57,5 +57,8 @@ return {
       ['[b'] = 'Prev Buffer',
       [']b'] = 'Next Buffer',
     })
+    local reg = require("which-key.plugins.registers")
+    reg.registers = '0123456789*+"-:.%/#=_abcdefghijklmnopqrstuvwxyz'
+
   end
 }
