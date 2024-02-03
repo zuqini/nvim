@@ -42,7 +42,7 @@ cmp.setup {
   },
   view = {
     docs = {
-      auto_open = false,
+      auto_open = true,
     },
     entries = { name = 'custom', selection_order = 'near_cursor' }
   },
