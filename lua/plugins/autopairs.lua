@@ -1,5 +1,9 @@
 return {
   'windwp/nvim-autopairs',
   event = 'InsertEnter',
-  opts = { disable_filetype = { "fzf" , "vim" } }
+  config = function()
+    local npairs = require('nvim-autopairs')
+    npairs.setup({ disable_filetype = { "fzf" , "vim" } })
+    -- npairs.remove_rule('`')
+  end,
 }
