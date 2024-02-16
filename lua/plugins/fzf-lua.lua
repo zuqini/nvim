@@ -2,6 +2,7 @@ return {
   'ibhagwan/fzf-lua',
   enabled = vim.g.search_with_fzf_lua,
   event = 'VeryLazy', -- @TODO: replace with keys
+  branch = vim.g.is_windows and "windows" or "main",
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     {

@@ -5,7 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 -- detect if is windows
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 
-vim.g.search_with_fzf_lua = not vim.g.is_windows
+vim.g.search_with_fzf_lua = true
 vim.g.search_with_fzf_vim = false
 vim.g.search_with_telescope = not vim.g.search_with_fzf_lua
 
