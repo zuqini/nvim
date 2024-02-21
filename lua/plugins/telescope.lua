@@ -1,5 +1,5 @@
 return {
-  enabled = vim.g.search_with_telescope,
+  enabled = vim.g.fuzzy_search_plugin == 'telescope.nvim',
   'nvim-telescope/telescope.nvim',
   tag = '0.1.4',
   -- or                              , branch = '0.1.x',
