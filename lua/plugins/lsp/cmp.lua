@@ -6,9 +6,16 @@ luasnip.setup({
   delete_check_events = "TextChanged,InsertLeave",
 })
 
+luasnip.add_snippets('lua', {
+luasnip.snippet("test_choice_node", luasnip.choice_node(1, {
+        luasnip.text_node("1. text node"),
+        luasnip.insert_node(nil, "2. insert node"),
+        luasnip.function_node(function(_) return "3. function node" end, {})
+     }))
+})
+
 require('luasnip.loaders.from_vscode').lazy_load()
 
----#Mappings
 -- Previous snippet region
 vim.keymap.set({ "i", "s" }, "<C-k>", function()
   if luasnip.jumpable(-1) then luasnip.jump(-1) end
@@ -20,11 +27,8 @@ vim.keymap.set({ "i", "s" }, "<C-j>", function()
 end, { silent = true })
 
 -- Cycle "choices" for current snippet region
-vim.keymap.set({ "i", "s" }, "<c-l>", function()
+vim.keymap.set({ "i", "s" }, "<c-e>", function()
   if luasnip.choice_active() then luasnip.change_choice(1) end
-end)
-vim.keymap.set({ "i", "s" }, "<c-h>", function()
-  if luasnip.choice_active() then luasnip.change_choice(-1) end
 end)
 
 -- nvim-cmp setup
@@ -107,10 +111,14 @@ cmp.setup.filetype('lua', {
   })
 })
 
-local feedkeys = require('cmp.utils.feedkeys')
-local keymap = require('cmp.utils.keymap')
+-- local feedkeys = require('cmp.utils.feedkeys')
+-- local keymap = require('cmp.utils.keymap')
 local cmdline_mapping = {
+  ['<c-l>'] = {
+    c = cmp.mapping.abort(),
+  },
 }
+
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(cmdline_mapping),
