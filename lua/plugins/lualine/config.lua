@@ -36,9 +36,8 @@ local winbar_navic = {
 local winbar_file_info = {
   {
     'filetype',
-    colored = false, -- color icon issue: https://github.com/nvim-lualine/lualine.nvim/pull/1172
     icon_only = true,
-    padding = { left = 1, right = 1 },
+    padding = { left = 1, right = 0 },
     component_separators = no_seps,
     section_separators = angle_up_seps,
   },
@@ -86,13 +85,15 @@ local sections = {
   lualine_x = {
     {
       'filetype',
+      icon = { align = 'right' }, -- Display filetype icon on the right hand side
       padding = { left = 1, right = 1 },
       separator = '·',
     },
     {
       'fileformat',
       symbols = {
-        unix = '  ',
+        -- unix = '  ',
+        unix = ' 󰀶 ',
         dos = '󰨡 ',
         mac = '󰀶 ',
       },
@@ -128,7 +129,7 @@ require('lualine').setup {
         'filetype',
         colored = false,
         icon_only = true,
-        padding = { left = 1, right = 1 },
+        padding = { left = 1, right = 0 },
         component_separators = no_seps,
         section_separators = angle_down_seps,
       },
