@@ -78,6 +78,10 @@ nnoremap <silent><leader>D "_D
 vnoremap <silent><leader>d "_d
 vnoremap <silent><leader>D "_D
 
+" paste does not overwrite register by default
+xnoremap p P
+xnoremap P p
+
 " Yank Pasting only
 nnoremap <silent><leader>p "0p
 nnoremap <silent><leader>P "0P
