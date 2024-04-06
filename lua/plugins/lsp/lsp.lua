@@ -61,7 +61,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>gl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
   vim.keymap.set('n', '<leader>gd', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>gc', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<leader>go', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', function() vim.lsp.buf.references { includeDeclaration = false } end, bufopts)
   vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
 
@@ -89,7 +89,7 @@ local on_attach = function(client, bufnr)
       l = 'Show Workspace',
       d = 'Type Definition',
       n = 'Rename',
-      c = 'Code Action',
+      o = 'Code Action',
       f = 'Format',
       q = 'jq',
       p = 'Peek func',
