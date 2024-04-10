@@ -75,8 +75,8 @@ return {
 
     vim.api.nvim_set_keymap('n', '<leader>o', ":lua require'fzf-lua'.oldfiles()<CR>", opts)
 
-    vim.api.nvim_set_keymap('n', '<leader>,f', ":lua require'fzf-lua'.git_files()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>,s', ":lua require'fzf-lua'.git_status()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>,s', ":lua require'fzf-lua'.git_files()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>,t', ":lua require'fzf-lua'.git_status()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>,c', ":lua require'fzf-lua'.git_commits()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>,x', ":lua require'fzf-lua'.git_bcommits()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>,b', ":lua require'fzf-lua'.git_branches()<CR>", opts)
@@ -123,8 +123,8 @@ return {
         name = 'Fzf-Git',
         b = 'Branches',
         c = 'Commits',
-        f = 'Files',
-        s = 'Status',
+        s = 'Files',
+        t = 'Status',
         x = 'BCommits',
       },
       l = {

@@ -83,7 +83,7 @@ local on_attach = function(client, bufnr)
   wk.register({
     K = 'Signature Help',
     g = {
-      name = 'Lang.',
+      name = 'LSP',
       a = 'Add Workspace',
       r = 'Remove Workspace',
       l = 'Show Workspace',
