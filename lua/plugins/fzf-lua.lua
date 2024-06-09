@@ -151,7 +151,6 @@ return {
         f = 'Files (git_icons = false)',
         s = 'All Files (hidden, ignored)',
         c = 'Commands',
-        u = 'Resume',
         [';'] = 'Commands History',
         ['/'] = 'Search History',
         b = 'Fzf Builtin',
