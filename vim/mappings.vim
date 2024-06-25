@@ -69,8 +69,8 @@ vnoremap <silent><leader>x "+d
 vnoremap <silent><leader>X "+D
 nnoremap <silent><leader>v "+p
 nnoremap <silent><leader>V "+P
-vnoremap <silent><leader>v "+p
-vnoremap <silent><leader>V "+P
+vnoremap <silent><leader>v "+P
+vnoremap <silent><leader>V "+p
 
 " Delete into oblivion
 nnoremap <silent><leader>d "_d
