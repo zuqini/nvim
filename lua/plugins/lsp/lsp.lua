@@ -65,34 +65,27 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, bufopts)
   vim.keymap.set('v', '<leader>gf', vim.lsp.buf.format, bufopts)
 
-  wk.register({
-    K = 'Hover',
-    g = {
-      name = 'Go',
-      d = 'Definition',
-      D = 'Declaration',
-      i = 'Implementation',
-      r = 'References',
-      R = 'References (incl. decl)',
-    }
+  wk.add({
+    { "K", desc = "Hover" },
+    { "g", group = "Go" },
+    { "gD", desc = "Declaration" },
+    { "gR", desc = "References (incl. decl)" },
+    { "gd", desc = "Definition" },
+    { "gi", desc = "Implementation" },
+    { "gr", desc = "References" },
+    { "<leader>K", desc = "Signature Help" },
+    { "<leader>g", group = "LSP" },
+    { "<leader>gP", desc = "Peek class" },
+    { "<leader>ga", desc = "Add Workspace" },
+    { "<leader>gd", desc = "Type Definition" },
+    { "<leader>gf", desc = "Format" },
+    { "<leader>gl", desc = "Show Workspace" },
+    { "<leader>gn", desc = "Rename" },
+    { "<leader>go", desc = "Code Action" },
+    { "<leader>gp", desc = "Peek func" },
+    { "<leader>gq", desc = "jq" },
+    { "<leader>gr", desc = "Remove Workspace" },
   })
-
-  wk.register({
-    K = 'Signature Help',
-    g = {
-      name = 'LSP',
-      a = 'Add Workspace',
-      r = 'Remove Workspace',
-      l = 'Show Workspace',
-      d = 'Type Definition',
-      n = 'Rename',
-      o = 'Code Action',
-      f = 'Format',
-      q = 'jq',
-      p = 'Peek func',
-      P = 'Peek class',
-    }
-  }, { prefix = '<leader>' })
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
