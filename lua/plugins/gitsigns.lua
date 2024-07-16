@@ -42,27 +42,21 @@ return {
       end
     })
 
-    require('which-key').register({
-      ['[g'] = 'Prev Hunk',
-      [']g'] = 'Next Hunk',
+    require('which-key').add({
+      { "[g", desc = "Prev Hunk" },
+      { "]g", desc = "Next Hunk" },
+      { "<leader>;", group = "GitSigns" },
+      { "<leader>;R", desc = "Reset Buffer" },
+      { "<leader>;S", desc = "Stage Buffer" },
+      { "<leader>;b", desc = "Blame" },
+      { "<leader>;d", desc = "Diff" },
+      { "<leader>;p", desc = "Preview Hunk" },
+      { "<leader>;r", desc = "Reset Hunk" },
+      { "<leader>;s", desc = "Stage Hunk" },
+      { "<leader>;t", group = "Toggle" },
+      { "<leader>;tb", desc = "Blame" },
+      { "<leader>;td", desc = "Deleted" },
+      { "<leader>;u", desc = "Undo Stage Hunk" },
     })
-    require('which-key').register({
-      [';'] = {
-        name = 'GitSigns',
-        s = 'Stage Hunk',
-        r = 'Reset Hunk',
-        S = 'Stage Buffer',
-        u = 'Undo Stage Hunk',
-        R = 'Reset Buffer',
-        p = 'Preview Hunk',
-        b = 'Blame',
-        t = {
-          name = 'Toggle',
-          b = 'Blame',
-          d = 'Deleted',
-        },
-        d = 'Diff',
-      },
-    }, { prefix='<leader>' })
   end
 }

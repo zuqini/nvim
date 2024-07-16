@@ -134,13 +134,13 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-require('which-key').register({
-  ['[f'] = 'Prev Method Start',
-  [']f'] = 'Next Method Start',
-  ['[F'] = 'Prev Method End',
-  [']F'] = 'Next Method End',
-  ['[c'] = 'Prev Class Start',
-  [']c'] = 'Next Class Start',
-  ['[C'] = 'Prev Class End',
-  [']C'] = 'Next Class End',
+require('which-key').add({
+  { "[C", desc = "Prev Class End" },
+  { "[F", desc = "Prev Method End" },
+  { "[c", desc = "Prev Class Start" },
+  { "[f", desc = "Prev Method Start" },
+  { "]C", desc = "Next Class End" },
+  { "]F", desc = "Next Method End" },
+  { "]c", desc = "Next Class Start" },
+  { "]f", desc = "Next Method Start" },
 })

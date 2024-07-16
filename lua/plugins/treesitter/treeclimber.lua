@@ -18,18 +18,16 @@ vim.keymap.set('n', '<A-m>', function() tc.highlight_node(opts) end, keyopts)
 vim.keymap.set('n', '<C-p>', function() tc.swap_prev(opts) end, keyopts)
 vim.keymap.set('n', '<C-n>', function() tc.swap_next(opts) end, keyopts)
 
-require('which-key').register({
-  ['<C-n>'] = 'Swap next node',
-  ['<C-p>'] = 'Swap prev node',
-  ['<M-m>'] = 'Highlight node',
-
-  ['<M-j>'] = 'Goto next node',
-  ['<M-h>'] = 'Goto parent node',
-  ['<M-k>'] = 'Goto prev node',
-  ['<M-l>'] = 'Goto child node',
-
-  ['<M-down>'] = 'Goto next node',
-  ['<M-left>'] = 'Goto parent node',
-  ['<M-up>'] = 'Goto prev node',
-  ['<M-right>'] = 'Goto child node',
+require('which-key').add({
+  { "<C-n>", desc = "Swap next node" },
+  { "<C-p>", desc = "Swap prev node" },
+  { "<M-down>", desc = "Goto next node" },
+  { "<M-h>", desc = "Goto parent node" },
+  { "<M-j>", desc = "Goto next node" },
+  { "<M-k>", desc = "Goto prev node" },
+  { "<M-l>", desc = "Goto child node" },
+  { "<M-left>", desc = "Goto parent node" },
+  { "<M-m>", desc = "Highlight node" },
+  { "<M-right>", desc = "Goto child node" },
+  { "<M-up>", desc = "Goto prev node" },
 })
