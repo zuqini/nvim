@@ -6,9 +6,8 @@ local lspconfig = require('lspconfig')
 local wk = require('which-key') -- For documentation
 
 local keymap_opts = { noremap = true, silent = true }
+vim.keymap.set('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end)
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', keymap_opts)
-vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', keymap_opts)
-vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', keymap_opts)
 -- Q loclist is set in plugins/vim/mappings.vim
 
 vim.diagnostic.config({
@@ -45,8 +44,9 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, bufopts)
@@ -55,32 +55,30 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>gd', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>go', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', function() vim.lsp.buf.references { includeDeclaration = false } end, bufopts)
-  vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
 
   vim.keymap.set('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, bufopts)
   vim.keymap.set('v', '<leader>gf', vim.lsp.buf.format, bufopts)
 
   wk.add({
     { "K", desc = "Hover" },
-    { "g", group = "Go" },
+    { "g", group = "LSP." },
     { "gD", desc = "Declaration" },
     { "gR", desc = "References (incl. decl)" },
     { "gd", desc = "Definition" },
     { "gi", desc = "Implementation" },
-    { "gr", desc = "References" },
+    { "grr", desc = "References" },
+    { "grn", desc = "Rename" },
+    { "gra", desc = "Code Action" },
     { "<leader>K", desc = "Signature Help" },
     { "<leader>g", group = "LSP" },
     { "<leader>gP", desc = "Peek class" },
     { "<leader>ga", desc = "Add Workspace" },
+    { "<leader>gr", desc = "Remove Workspace" },
     { "<leader>gd", desc = "Type Definition" },
     { "<leader>gf", desc = "Format" },
     { "<leader>gl", desc = "Show Workspace" },
-    { "<leader>gn", desc = "Rename" },
-    { "<leader>go", desc = "Code Action" },
     { "<leader>gp", desc = "Peek func" },
     { "<leader>gq", desc = "jq" },
-    { "<leader>gr", desc = "Remove Workspace" },
   })
 end
 
