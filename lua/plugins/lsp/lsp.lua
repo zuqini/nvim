@@ -148,19 +148,18 @@ lspconfig.tsserver.setup {}
 lspconfig.pyright.setup {}
 lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
+lspconfig.gdscript.setup {}
 
 -- expose on_attach and capabilities to other config files
 lspconfig.zuqini_custom = {}
 lspconfig.zuqini_custom.on_attach = on_attach
 lspconfig.zuqini_custom.capabilities = capabilities
 
-if vim.g.is_windows then
-  -- windows specific bug, see https://www.reddit.com/r/neovim/comments/114z8he/comment/j8z2w0k/?utm_source=share&utm_medium=web2x&context=3
-  -- remember to run `scoop install nmap`
-  lspconfig.gdscript.setup { cmd = { "ncat", "localhost", "6005" } }
-else
-  lspconfig.gdscript.setup {}
-end
+-- if vim.g.is_windows then
+--   windows specific bug, see https://www.reddit.com/r/neovim/comments/114z8he/comment/j8z2w0k/?utm_source=share&utm_medium=web2x&context=3
+--   remember to run `scoop install nmap`
+--   lspconfig.gdscript.setup { cmd = { "ncat", "localhost", "6005" } }
+-- end
 
 -- either use omnisharp or omnisharp_mono, add to my.lua based on which is needed
 -- lspconfig.omnisharp.setup {}
