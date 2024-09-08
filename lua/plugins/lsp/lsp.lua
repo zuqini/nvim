@@ -144,7 +144,7 @@ lspconfig.lua_ls.setup {
 }
 
 -- setup servers
-lspconfig.tsserver.setup {}
+lspconfig.ts_ls.setup {}
 lspconfig.pyright.setup {}
 lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
