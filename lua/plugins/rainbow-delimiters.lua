@@ -1,5 +1,6 @@
 return {
   'hiphish/rainbow-delimiters.nvim',
+  enabled = false,
   event = 'VeryLazy',
   config = function()
     -- This module contains a number of default definitions
