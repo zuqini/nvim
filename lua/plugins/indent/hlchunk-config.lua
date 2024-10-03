@@ -31,6 +31,8 @@ require("hlchunk").setup({
     },
   },
   blank = {
+    -- https://github.com/shellRaining/hlchunk.nvim/issues/123
+    -- blank doesn't seem to work. Disable for now.
     enable = false,
   },
 })

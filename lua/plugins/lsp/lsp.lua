@@ -48,6 +48,13 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+
+  -- these are default in nvim v0.11
+  vim.keymap.set('n', 'grn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', 'gra', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'grr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('i', '<c-s>', vim.lsp.buf.signature_help, bufopts)
+
   vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>gr', vim.lsp.buf.remove_workspace_folder, bufopts)
