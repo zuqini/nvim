@@ -46,10 +46,11 @@ end
 
 function M.select_theme_by_index(index)
   -- this disables lualine and stops its timers
-  require('lualine').hide()
+  -- require('lualine').hide()
 
   -- experimental code for hot reloading
   -- hacky and buggy: unload theme packages for hot-reloading
+  local ibl_loaded = false
   for package_name, _ in pairs(package.loaded) do
     for _, theme in pairs(themes) do
       if package_name:match(theme.name) or
@@ -59,15 +60,20 @@ function M.select_theme_by_index(index)
     end
     if package_name:match('indent_blankline') or
         package_name:match('indent%-blankline') or
-        package_name:match('ibl') or
-        package_name:match('lualine') then
+        package_name:match('ibl') then
+        ibl_loaded = true
+      package.loaded[package_name] = nil
+    end
+    if package_name:match('lualine') then
       package.loaded[package_name] = nil
     end
   end
 
   theme_index = index
   require('plugins.themes.' .. M.get_current_theme())
-  require('plugins.indent-blankline.config')
+  if ibl_loaded then
+    require('plugins.indent.ibl-config')
+  end
   require('plugins.lualine.config')
   if vim.g.transparent_background then
     vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
