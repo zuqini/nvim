@@ -150,6 +150,7 @@ lspconfig.lua_ls.setup {
 }
 
 -- setup servers
+lspconfig.vimls.setup {}
 lspconfig.ts_ls.setup {}
 lspconfig.pyright.setup {}
 lspconfig.jdtls.setup {}

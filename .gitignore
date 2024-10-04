@@ -1,2 +1,3 @@
 my.lua
 .DS_Store
+**/internal/**

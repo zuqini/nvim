@@ -1,24 +1,35 @@
 require('mason').setup({
-    ui = {
-        icons = {
-            server_installed = "✓",
-            server_pending = "➜",
-            server_uninstalled = "✗"
-        }
+  ui = {
+    icons = {
+      server_installed = "✓",
+      server_pending = "➜",
+      server_uninstalled = "✗"
     }
+  }
 })
 
 require("mason-lspconfig").setup({
-  automatic_installation = { exclude = { "rust_analyzer", "omnisharp", "omnisharp_mono" } }
+  automatic_installation = {
+    exclude = {
+      "rust_analyzer",
+      "omnisharp",
+      "omnisharp_mono",
+      "jdtls",
+      "pyright",
+      "vimls",
+      "jsonls",
+      "ts_ls",
+    }
+  }
 })
 
-local opts = { noremap=true }
+local opts = { noremap = true }
 vim.api.nvim_set_keymap('n', '<leader>gt', ":LspRestart<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>gs', ":LspStop<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>gS', ":LspStart<CR>", opts)
 
 require('which-key').add({
-  { "<leader>g", group = "Lang." },
+  { "<leader>g",  group = "Lang." },
   { "<leader>gS", desc = "LspStart" },
   { "<leader>gs", desc = "LspStop" },
   { "<leader>gt", desc = "LspRestart" },
