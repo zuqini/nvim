@@ -6,7 +6,12 @@ local lspconfig = require('lspconfig')
 local wk = require('which-key') -- For documentation
 
 local keymap_opts = { noremap = true, silent = true }
-vim.keymap.set('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end)
+  -- these are default in nvim v0.11
+vim.keymap.set('n', 'grn', vim.lsp.buf.rename, keymap_opts)
+vim.keymap.set('n', 'gra', vim.lsp.buf.code_action, keymap_opts)
+vim.keymap.set('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end, keymap_opts)
+vim.keymap.set('i', '<c-s>', vim.lsp.buf.signature_help, keymap_opts)
+
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', keymap_opts)
 -- Q loclist is set in plugins/vim/mappings.vim
 
@@ -37,6 +42,9 @@ end
 wk.add({
   { "[d", desc = "Prev Diagnostic" },
   { "]d", desc = "Next Diagnostic" },
+  { "grr", desc = "References" },
+  { "grn", desc = "Rename" },
+  { "gra", desc = "Code Action" },
   { "<leader>e", desc = "Open Float" },
 })
 
@@ -48,12 +56,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-
-  -- these are default in nvim v0.11
-  vim.keymap.set('n', 'grn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', 'gra', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'grr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('i', '<c-s>', vim.lsp.buf.signature_help, bufopts)
 
   vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, bufopts)
@@ -73,9 +75,6 @@ local on_attach = function(client, bufnr)
     { "gR", desc = "References (incl. decl)" },
     { "gd", desc = "Definition" },
     { "gi", desc = "Implementation" },
-    { "grr", desc = "References" },
-    { "grn", desc = "Rename" },
-    { "gra", desc = "Code Action" },
     { "<leader>K", desc = "Signature Help" },
     { "<leader>g", group = "LSP" },
     { "<leader>gP", desc = "Peek class" },
