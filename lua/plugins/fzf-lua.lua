@@ -81,7 +81,6 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>,x', ":lua require'fzf-lua'.git_bcommits()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>,b', ":lua require'fzf-lua'.git_branches()<CR>", opts)
 
-    vim.api.nvim_set_keymap('n', '<leader>b', ":lua require'fzf-lua'.buffers()<CR>", opts)
 
     vim.api.nvim_set_keymap('n', '<leader>lr', ":lua require'fzf-lua'.lsp_references()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>ld', ":lua require'fzf-lua'.lsp_definitions()<CR>", opts)
@@ -102,7 +101,8 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>fe', ":lua require'fzf-lua'.resume()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>f;', ":lua require'fzf-lua'.command_history()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>f/', ":lua require'fzf-lua'.search_history()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>fb', ":lua require'fzf-lua'.builtin()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fb', ":lua require'fzf-lua'.buffers()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fi', ":lua require'fzf-lua'.builtin()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fr', ":lua require'fzf-lua'.registers()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fp', ":lua require'fzf-lua'.spell_suggest()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fk', ":lua require'fzf-lua'.keymaps()<CR>", opts)
@@ -120,11 +120,11 @@ return {
       { "<leader>,t", desc = "Status" },
       { "<leader>,x", desc = "BCommits" },
       { "<leader>S", desc = "Native Grep" },
-      { "<leader>b", desc = "Buffers" },
       { "<leader>f", group = "Fzf-Misc" },
       { "<leader>f/", desc = "Search History" },
       { "<leader>f;", desc = "Commands History" },
-      { "<leader>fb", desc = "Fzf Builtin" },
+      { "<leader>fb", desc = "Fzf Buffers" },
+      { "<leader>fi", desc = "Fzf Builtin" },
       { "<leader>fc", desc = "Commands" },
       { "<leader>fd", desc = "Dotfiles" },
       { "<leader>fe", desc = "Resume" },
