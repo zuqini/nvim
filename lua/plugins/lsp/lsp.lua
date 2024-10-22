@@ -85,6 +85,8 @@ local on_attach = function(client, bufnr)
     { "<leader>gl", desc = "Show Workspace" },
     { "<leader>gp", desc = "Peek func" },
     { "<leader>gq", desc = "jq" },
+    { "<leader>gn", desc = "Rename" },
+    { "<leader>go", desc = "Code Action" },
   })
 end
 
