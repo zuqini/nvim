@@ -43,6 +43,9 @@ require'nvim-treesitter.configs'.setup {
         if ok and stats and stats.size > max_filesize then
           return true
         end
+
+        -- Then check line nbr
+        return vim.api.nvim_buf_line_count(buf) > 50000
     end,
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

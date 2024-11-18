@@ -6,7 +6,7 @@ local lspconfig = require('lspconfig')
 local wk = require('which-key') -- For documentation
 
 local keymap_opts = { noremap = true, silent = true }
-  -- these are default in nvim v0.11
+-- these are default in nvim v0.11
 vim.keymap.set('n', 'grn', vim.lsp.buf.rename, keymap_opts)
 vim.keymap.set('n', 'gra', vim.lsp.buf.code_action, keymap_opts)
 vim.keymap.set('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end, keymap_opts)
@@ -40,11 +40,11 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 wk.add({
-  { "[d", desc = "Prev Diagnostic" },
-  { "]d", desc = "Next Diagnostic" },
-  { "grr", desc = "References" },
-  { "grn", desc = "Rename" },
-  { "gra", desc = "Code Action" },
+  { "[d",        desc = "Prev Diagnostic" },
+  { "]d",        desc = "Next Diagnostic" },
+  { "grr",       desc = "References" },
+  { "grn",       desc = "Rename" },
+  { "gra",       desc = "Code Action" },
   { "<leader>e", desc = "Open Float" },
 })
 
@@ -69,14 +69,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('v', '<leader>gf', vim.lsp.buf.format, bufopts)
 
   wk.add({
-    { "K", desc = "Hover" },
-    { "g", group = "LSP." },
-    { "gD", desc = "Declaration" },
-    { "gR", desc = "References (incl. decl)" },
-    { "gd", desc = "Definition" },
-    { "gi", desc = "Implementation" },
-    { "<leader>K", desc = "Signature Help" },
-    { "<leader>g", group = "LSP" },
+    { "K",          desc = "Hover" },
+    { "g",          group = "LSP." },
+    { "gD",         desc = "Declaration" },
+    { "gR",         desc = "References (incl. decl)" },
+    { "gd",         desc = "Definition" },
+    { "gi",         desc = "Implementation" },
+    { "<leader>K",  desc = "Signature Help" },
+    { "<leader>g",  group = "LSP" },
     { "<leader>gP", desc = "Peek class" },
     { "<leader>ga", desc = "Add Workspace" },
     { "<leader>gr", desc = "Remove Workspace" },
@@ -117,14 +117,14 @@ lspconfig.rust_analyzer.setup({
       function()
         vim.lsp.buf_request(vim.api.nvim_get_current_buf(), 'experimental/externalDocs',
           vim.lsp.util.make_position_params(), function(err, url)
-          if err then
-            error(tostring(err))
-          elseif url == nil then
-            print("No documentation found.")
-          else
-            open_url(url)
-          end
-        end)
+            if err then
+              error(tostring(err))
+            elseif url == nil then
+              print("No documentation found.")
+            else
+              open_url(url)
+            end
+          end)
       end,
       description = 'Open documentation for the symbol under the cursor in default browser',
     },
@@ -145,7 +145,8 @@ lspconfig.lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = {
-        globals = { 'vim', 'RequireVim' }
+        globals = { 'vim', 'RequireVim' },
+        disable = { "missing-fields" }
       }
     }
   }
