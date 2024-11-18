@@ -1,7 +1,7 @@
 return {
   {
     'lukas-reineke/indent-blankline.nvim',
-    enabled = false,
+    enabled = true,
     event = 'VeryLazy',
     config = function()
       require('plugins.indent.ibl-config')
@@ -9,7 +9,7 @@ return {
   },
   {
     "shellRaining/hlchunk.nvim",
-    enabled = true,
+    enabled = false,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require('plugins.indent.hlchunk-config')
