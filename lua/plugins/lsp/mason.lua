@@ -15,10 +15,7 @@ require("mason-lspconfig").setup({
       "omnisharp",
       "omnisharp_mono",
       "jdtls",
-      "pyright",
-      "vimls",
-      "jsonls",
-      "ts_ls",
+      "astro",
     }
   }
 })

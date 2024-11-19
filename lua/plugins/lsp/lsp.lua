@@ -159,6 +159,7 @@ lspconfig.pyright.setup {}
 lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
 lspconfig.gdscript.setup {}
+lspconfig.astro.setup {}
 
 -- expose on_attach and capabilities to other config files
 lspconfig.zuqini_custom = {}
