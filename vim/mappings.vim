@@ -24,18 +24,6 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Tabs
-nnoremap <silent><leader>t1 1gt
-nnoremap <silent><leader>t2 2gt
-nnoremap <silent><leader>t3 3gt
-nnoremap <silent><leader>t4 4gt
-nnoremap <silent><leader>t5 5gt
-nnoremap <silent><leader>6 6gt
-nnoremap <silent><leader>t7 7gt
-nnoremap <silent><leader>t8 8gt
-nnoremap <silent><leader>t9 9gt
-nnoremap <silent><leader>t0 :tablast<cr>
-nnoremap <silent><leader>th :tabm -1<CR>
-nnoremap <silent><leader>tl :tabm +1<CR>
 nnoremap <silent>[t gT
 nnoremap <silent>]t gt
 
