@@ -114,8 +114,8 @@ return {
 
     require('which-key').add({
       { "<leader>ff", desc = "Find Files" },
-      { "<leader>fs", desc = "Find Files (No git-icons)" },
-      { "<leader>fF", desc = "Find Files (No git-icons, hidden, ignored)" },
+      { "<leader>fs", desc = "Find Files (no git-icons)" },
+      { "<leader>fF", desc = "Find Files (no git-icons, hidden, ignored)" },
       { "<leader>,", group = "Fzf-Git" },
       { "<leader>,b", desc = "Branches" },
       { "<leader>,c", desc = "Commits" },
@@ -130,7 +130,6 @@ return {
       { "<leader>fc", desc = "Commands" },
       { "<leader>fd", desc = "Dotfiles" },
       { "<leader>fe", desc = "Resume" },
-      { "<leader>ff", desc = "Files (git_icons = false)" },
       { "<leader>fh", desc = "Help" },
       { "<leader>fk", desc = "Keymaps" },
       { "<leader>fp", desc = "Spell Suggest" },
