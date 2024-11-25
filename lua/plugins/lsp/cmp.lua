@@ -7,11 +7,11 @@ luasnip.setup({
 })
 
 luasnip.add_snippets('lua', {
-luasnip.snippet("test_choice_node", luasnip.choice_node(1, {
-        luasnip.text_node("1. text node"),
-        luasnip.insert_node(nil, "2. insert node"),
-        luasnip.function_node(function(_) return "3. function node" end, {})
-     }))
+  luasnip.snippet("test_choice_node", luasnip.choice_node(1, {
+    luasnip.text_node("1. text node"),
+    luasnip.insert_node(nil, "2. insert node"),
+    luasnip.function_node(function(_) return "3. function node" end, {})
+  }))
 })
 
 require('luasnip.loaders.from_vscode').lazy_load()
@@ -55,6 +55,12 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.menu = entry.source.name
+      return vim_item
+    end,
+  }, -- formatting
   mapping = cmp.mapping.preset.insert({
     ['<up>'] = cmp.mapping.select_prev_item(),
     ['<down>'] = cmp.mapping.select_next_item(),
@@ -98,6 +104,10 @@ cmp.setup {
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    {
+      name = "lazydev",
+      group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+    }
   }, {
     { name = 'buffer' },
   })

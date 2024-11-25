@@ -1,7 +1,4 @@
--- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 -- vim.lsp.set_log_level("debug")
-
-require("neodev").setup({})
 local lspconfig = require('lspconfig')
 local wk = require('which-key') -- For documentation
 
