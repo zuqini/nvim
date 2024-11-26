@@ -34,8 +34,9 @@ return {
         height = 0.95,
         width = 0.85,
         preview = {
+          -- investigate https://github.com/ibhagwan/fzf-lua/issues/1002
           layout = 'vertical',
-          vertical = 'down:75%',
+          vertical = 'down:55%',
         },
       },
       fzf_opts = {

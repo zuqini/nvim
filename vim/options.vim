@@ -16,7 +16,7 @@ set hlsearch
 set ignorecase smartcase
 set laststatus=3
 
-set scrolloff=8
+set scrolloff=4
 set synmaxcol=512
 
 set cursorline
