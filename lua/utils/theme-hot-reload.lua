@@ -9,7 +9,7 @@ local themes = {
 local theme_index = 1
 local theme_timer_active = 0
 
-local timer = vim.loop.new_timer()
+Timer = vim.uv.new_timer()
 local min = 60 * 1000
 
 local M = {}
@@ -46,7 +46,7 @@ end
 
 function M.select_theme_by_index(index)
   -- this disables lualine and stops its timers
-  -- require('lualine').hide()
+  require('lualine').hide({})
 
   -- experimental code for hot reloading
   -- hacky and buggy: unload theme packages for hot-reloading
@@ -105,7 +105,7 @@ end
 
 function M.clear_timer()
   if theme_timer_active == 1 then
-    timer:close()
+    Timer:close()
     theme_timer_active = 0
   end
 end
@@ -122,7 +122,7 @@ end
 
 -- experimental hot reloading
 -- check every 10 min
-timer:start(10 * min, 10 * min, vim.schedule_wrap(M.select_theme_by_time))
+Timer:start(10 * min, 10 * min, vim.schedule_wrap(M.select_theme_by_time))
 theme_timer_active = 1
 
 vim.api.nvim_create_user_command('ThemeNext', M.next, {})
