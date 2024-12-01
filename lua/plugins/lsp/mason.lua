@@ -24,10 +24,3 @@ local opts = { noremap = true }
 vim.api.nvim_set_keymap('n', '<leader>gt', ":LspRestart<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>gs', ":LspStop<CR>", opts)
 vim.api.nvim_set_keymap('n', '<leader>gS', ":LspStart<CR>", opts)
-
-require('which-key').add({
-  { "<leader>g",  group = "Lang." },
-  { "<leader>gS", desc = "LspStart" },
-  { "<leader>gs", desc = "LspStop" },
-  { "<leader>gt", desc = "LspRestart" },
-})

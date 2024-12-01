@@ -13,13 +13,3 @@ vim.keymap.set('n', '<leader>tm', function() tc.highlight_node(opts) end, keyopt
 
 vim.keymap.set('n', '<leader>tp', function() tc.swap_prev(opts) end, keyopts)
 vim.keymap.set('n', '<leader>tn', function() tc.swap_next(opts) end, keyopts)
-
-require('which-key').add({
-  { "<leader>tn", desc = "Swap next node" },
-  { "<leader>tp", desc = "Swap prev node" },
-  { "<a-left>", desc = "Goto parent node" },
-  { "<a-down>", desc = "Goto next node" },
-  { "<a-up>", desc = "Goto prev node" },
-  { "<a-right>", desc = "Goto child node" },
-  { "<leader>tm", desc = "Highlight node" },
-})

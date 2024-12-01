@@ -112,54 +112,5 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>fd', ":lua require'fzf-lua'.files({ cwd = '~/dotfiles' })<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>ft', ":lua require'fzf-lua'.tabs()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fm', ":lua require'fzf-lua'.marks()<CR>", opts)
-
-    require('which-key').add({
-
-      { "<leader>,", group = "Fzf-Git" },
-      { "<leader>,b", desc = "Branches" },
-      { "<leader>,c", desc = "Commits" },
-      { "<leader>,s", desc = "Files" },
-      { "<leader>,t", desc = "Status" },
-      { "<leader>,x", desc = "BCommits" },
-
-      { "<leader>ff", desc = "Find Files" },
-      { "<leader>fs", desc = "Find Files (no git-icons)" },
-      { "<leader>fF", desc = "Find Files (no git-icons, hidden, ignored)" },
-
-      { "<leader>fo", desc = "Old Files (History)" },
-      { "<leader>fn", desc = "Grep" },
-      { "<leader>fN", desc = "Native Grep" },
-      { "<leader>fh", desc = "Grep (hidden)" },
-
-      { "<leader>f", group = "Fzf-Misc" },
-      { "<leader>f/", desc = "Search History" },
-      { "<leader>f;", desc = "Commands History" },
-      { "<leader>fb", desc = "Fzf Buffers" },
-      { "<leader>fi", desc = "Fzf Builtin" },
-      { "<leader>fc", desc = "Commands" },
-      { "<leader>fd", desc = "Dotfiles" },
-      { "<leader>fe", desc = "Resume" },
-      { "<leader>fH", desc = "Help" },
-      { "<leader>fk", desc = "Keymaps" },
-      { "<leader>fp", desc = "Spell Suggest" },
-      { "<leader>fr", desc = "Registers" },
-      { "<leader>ft", desc = "Tabs" },
-
-      { "<leader>l", group = "Fzf-LSP" },
-      { "<leader>lD", desc = "Declarations" },
-      { "<leader>lG", desc = "Workspace Diagnostics" },
-      { "<leader>lQ", desc = "Loclist" },
-      { "<leader>lc", desc = "Code Actions" },
-      { "<leader>ld", desc = "Definitions" },
-      { "<leader>lg", desc = "Diagnostics" },
-      { "<leader>li", desc = "Implementations" },
-      { "<leader>lq", desc = "Quickfix" },
-      { "<leader>lr", desc = "References" },
-      { "<leader>ls", group = "Symbols" },
-      { "<leader>lsW", desc = "Live Workspace Symbols" },
-      { "<leader>lsd", desc = "Document Symbols" },
-      { "<leader>lsw", desc = "Workspace Symbols" },
-      { "<leader>lt", desc = "TypeDefs" },
-    })
   end
 }

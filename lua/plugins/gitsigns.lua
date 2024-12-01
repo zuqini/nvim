@@ -41,22 +41,5 @@ return {
         map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
       end
     })
-
-    require('which-key').add({
-      { "[g", desc = "Prev Hunk" },
-      { "]g", desc = "Next Hunk" },
-      { "<leader>;", group = "GitSigns" },
-      { "<leader>;R", desc = "Reset Buffer" },
-      { "<leader>;S", desc = "Stage Buffer" },
-      { "<leader>;b", desc = "Blame" },
-      { "<leader>;d", desc = "Diff" },
-      { "<leader>;p", desc = "Preview Hunk" },
-      { "<leader>;r", desc = "Reset Hunk" },
-      { "<leader>;s", desc = "Stage Hunk" },
-      { "<leader>;t", group = "Toggle" },
-      { "<leader>;tb", desc = "Blame" },
-      { "<leader>;td", desc = "Deleted" },
-      { "<leader>;u", desc = "Undo Stage Hunk" },
-    })
   end
 }

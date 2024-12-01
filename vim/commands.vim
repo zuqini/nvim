@@ -1,16 +1,31 @@
 command! L :Lazy
 command! LS :Lazy sync
 
-" ctags
-command! MakeTags !ctags -R --exclude=.git --exclude=node_modules --exclude=test
-command! MT silent :MakeTags
+function! ToggleQuickFix()
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    copen
+  else
+    cclose
+  endif
+endfunction
 
-" set current dir
-command! CD :cd %:p:h
+function! ToggleLocList()
+  if empty(filter(getwininfo(), 'v:val.loclist'))
+    lua vim.diagnostic.setloclist()
+  else
+    lclose
+  endif
+endfunction
 
-" literal search
-command! -nargs=1 Search :let @/='\V'.escape(<q-args>, '\\')| normal! n
-command! -nargs=1 S :let @/='\V'.escape(<q-args>, '\\')| normal! n
+function! HandleURI()
+  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
+  echo s:uri
+  if s:uri != ""
+    silent exec "lua require(\"utils\").open_url('" . s:uri . "')"
+  else
+    echo "No URI found in line."
+  endif
+endfunction
 
 " Search for the ... arguments separated with whitespace (if no '!'),
 " or with non-word characters (if '!' added to command).
@@ -20,8 +35,20 @@ function! SearchMultiLine(bang, ...)
     let @/ = join(a:000, sep)
   endif
 endfunction
+
 command! -bang -nargs=* SearchMulti call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 command! -bang -nargs=* SM call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
+
+" literal search
+command! -nargs=1 Search :let @/='\V'.escape(<q-args>, '\\')| normal! n
+command! -nargs=1 S :let @/='\V'.escape(<q-args>, '\\')| normal! n
+
+" ctags
+command! MakeTags !ctags -R --exclude=.git --exclude=node_modules --exclude=test
+command! MT silent :MakeTags
+
+" set current working directory
+command! CD :cd %:p:h
 
 " Augroups
 augroup mainMiscCommands

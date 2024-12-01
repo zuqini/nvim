@@ -1,6 +1,5 @@
 -- vim.lsp.set_log_level("debug")
 local lspconfig = require('lspconfig')
-local wk = require('which-key') -- For documentation
 
 local keymap_opts = { noremap = true, silent = true }
 -- these are default in nvim v0.11
@@ -36,13 +35,6 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-wk.add({
-  { "grr",       desc = "References" },
-  { "grn",       desc = "Rename" },
-  { "gra",       desc = "Code Action" },
-  { "<leader>e", desc = "Open Float" },
-})
-
 local on_attach = function(client, bufnr)
   -- Mappings.
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -62,27 +54,6 @@ local on_attach = function(client, bufnr)
 
   vim.keymap.set('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, bufopts)
   vim.keymap.set('v', '<leader>gf', vim.lsp.buf.format, bufopts)
-
-  wk.add({
-    { "K",          desc = "Hover" },
-    { "g",          group = "LSP." },
-    { "gD",         desc = "Declaration" },
-    { "gR",         desc = "References (incl. decl)" },
-    { "gd",         desc = "Definition" },
-    { "gi",         desc = "Implementation" },
-    { "<leader>K",  desc = "Signature Help" },
-    { "<leader>g",  group = "LSP" },
-    { "<leader>gP", desc = "Peek class" },
-    { "<leader>ga", desc = "Add Workspace" },
-    { "<leader>gr", desc = "Remove Workspace" },
-    { "<leader>gd", desc = "Type Definition" },
-    { "<leader>gf", desc = "Format" },
-    { "<leader>gl", desc = "Show Workspace" },
-    { "<leader>gp", desc = "Peek func" },
-    { "<leader>gq", desc = "jq" },
-    { "<leader>gn", desc = "Rename" },
-    { "<leader>go", desc = "Code Action" },
-  })
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -128,11 +99,6 @@ lspconfig.rust_analyzer.setup({
     on_attach(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     buf_set_keymap('n', '<leader>ge', ':RustOpenExternalDocs<CR>', keymap_opts)
-    wk.add(
-      {
-        { "<leader>ge", desc = "RustOpenExtDocs" },
-      }
-    )
   end,
 })
 
