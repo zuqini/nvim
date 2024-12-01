@@ -2,6 +2,8 @@ local vrequire = require("utils").vrequire
 
 require("globals")
 
+vrequire("utils")
+
 vrequire("commands")
 require("commands")
 

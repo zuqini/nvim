@@ -6,9 +6,6 @@ return {
       replace = {
         prefix = 'gp',
       },
-      exchange = {
-        prefix = 'gP',
-      },
     })
   end
 };

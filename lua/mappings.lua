@@ -69,4 +69,4 @@ nmap('<S-Right>', '<C-W>>', '+ Win Width')
 nmap('<S-Down>', '<C-W>-', '- Win Height')
 nmap('<S-Up>', '<C-W>+', '+ Win Height')
 
-nmap('gx', ':call HandleURI()<CR>', 'Navigate URI')
+nmap('gz', ':call HandleURI()<CR>', 'Navigate URI')
