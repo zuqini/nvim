@@ -1,8 +1,12 @@
+-- replace this with mini-clue
 return {
   'folke/which-key.nvim',
   config = function ()
     local wk = require("which-key")
     wk.setup({
+      delay = function(ctx)
+        return ctx.plugin and 0 or 1000
+      end,
       layout = {
         height = { min = 4, max = 15 }, -- min and max height of the columns
         width = { min = 20, max = 35 }, -- min and max width of the columns
