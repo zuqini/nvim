@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 
-local nmap = function(mapping, rhs, desc) vim.keymap.set('n', mapping, rhs, { desc = desc, noremap = true })
+local nmap = function(mapping, rhs, desc)
+  vim.keymap.set('n', mapping, rhs, { desc = desc, noremap = true })
 end
 local xmap = function(mapping, rhs, desc)
   vim.keymap.set('x', mapping, rhs, { desc = desc, noremap = true })

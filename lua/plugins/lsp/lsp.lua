@@ -1,15 +1,17 @@
 -- vim.lsp.set_log_level("debug")
 local lspconfig = require('lspconfig')
 
-local keymap_opts = { noremap = true, silent = true }
--- these are default in nvim v0.11
-vim.keymap.set('n', 'grn', vim.lsp.buf.rename, keymap_opts)
-vim.keymap.set('n', 'gra', vim.lsp.buf.code_action, keymap_opts)
-vim.keymap.set('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end, keymap_opts)
-vim.keymap.set('i', '<c-s>', vim.lsp.buf.signature_help, keymap_opts)
+local map = function(mode, mapping, rhs, desc)
+  vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true })
+end
 
-vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', keymap_opts)
--- Q loclist is set in plugins/vim/mappings.vim
+map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Dignostic Float')
+
+-- these are default in nvim v0.11
+map('n', 'grn', vim.lsp.buf.rename, 'Rename')
+map('n', 'gra', vim.lsp.buf.code_action, 'Code Action')
+map('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end, 'References')
+map('i', '<c-s>', vim.lsp.buf.signature_help, 'Signature Help')
 
 vim.diagnostic.config({
   virtual_text = {
@@ -37,23 +39,23 @@ end
 
 local on_attach = function(client, bufnr)
   -- Mappings.
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  local bufmap = function(mode, mapping, rhs, desc)
+    vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true, buffer = bufnr })
+  end
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  bufmap('n', 'gd', vim.lsp.buf.definition, 'Definition')
+  bufmap('n', 'gD', vim.lsp.buf.declaration, 'Declaration')
+  bufmap('n', 'gR', vim.lsp.buf.references, 'References w/ Declaration')
+  bufmap('n', 'gi', vim.lsp.buf.implementation, 'Implementation')
 
-  vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<leader>gr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<leader>gl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
-  vim.keymap.set('n', '<leader>gd', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>go', vim.lsp.buf.code_action, bufopts)
+  bufmap('n', '<leader>K', vim.lsp.buf.signature_help, 'Signature Help')
+  bufmap('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, 'Add Workspace Folder')
+  bufmap('n', '<leader>gr', vim.lsp.buf.remove_workspace_folder, 'Remove Workspace Folder')
+  bufmap('n', '<leader>gl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List Workspace Folder')
+  bufmap('n', '<leader>gd', vim.lsp.buf.type_definition, 'Type Definition')
 
-  vim.keymap.set('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, bufopts)
-  vim.keymap.set('v', '<leader>gf', vim.lsp.buf.format, bufopts)
+  bufmap('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, 'Format')
+  bufmap('v', '<leader>gf', vim.lsp.buf.format, 'Format')
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -97,8 +99,7 @@ lspconfig.rust_analyzer.setup({
   },
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    buf_set_keymap('n', '<leader>ge', ':RustOpenExternalDocs<CR>', keymap_opts)
+    map('n', '<leader>ge', ':RustOpenExternalDocs<CR>', 'Open Ext. Docs')
   end,
 })
 
