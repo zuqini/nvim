@@ -30,8 +30,6 @@ nnoremap <silent>]t gt
 " Buffer management
 nnoremap <silent><BS> <c-^>
 nnoremap <silent><leader><BS> :%bd!\|e#\|bd!#<CR>
-nnoremap <silent>[b :bp<CR>
-nnoremap <silent>]b :bn<CR>
 
 " go to file in new tab
 nnoremap <silent> gF :tab split<CR>gf

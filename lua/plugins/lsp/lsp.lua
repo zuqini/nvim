@@ -37,8 +37,6 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 wk.add({
-  { "[d",        desc = "Prev Diagnostic" },
-  { "]d",        desc = "Next Diagnostic" },
   { "grr",       desc = "References" },
   { "grn",       desc = "Rename" },
   { "gra",       desc = "Code Action" },

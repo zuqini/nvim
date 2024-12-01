@@ -108,22 +108,22 @@ require'nvim-treesitter.configs'.setup {
       goto_next_start = {
         ["]f"] = "@function.outer",
         ["]["] = "@function.outer",
-        ["]c"] = { query = "@class.outer", desc = "Next class start" },
+        ["]l"] = "@class.outer",
       },
       goto_next_end = {
         ["]F"] = "@function.outer",
         ["]]"] = "@function.outer",
-        ["]C"] = "@class.outer",
+        ["]L"] = "@class.outer",
       },
       goto_previous_start = {
         ["[f"] = "@function.outer",
         ["[["] = "@function.outer",
-        ["[c"] = "@class.outer",
+        ["[l"] = "@class.outer",
       },
       goto_previous_end = {
         ["[F"] = "@function.outer",
         ["[]"] = "@function.outer",
-        ["[C"] = "@class.outer",
+        ["[L"] = "@class.outer",
       },
     },
     lsp_interop = {
@@ -138,12 +138,12 @@ require'nvim-treesitter.configs'.setup {
 }
 
 require('which-key').add({
-  { "[C", desc = "Prev Class End" },
+  { "[L", desc = "Prev Class End" },
   { "[F", desc = "Prev Method End" },
-  { "[c", desc = "Prev Class Start" },
+  { "[l", desc = "Prev Class Start" },
   { "[f", desc = "Prev Method Start" },
-  { "]C", desc = "Next Class End" },
+  { "]L", desc = "Next Class End" },
   { "]F", desc = "Next Method End" },
-  { "]c", desc = "Next Class Start" },
+  { "]l", desc = "Next Class Start" },
   { "]f", desc = "Next Method Start" },
 })
