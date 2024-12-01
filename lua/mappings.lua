@@ -63,7 +63,7 @@ nmap('<F5>', ':mod<CR>', 'Clear * Redraw')
 xmap('>', '>gv', 'Indent w/ Selection')
 xmap('<', '<gv', 'Unindent w/ Selection')
 
-nmap('<BS>', '<C-^>', 'Go to Alternate File')
+nmap('<BS>', '<C-^>', 'Goto Alternate File')
 
 nmap('<S-Left>', '<C-W><', '- Win Width')
 nmap('<S-Right>', '<C-W>>', '+ Win Width')
