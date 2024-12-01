@@ -47,6 +47,7 @@ return {
       { "s", desc = "Search (Leap)" },
     })
 
+    ---@class wk.Plugin
     local reg = require("which-key.plugins.registers")
     reg.registers = '0123456789*+"-:.%/#=_abcdefghijklmnopqrstuvwxyz'
 
