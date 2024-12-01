@@ -71,11 +71,11 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>fs', ":lua require'fzf-lua'.files({ git_icons = false})<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fF', ":lua require'fzf-lua'.files({ git_icons = false, cmd = 'fd --no-ignore --hidden' })<CR>", opts)
 
-    vim.api.nvim_set_keymap('n', '<leader>s', ":lua require'fzf-lua'.grep_project()<CR>", opts)
-    vim.api.nvim_set_keymap('n', 'S', ":lua require'fzf-lua'.grep({search = '', rg_opts = '--hidden', fzf_opts = { ['--nth'] = '2..' }})<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>S', ":lua require'fzf-lua'.live_grep_native()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fn', ":lua require'fzf-lua'.grep_project()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fh', ":lua require'fzf-lua'.grep({search = '', rg_opts = '--hidden', fzf_opts = { ['--nth'] = '2..' }})<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fN', ":lua require'fzf-lua'.live_grep_native()<CR>", opts)
 
-    vim.api.nvim_set_keymap('n', '<leader>o', ":lua require'fzf-lua'.oldfiles()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fo', ":lua require'fzf-lua'.oldfiles()<CR>", opts)
 
     vim.api.nvim_set_keymap('n', '<leader>,s', ":lua require'fzf-lua'.git_files()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>,t', ":lua require'fzf-lua'.git_status()<CR>", opts)
@@ -108,21 +108,29 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>fr', ":lua require'fzf-lua'.registers()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fp', ":lua require'fzf-lua'.spell_suggest()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fk', ":lua require'fzf-lua'.keymaps()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>fh', ":lua require'fzf-lua'.help_tags()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>fH', ":lua require'fzf-lua'.help_tags()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fd', ":lua require'fzf-lua'.files({ cwd = '~/dotfiles' })<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>ft', ":lua require'fzf-lua'.tabs()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>fm', ":lua require'fzf-lua'.marks()<CR>", opts)
 
     require('which-key').add({
-      { "<leader>ff", desc = "Find Files" },
-      { "<leader>fs", desc = "Find Files (no git-icons)" },
-      { "<leader>fF", desc = "Find Files (no git-icons, hidden, ignored)" },
+
       { "<leader>,", group = "Fzf-Git" },
       { "<leader>,b", desc = "Branches" },
       { "<leader>,c", desc = "Commits" },
       { "<leader>,s", desc = "Files" },
       { "<leader>,t", desc = "Status" },
       { "<leader>,x", desc = "BCommits" },
+
+      { "<leader>ff", desc = "Find Files" },
+      { "<leader>fs", desc = "Find Files (no git-icons)" },
+      { "<leader>fF", desc = "Find Files (no git-icons, hidden, ignored)" },
+
+      { "<leader>fo", desc = "Old Files (History)" },
+      { "<leader>fn", desc = "Grep" },
+      { "<leader>fN", desc = "Native Grep" },
+      { "<leader>fh", desc = "Grep (hidden)" },
+
       { "<leader>f", group = "Fzf-Misc" },
       { "<leader>f/", desc = "Search History" },
       { "<leader>f;", desc = "Commands History" },
@@ -131,11 +139,12 @@ return {
       { "<leader>fc", desc = "Commands" },
       { "<leader>fd", desc = "Dotfiles" },
       { "<leader>fe", desc = "Resume" },
-      { "<leader>fh", desc = "Help" },
+      { "<leader>fH", desc = "Help" },
       { "<leader>fk", desc = "Keymaps" },
       { "<leader>fp", desc = "Spell Suggest" },
       { "<leader>fr", desc = "Registers" },
       { "<leader>ft", desc = "Tabs" },
+
       { "<leader>l", group = "Fzf-LSP" },
       { "<leader>lD", desc = "Declarations" },
       { "<leader>lG", desc = "Workspace Diagnostics" },
@@ -151,10 +160,6 @@ return {
       { "<leader>lsd", desc = "Document Symbols" },
       { "<leader>lsw", desc = "Workspace Symbols" },
       { "<leader>lt", desc = "TypeDefs" },
-      { "<leader>o", desc = "Old Files (History)" },
-      { "<leader>s", desc = "Grep" },
-      { "<leader>S", desc = "Native Grep" },
-      { "S", desc = "Grep (hidden)" },
     })
   end
 }
