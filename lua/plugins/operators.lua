@@ -3,10 +3,10 @@ return {
   version = false,
   config = function()
     require('mini.operators').setup({
-      exchange = {
+      replace = {
         prefix = 'gp',
       },
-      replace = {
+      exchange = {
         prefix = 'gP',
       },
     })
