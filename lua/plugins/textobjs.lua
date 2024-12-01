@@ -17,16 +17,7 @@ return {
   {
     'echasnovski/mini.ai',
     version = false,
-    opts = {
-      config = function()
-        local ai = require('mini.ai')
-        ai.setup({
-          custom_textobjects = {
-            s = { '%[%[().-()%]%]' },
-          }
-        })
-      end,
-    },
+    opts = {},
   },
   {
     'echasnovski/mini.indentscope',
