@@ -28,14 +28,14 @@ nvim
     ```
   - FiraCode
     - Download at https://www.nerdfonts.com/font-downloads
-  
+
 - Configure the installed font in your terminal
-  
+
     - e.g. `Iterm2 > Preferences > Profiles > Text > Font > Hack Nerd Font Mono`
     - Enable ligatures
-  
+
 Alternatively if you don't want to setup icons, you can disable them at `lua/configs/lualine.lua` and `vim/configs/nvim-tree.vim`
- 
+
 </details>
 
 <details>

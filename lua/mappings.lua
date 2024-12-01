@@ -44,6 +44,8 @@ nmap_leader('P', '"0P', 'Yank Paste Before')
 xmap_leader('p', '"0p', 'Yank Paste')
 xmap_leader('P', '"0P', 'Yank Paste Before')
 
+nmap_leader('u', ':UndotreeToggle<CR>', 'Undotree')
+
 nmap_leader('c', ':call ToggleQuickFix()<CR>', 'Toggle QuickFix')
 nmap_leader('k', ':cp<CR>', 'QuickFix Prev')
 nmap_leader('j', ':cn<CR>', 'QuickFix Next')

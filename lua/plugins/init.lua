@@ -10,7 +10,6 @@ return {
   },
   {
     'mbbill/undotree',
-    keys = { '<leader>u' },
     config = function()
       vrequire('plugins/undotree')
     end
