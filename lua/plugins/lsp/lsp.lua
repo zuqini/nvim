@@ -32,12 +32,13 @@ local border = {
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  ---@class vim.lsp.util.open_floating_preview.Opts
   opts = opts or {}
   opts.border = opts.border or border
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   -- Mappings.
   local bufmap = function(mode, mapping, rhs, desc)
     vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true, buffer = bufnr })
