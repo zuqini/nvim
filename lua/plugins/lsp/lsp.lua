@@ -39,6 +39,19 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 local on_attach = function(_, bufnr)
+  vim.lsp.inlay_hint.enable(true)
+  --- toggle diagnostics
+  vim.g.diagnostics_visible = true
+  local function toggle_diagnostics()
+    if vim.g.diagnostics_visible then
+      vim.g.diagnostics_visible = false
+      vim.diagnostic.enable(false)
+    else
+      vim.g.diagnostics_visible = true
+      vim.diagnostic.enable(true)
+    end
+  end
+
   -- Mappings.
   local bufmap = function(mode, mapping, rhs, desc)
     vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true, buffer = bufnr })
@@ -52,11 +65,18 @@ local on_attach = function(_, bufnr)
   bufmap('n', '<leader>K', vim.lsp.buf.signature_help, 'Signature Help')
   bufmap('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, 'Add Workspace Folder')
   bufmap('n', '<leader>gr', vim.lsp.buf.remove_workspace_folder, 'Remove Workspace Folder')
-  bufmap('n', '<leader>gl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List Workspace Folder')
+  bufmap('n', '<leader>gl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+    'List Workspace Folder')
   bufmap('n', '<leader>gd', vim.lsp.buf.type_definition, 'Type Definition')
 
   bufmap('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, 'Format')
   bufmap('v', '<leader>gf', vim.lsp.buf.format, 'Format')
+  bufmap('n', '<leader>gD', toggle_diagnostics, 'Toggle Dignostics')
+  bufmap('n', '<leader>gI',
+    function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end,
+    'Toggle Inlay Hints')
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -110,7 +130,10 @@ lspconfig.lua_ls.setup {
       diagnostics = {
         globals = { 'vim', 'RequireVim' },
         disable = { "missing-fields" }
-      }
+      },
+      hint = {
+        enable = true
+      },
     }
   }
 }
