@@ -98,7 +98,6 @@ lspconfig.util.default_config = vim.tbl_extend(
   }
 )
 
-local open_url = require('utils').open_url;
 vim.g.rustaceanvim = {
   server = {
     default_settings = {
