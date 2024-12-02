@@ -52,6 +52,14 @@ local on_attach = function(_, bufnr)
     end
   end
 
+  if vim.lsp.codelens then
+    vim.lsp.codelens.refresh()
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      buffer = bufnr,
+      callback = vim.lsp.codelens.refresh,
+    })
+  end
+
   -- Mappings.
   local bufmap = function(mode, mapping, rhs, desc)
     vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true, buffer = bufnr })
@@ -71,11 +79,9 @@ local on_attach = function(_, bufnr)
 
   bufmap('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, 'Format')
   bufmap('v', '<leader>gf', vim.lsp.buf.format, 'Format')
+  bufmap('n', '<leader>gc', vim.lsp.codelens.run, 'Run CodeLens')
   bufmap('n', '<leader>gD', toggle_diagnostics, 'Toggle Dignostics')
-  bufmap('n', '<leader>gI',
-    function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-    end,
+  bufmap('n', '<leader>gI', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
     'Toggle Inlay Hints')
 end
 
@@ -133,6 +139,9 @@ lspconfig.lua_ls.setup {
       },
       hint = {
         enable = true
+      },
+      codeLens = {
+        enable = true,
       },
     }
   }
