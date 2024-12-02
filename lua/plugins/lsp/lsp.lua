@@ -99,36 +99,25 @@ lspconfig.util.default_config = vim.tbl_extend(
 )
 
 local open_url = require('utils').open_url;
-lspconfig.rust_analyzer.setup({
-  settings = {
-    ['rust-analyzer'] = {
-      check = {
-        command = "clippy"
+vim.g.rustaceanvim = {
+  server = {
+    default_settings = {
+      ['rust-analyzer'] = {
+        check = {
+          command = "clippy",
+        }
       }
-    }
-  },
-  commands = {
-    RustOpenExternalDocs = {
-      function()
-        vim.lsp.buf_request(vim.api.nvim_get_current_buf(), 'experimental/externalDocs',
-          vim.lsp.util.make_position_params(), function(err, url)
-            if err then
-              error(tostring(err))
-            elseif url == nil then
-              print("No documentation found.")
-            else
-              open_url(url)
-            end
-          end)
-      end,
-      description = 'Open documentation for the symbol under the cursor in default browser',
     },
-  },
-  on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
-    map('n', '<leader>ge', ':RustOpenExternalDocs<CR>', 'Open Ext. Docs')
-  end,
-})
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      local bufmap = function(mode, mapping, rhs, desc)
+        vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true, buffer = bufnr })
+      end
+      bufmap('n', 'K', function() vim.cmd.RustLsp({ 'hover', 'actions' }) end, 'Hover')
+      bufmap('n', 'gra', function() vim.cmd.RustLsp('codeAction') end, 'Code Action')
+    end,
+  }
+}
 
 lspconfig.lua_ls.setup {
   settings = {
