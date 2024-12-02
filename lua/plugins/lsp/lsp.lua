@@ -149,7 +149,20 @@ lspconfig.lua_ls.setup {
 
 -- setup servers
 lspconfig.vimls.setup {}
-lspconfig.ts_ls.setup {}
+lspconfig.ts_ls.setup {
+  init_options = {
+    preferences = {
+      includeInlayParameterNameHints = 'all',
+      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayVariableTypeHints = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayEnumMemberValueHints = true,
+      importModuleSpecifierPreference = 'non-relative',
+    },
+  },
+}
 lspconfig.pyright.setup {}
 lspconfig.jdtls.setup {}
 lspconfig.jsonls.setup {}
