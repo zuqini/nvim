@@ -52,6 +52,6 @@ augroup END
 
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter,CmdlineLeave * if &nu && mode() != "i" | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave,CmdlineEnter   * if &nu                  | set nornu | redraw | endif
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter,CmdlineLeave * if g:hybrid_nu && &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave,CmdlineEnter   * if g:hybrid_nu && &nu                  | set nornu | redraw | endif
 augroup END

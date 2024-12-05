@@ -41,4 +41,15 @@ M.open_url = function (url)
   return false
 end
 
+M.clear_reg = function ()
+  print('Clearing registers')
+  vim.cmd [[
+    let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
+    for r in regs
+    call setreg(r, [])
+    endfor
+]]
+end
+
+
 return M

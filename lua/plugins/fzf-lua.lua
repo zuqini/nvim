@@ -81,8 +81,8 @@ return {
 
     nmap('fo', ":lua require'fzf-lua'.oldfiles()<CR>", 'Old Files')
 
-    nmap(',s', ":lua require'fzf-lua'.git_files()<CR>", 'Git Files')
-    nmap(',t', ":lua require'fzf-lua'.git_status()<CR>", 'Git Status')
+    nmap(',f', ":lua require'fzf-lua'.git_files()<CR>", 'Git Files')
+    nmap(',s', ":lua require'fzf-lua'.git_status()<CR>", 'Git Status')
     nmap(',c', ":lua require'fzf-lua'.git_commits()<CR>", 'Git Commits')
     nmap(',x', ":lua require'fzf-lua'.git_bcommits()<CR>", 'Git BCommits')
     nmap(',b', ":lua require'fzf-lua'.git_branches()<CR>", 'Git Branches')
@@ -92,15 +92,15 @@ return {
     nmap('lD', ":lua require'fzf-lua'.lsp_declarations()<CR>", 'LSP Decl')
     nmap('lt', ":lua require'fzf-lua'.lsp_typedefs()<CR>", 'LSP TypeDefs')
     nmap('li', ":lua require'fzf-lua'.lsp_implementations()<CR>", 'LSP Impls')
-    nmap('lc', ":lua require'fzf-lua'.lsp_code_actions()<CR>", 'LSP Code Actions')
+    nmap('la', ":lua require'fzf-lua'.lsp_code_actions()<CR>", 'LSP Code Actions')
     nmap('lsd', ":lua require'fzf-lua'.lsp_document_symbols()<CR>", 'LSP Doc Symbols')
     nmap('lsw', ":lua require'fzf-lua'.lsp_workspace_symbols()<CR>", 'LSP Workspace Symbols')
     nmap('lsW', ":lua require'fzf-lua'.lsp_live_workspace_symbols()<CR>", 'LSP Live Workspace Symbols')
     nmap('lg', ":lua require'fzf-lua'.lsp_document_diagnostics()<CR>", 'LSP Doc Diagnostics')
     nmap('lG', ":lua require'fzf-lua'.lsp_workspace_diagnostics()<CR>", 'LSP Workspace Diagnostics')
 
-    nmap('lq', ":lua require'fzf-lua'.quickfix()<CR>", 'QuickFix')
-    nmap('lQ', ":lua require'fzf-lua'.loclist()<CR>", 'LocList')
+    nmap('lc', ":lua require'fzf-lua'.quickfix()<CR>", 'QuickFix')
+    nmap('lx', ":lua require'fzf-lua'.loclist()<CR>", 'LocList')
 
     nmap('fc', ":lua require'fzf-lua'.commands()<CR>", 'Commands')
     nmap('fe', ":lua require'fzf-lua'.resume()<CR>", 'REsume')

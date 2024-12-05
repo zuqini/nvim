@@ -1,19 +1,11 @@
-function ClearReg()
-  print('Clearing registers')
-  vim.cmd [[
-    let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
-    for r in regs
-    call setreg(r, [])
-    endfor
-]]
-end
+local clear_reg = require("utils").clear_reg
+local opts = { bang = true }
 
 vim.api.nvim_create_user_command('ClearReg', function()
-  ClearReg()
-end, {})
+  clear_reg()
+end, opts)
 
 -- tabs
-vim.api.nvim_create_user_command('TS', "tab split", { bang = true })
-vim.api.nvim_create_user_command('TB', "tab new", { bang = true })
-vim.api.nvim_create_user_command('VS', "vs", { bang = true })
-vim.api.nvim_create_user_command('SP', "sp", { bang = true })
+vim.api.nvim_create_user_command('TS', "tab split", opts)
+vim.api.nvim_create_user_command('TB', "tab new", opts)
+vim.api.nvim_create_user_command('HN', "let g:hybrid_nu = !g:hybrid_nu | if g:hybrid_nu | set rnu | else | set nornu | endif", opts)

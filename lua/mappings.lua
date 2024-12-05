@@ -18,7 +18,6 @@ nmap_leader('w', ':up<CR>', 'Save')
 nmap_leader('W', ':up<CR>:MT<CR>', 'Save & CTags')
 nmap_leader('C', ":put=execute(':')<left><left>", 'Put :Cmd')
 
-nmap_leader('z', ':let &scrolloff=999-&scrolloff<CR>', 'Center Cursor')
 nmap_leader('<BS>', ':%bd!|e#|bd!#<CR>', 'Delete All Other Buffers')
 
 nmap('gq', ':%!jq<CR>', 'JQ')
