@@ -59,6 +59,9 @@ return {
         ["gutter"]  = { "bg", "Normal" },
       },
       keymap = {
+        builtin = {
+          ["<Esc>"] = "hide",
+        },
         fzf = {
           -- Send all current search results to QuickFix list
           ["ctrl-q"] = "select-all+accept", -- https://github.com/ibhagwan/fzf-lua/issues/324
