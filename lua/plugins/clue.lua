@@ -23,6 +23,10 @@ return {
         { mode = 'n', keys = 'z' },
         { mode = 'x', keys = 'z' },
 
+        -- `s` key
+        { mode = 'n', keys = 's' },
+        { mode = 'x', keys = 's' },
+
         -- Marks
         { mode = 'n', keys = "'" },
         { mode = 'n', keys = '`' },
