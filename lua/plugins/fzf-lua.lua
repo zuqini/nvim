@@ -60,9 +60,11 @@ return {
       },
       keymap = {
         builtin = {
+          true,
           ["<Esc>"] = "hide",
         },
         fzf = {
+          true,
           -- Send all current search results to QuickFix list
           ["ctrl-q"] = "select-all+accept", -- https://github.com/ibhagwan/fzf-lua/issues/324
         }
