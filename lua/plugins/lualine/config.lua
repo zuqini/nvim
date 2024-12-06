@@ -37,19 +37,6 @@ vim.diagnostic.config({
   }
 })
 
-local navic = require("nvim-navic")
-local winbar_navic = {
-  {
-    function()
-      return navic.get_location()
-    end,
-    cond = function()
-      return navic.is_available()
-    end,
-    section_separators = angle_up_seps,
-  },
-};
-
 local winbar_file_info = {
   {
     'filetype',
@@ -143,6 +130,14 @@ require('lualine').setup {
   tabline = {
     lualine_a = {
       {
+        'tabs',
+        mode = 0,
+        show_modified_status = false,
+        section_separators = angle_down_seps,
+      },
+    },
+    lualine_z = {
+      {
         'filetype',
         colored = false,
         icon_only = true,
@@ -162,22 +157,12 @@ require('lualine').setup {
         separator = '',
       },
     },
-    lualine_z = {
-      {
-        'tabs',
-        mode = 0,
-        show_modified_status = false,
-        section_separators = angle_down_seps,
-      },
-    }
   },
   winbar = {
-    lualine_b = winbar_navic,
-    lualine_y = winbar_file_info
+    lualine_b = winbar_file_info
   },
   inactive_winbar = {
-    lualine_c = winbar_navic,
-    lualine_x = winbar_file_info,
+    lualine_c = winbar_file_info,
   },
   sections = sections,
   extensions = { 'fzf' },

@@ -27,6 +27,9 @@ return {
         { mode = 'n', keys = 's' },
         { mode = 'x', keys = 's' },
 
+        -- `d` key
+        { mode = 'n', keys = 'd' },
+
         -- Marks
         { mode = 'n', keys = "'" },
         { mode = 'n', keys = '`' },
