@@ -8,7 +8,7 @@ endfunction
 
 function! ToggleLocList()
   if empty(filter(getwininfo(), 'v:val.loclist'))
-    lua vim.diagnostic.setloclist()
+    lua if vim.lsp.buf_is_attached() then vim.diagnostic.setloclist() elseif not pcall(vim.cmd, 'lopen') then print('No location list') end
   else
     lclose
   endif
