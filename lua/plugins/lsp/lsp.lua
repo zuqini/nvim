@@ -5,12 +5,14 @@ local map = function(mode, mapping, rhs, desc)
   vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true })
 end
 
-map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Dignostic Float')
+map('n', '<leader>e', vim.diagnostic.open_float, 'Dignostic Float')
 
 -- these are default in nvim v0.11
 map('n', 'grn', vim.lsp.buf.rename, 'Rename')
 map('n', 'gra', vim.lsp.buf.code_action, 'Code Action')
 map('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end, 'References')
+map('n', 'gri', vim.lsp.buf.implementation, 'Implementation')
+map('n', 'gO', vim.lsp.buf.document_symbol, 'Document Symbol')
 map('i', '<c-s>', vim.lsp.buf.signature_help, 'Signature Help')
 
 vim.diagnostic.config({
@@ -65,21 +67,20 @@ local on_attach = function(_, bufnr)
     vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true, buffer = bufnr })
   end
   -- See `:help vim.lsp.*` for documentation on any of the below functions
+  bufmap('n', '<C-]>', vim.lsp.buf.definition, 'Definition')
   bufmap('n', 'gd', vim.lsp.buf.definition, 'Definition')
-  bufmap('n', 'gD', vim.lsp.buf.declaration, 'Declaration')
+  bufmap('n', 'gD', vim.lsp.buf.type_definition, 'Type Definition')
   bufmap('n', 'gR', vim.lsp.buf.references, 'References w/ Declaration')
-  bufmap('n', 'gi', vim.lsp.buf.implementation, 'Implementation')
 
   bufmap('n', '<leader>K', vim.lsp.buf.signature_help, 'Signature Help')
+  bufmap('n', '<leader>gd', vim.lsp.buf.declaration, 'Declaration')
   bufmap('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, 'Add Workspace Folder')
   bufmap('n', '<leader>gr', vim.lsp.buf.remove_workspace_folder, 'Remove Workspace Folder')
   bufmap('n', '<leader>gl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
     'List Workspace Folder')
-  bufmap('n', '<leader>gd', vim.lsp.buf.type_definition, 'Type Definition')
 
-  bufmap('n', '<leader>gf', function() vim.lsp.buf.format { async = true } end, 'Format')
-  bufmap('v', '<leader>gf', vim.lsp.buf.format, 'Format')
   bufmap('n', '<leader>gc', vim.lsp.codelens.run, 'Run CodeLens')
+
   bufmap('n', '<leader>gD', toggle_diagnostics, 'Toggle Dignostics')
   bufmap('n', '<leader>gI', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
     'Toggle Inlay Hints')
