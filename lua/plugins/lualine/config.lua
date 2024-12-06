@@ -13,7 +13,7 @@ local angle_up_thin2_seps = { left = '', right = '' }
 local triangle_thin_seps = { left = '', right = '' }
 local circle_thin_seps = { left = '', right = '' }
 
-local symbols = { error = "󰅚  ", warn = "󰀪  ", hint = "󰌶  ", info = "󰋽  " }
+local symbols = { error = "󰅚  ", warn = "󰀪  ", hint = "󰌶 ", info = "󰋽  " }
 vim.diagnostic.config({
   signs = {
     text = {
