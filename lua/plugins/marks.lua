@@ -53,10 +53,6 @@ return {
       bookmark_9 = {
         sign = "9",
       },
-      mappings = {
-        next_bookmark = "m/",
-        prev_bookmark = "m\\"
-      }
     }
   end,
 }

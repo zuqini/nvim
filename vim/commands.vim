@@ -4,6 +4,8 @@ command! LS :Lazy sync
 command! -bang -nargs=* SearchMulti call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 command! -bang -nargs=* SM call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 
+command! DM :delm! | delm A-Z0-9
+
 " literal search
 command! -nargs=1 Search :let @/='\V'.escape(<q-args>, '\\')| normal! n
 command! -nargs=1 S :let @/='\V'.escape(<q-args>, '\\')| normal! n
