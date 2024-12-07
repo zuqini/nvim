@@ -1,6 +1,8 @@
 local theme = require('utils.theme-hot-reload').get_current_lualine_theme()
 
 local no_seps = { left = '', right = '' }
+local winbar_no_seps = { left = ' '} -- need to add an extra space, or else the component would take up the whole bar
+
 local angle_down_seps = { left = '', right = '' }
 local angle_up_seps = { left = '', right = '' }
 local triangle_seps = { left = '', right = '' }
@@ -42,8 +44,9 @@ local winbar_file_info = {
     'filetype',
     icon_only = true,
     padding = { left = 1, right = 0 },
-    component_separators = no_seps,
-    section_separators = angle_up_seps,
+    -- component_separators = no_seps,
+    -- section_separators = angle_up_seps,
+    section_separators = winbar_no_seps,
   },
   {
     'filename',
@@ -119,8 +122,10 @@ local sections = {
 require('lualine').setup {
   options = {
     theme = theme,
-    component_separators = angle_down_thin2_seps,
-    section_separators = angle_down_seps,
+    -- component_separators = angle_down_thin2_seps,
+    -- section_separators = angle_down_seps,
+    component_separators = no_seps,
+    section_separators = no_seps,
     icons_enabled = true,
     globalstatus = true,
 
@@ -133,7 +138,7 @@ require('lualine').setup {
         'tabs',
         mode = 0,
         show_modified_status = false,
-        section_separators = angle_down_seps,
+        -- section_separators = angle_down_seps,
       },
     },
     lualine_z = {
@@ -142,8 +147,8 @@ require('lualine').setup {
         colored = false,
         icon_only = true,
         padding = { left = 1, right = 0 },
-        component_separators = no_seps,
-        section_separators = angle_down_seps,
+        -- component_separators = no_seps,
+        -- section_separators = angle_down_seps,
       },
       {
         'filename',
