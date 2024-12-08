@@ -1,14 +1,6 @@
 local vrequire = require("utils").vrequire
 return {
   {
-    'junegunn/fzf.vim',
-    enabled = vim.g.fuzzy_search_plugin == 'fzf.vim',
-    dependencies = { 'junegunn/fzf' },
-    config = function()
-      vrequire('plugins.fzf');
-    end
-  },
-  {
     'mbbill/undotree',
     config = function()
       vrequire('plugins/undotree')
@@ -23,6 +15,6 @@ return {
     end
   },
   { 'stevearc/vim-arduino', ft = "arduino", },
-  { 'habamax/vim-godot',    ft = "gdscript" },
-  { 'tpope/vim-fugitive',   cmd = 'G' },
+  { 'habamax/vim-godot', ft = "gdscript" },
+  { 'tpope/vim-fugitive', cmd = 'G' },
 }

@@ -4,7 +4,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- detect if is windows
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
-vim.g.fuzzy_search_plugin = "fzf-lua"
 vim.g.transparent_background = true
 
 _G.clear_floats_and_highlights = function ()
