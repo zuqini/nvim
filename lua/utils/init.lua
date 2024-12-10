@@ -51,5 +51,26 @@ M.clear_reg = function ()
 ]]
 end
 
+M.set_transparent_background = function()
+  if vim.g.transparent_background then
+    vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
+    vim.cmd('hi NormalNC guibg=NONE ctermbg=NONE')
+    vim.cmd('hi Terminal guibg=NONE ctermbg=NONE')
+    vim.cmd('hi SignColumn guibg=NONE ctermbg=NONE')
+
+    vim.cmd('hi TelescopeBorder guibg=NONE ctermbg=NONE')
+    vim.cmd('hi TelescopePromptNormal guibg=NONE ctermbg=NONE')
+    vim.cmd('hi TelescopePreviewNormal guibg=NONE ctermbg=NONE')
+    vim.cmd('hi TelescopeResultsNormal guibg=NONE ctermbg=NONE')
+
+    if vim.g.colors_name ~= "gruvbox-material" then
+      vim.cmd('hi DiagnosticVirtualTextError guibg=NONE ctermbg=NONE')
+      vim.cmd('hi DiagnosticVirtualTextWarn guibg=NONE ctermbg=NONE')
+      vim.cmd('hi DiagnosticVirtualTextInfo guibg=NONE ctermbg=NONE')
+      vim.cmd('hi DiagnosticVirtualTextHint guibg=NONE ctermbg=NONE')
+      vim.cmd('hi DiagnosticVirtualTextOk guibg=NONE ctermbg=NONE')
+    end
+  end
+end
 
 return M

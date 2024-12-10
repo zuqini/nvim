@@ -63,7 +63,7 @@ return {
       }
     })
 
-    -- don't need this with noice
+    -- don't need this with noice.nvim
     -- local border = {
     --   { "╭", "FloatBorder" },
     --   { "─", "FloatBorder" },

@@ -17,6 +17,9 @@ command! MT silent :MakeTags
 " set current working directory
 command! CD :cd %:p:h
 
+" transparent bg
+autocmd vimenter * lua require('utils').set_transparent_background()
+
 " Augroups
 augroup mainMiscCommands
   au!
@@ -31,25 +34,6 @@ augroup CustomFloatColors
   au!
   au ColorScheme * highlight! link NormalFloat Normal
   au ColorScheme * highlight! link FloatBorder Normal
-augroup END
-
-augroup TransparentBackground
-  " transparent bg
-  autocmd vimenter * if g:transparent_background | hi Normal guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi NormalNC guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi Terminal guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi SignColumn guibg=NONE ctermbg=NONE
-
-  autocmd vimenter * if g:transparent_background | hi TelescopeBorder guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi TelescopePromptNormal guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi TelescopePreviewNormal guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background | hi TelescopeResultsNormal guibg=NONE ctermbg=NONE
-
-  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextOk guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextHint guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextInfo guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextWarn guibg=NONE ctermbg=NONE
-  autocmd vimenter * if g:transparent_background && g:colors_name != "gruvbox-material" | hi DiagnosticVirtualTextError guibg=NONE ctermbg=NONE
 augroup END
 
 augroup numbertoggle
