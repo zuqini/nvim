@@ -46,9 +46,11 @@ return {
 
     -- these are default in nvim v0.11
     -- map('n', 'grn', vim.lsp.buf.rename, 'Rename')
+
     vim.keymap.set("n", 'grn', function()
       return ":IncRename " .. vim.fn.expand("<cword>")
     end, { desc = 'Rename', noremap = true, silent = true, expr = true })
+    map("n", "grN", ":IncRename ", "Rename (Clear)")
     map('n', 'gra', vim.lsp.buf.code_action, 'Code Action')
     map('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end, 'References')
     map('n', 'gri', vim.lsp.buf.implementation, 'Implementation')
