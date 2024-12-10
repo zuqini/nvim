@@ -58,13 +58,16 @@ function M.select_theme_by_index(index)
         package.loaded[package_name] = nil
       end
     end
-    if package_name:match('indent_blankline') or
-        package_name:match('indent%-blankline') or
-        package_name:match('ibl') then
-        ibl_loaded = true
+    if package_name:match('indent_blankline')
+        or package_name:match('indent%-blankline')
+        or package_name:match('ibl')
+    then
+      ibl_loaded = true
       package.loaded[package_name] = nil
     end
-    if package_name:match('lualine') then
+    if package_name:match('lualine')
+        or package_name:match('noice')
+    then
       package.loaded[package_name] = nil
     end
   end
@@ -75,6 +78,7 @@ function M.select_theme_by_index(index)
     require('plugins.config.ibl')
   end
   require('plugins.config.lualine')
+  require('plugins.config.noice')
   if vim.g.transparent_background then
     vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
     vim.cmd('hi NormalNC guibg=NONE ctermbg=NONE')
