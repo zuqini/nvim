@@ -63,25 +63,24 @@ return {
       }
     })
 
-    -- don't need this with noice.nvim
-    -- local border = {
-    --   { "╭", "FloatBorder" },
-    --   { "─", "FloatBorder" },
-    --   { "╮", "FloatBorder" },
-    --   { "│", "FloatBorder" },
-    --   { "╯", "FloatBorder" },
-    --   { "─", "FloatBorder" },
-    --   { "╰", "FloatBorder" },
-    --   { "│", "FloatBorder" },
-    -- }
-    --
-    -- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-    -- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-    --   ---@class vim.lsp.util.open_floating_preview.Opts
-    --   opts = opts or {}
-    --   opts.border = opts.border or border
-    --   return orig_util_open_floating_preview(contents, syntax, opts, ...)
-    -- end
+    local border = {
+      { "╭", "FloatBorder" },
+      { "─", "FloatBorder" },
+      { "╮", "FloatBorder" },
+      { "│", "FloatBorder" },
+      { "╯", "FloatBorder" },
+      { "─", "FloatBorder" },
+      { "╰", "FloatBorder" },
+      { "│", "FloatBorder" },
+    }
+
+    local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+      ---@class vim.lsp.util.open_floating_preview.Opts
+      opts = opts or {}
+      opts.border = opts.border or border
+      return orig_util_open_floating_preview(contents, syntax, opts, ...)
+    end
 
     local on_attach = function(_, bufnr)
       vim.lsp.inlay_hint.enable(true)
