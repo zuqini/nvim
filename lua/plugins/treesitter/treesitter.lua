@@ -7,7 +7,7 @@ return {
 
     require 'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all"
-      ensure_installed = {},
+      ensure_installed = { 'regex' },
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,
@@ -93,7 +93,7 @@ return {
           -- mapping query_strings to modes.
           selection_modes = {
             ['@parameter.outer'] = 'v', -- charwise
-            ['@function.outer'] = 'V', -- linewise
+            ['@function.outer'] = 'V',  -- linewise
             ['@class.outer'] = '<c-v>', -- blockwise
           },
           -- If you set this to `true` (default is `false`) then any textobject is
