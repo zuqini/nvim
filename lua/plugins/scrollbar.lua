@@ -1,6 +1,10 @@
 return {
-  'drybalka/tree-climber.nvim',
+  'petertriho/nvim-scrollbar',
   event = 'VeryLazy',
+  dependencies = {
+    'lewis6991/gitsigns.nvim',
+    'kevinhwang91/nvim-hlslens',
+  },
   config = function()
     require("scrollbar.handlers.search").setup({
       override_lens = function() end,
@@ -25,5 +29,5 @@ return {
         GitDelete = { color = '#e57474' },
       }
     })
-  end
+  end,
 }
