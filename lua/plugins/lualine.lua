@@ -5,6 +5,6 @@ return {
   },
   config = function ()
     -- separating config out so it can be hot-reloaded later in utils.themes-hot-reload
-    require('plugins.lualine.config')
+    require('plugins.config.lualine')
   end
 }

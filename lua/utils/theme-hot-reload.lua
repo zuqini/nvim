@@ -72,9 +72,9 @@ function M.select_theme_by_index(index)
   theme_index = index
   require('plugins.themes.' .. M.get_current_theme())
   if ibl_loaded then
-    require('plugins.indent.ibl-config')
+    require('plugins.config.ibl')
   end
-  require('plugins.lualine.config')
+  require('plugins.config.lualine')
   if vim.g.transparent_background then
     vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
     vim.cmd('hi NormalNC guibg=NONE ctermbg=NONE')
