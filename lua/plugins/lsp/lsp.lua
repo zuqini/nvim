@@ -45,7 +45,10 @@ return {
     map('n', '<leader>e', vim.diagnostic.open_float, 'Dignostic Float')
 
     -- these are default in nvim v0.11
-    map('n', 'grn', vim.lsp.buf.rename, 'Rename')
+    -- map('n', 'grn', vim.lsp.buf.rename, 'Rename')
+    vim.keymap.set("n", 'grn', function()
+      return ":IncRename " .. vim.fn.expand("<cword>")
+    end, { desc = 'Rename', noremap = true, silent = true, expr = true })
     map('n', 'gra', vim.lsp.buf.code_action, 'Code Action')
     map('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end, 'References')
     map('n', 'gri', vim.lsp.buf.implementation, 'Implementation')
@@ -58,24 +61,25 @@ return {
       }
     })
 
-    local border = {
-      { "╭", "FloatBorder" },
-      { "─", "FloatBorder" },
-      { "╮", "FloatBorder" },
-      { "│", "FloatBorder" },
-      { "╯", "FloatBorder" },
-      { "─", "FloatBorder" },
-      { "╰", "FloatBorder" },
-      { "│", "FloatBorder" },
-    }
-
-    local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-      ---@class vim.lsp.util.open_floating_preview.Opts
-      opts = opts or {}
-      opts.border = opts.border or border
-      return orig_util_open_floating_preview(contents, syntax, opts, ...)
-    end
+    -- don't need this with noice
+    -- local border = {
+    --   { "╭", "FloatBorder" },
+    --   { "─", "FloatBorder" },
+    --   { "╮", "FloatBorder" },
+    --   { "│", "FloatBorder" },
+    --   { "╯", "FloatBorder" },
+    --   { "─", "FloatBorder" },
+    --   { "╰", "FloatBorder" },
+    --   { "│", "FloatBorder" },
+    -- }
+    --
+    -- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+    -- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+    --   ---@class vim.lsp.util.open_floating_preview.Opts
+    --   opts = opts or {}
+    --   opts.border = opts.border or border
+    --   return orig_util_open_floating_preview(contents, syntax, opts, ...)
+    -- end
 
     local on_attach = function(_, bufnr)
       vim.lsp.inlay_hint.enable(true)
