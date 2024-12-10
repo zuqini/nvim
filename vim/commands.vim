@@ -1,6 +1,9 @@
 command! L :Lazy
 command! LS :Lazy sync
 
+command! H :Noice
+command! M :messages
+
 command! -bang -nargs=* SearchMulti call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 command! -bang -nargs=* SM call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 
