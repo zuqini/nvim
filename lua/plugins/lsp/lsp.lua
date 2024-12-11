@@ -10,16 +10,7 @@ return {
         },
       },
       config = function()
-        require('mason').setup({
-          ui = {
-            icons = {
-              server_installed = "✓",
-              server_pending = "➜",
-              server_uninstalled = "✗"
-            }
-          }
-        })
-
+        require('mason').setup()
         require("mason-lspconfig").setup({
           automatic_installation = {
             exclude = {
@@ -199,6 +190,7 @@ return {
     lspconfig.jsonls.setup {}
     lspconfig.gdscript.setup {}
     lspconfig.astro.setup {}
+    lspconfig.css_lsp.setup {}
 
     -- expose on_attach and capabilities to other config files
     lspconfig.zuqini_custom = {}
