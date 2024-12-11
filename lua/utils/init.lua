@@ -73,4 +73,12 @@ M.set_transparent_background = function()
   end
 end
 
+M.is_large_file = function (buf)
+  local max_filesize = 1024 * 1024 -- 1MiB
+  local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+  if ok and stats and stats.size > max_filesize then
+    return true
+  end
+end
+
 return M

@@ -1,5 +1,5 @@
 return {
-  "shellRaining/hlchunk.nvim",
+  "shellRaining/hlchunk.nvim", -- looks prettier than hlchunk, but significant worse perf
   enabled = false,
   event = { "BufReadPre", "BufNewFile" },
   config = function()

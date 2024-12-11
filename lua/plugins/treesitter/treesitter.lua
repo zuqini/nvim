@@ -38,9 +38,7 @@ return {
           end
 
           -- Then check max file size
-          local max_filesize = 1 * 1024 * 1024 -- 1MiB
-          local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-          if ok and stats and stats.size > max_filesize then
+          if require('utils').is_large_file(buf) then
             return true
           end
 

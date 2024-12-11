@@ -46,6 +46,6 @@ return {
         inc_rename = false,       -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true,    -- add a border to hover docs and signature help
       },
-    })                            -- vim.cmd("set showtabline=1") --https://github.com/nvim-lualine/lualine.nvim/issues/395
+    })
   end
 }
