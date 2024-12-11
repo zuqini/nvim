@@ -227,6 +227,5 @@ return {
     --     "-clangd", "clangd"
     --   }
     -- }
-    pcall(function() require("plugins.config.custom_lsp") end) -- this is for env specific lsp configs
   end
 }
