@@ -18,6 +18,7 @@ require('noice').setup({
       filter = { pattern = "^:%s*!", icon = "λ:!", lang = "bash" },
       lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = " :", lang = "lua" },
       help = { pattern = "^:%s*he?l?p?%s+", icon = " :" },
+      inc_rename = { pattern = "^:%s*IncRename%s+", icon = " :" },
       input = { view = "cmdline_input", icon = "󰥻 :" }, -- Used by input()
     },
   },

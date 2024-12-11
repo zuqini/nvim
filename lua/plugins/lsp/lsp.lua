@@ -190,7 +190,7 @@ return {
     lspconfig.jsonls.setup {}
     lspconfig.gdscript.setup {}
     lspconfig.astro.setup {}
-    lspconfig.css_lsp.setup {}
+    lspconfig.cssls.setup {}
 
     -- expose on_attach and capabilities to other config files
     lspconfig.zuqini_custom = {}
