@@ -6,180 +6,46 @@ return {
     "MunifTanjim/nui.nvim",
   },
   config = function()
-    local theme = require('utils.theme').get_current_lualine_theme()
-
-    local no_seps = { left = '', right = '' }
-    local winbar_no_seps = { left = ' ' } -- need to add an extra space, or else the component would take up the whole bar
-
-    local angle_down_seps = { left = '', right = '' }
-    local angle_up_seps = { left = '', right = '' }
-    local triangle_seps = { left = '', right = '' }
-    local circle_seps = { left = '', right = '' }
-
-    local angle_down_thin_seps = { left = '\\', right = '/' }
-    local angle_up_thin_seps = { left = '/', right = '\\' }
-    local angle_down_thin2_seps = { left = '', right = '' }
-    local angle_up_thin2_seps = { left = '', right = '' }
-    local triangle_thin_seps = { left = '', right = '' }
-    local circle_thin_seps = { left = '', right = '' }
-
-    local symbols = { error = "󰅚  ", warn = "󰀪  ", hint = "󰌶 ", info = "󰋽  " }
-    vim.diagnostic.config({
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = '󰅚',
-          [vim.diagnostic.severity.WARN] = '󰀪',
-          [vim.diagnostic.severity.HINT] = '󰌶',
-          [vim.diagnostic.severity.INFO] = '󰋽',
-        },
-        linehl = {
-          [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
-          [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-          [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
-          [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-        },
-        numhl = {
-          [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
-          [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-          [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
-          [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-        },
-      }
-    })
-
-    local winbar_file_info = {
-      {
-        'filetype',
-        icon_only = true,
-        padding = { left = 1, right = 0 },
-        -- component_separators = no_seps,
-        -- section_separators = angle_up_seps,
-        section_separators = winbar_no_seps,
-      },
-      {
-        'filename',
-        file_status = true,
-        path = 0,
-        symbols = {
-          modified = '[+]',
-          readonly = '[-]',
-          unnamed = '[]',
-        },
-        separator = '',
-      },
-    };
-
-    local sections = {
-      lualine_a = {
-        {
-          'mode',
-          fmt = string.upper,
-        }
-      },
-      lualine_b = {
-        {
-          'branch',
-          icon = '',
-          separator = ':'
-        },
-        { 'diff' },
-      },
-      lualine_c = {
-        {
-          'diagnostics',
-          sources = { 'nvim_diagnostic', },
-
-          sections = { 'error', 'warn', 'info', 'hint' },
-
-          symbols = symbols,
-          colored = true, -- Displays diagnostics status in color if set to true.
-          update_in_insert = false, -- Update diagnostics in insert mode.
-          always_visible = false, -- Show diagnostics even if there are none.
-        },
-      },
-      lualine_x = {
-        {
-          'filetype',
-          icon = { align = 'right' }, -- Display filetype icon on the right hand side
-          padding = { left = 1, right = 1 },
-          separator = '·',
-        },
-        {
-          'fileformat',
-          symbols = {
-            -- unix = '  ',
-            unix = ' 󰀶 ',
-            dos = '󰨡 ',
-            mac = '󰀶 ',
-          },
-          separator = '·',
-        },
-        {
-          'encoding',
-          separator = '·',
-        },
-        {
-          'filesize',
-          separator = '·',
-        },
-      },
-      lualine_y = { 'progress' },
-      lualine_z = { 'location' },
-    }
-
-    require('lualine').setup {
-      options = {
-        theme = theme,
-        -- component_separators = angle_down_thin2_seps,
-        -- section_separators = angle_down_seps,
-        component_separators = no_seps,
-        section_separators = no_seps,
-        icons_enabled = true,
-        globalstatus = true,
-
-        -- Uncomment to disable icons
-        -- icons_enabled = false,
-      },
-      tabline = {
-        lualine_a = {
-          {
-            'tabs',
-            mode = 0,
-            show_modified_status = false,
-            -- section_separators = angle_down_seps,
-          },
-        },
-        lualine_z = {
-          {
-            'filetype',
-            colored = false,
-            icon_only = true,
-            padding = { left = 1, right = 0 },
-            -- component_separators = no_seps,
-            -- section_separators = angle_down_seps,
-          },
-          {
-            'filename',
-            file_status = true,
-            path = 1,
-            symbols = {
-              modified = '[+]',
-              readonly = '[-]',
-              unnamed = '[]',
-            },
-            separator = '',
+    require('noice').setup({
+      notify = { enabled = false },
+      views = {
+        mini = {
+          align = "message-left",
+          timeout = 5000,
+          position = {
+            col = 0,
           },
         },
       },
-      winbar = {
-        lualine_b = winbar_file_info
+      cmdline = {
+        view = "cmdline",
+        format = {
+          cmdline = { pattern = "^:", icon = " :", lang = "vim" },
+          search_down = { kind = "search", pattern = "^/", icon = "  /", lang = "regex" },
+          search_up = { kind = "search", pattern = "^%?", icon = "  /", lang = "regex" },
+          filter = { pattern = "^:%s*!", icon = "λ:!", lang = "bash" },
+          lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = " :", lang = "lua" },
+          help = { pattern = "^:%s*he?l?p?%s+", icon = " :" },
+          inc_rename = { pattern = "^:%s*IncRename%s+", icon = " :" },
+          input = { view = "cmdline_input", icon = "󰥻 :" }, -- Used by input()
+        },
       },
-      inactive_winbar = {
-        lualine_c = winbar_file_info,
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+        },
       },
-      sections = sections,
-      extensions = { 'fzf' },
-    }
-    -- vim.cmd("set showtabline=1") --https://github.com/nvim-lualine/lualine.nvim/issues/395
+      -- you can enable a preset for easier configuration
+      presets = {
+        bottom_search = true,     -- use a classic bottom cmdline for search
+        command_palette = true,   -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false,       -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true,    -- add a border to hover docs and signature help
+      },
+    })                            -- vim.cmd("set showtabline=1") --https://github.com/nvim-lualine/lualine.nvim/issues/395
   end
 }
