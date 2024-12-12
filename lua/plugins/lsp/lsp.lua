@@ -36,17 +36,20 @@ return {
     map('n', '<leader>e', vim.diagnostic.open_float, 'Dignostic Float')
 
     -- these are default in nvim v0.11
-    -- map('n', 'grn', vim.lsp.buf.rename, 'Rename')
-
-    vim.keymap.set("n", 'grn', function()
-      return ":IncRename " .. vim.fn.expand("<cword>")
-    end, { desc = 'Rename', noremap = true, silent = true, expr = true })
-    map("n", "grN", ":IncRename ", "Rename (Clear)")
     map('n', 'gra', vim.lsp.buf.code_action, 'Code Action')
     map('n', 'grr', function() vim.lsp.buf.references { includeDeclaration = false } end, 'References')
     map('n', 'gri', vim.lsp.buf.implementation, 'Implementation')
     map('n', 'gO', vim.lsp.buf.document_symbol, 'Document Symbol')
     map('i', '<c-s>', vim.lsp.buf.signature_help, 'Signature Help')
+    -- map('n', 'grn', vim.lsp.buf.rename, 'Rename')
+    map("n", "grn", ":IncRename ", "Rename (Clear)")
+    vim.keymap.set(
+      "n",
+      'grN',
+      function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end,
+      { desc = 'Rename', noremap = true, silent = true, expr = true })
 
     vim.diagnostic.config({
       virtual_text = {
