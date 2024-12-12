@@ -94,8 +94,18 @@ return {
           update_in_insert = false, -- Update diagnostics in insert mode.
           always_visible = false, -- Show diagnostics even if there are none.
         },
+        {
+          require("noice").api.status.mode.get,
+          cond = require("noice").api.status.mode.has,
+          color = { fg = "#ff9e64" },
+        },
       },
       lualine_x = {
+        {
+          require("noice").api.status.command.get,
+          cond = require("noice").api.status.command.has,
+          color = { fg = "#ff9e64" },
+        },
         {
           'filetype',
           icon = { align = 'right' }, -- Display filetype icon on the right hand side
@@ -121,8 +131,12 @@ return {
           separator = '·',
         },
       },
-      lualine_y = { 'progress' },
-      lualine_z = { 'location' },
+      lualine_y = {
+        { 'progress' },
+      },
+      lualine_z = {
+        { 'location' },
+      },
     }
 
     require('lualine').setup {
@@ -137,6 +151,25 @@ return {
 
         -- Uncomment to disable icons
         -- icons_enabled = false,
+
+        disabled_filetypes = {
+          statusline = {
+            "dap-repl",
+            "dapui_breakpoints",
+            "dapui_console",
+            "dapui_scopes",
+            "dapui_watches",
+            "dapui_stacks",
+          },
+          winbar = {
+            "dap-repl",
+            "dapui_breakpoints",
+            "dapui_console",
+            "dapui_scopes",
+            "dapui_watches",
+            "dapui_stacks",
+          },
+        },
       },
       tabline = {
         lualine_a = {
