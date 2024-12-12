@@ -15,6 +15,9 @@ return {
           position = {
             col = 0,
           },
+          win_options = {
+            wrap = true,
+          },
         },
       },
       cmdline = {
