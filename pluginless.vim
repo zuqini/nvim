@@ -12,4 +12,5 @@ lua << EOF
   require("mappings")
 EOF
 
+colorscheme habamax
 set showmode
