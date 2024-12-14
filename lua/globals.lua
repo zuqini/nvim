@@ -1,7 +1,3 @@
--- disable nvim tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- detect if is windows
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 vim.g.transparent_background = true
