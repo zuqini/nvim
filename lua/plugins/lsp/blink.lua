@@ -49,6 +49,9 @@ return {
         -- Controls whether the documentation window will automatically show when selecting a completion item
         auto_show = true,
         auto_show_delay_ms = 100,
+        window = {
+          border = 'rounded',
+        },
       },
       accept = {
         -- Create an undo point when accepting a completion item
