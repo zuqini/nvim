@@ -43,12 +43,25 @@ return {
       },
       -- you can enable a preset for easier configuration
       presets = {
-        bottom_search = true,     -- use a classic bottom cmdline for search
-        command_palette = false,   -- position the cmdline and popupmenu together
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = false,      -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false,       -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false,    -- add a border to hover docs and signature help
+        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false,       -- add a border to hover docs and signature help
       },
     })
+    local map = function(mapping, rhs, desc)
+      vim.keymap.set({ 'n', 'i', 's' }, mapping, rhs, { desc = desc, noremap = true })
+    end
+    map("<c-f>", function()
+      if not require("noice.lsp").scroll(4) then
+        return "<c-f>"
+      end
+    end, "Scroll Signature Help Forward")
+    map("<c-b>", function()
+      if not require("noice.lsp").scroll(-4) then
+        return "<c-b>"
+      end
+    end, "Scroll Signature Help Back")
   end
 }

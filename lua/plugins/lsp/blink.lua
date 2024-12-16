@@ -6,9 +6,9 @@ return {
   dependencies = 'rafamadriz/friendly-snippets',
 
   -- use a release tag to download pre-built binaries
-  version = 'v0.*',
+  -- version = 'v0.*',
   -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-  -- build = 'cargo build --release',
+  build = 'cargo build --release',
   -- If you use nix, you can build from source using latest nightly rust with:
   -- build = 'nix run .#build-plugin',
 
@@ -24,13 +24,25 @@ return {
       preset = 'super-tab',
       ['<C-l>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide', 'fallback' },
-      ['<Esc>'] = { 'hide', 'fallback' },
+      ['<Esc>'] = { 'cancel', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
-      ['<CR>'] = { 'accept', 'fallback' },
+      ['<CR>'] = { 'select_and_accept', 'fallback' },
 
-      ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
-      ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+      cmdline = {
+        preset = 'super-tab',
+        ['<C-y>'] = { 'select_and_accept' },
+        ['<CR>'] = { 'accept', 'fallback' },
+        ['<Esc>'] = {
+          'cancel',
+          function(_) return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-c>', true, true, true), 'n', true) end,   -- https://github.com/Saghen/blink.cmp/issues/547
+        }
+      }
     },
+
+    -- disables cmdline
+    -- sources = {
+    --   cmdline = {},
+    -- },
 
     completion = {
       documentation = {
@@ -47,10 +59,14 @@ return {
           enabled = true,
         },
       },
+      list = {
+        selection = 'manual',
+      },
     },
 
     -- experimental signature help support
-    signature = { enabled = true }
+    -- disable since noice already does this
+    signature = { enabled = false }
   },
   -- allows extending the providers array elsewhere in your config
   -- without having to redefine it
