@@ -1,5 +1,6 @@
 return {
-  'hrsh7th/nvim-cmp',   -- Autocompletion plugin
+  'hrsh7th/nvim-cmp', -- Autocompletion plugin
+  enabled = vim.g.cmp_engine == "nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     'hrsh7th/cmp-buffer',
@@ -57,10 +58,10 @@ return {
 
     local cmp = require('cmp')
     cmp.setup {
-      window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-      },
+      -- window = {
+      --   completion = cmp.config.window.bordered(),
+      --   documentation = cmp.config.window.bordered(),
+      -- },
       view = {
         docs = {
           auto_open = true,

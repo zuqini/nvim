@@ -57,24 +57,24 @@ return {
       }
     })
 
-    local border = {
-      { "╭", "FloatBorder" },
-      { "─", "FloatBorder" },
-      { "╮", "FloatBorder" },
-      { "│", "FloatBorder" },
-      { "╯", "FloatBorder" },
-      { "─", "FloatBorder" },
-      { "╰", "FloatBorder" },
-      { "│", "FloatBorder" },
-    }
-
-    local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-      ---@class vim.lsp.util.open_floating_preview.Opts
-      opts = opts or {}
-      opts.border = opts.border or border
-      return orig_util_open_floating_preview(contents, syntax, opts, ...)
-    end
+    -- local border = {
+    --   { "╭", "FloatBorder" },
+    --   { "─", "FloatBorder" },
+    --   { "╮", "FloatBorder" },
+    --   { "│", "FloatBorder" },
+    --   { "╯", "FloatBorder" },
+    --   { "─", "FloatBorder" },
+    --   { "╰", "FloatBorder" },
+    --   { "│", "FloatBorder" },
+    -- }
+    --
+    -- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+    -- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+    --   ---@class vim.lsp.util.open_floating_preview.Opts
+    --   opts = opts or {}
+    --   opts.border = opts.border or border
+    --   return orig_util_open_floating_preview(contents, syntax, opts, ...)
+    -- end
 
     local on_attach = function(_, bufnr)
       vim.lsp.inlay_hint.enable(true)
@@ -122,7 +122,14 @@ return {
         'Toggle Inlay Hints')
     end
 
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local capabilities = nil
+    if vim.g.cmp_engine == "blink" then
+      capabilities = require('blink.cmp').get_lsp_capabilities()
+    end
+    if vim.g.cmp_engine == "nvim-cmp" then
+      capabilities = require('cmp_nvim_lsp').default_capabilities()
+    end
+
     lspconfig.util.default_config = vim.tbl_extend(
       "force",
       lspconfig.util.default_config,
