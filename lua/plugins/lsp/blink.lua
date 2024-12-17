@@ -22,7 +22,7 @@ return {
     -- your own keymap.
     keymap = {
       preset = 'super-tab',
-      ['<C-l>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<C-l>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide', 'fallback' },
       ['<Esc>'] = { 'cancel', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
