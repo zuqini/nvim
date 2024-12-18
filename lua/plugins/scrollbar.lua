@@ -13,6 +13,19 @@ return {
 
     -- some colorschemes seems to not work well w/ default highlight
     require("scrollbar").setup({
+      excluded_filetypes = {
+        "dropbar_menu",
+        "dropbar_menu_fzf",
+        "DressingInput",
+        "cmp_docs",
+        "cmp_menu",
+        "noice",
+        "prompt",
+        "TelescopePrompt",
+        "blink-cmp-menu",
+        "blink-cmp-signature",
+        "blink-cmp-documentation",
+      },
       handle = {
         color = '#333333',
       },
