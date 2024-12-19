@@ -15,6 +15,14 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    sources = {
+      -- add lazydev to your completion providers
+      default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+      providers = {
+        -- dont show LuaLS require statements when lazydev has items
+        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
+      },
+    },
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
@@ -38,15 +46,10 @@ return {
         ['<CR>'] = { 'accept', 'fallback' },
         ['<Esc>'] = {
           'cancel',
-          function(_) return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-c>', true, true, true), 'n', true) end,   -- https://github.com/Saghen/blink.cmp/issues/547
+          function(_) return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-c>', true, true, true), 'n', true) end, -- https://github.com/Saghen/blink.cmp/issues/547
         }
       }
     },
-
-    -- disables cmdline
-    -- sources = {
-    --   cmdline = {},
-    -- },
 
     completion = {
       documentation = {
