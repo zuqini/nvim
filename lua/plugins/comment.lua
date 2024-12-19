@@ -1,5 +1,6 @@
 return {
   'JoosepAlviste/nvim-ts-context-commentstring',
+  event = 'VeryLazy',
   opts = { enable_autocmd = false },
   config = function()
     local get_option = vim.filetype.get_option
