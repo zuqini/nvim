@@ -75,8 +75,12 @@ return {
     },
 
     -- experimental signature help support
-    -- disable since noice already does this
-    signature = { enabled = false }
+    signature = {
+      enabled = true,
+      window = {
+        border = 'rounded',
+      },
+    }
   },
   -- allows extending the providers array elsewhere in your config
   -- without having to redefine it
