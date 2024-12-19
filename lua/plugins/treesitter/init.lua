@@ -13,6 +13,9 @@ return {
     event = 'VeryLazy',
   },
   -- Additional language packs that treesitter doesn't support
-  { 'elubow/cql-vim',             ft = 'cql', },
+  {
+    'elubow/cql-vim',
+    ft = 'cql',
+  },
   { import = 'plugins/treesitter' }
 }
