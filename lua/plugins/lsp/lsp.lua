@@ -109,6 +109,7 @@ return {
       bufmap('n', 'gR', vim.lsp.buf.references, 'References w/ Declaration')
 
       bufmap('n', '<leader>K', vim.lsp.buf.signature_help, 'Signature Help')
+      bufmap('n', '<leader>gq', vim.lsp.buf.format, 'Format Buffer')
       bufmap('n', '<leader>gd', vim.lsp.buf.declaration, 'Declaration')
       bufmap('n', '<leader>ga', vim.lsp.buf.add_workspace_folder, 'Add Workspace Folder')
       bufmap('n', '<leader>gr', vim.lsp.buf.remove_workspace_folder, 'Remove Workspace Folder')

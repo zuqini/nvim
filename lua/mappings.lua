@@ -20,8 +20,8 @@ nmap_leader('C', ":put=execute(':')<left><left>", 'Put :Cmd')
 
 nmap_leader('<BS>', ':%bd!|e#|bd!#<CR>', 'Delete All Other Buffers')
 
-nmap_leader('gq', ':%!jq<CR>', 'JQ')
-nmap_leader('gq', ':%!jq<CR>', 'JQ')
+nmap_leader('gQ', ':%!jq<CR>', 'JQ')
+nmap_leader('gQ', ':%!jq<CR>', 'JQ')
 
 xmap('p', 'P', 'Paste No Reg. Overwrite')
 xmap('P', 'p', 'Paste Reg. Overwrite')

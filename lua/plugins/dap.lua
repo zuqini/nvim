@@ -1,5 +1,6 @@
 return {
   "mfussenegger/nvim-dap",
+  ft = { "rust" },
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "theHamsta/nvim-dap-virtual-text",
