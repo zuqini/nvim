@@ -21,7 +21,9 @@ return {
     -- see the "default configuration" section below for full documentation on how to define
     -- your own keymap.
     keymap = {
-      preset = 'super-tab',
+      preset = 'enter',
+      ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
       ['<C-l>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide', 'fallback' },
       ['<Esc>'] = { 'cancel', 'fallback' },
@@ -29,7 +31,9 @@ return {
       ['<CR>'] = { 'select_and_accept', 'fallback' },
 
       cmdline = {
-        preset = 'super-tab',
+        preset = 'enter',
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
         ['<C-y>'] = { 'select_and_accept' },
         ['<CR>'] = { 'accept', 'fallback' },
         ['<Esc>'] = {
@@ -63,7 +67,7 @@ return {
         },
       },
       list = {
-        selection = 'manual',
+        selection = 'auto_insert',
       },
     },
 
