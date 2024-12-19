@@ -1,5 +1,6 @@
 return {
   'dstein64/nvim-scrollview',
+  event = 'VeryLazy',
   dependencies = {
     'lewis6991/gitsigns.nvim',
   },
