@@ -23,14 +23,14 @@ return {
       port = 13000 -- 💀 Use the port printed out or specified with `--port`
     }
 
-    nmap("<space>gb", dap.toggle_breakpoint, "Toggle breakpoint")
-    nmap("<space>gB", dap.run_to_cursor, "Run to Cursor")
+    nmap("<space>gb", dap.toggle_breakpoint, "(DAP) Toggle breakpoint")
+    nmap("<space>gB", dap.run_to_cursor, "(DAP) Run to Cursor")
     vim.api.nvim_create_user_command('D', "lua require('dapui').toggle()<CR>", { bang = true })
 
     -- Eval var under cursor
     nmap("<space>?", function()
       require("dapui").eval(nil, { enter = true })
-    end, "Eval Var under Cursor")
+    end, "(DAP) Eval Var under Cursor")
     nmap("<F1>", dap.continue, "Continue")
     nmap("<F2>", dap.step_into, "Step Into")
     nmap("<F3>", dap.step_over, "Step Over")
