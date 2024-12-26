@@ -7,6 +7,6 @@ vim.g.gruvbox_material_diagnostic_line_highlight=1
 vim.g.gruvbox_material_diagnostic_virtual_text='colored'
 
 vim.cmd('colorscheme gruvbox-material')
-vim.api.nvim_set_hl(0, 'Cursor', { bg='#d4be98', reverse=true })
-vim.api.nvim_set_hl(0, 'TermCursor', { bg='#d4be98', reverse=true })
-vim.api.nvim_set_hl(0, 'TermCursorNC', { bg='#d4be98', reverse=true })
+-- vim.api.nvim_set_hl(0, 'Cursor', { bg='#d4be98', reverse=true })
+-- vim.api.nvim_set_hl(0, 'TermCursor', { bg='#d4be98', reverse=true })
+-- vim.api.nvim_set_hl(0, 'TermCursorNC', { bg='#d4be98', reverse=true })
