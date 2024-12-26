@@ -8,5 +8,4 @@ return {
   },
   { 'stevearc/vim-arduino', ft = "arduino", },
   { 'habamax/vim-godot', ft = "gdscript" },
-  { 'tpope/vim-fugitive', cmd = 'G' },
 }
