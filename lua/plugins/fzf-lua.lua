@@ -11,27 +11,28 @@ return {
   config = function()
     local fzf = require 'fzf-lua'
     local exclude_list = {
-      'node_modules',
-      '.godot',
-      '.eslintcache',
-      'tags',
-      '*.url',
-      '*.pdf',
-      '.git',
+      '"node_modules"',
+      '".godot"',
+      '".eslintcache"',
+      '"tags"',
+      '"*.url"',
+      '"*.pdf"',
+      '".git"',
       -- godot
-      '*.tscn*',
-      '*.tres*',
+      '"*.tscn"',
+      '"*.tres"',
+      '"*.import"',
       -- images
-      '*.svg*',
-      '*.jpg*',
-      '*.png*',
-      '*.gif*',
-      '*.jpeg*',
-      '*.psd*',
+      '"*.svg"',
+      '"*.jpg"',
+      '"*.png"',
+      '"*.gif"',
+      '"*.jpeg"',
+      '"*.psd"',
       -- audio
-      '*.mp3*',
-      '*.ogg*',
-      '*.wav*',
+      '"*.mp3"',
+      '"*.ogg"',
+      '"*.wav"',
     };
 
     fzf.setup {
@@ -87,8 +88,9 @@ return {
         fd_opts = '--color=never --type f --hidden --follow --exclude ' .. table.concat(exclude_list, ' --exclude ')
     })
     end, 'Files')
+    nmap('fF', ":lua require'fzf-lua'.files()<CR>", 'Files (Default)')
     nmap('fs', ":lua require'fzf-lua'.files({ git_icons = false })<CR>", 'Files + Excluded')
-    nmap('fF', ":lua require'fzf-lua'.files({ git_icons = false, cmd = 'fd --no-ignore --hidden' })<CR>",
+    nmap('fS', ":lua require'fzf-lua'.files({ git_icons = false, cmd = 'fd --no-ignore --hidden' })<CR>",
       'Files + Excluded + Ignored')
 
     nmap('fn', ":lua require'fzf-lua'.grep_project()<CR>", 'FiNd')
