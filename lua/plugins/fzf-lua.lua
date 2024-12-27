@@ -17,6 +17,7 @@ return {
       'tags',
       '*.url',
       '*.pdf',
+      '.git',
       -- godot
       '*.tscn*',
       '*.tres*',
@@ -82,12 +83,13 @@ return {
     end
 
     nmap('ff', function()
-      fzf.files({ fd_opts = '--type f --exclude node_modules --exclude ' ..
-      table.concat(exclude_list, ' --exclude ') })
+      fzf.files({
+        fd_opts = '--color=never --type f --hidden --follow --exclude ' .. table.concat(exclude_list, ' --exclude ')
+    })
     end, 'Files')
-    nmap('fs', ":lua require'fzf-lua'.files({ git_icons = false})<CR>", 'Files + Excluded')
+    nmap('fs', ":lua require'fzf-lua'.files({ git_icons = false })<CR>", 'Files + Excluded')
     nmap('fF', ":lua require'fzf-lua'.files({ git_icons = false, cmd = 'fd --no-ignore --hidden' })<CR>",
-      'Files + Excluded + Hidden')
+      'Files + Excluded + Ignored')
 
     nmap('fn', ":lua require'fzf-lua'.grep_project()<CR>", 'FiNd')
     nmap('fh', ":lua require'fzf-lua'.grep({search = '', rg_opts = '--hidden', fzf_opts = { ['--nth'] = '2..' }})<CR>",
