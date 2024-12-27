@@ -9,26 +9,34 @@ return {
     },
   },
   config = function()
-    require 'fzf-lua'.setup {
+    local fzf = require 'fzf-lua'
+    local exclude_list = {
+      'node_modules',
+      '.godot',
+      '.eslintcache',
+      'tags',
+      '*.url',
+      '*.pdf',
+      -- godot
+      '*.tscn*',
+      '*.tres*',
+      -- images
+      '*.svg*',
+      '*.jpg*',
+      '*.png*',
+      '*.gif*',
+      '*.jpeg*',
+      '*.psd*',
+      -- audio
+      '*.mp3*',
+      '*.ogg*',
+      '*.wav*',
+    };
+
+    fzf.setup {
       -- this seems to be super slow,
       -- try this instead: https://github.com/ibhagwan/fzf-lua/wiki#how-do-i-exclude-paths-eg-node_modules
-      -- file_ignore_patterns = {
-      --   'node_modules/.*',
-      --   '.godot/.*',
-      --   '.eslintcache',
-      --   'tags',
-      --   '.*%.tscn',
-      --   -- images
-      --   '.*%.svg.*',
-      --   '.*%.jpg.*',
-      --   '.*%.png.*',
-      --   '.*%.gif.*',
-      --   '.*%.jpeg.*',
-      --   -- audio
-      --   '.*%.mp3.*',
-      --   '.*%.ogg.*',
-      --   '.*%.wav.*',
-      -- },
+      -- file_ignore_patterns = exclude_list,
       winopts = {
         height = 0.95,
         width = 0.85,
@@ -73,10 +81,13 @@ return {
       vim.keymap.set('n', '<Leader>' .. suffix, rhs, { desc = desc, noremap = true, silent = true })
     end
 
-    nmap('ff', ":lua require'fzf-lua'.files()<CR>", 'Files')
-    nmap('fs', ":lua require'fzf-lua'.files({ git_icons = false})<CR>", 'Files No Git Icons')
+    nmap('ff', function()
+      fzf.files({ fd_opts = '--type f --exclude node_modules --exclude ' ..
+      table.concat(exclude_list, ' --exclude ') })
+    end, 'Files')
+    nmap('fs', ":lua require'fzf-lua'.files({ git_icons = false})<CR>", 'Files + Excluded')
     nmap('fF', ":lua require'fzf-lua'.files({ git_icons = false, cmd = 'fd --no-ignore --hidden' })<CR>",
-      'Files + Hidden')
+      'Files + Excluded + Hidden')
 
     nmap('fn', ":lua require'fzf-lua'.grep_project()<CR>", 'FiNd')
     nmap('fh', ":lua require'fzf-lua'.grep({search = '', rg_opts = '--hidden', fzf_opts = { ['--nth'] = '2..' }})<CR>",
