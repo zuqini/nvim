@@ -42,8 +42,17 @@ return {
         ["<Tab>"] = { "select_next", "fallback" },
         ["<S-Tab>"] = { "select_prev", "fallback" },
         ['<C-y>'] = { 'select_and_accept' },
-        ['<CR>'] = { 'accept', 'fallback' },
-      }
+        ['<CR>'] = {
+          function(cmp)
+            return cmp.accept({
+              callback = function()
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<CR>', true, true, true), 'n', true)
+              end,
+            })
+          end,
+          'fallback',
+        },
+      },
     },
 
     completion = {
