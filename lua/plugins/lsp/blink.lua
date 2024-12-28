@@ -34,7 +34,6 @@ return {
       ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
       ['<C-l>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide', 'fallback' },
-      ['<Esc>'] = { 'cancel', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
       ['<CR>'] = { 'select_and_accept', 'fallback' },
 
@@ -44,10 +43,6 @@ return {
         ["<S-Tab>"] = { "select_prev", "fallback" },
         ['<C-y>'] = { 'select_and_accept' },
         ['<CR>'] = { 'accept', 'fallback' },
-        ['<Esc>'] = {
-          'cancel',
-          function(_) return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-c>', true, true, true), 'n', true) end, -- https://github.com/Saghen/blink.cmp/issues/547
-        }
       }
     },
 
