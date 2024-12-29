@@ -23,7 +23,6 @@ set cursorline
 
 " Neovim bug, see https://github.com/neovim/neovim/issues/18576
 if !g:transparent_background
-  set pumblend=15
   set winblend=15
 endif
 

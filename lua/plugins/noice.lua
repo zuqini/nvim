@@ -18,6 +18,11 @@ return {
             wrap = true,
           },
         },
+        cmdline = {
+          win_options = {
+            winblend = 0,
+          },
+        },
       },
       cmdline = {
         view = "cmdline",

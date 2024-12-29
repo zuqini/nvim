@@ -60,9 +60,9 @@ return {
         -- Controls whether the documentation window will automatically show when selecting a completion item
         auto_show = true,
         auto_show_delay_ms = 100,
-        -- window = {
-        --   border = 'rounded',
-        -- },
+        window = {
+          winblend = vim.g.transparent_background and 0 or 15
+        },
       },
       accept = {
         -- Create an undo point when accepting a completion item
@@ -81,9 +81,9 @@ return {
     -- experimental signature help support
     signature = {
       enabled = true,
-      -- window = {
-      --   border = 'rounded',
-      -- },
+      window = {
+        winblend = vim.g.transparent_background and 0 or 15
+      }
     }
   },
   -- allows extending the providers array elsewhere in your config
