@@ -56,6 +56,11 @@ return {
     },
 
     completion = {
+      menu = {
+        draw = {
+          gap = 2,
+        },
+      },
       documentation = {
         -- Controls whether the documentation window will automatically show when selecting a completion item
         auto_show = true,
