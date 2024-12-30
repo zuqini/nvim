@@ -18,8 +18,6 @@ nmap_leader('w', ':up<CR>', 'Save')
 nmap_leader('W', ':up<CR>:MT<CR>', 'Save & CTags')
 nmap_leader('C', ":put=execute(':')<left><left>", 'Put :Cmd')
 
-nmap_leader('<BS>', ':%bd!|e#|bd!#<CR>', 'Delete All Other Buffers')
-
 nmap_leader('gQ', ':%!jq<CR>', 'JQ')
 nmap_leader('gQ', ':%!jq<CR>', 'JQ')
 
@@ -56,15 +54,14 @@ nmap('<C-k>', ':lp<CR>', 'LocList Prev')
 nmap('<C-j>', ':lne<CR>', 'LocList Next')
 nmap('<C-up>', ':lp<CR>', 'LocList Prev')
 nmap('<C-down>', ':lne<CR>', 'LocList Next')
-
+nmap('<CR>',  "<Cmd>call append(line('.'), repeat([''], v:count1))<CR>", "New Line Prev")
+nmap('<BS>', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>", "New Line")
 
 nmap('<C-l>', ':lua clear_floats_and_highlights()<CR><c-l>', 'Clear Floats & Highlights')
 nmap('<F5>', ':mod<CR>', 'Clear * Redraw')
 
 xmap('>', '>gv', 'Indent w/ Selection')
 xmap('<', '<gv', 'Unindent w/ Selection')
-
-nmap('<BS>', '<C-^>', 'Goto Alternate File')
 
 nmap('<S-Left>', '<C-W><', '- Win Width')
 nmap('<S-Right>', '<C-W>>', '+ Win Width')
