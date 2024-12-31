@@ -14,6 +14,7 @@ elseif hour >= 16 and hour < 21 then
 elseif hour >= 21 or hour < 6 then
   index = 3
 end
+index = 1
 
 local M = {}
 function M.get_current_theme()
