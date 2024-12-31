@@ -1,9 +1,9 @@
 return {
   'akinsho/toggleterm.nvim',
-  keys = '<c-\\>',
+  keys = [[<leader>\]],
   config = function()
     require("toggleterm").setup({
-      open_mapping = [[<c-\>]],
+      open_mapping = [[<leader>\]],
       shade_terminals = false,
       size = function (_term)
         return vim.o.lines * 0.6
