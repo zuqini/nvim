@@ -1,4 +1,5 @@
 {
+  "any-jump.vim": { "branch": "master", "commit": "f95674d9a4251ac02f452d5f1861e4422f4652c7" },
   "blink.cmp": { "branch": "main", "commit": "9fa48e9513ccba69f7fd3c260b935f9c2165a119" },
   "cql-vim": { "branch": "master", "commit": "6f61df5a633c3a91edea7bcb5d5772648df19d1a" },
   "dressing.nvim": { "branch": "master", "commit": "fc78a3ca96f4db9f8893bb7e2fd9823e0780451b" },

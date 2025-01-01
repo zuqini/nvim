@@ -12,5 +12,5 @@ lua << EOF
   require("mappings")
 EOF
 
-colorscheme habamax
+colorscheme retrobox
 set showmode
