@@ -1,9 +1,61 @@
+local map = function(mode, mapping, rhs, desc)
+  vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true })
+end
+
+--- Retrieves the topmost tree-sitter node under the current cursor position.
+-- The top node is determined by traversing the AST (abstract syntax tree) upwards
+-- from the node under the cursor position, stopping at the first ancestor node
+-- which does not begin at the same position as its own parent. This recursion
+-- is limited by a predefined maximum depth.
+--
+-- @return top_node, row, col
+--   - `top_node`: the topmost tree-sitter Node, or `nil` if no node is found.
+--   - `row`: the starting row index of the top node.
+--   - `col`: the starting column index of the top node.
+local function get_current_top_node()
+  local function search_parent(node, depth)
+    -- Stop recursion if node is nil or max depth is reached
+    if not node or depth <= 0 then
+      return node
+    end
+
+    local parent = node:parent()
+
+    if not parent then
+      return node
+    end
+
+    local start_row, start_col = node:range()
+    local parent_start_row, parent_start_col = parent:range()
+
+    -- If the node does not start at the same position as its parent, return the node
+    if start_row ~= parent_start_row or start_col ~= parent_start_col then
+        return node
+    end
+
+    -- If it does start at the same position, recurse with reduced depth
+    return search_parent(parent, depth - 1)
+  end
+
+  local node = vim.treesitter.get_node()
+
+  if not node then
+    return nil
+  end
+
+  local top_node =  search_parent(node, 100)
+
+  local row, col = top_node:range()
+  return top_node, row, col
+end
+
 return {
   'nvim-treesitter/nvim-treesitter',
   event = 'VeryLazy',
   build = ':TSUpdate',
   config = function()
-    local Set = require('utils.set');
+    local Set = require 'utils.set';
+    local ts_utils = require 'nvim-treesitter.ts_utils'
 
     require 'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all"
@@ -134,5 +186,32 @@ return {
         },
       },
     }
+
+    local function swap_prev()
+      local node = get_current_top_node()
+      if not node then
+        return
+      end
+
+      local prev_node = node:prev_named_sibling()
+      if prev_node then
+        ts_utils.swap_nodes(node, prev_node, 0, true)
+      end
+    end
+
+    local function swap_next()
+      local node = get_current_top_node()
+      if not node then
+        return
+      end
+
+      local next_node = node:next_named_sibling()
+      if next_node then
+        ts_utils.swap_nodes(node, next_node, 0, true)
+      end
+    end
+
+    map('n', '<leader>tp', function() swap_prev() end, 'Swap Prev')
+    map('n', '<leader>tn', function() swap_next() end, 'Swap Next')
   end
 }
