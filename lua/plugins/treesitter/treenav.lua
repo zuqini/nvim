@@ -15,7 +15,7 @@ return {
     map({ 'n', 'v' }, '<A-h>', '<cmd>Treewalker Left<cr>', 'Treewalker Left')
     map('n', '<leader>tj', '<cmd>Treewalker SwapDown<cr>', 'Swap Down')
     map('n', '<leader>tk', '<cmd>Treewalker SwapUp<cr>', 'Swap Up')
-    -- vim.keymap.set('n', '<leader>tn', ":TSTextobjectSwapNext @parameter.inner<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set('n', '<leader>tp', ":TSTextobjectSwapPrevious @parameter.inner<CR>", { noremap = true, silent = true })
+    map('n', '<leader>tn', "<cmd>Treewalker SwapRight<cr>", 'Swap Next')
+    map('n', '<leader>tp', "<cmd>Treewalker SwapLeft<cr>", 'Swap Prev')
   end
 }

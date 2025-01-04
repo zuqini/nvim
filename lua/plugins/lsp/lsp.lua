@@ -43,12 +43,12 @@ return {
     map('n', 'gO', vim.lsp.buf.document_symbol, 'Document Symbol')
     map('i', '<c-s>', vim.lsp.buf.signature_help, 'Signature Help')
     -- map('n', 'grn', vim.lsp.buf.rename, 'Rename')
-    map("n", "grn", ":IncRename ", "Rename (Clear)")
+    map('n', 'grn', ':IncRename ', 'Rename (Clear)')
     vim.keymap.set(
       "n",
       'grN',
       function()
-        return ":IncRename " .. vim.fn.expand("<cword>")
+        return ':IncRename ' .. vim.fn.expand('<cword>')
       end,
       { desc = 'Rename', noremap = true, silent = true, expr = true })
 
@@ -93,7 +93,7 @@ return {
 
       if vim.lsp.codelens then
         vim.lsp.codelens.refresh()
-        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
           buffer = bufnr,
           callback = vim.lsp.codelens.refresh,
         })
@@ -133,7 +133,7 @@ return {
     end
 
     lspconfig.util.default_config = vim.tbl_extend(
-      "force",
+      'force',
       lspconfig.util.default_config,
       {
         on_attach = on_attach,
@@ -149,7 +149,7 @@ return {
         default_settings = {
           ['rust-analyzer'] = {
             check = {
-              command = "clippy",
+              command = 'clippy',
             }
           }
         },
