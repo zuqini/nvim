@@ -59,6 +59,7 @@ return {
       menu = {
         draw = {
           gap = 2,
+          treesitter = { "lsp" },
         },
       },
       documentation = {
