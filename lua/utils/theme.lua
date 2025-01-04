@@ -20,15 +20,15 @@ elseif hour >= 11 and hour < 17 then
   index = 2
 elseif hour >= 17 and hour < 21 then
   -- dusk
-  index = 3
+  index = 4
 elseif hour >= 21 or hour < 1 then
   -- early night
-  index = 4
+  index = 6
 elseif hour >= 1 and hour < 6 then
   -- Deep night
-  index = 5
+  index = 7
 end
--- index = 9
+-- index = 7
 
 local M = {}
 function M.get_current_theme()
