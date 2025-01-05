@@ -4,7 +4,6 @@ return {
   build = ':TSUpdate',
   config = function()
     local Set = require 'utils.set';
-    local ts_utils = require 'nvim-treesitter.ts_utils'
 
     require 'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all"
@@ -71,12 +70,11 @@ return {
 
           keymaps = {
             -- You can use the capture groups defined in textobjects.scm
-            ["aF"] = "@function.outer",
-            ["iF"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            -- You can optionally set descriptions to the mappings (used in the desc parameter of
-            -- nvim_buf_set_keymap) which plugins like which-key display
+            ["aF"] = { query = "@function.outer", desc = "Select outer part of a function region" },
+            ["iF"] = { query = "@function.inner", desc = "Select inner part of a function region" },
+            ["ac"] = { query = "@class.outer", desc = "Select outer part of a class region" },
             ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+            ["aS"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
           },
           -- You can choose the select mode (default is charwise 'v')
           --
