@@ -70,8 +70,10 @@ return {
 
           keymaps = {
             -- You can use the capture groups defined in textobjects.scm
-            ["aF"] = { query = "@function.outer", desc = "Select outer part of a function region" },
-            ["iF"] = { query = "@function.inner", desc = "Select inner part of a function region" },
+            ["am"] = { query = "@function.outer", desc = "Select outer part of a method/function region" },
+            ["im"] = { query = "@function.inner", desc = "Select inner part of a method/function region" },
+            ["ao"] = { query = "@block.outer", desc = "Select outer part of a block region" },
+            ["io"] = { query = "@block.inner", desc = "Select inner part of a block region" },
             ["ac"] = { query = "@class.outer", desc = "Select outer part of a class region" },
             ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
             ["aS"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
@@ -103,24 +105,32 @@ return {
           enable = true,
           set_jumps = true, -- whether to set jumps in the jumplist
           goto_next_start = {
-            ["]f"] = "@function.outer",
-            ["]["] = "@function.outer",
-            ["]l"] = "@class.outer",
+            ["]m"] = "@function.outer",
+            ["]]"] = "@class.outer",
+            ["]o"] = "@block.outer",
+            ["]S"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
           },
           goto_next_end = {
-            ["]F"] = "@function.outer",
-            ["]]"] = "@function.outer",
-            ["]L"] = "@class.outer",
+            ["]M"] = "@function.outer",
+            ["]["] = "@class.outer",
+            ["]O"] = "@block.outer",
           },
           goto_previous_start = {
-            ["[f"] = "@function.outer",
-            ["[["] = "@function.outer",
-            ["[l"] = "@class.outer",
+            ["[m"] = "@function.outer",
+            ["[["] = "@class.outer",
+            ["[o"] = "@block.outer",
+            ["[S"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
           },
           goto_previous_end = {
-            ["[F"] = "@function.outer",
-            ["[]"] = "@function.outer",
-            ["[L"] = "@class.outer",
+            ["[M"] = "@function.outer",
+            ["[]"] = "@class.outer",
+            ["[O"] = "@block.outer",
+          },
+          goto_next = {
+            ["]d"] = "@conditional.outer",
+          },
+          goto_previous = {
+            ["[d"] = "@conditional.outer",
           },
         },
         lsp_interop = {
