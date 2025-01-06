@@ -50,8 +50,6 @@ nmap('<C-n>', ':cn<CR>', 'QuickFix Next')
 nmap_leader('x', ':call ToggleLocList()<CR>', 'Toggle LocList')
 nmap('<C-k>', ':lp<CR>', 'LocList Prev')
 nmap('<C-j>', ':lne<CR>', 'LocList Next')
-nmap_leader('o',  "<Cmd>call append(line('.'), repeat([''], v:count1))<CR>", "New Line")
-nmap_leader('O', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>", "New Line Prev")
 
 nmap('<C-l>', ':lua clear_floats_and_highlights()<CR><c-l>', 'Clear Floats & Highlights')
 nmap('<F5>', ':mod<CR>', 'Clear * Redraw')
