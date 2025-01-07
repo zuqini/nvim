@@ -71,6 +71,8 @@ return {
         builtin = {
           true,
           ["<Esc>"] = "hide",
+          ['<C-b>'] = 'preview-page-up',
+          ['<C-f>'] = 'preview-page-down',
         },
         fzf = {
           true,

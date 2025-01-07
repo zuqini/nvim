@@ -34,7 +34,9 @@ return {
       ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
       ['<C-l>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide', 'fallback' },
+      ['<Esc>'] = { 'hide', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
+      ['<CR>'] = { 'select_and_accept', 'fallback' },
 
       cmdline = {
         preset = 'enter',
