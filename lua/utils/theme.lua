@@ -4,7 +4,6 @@ local themes = {
   { name = 'duskfox', lualine = 'auto' },
   { name = 'nightfox', lualine = 'auto' },
   { name = 'carbonfox', lualine = 'auto' },
-  { name = 'everblush', lualine = 'everblush' },
   { name = 'ayu', lualine = 'ayu' },
   { name = 'kanagawa', lualine = 'auto' },
   { name = 'tokyonight', lualine = 'tokyonight' },
@@ -13,10 +12,10 @@ local themes = {
 
 local index = 2
 local hour = tonumber(os.date("%H"))
-if hour >= 6 and hour < 11 then
+if hour >= 9 and hour < 13 then
   -- morning
-  index = 1
-elseif hour >= 11 and hour < 17 then
+  index = 2
+elseif hour >= 13 and hour < 17 then
   -- day
   index = 2
 elseif hour >= 17 and hour < 21 then
@@ -24,12 +23,15 @@ elseif hour >= 17 and hour < 21 then
   index = 4
 elseif hour >= 21 or hour < 1 then
   -- early night
+  index = 8
+elseif hour >= 1 and hour < 5 then
+  -- deep night
   index = 5
-elseif hour >= 1 and hour < 6 then
-  -- Deep night
-  index = 7
+elseif hour >= 5 and hour < 9 then
+  -- early morning
+  index = 5
 end
--- index = 10
+-- index = 9
 
 local M = {}
 function M.get_current_theme()

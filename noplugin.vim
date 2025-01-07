@@ -1,5 +1,6 @@
 lua << EOF
   local vrequire = require("utils").vrequire
+  require("plugins.themes.default")
   require("globals")
 
   vrequire("commands")
