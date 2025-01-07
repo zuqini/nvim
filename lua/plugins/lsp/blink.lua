@@ -35,7 +35,6 @@ return {
       ['<C-l>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
-      ['<CR>'] = { 'select_and_accept', 'fallback' },
 
       cmdline = {
         preset = 'enter',
