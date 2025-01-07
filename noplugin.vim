@@ -12,5 +12,4 @@ lua << EOF
   require("mappings")
 EOF
 
-colorscheme retrobox
 set showmode

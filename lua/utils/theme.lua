@@ -1,13 +1,14 @@
 local themes = {
   { name = 'gruvbox', lualine = 'auto' },
-  { name = 'terafox', alt_name = 'nightfox', lualine = 'auto' },
-  { name = 'duskfox', alt_name = 'nightfox', lualine = 'auto' },
-  { name = 'nightfox', alt_name = 'nightfox', lualine = 'auto' },
-  { name = 'carbonfox', alt_name = 'nightfox', lualine = 'auto' },
+  { name = 'terafox', lualine = 'auto' },
+  { name = 'duskfox', lualine = 'auto' },
+  { name = 'nightfox', lualine = 'auto' },
+  { name = 'carbonfox', lualine = 'auto' },
   { name = 'everblush', lualine = 'everblush' },
   { name = 'ayu', lualine = 'ayu' },
   { name = 'kanagawa', lualine = 'auto' },
   { name = 'tokyonight', lualine = 'tokyonight' },
+  { name = 'default', lualine = 'auto' },
 }
 
 local index = 2
@@ -28,7 +29,7 @@ elseif hour >= 1 and hour < 6 then
   -- Deep night
   index = 7
 end
--- index = 7
+-- index = 10
 
 local M = {}
 function M.get_current_theme()
