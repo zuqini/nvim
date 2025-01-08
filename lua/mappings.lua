@@ -14,8 +14,8 @@ local xmap_leader = function(suffix, rhs, desc)
   xmap('<Leader>' .. suffix, rhs, desc)
 end
 
-nmap_leader('w', ':up<CR>', 'Save')
-nmap_leader('W', ':up<CR>:MT<CR>', 'Save & CTags')
+nmap_leader('w', ':w<CR>', 'Save')
+nmap_leader('W', ':w<CR>:MT<CR>', 'Save & CTags')
 nmap_leader('C', ":put=execute(':')<left><left>", 'Put :Cmd')
 
 nmap_leader('gQ', ':%!jq<CR>', 'JQ')
