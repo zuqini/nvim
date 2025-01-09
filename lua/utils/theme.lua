@@ -1,37 +1,39 @@
 local themes = {
-  { name = 'gruvbox', lualine = 'auto' },
-  { name = 'terafox', lualine = 'auto' },
-  { name = 'duskfox', lualine = 'auto' },
-  { name = 'nightfox', lualine = 'auto' },
-  { name = 'carbonfox', lualine = 'auto' },
-  { name = 'ayu', lualine = 'ayu' },
-  { name = 'kanagawa', lualine = 'auto' },
-  { name = 'tokyonight', lualine = 'tokyonight' },
-  { name = 'default', lualine = 'auto' },
+  { name = 'gruvbox', lualine = 'auto' }, -- brown
+  { name = 'terafox', lualine = 'auto' }, -- green
+  { name = 'duskfox', lualine = 'auto' }, -- "bright" purple
+  { name = 'nightfox', lualine = 'auto' }, -- blue
+  { name = 'carbonfox', lualine = 'auto' }, -- midnight brown
+  { name = 'ayu', lualine = 'ayu' }, -- midnight blue
+  { name = 'kanagawa-wave', lualine = 'auto' }, -- pastel purple
+  { name = 'kanagawa-dragon', lualine = 'auto' }, -- pastel brown
+  { name = 'kanagawa-lotus', lualine = 'auto' }, -- gold paper
+  { name = 'tokyonight', lualine = 'tokyonight' }, -- purple
+  { name = 'default', lualine = 'auto' }, -- midnight
 }
 
 local index = 2
 local hour = tonumber(os.date("%H"))
 if hour >= 9 and hour < 13 then
   -- morning
-  index = 2
+  index = 9
 elseif hour >= 13 and hour < 17 then
   -- day
-  index = 4
+  index = 2
 elseif hour >= 17 and hour < 21 then
   -- dusk
-  index = 7
+  index = 10
 elseif hour >= 21 or hour < 1 then
   -- early night
   index = 8
 elseif hour >= 1 and hour < 5 then
   -- deep night
-  index = 9
+  index = 11
 elseif hour >= 5 and hour < 9 then
   -- early morning
-  index = 5
+  index = 4
 end
--- index = 9
+-- index = 4
 
 local M = {}
 function M.get_current_theme()

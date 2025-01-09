@@ -1,5 +1,5 @@
-vim.cmd('colorscheme kanagawa')
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "#272833" })
+vim.cmd('colorscheme kanagawa-lotus')
+-- vim.api.nvim_set_hl(0, "CursorLine", { bg = "#272833" })
 -- vim.api.nvim_set_hl(0, 'Cursor', { fg='#1a1b26', bg='#c0caf5', reverse=true })
 -- vim.api.nvim_set_hl(0, 'TermCursor', { fg='#1a1b26', bg='#c0caf5', reverse=true })
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', { fg='#1a1b26', bg='#c0caf5', reverse=true })
