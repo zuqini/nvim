@@ -16,24 +16,24 @@ local index = 2
 local hour = tonumber(os.date("%H"))
 if hour >= 9 and hour < 13 then
   -- morning
-  index = 9
+  index = 2
 elseif hour >= 13 and hour < 17 then
   -- day
   index = 2
 elseif hour >= 17 and hour < 21 then
   -- dusk
-  index = 10
+  index = 7
 elseif hour >= 21 or hour < 1 then
   -- early night
   index = 8
 elseif hour >= 1 and hour < 5 then
   -- deep night
-  index = 11
+  index = 8
 elseif hour >= 5 and hour < 9 then
   -- early morning
   index = 4
 end
--- index = 4
+-- index = 10
 
 local M = {}
 function M.get_current_theme()
