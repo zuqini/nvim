@@ -22,7 +22,7 @@ elseif hour >= 13 and hour < 17 then
   index = 2
 elseif hour >= 17 and hour < 21 then
   -- dusk
-  index = 7
+  index = 4
 elseif hour >= 21 or hour < 1 then
   -- early night
   index = 8
