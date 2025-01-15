@@ -1,6 +1,5 @@
 return {
   'saghen/blink.cmp',
-  enabled = vim.g.cmp_engine == "blink",
   lazy = false, -- lazy loading handled internally
   -- optional: provides snippets for the snippet source
   dependencies = 'rafamadriz/friendly-snippets',

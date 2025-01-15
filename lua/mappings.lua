@@ -61,3 +61,17 @@ nmap('<S-Down>', '<C-W>-', '- Win Height')
 nmap('<S-Up>', '<C-W>+', '+ Win Height')
 
 nmap('gz', ':call HandleURI()<CR>', 'Navigate URI')
+
+-- diagnostics
+vim.g.diagnostics_visible = true
+local function toggle_diagnostics()
+  if vim.g.diagnostics_visible then
+    vim.g.diagnostics_visible = false
+    vim.diagnostic.enable(false)
+  else
+    vim.g.diagnostics_visible = true
+    vim.diagnostic.enable(true)
+  end
+end
+nmap_leader('e', vim.diagnostic.open_float, 'Dignostic Float')
+nmap_leader('gD', toggle_diagnostics, 'Toggle Dignostics')
