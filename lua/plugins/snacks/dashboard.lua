@@ -18,9 +18,9 @@ M.opts = {
     { section = "keys", gap = 1, padding = 1 },
     {
       pane = 2,
+      { title = '   nvim ' .. tostring(vim.version()), align = 'center' },
       { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
       { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-      { title = 'nvim ' .. tostring(vim.version()), align = 'center' },
       { section = "startup" },
     },
   },
