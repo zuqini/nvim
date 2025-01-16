@@ -38,6 +38,8 @@ return {
           return
         end
 
+        require('plugins.lsp.utils.builtin-cmp').setup({ client = client, bufnr = args.buf })
+
         vim.lsp.inlay_hint.enable(true)
 
         if vim.lsp.codelens then
