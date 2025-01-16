@@ -1,13 +1,13 @@
 local M = {}
 
 -- "lua-like" require instead of source
-M.vrequire = function (path)
+M.vrequire = function(path)
   vim.cmd('source ' .. vim.fn.stdpath('config') .. '/vim/' .. path:gsub("%.", "/") .. '.vim')
 end
 
 -- opens a url in the correct OS
 -- lifted from https://github.com/Almo7aya/openingh.nvim/blob/main/lua/openingh/utils.lua
-M.open_url = function (url)
+M.open_url = function(url)
   -- when running in test env store the url
   if vim.g.test then
     vim.g.OPENINGH_RESULT = url
@@ -41,7 +41,7 @@ M.open_url = function (url)
   return false
 end
 
-M.clear_reg = function ()
+M.clear_reg = function()
   print('Clearing registers')
   vim.cmd [[
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
@@ -73,12 +73,28 @@ M.set_transparent_background = function()
   end
 end
 
-M.is_large_file = function (buf)
+M.is_large_file = function(buf)
   local max_filesize = 1024 * 1024 -- 1MiB
   local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
   if ok and stats and stats.size > max_filesize then
     return true
   end
+end
+
+--- Trim trailing whitespace
+M.trim_space = function()
+  -- Save cursor position to later restore
+  local curpos = vim.api.nvim_win_get_cursor(0)
+  -- Search and replace trailing whitespace
+  vim.cmd([[keeppatterns %s/\s\+$//e]])
+  vim.api.nvim_win_set_cursor(0, curpos)
+end
+
+--- Trim last blank lines
+M.trim_last_lines = function()
+  local n_lines = vim.api.nvim_buf_line_count(0)
+  local last_nonblank = vim.fn.prevnonblank(n_lines)
+  if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
 end
 
 return M
