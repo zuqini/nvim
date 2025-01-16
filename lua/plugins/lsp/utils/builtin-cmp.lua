@@ -31,7 +31,7 @@ local M = {}
 M.setup = function(opts)
   local client = opts.client
   local bufnr = opts.bufnr
-  vim.o.completeopt = 'menuone,popup,noinsert,fuzzy'
+  vim.o.completeopt = 'menuone,popup,noinsert'
 
   ---Utility for keymap creation.
   ---@param lhs string

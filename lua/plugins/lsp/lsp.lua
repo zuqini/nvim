@@ -38,7 +38,9 @@ return {
           return
         end
 
-        require('plugins.lsp.utils.builtin-cmp').setup({ client = client, bufnr = args.buf })
+        if vim.g.cmp_engine == 'builtin' then
+          require('plugins.lsp.utils.builtin-cmp').setup({ client = client, bufnr = args.buf })
+        end
 
         vim.lsp.inlay_hint.enable(true)
 
