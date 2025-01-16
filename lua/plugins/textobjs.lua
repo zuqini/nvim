@@ -6,10 +6,10 @@ return {
     require("various-textobjs").setup({
       useDefaultKeymaps = true,
       disabledKeymaps = {
-        "gc"   -- conflicts with Comment.nvim
+        "gc" -- conflicts with Comment.nvim
       },
     })
 
-    vim.keymap.set({ "o", "x" }, "gm", "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>")   -- originally gc
+    vim.keymap.set({ "o", "x" }, "gm", "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>") -- originally gc
   end,
 }

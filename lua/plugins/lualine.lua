@@ -1,6 +1,5 @@
 return {
   'nvim-lualine/lualine.nvim',
-  event = 'VeryLazy',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
@@ -91,9 +90,9 @@ return {
           sections = { 'error', 'warn', 'info', 'hint' },
 
           symbols = symbols,
-          colored = true, -- Displays diagnostics status in color if set to true.
+          colored = true,           -- Displays diagnostics status in color if set to true.
           update_in_insert = false, -- Update diagnostics in insert mode.
-          always_visible = false, -- Show diagnostics even if there are none.
+          always_visible = false,   -- Show diagnostics even if there are none.
         },
         {
           require("noice").api.status.mode.get,
@@ -161,6 +160,7 @@ return {
             "dapui_scopes",
             "dapui_watches",
             "dapui_stacks",
+            "snacks_dashboard",
           },
           winbar = {
             "dap-repl",
@@ -169,6 +169,7 @@ return {
             "dapui_scopes",
             "dapui_watches",
             "dapui_stacks",
+            "snacks_dashboard",
           },
         },
       },
@@ -210,7 +211,7 @@ return {
         lualine_c = winbar_file_info,
       },
       sections = sections,
-      extensions = { 'fzf' },
+      -- extensions = { 'fzf' },
     }
     -- vim.cmd("set showtabline=1") --https://github.com/nvim-lualine/lualine.nvim/issues/395
   end
