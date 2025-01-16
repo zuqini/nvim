@@ -1,6 +1,7 @@
 return {
   'ibhagwan/fzf-lua',
   event = 'VeryLazy', -- @TODO: replace with keys
+  enabled = false,
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     {
@@ -88,7 +89,7 @@ return {
     nmap('ff', function()
       fzf.files({
         fd_opts = '--color=never --type f --hidden --follow --exclude ' .. table.concat(exclude_list, ' --exclude ')
-    })
+      })
     end, 'Files')
     nmap('fF', ":lua require'fzf-lua'.files()<CR>", 'Files (Default)')
     nmap('fs', ":lua require'fzf-lua'.files({ git_icons = false })<CR>", 'Files + Excluded')
