@@ -13,6 +13,9 @@ return {
       should_enable = function(bufnr)
         return not require('utils').is_large_file(bufnr)
       end,
+      filetypes_denylist = {
+        'snacks_picker_input',
+      },
     })
   end,
 }

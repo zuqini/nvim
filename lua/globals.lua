@@ -1,7 +1,7 @@
 -- detect if is windows
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 vim.g.transparent_background = false
-vim.g.cmp_engine = 'blink'
+vim.g.cmp_engine = 'builtin'
 
 _G.clear_floats_and_highlights = function()
   vim.cmd [[ nohlsearch ]]

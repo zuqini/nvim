@@ -2,21 +2,23 @@ local M = {}
 
 -- copied from documentation + adjustments
 local layout_main = {
+  reverse = true,
   layout = {
     width = 0.85,
     height = 0.95,
     box = "vertical",
     title = "{source} {live}",
     title_pos = "center",
-    { win = "preview", height = 0.5,   border = "none" },
-    { win = "input",   height = 1,     border = "none" },
     { win = "list",    border = "none" },
+    { win = "input",   height = 1,     border = "none" },
+    { win = "preview", height = 0.55,  border = "top" },
   },
 }
 
 -- copied from documentation
 local layout_ivy_lines = {
   preview = 'main',
+  reverse = true,
   layout = {
     box = "vertical",
     backdrop = false,
@@ -26,21 +28,21 @@ local layout_ivy_lines = {
     border = "top",
     title = " {source} {live}",
     title_pos = "left",
-    { win = "input", height = 1, border = "bottom" },
     {
       box = "horizontal",
-      { win = "list",    border = "none" },
-      { win = "preview", width = 0.6,    border = "left" },
+      { win = "list",    border = "top" },
+      { win = "preview", width = 0.6,   border = "left" },
     },
+    { win = "input", height = 1, border = "none" },
   },
 }
 
 -- result of trial and error, not really sure how this layout works
 local layout_vscode = {
   preview = false,
+  reverse = false,
   layout = {
     box = "vertical",
-    row = 1,
     width = 0.4,
     min_width = 80,
     height = 0.4,
