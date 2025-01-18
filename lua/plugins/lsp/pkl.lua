@@ -17,14 +17,4 @@ return {
       vim.cmd("TSInstall! pkl")
     end,
   },
-  {
-    "https://github.pie.apple.com/zuqi-li/pcl-neovim.git",
-    event = "BufReadPre *.pcl",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    build = function()
-      vim.cmd("TSInstall! pcl")
-    end,
-  }
 }
