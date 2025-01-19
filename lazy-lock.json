@@ -1,6 +1,6 @@
 {
   "any-jump.vim": { "branch": "master", "commit": "f95674d9a4251ac02f452d5f1861e4422f4652c7" },
-  "blink.cmp": { "branch": "main", "commit": "d0cb8e83b3ca5bd631e465494000543585c3b2ef" },
+  "blink.cmp": { "branch": "main", "commit": "ef9f85c6ff87747655e8ef37c997ab808a2957c0" },
   "cql-vim": { "branch": "master", "commit": "6f61df5a633c3a91edea7bcb5d5772648df19d1a" },
   "dressing.nvim": { "branch": "master", "commit": "fc78a3ca96f4db9f8893bb7e2fd9823e0780451b" },
   "flash.nvim": { "branch": "main", "commit": "34c7be146a91fec3555c33fe89c7d643f6ef5cf1" },
@@ -51,7 +51,7 @@
   "quicker.nvim": { "branch": "master", "commit": "049def718213d3cdf49fdf29835aded09b3e54a3" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "85b80abaa09cbbc039e3095b2f515b3cf8cadd11" },
   "rustaceanvim": { "branch": "master", "commit": "0a1876b970ab946be3f4d341e9d743a5d62d646a" },
-  "snacks.nvim": { "branch": "main", "commit": "be1e5072c16ee1736a48cc8ff4167541dbfe3ffd" },
+  "snacks.nvim": { "branch": "main", "commit": "f7fddf8dfb295756f86fa6c95417e2d783ae2148" },
   "toggleterm.nvim": { "branch": "main", "commit": "e76134e682c1a866e3dfcdaeb691eb7b01068668" },
   "tokyonight.nvim": { "branch": "main", "commit": "c3ab53c3f544e4a04f2a05d43451fd9bedff51b4" },
   "treewalker.nvim": { "branch": "main", "commit": "9a29abe2141d930321a88c3a1ff9d914f4fd3257" },
