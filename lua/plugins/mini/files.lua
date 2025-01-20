@@ -2,6 +2,7 @@ return {
   'echasnovski/mini.files',
   enabled = false,
   version = false,
+  event = 'VeryLazy',
   config = function()
     require('mini.files').setup({
       mappings = {
@@ -14,8 +15,8 @@ return {
         preview = true,
       },
     })
-    vim.api.nvim_create_user_command('E', ':lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)', { nargs = 0 })   --Edit current path
-    vim.api.nvim_create_user_command('EE', ':lua MiniFiles.open(nil, false)', { nargs = 0 })                           --Edit current path
+    vim.api.nvim_create_user_command('E', ':lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)', { nargs = 0 }) --Edit current path
+    vim.api.nvim_create_user_command('EE', ':lua MiniFiles.open(nil, false)', { nargs = 0 })                         --Edit current path
 
     local show_dotfiles = true
 
