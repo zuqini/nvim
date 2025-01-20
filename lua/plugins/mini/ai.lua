@@ -5,6 +5,7 @@ return {
   config = function()
     local gen_ai_spec = require('mini.extra').gen_ai_spec
     require('mini.ai').setup({
+      n_lines = 1000,
       custom_textobjects = {
         B = gen_ai_spec.buffer(),
         D = gen_ai_spec.diagnostic(),
