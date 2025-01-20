@@ -8,10 +8,6 @@ return {
     lazy = true,
     event = "VeryLazy"
   },
-  {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    event = 'VeryLazy',
-  },
   -- Additional language packs that treesitter doesn't support
   {
     'elubow/cql-vim',
