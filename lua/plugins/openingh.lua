@@ -1,12 +1,8 @@
 return {
   "almo7aya/openingh.nvim",
-  config = function ()
-    local map = function(mode, mapping, rhs, desc)
-      vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = true, silent = true })
-    end
-    -- for repository page
-    map("n", "<Leader>gH", ":OpenInGHRepo<CR>", 'Open Repo')
-    -- for current file page
-    map("n", "<Leader>gh", ":OpenInGHFile<CR>", 'Open Repo File')
-  end
+  keys = {
+    { "<leader>gH", mode = { "n" }, ":OpenInGHRepo<CR>", desc = "Open Repo" },
+    { "<leader>gh", mode = { "n" }, ":OpenInGHFile<CR>", desc = "Open Repo File" },
+  },
+  opts = {}
 }
