@@ -73,13 +73,14 @@ M.keys = {
   { "<leader>fd", function() Snacks.picker.files({ cwd = '~/dotfiles', hidden = true }) end,                               desc = "Find Dots" },
   { "<leader>fr", function() Snacks.picker.recent() end,                                                                   desc = "Recent" },
   -- git
+  { "<leader>,c", function() Snacks.picker.git_log_file() end,                                                             desc = "Git Log File (Commits)" },
   { "<leader>,l", function() Snacks.picker.git_log() end,                                                                  desc = "Git Log" },
-  { "<leader>,d", function() Snacks.picker.git_diff() end,                                                                 desc = "Git Log" },
+  { "<leader>,d", function() Snacks.picker.git_diff() end,                                                                 desc = "Git Diff" },
   { "<leader>,s", function() Snacks.picker.git_status() end,                                                               desc = "Git Status" },
   { "<leader>,f", function() Snacks.picker.git_files() end,                                                                desc = "Git Files" },
   -- Grep
-  { "<leader>fn", function() Snacks.picker.grep({ hidden = true, live = false, need_search = false }) end,                 desc = "Grep" },
-  { "<leader>fN", function() Snacks.picker.grep({ hidden = true }) end,                                                    desc = "Live Grep" },
+  { "<leader>fe", function() Snacks.picker.grep({ hidden = true, live = false, need_search = false }) end,                 desc = "GrEp" },
+  { "<leader>fE", function() Snacks.picker.grep({ hidden = true }) end,                                                    desc = "Live GrEp" },
   { "<leader>fi", function() Snacks.picker.grep({ hidden = true, ignored = true, live = false, need_search = false }) end, desc = "Grep (Ignored)" },
   { "<leader>fI", function() Snacks.picker.grep({ hidden = true, ignored = true }) end,                                    desc = "Live Grep (Ignored)" },
   { "<leader>fl", function() Snacks.picker.lines({ layout = layout_ivy_lines, }) end,                                      desc = "Buffer Lines" },

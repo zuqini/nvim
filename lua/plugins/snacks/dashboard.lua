@@ -4,9 +4,9 @@ M.opts = {
   preset = {
     keys = {
       { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files({ hidden = true })" },
-      { icon = " ", key = "e", desc = "New File", action = ":ene | startinsert" },
-      { icon = " ", key = "n", desc = "Grep", action = ":lua Snacks.picker.grep({ hidden = true, live = false, need_search = false })" },
-      { icon = " ", key = "N", desc = "Live Grep", action = ":lua Snacks.picker.grep({ hidden = true })" },
+      { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+      { icon = " ", key = "e", desc = "GrEp", action = ":lua Snacks.picker.grep({ hidden = true, live = false, need_search = false })" },
+      { icon = " ", key = "E", desc = "Live GrEp", action = ":lua Snacks.picker.grep({ hidden = true })" },
       { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.picker.recent()" },
       { icon = " ", key = "d", desc = "Dotfiles", action = ":lua Snacks.picker.files({ cwd = '~/dotfiles', hidden = true })" },
       { icon = " ", key = "s", desc = "Restore Session", section = "session" },
