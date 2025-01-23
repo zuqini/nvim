@@ -62,6 +62,14 @@ M.opts = {
       filename_first = true,
     },
   },
+  win = {
+    input = {
+      keys = {
+        [";"] = "focus_list",
+        ["/"] = "focus_preview",
+      },
+    },
+  },
   layout = layout_main,
 }
 
