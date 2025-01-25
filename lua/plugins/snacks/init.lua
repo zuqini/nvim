@@ -5,8 +5,8 @@ return {
   opts = {
     bigfile = {},
     quickfile = {},
+    statuscolumn = require('plugins.snacks.statuscolumn').opts,
     indent = require('plugins.snacks.indent').opts,
-    statuscol = {},
     dashboard = require('plugins.snacks.dashboard').opts,
     picker = require('plugins.snacks.picker').opts,
   },
