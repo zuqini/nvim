@@ -41,6 +41,9 @@ nmap_leader('P', '"0P', 'Yank Paste Before')
 xmap_leader('p', '"0p', 'Yank Paste')
 xmap_leader('P', '"0P', 'Yank Paste Before')
 
+nmap("<M-u>", ":m .-2<CR>", 'Move line up')
+nmap("<M-d>", ":m .+1<CR>", 'Move line down')
+
 nmap_leader('c', ':call ToggleQuickFix()<CR>', 'Toggle QuickFix')
 nmap('<C-p>', ':cp<CR>', 'QuickFix Prev')
 nmap('<C-n>', ':cn<CR>', 'QuickFix Next')
