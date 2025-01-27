@@ -76,5 +76,26 @@ local function toggle_diagnostics()
     vim.diagnostic.enable(true)
   end
 end
+local function toggle_virtual_lines()
+  local new_config = vim.diagnostic.config().virtual_lines == false and
+      { current_line = vim.g.virtual_line_current_line } or
+      false
+  vim.diagnostic.config({ virtual_lines = new_config })
+end
+local function toggle_virtual_lines_current_line()
+  vim.g.virtual_line_current_line = not vim.g.virtual_line_current_line
+  if vim.diagnostic.config().virtual_lines ~= false then
+    vim.diagnostic.config({ virtual_lines = { current_line = vim.g.virtual_line_current_line } })
+  end
+end
+
+local virtual_text_config = vim.diagnostic.config().virtual_text
+local function toggle_virtual_text()
+  vim.diagnostic.config({ virtual_text = vim.diagnostic.config().virtual_text == false and virtual_text_config or false })
+end
+
 nmap_leader('e', vim.diagnostic.open_float, 'Dignostic Float')
 nmap_leader('gD', toggle_diagnostics, 'Toggle Dignostics')
+nmap_leader('gK', toggle_virtual_lines, 'Toggle diagnostic virtual_lines')
+nmap_leader('gL', toggle_virtual_lines_current_line, 'Toggle diagnostic virtual_lines current_line')
+nmap_leader('gT', toggle_virtual_text, 'Toggle diagnostic virtual_text')
