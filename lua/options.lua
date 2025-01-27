@@ -6,7 +6,7 @@ end
 vim.diagnostic.config({
   virtual_text = {
     prefix = ' ',
-    suffix = ' ',
+    suffix = '  ',
     virt_text_pos = 'eol_right_align',
   },
   virtual_lines = { current_line = vim.g.virtual_line_current_line },
