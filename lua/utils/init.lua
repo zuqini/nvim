@@ -63,6 +63,11 @@ M.set_transparent_background = function()
     vim.cmd('hi TelescopePreviewNormal guibg=NONE ctermbg=NONE')
     vim.cmd('hi TelescopeResultsNormal guibg=NONE ctermbg=NONE')
 
+    if vim.g.transparent_float_if_transparent then
+      vim.cmd('hi! link NormalFloat Normal')
+      vim.cmd('hi! link FloatBorder Normal')
+    end
+
     if vim.g.colors_name ~= "gruvbox-material" then
       vim.cmd('hi DiagnosticVirtualTextError guibg=NONE ctermbg=NONE')
       vim.cmd('hi DiagnosticVirtualTextWarn guibg=NONE ctermbg=NONE')

@@ -68,7 +68,7 @@ return {
         auto_show = true,
         auto_show_delay_ms = 100,
         window = {
-          winblend = vim.g.transparent_background and 0 or vim.g.winblend
+          winblend = (vim.g.no_winblend_if_transparent and vim.g.transparent_background) and 0 or vim.g.winblend
         },
       },
       accept = {
@@ -89,7 +89,7 @@ return {
     signature = {
       enabled = true,
       window = {
-        winblend = vim.g.transparent_background and 0 or vim.g.winblend
+        winblend = (vim.g.no_winblend_if_transparent and vim.g.transparent_background) and 0 or vim.g.winblend
       }
     }
   },

@@ -32,13 +32,6 @@ augroup mainMiscCommands
   au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 augroup END
 
-" Make sure this one goes before theme is loaded. Needed for LSP float
-augroup CustomFloatColors
-  au!
-  au ColorScheme * highlight! link NormalFloat Normal
-  au ColorScheme * highlight! link FloatBorder Normal
-augroup END
-
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter,CmdlineLeave * if g:hybrid_nu && &nu && mode() != "i" | set rnu   | endif
