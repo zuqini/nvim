@@ -1,5 +1,32 @@
 local M = {}
 
+-- list inherited from old fzf-lua config, need to update pattern format
+local exclude = {
+  -- '"node_modules"',
+  -- '".eslintcache"',
+  -- '"tags"',
+  -- '"*.url"',
+  -- '"*.pdf"',
+  -- '".git"',
+  -- -- godot
+  'addons/',
+  -- '".godot"',
+  -- '"*.tscn"',
+  -- '"*.tres"',
+  -- '"*.import"',
+  -- -- images
+  -- '"*.svg"',
+  -- '"*.jpg"',
+  -- '"*.png"',
+  -- '"*.gif"',
+  -- '"*.jpeg"',
+  -- '"*.psd"',
+  -- -- audio
+  -- '"*.mp3"',
+  -- '"*.ogg"',
+  -- '"*.wav"',
+};
+
 -- copied from documentation + adjustments
 local layout_main = {
   reverse = true,
@@ -55,6 +82,8 @@ local layout_vscode = {
   },
 }
 
+M.files = function() Snacks.picker.files({ hidden = true, exclude = exclude }) end
+M.grep = function() Snacks.picker.grep({ hidden = true, exclude = exclude, live = false, need_search = false }) end
 
 M.opts = {
   formatters = {
@@ -75,7 +104,7 @@ M.opts = {
 
 M.keys = {
   -- find
-  { "<leader>ff", function() Snacks.picker.files({ hidden = true }) end,                                                   desc = "Find Files" },
+  { "<leader>ff", M.files,                                                                                                 desc = "Find Files" },
   { "<leader>fF", function() Snacks.picker.files({ hidden = true, ignored = true }) end,                                   desc = "Find Files (Ignored)" },
   { "<leader>fb", function() Snacks.picker.buffers() end,                                                                  desc = "Buffers" },
   { "<leader>fd", function() Snacks.picker.files({ cwd = '~/dotfiles', hidden = true }) end,                               desc = "Find Dots" },
@@ -87,8 +116,8 @@ M.keys = {
   { "<leader>,s", function() Snacks.picker.git_status() end,                                                               desc = "Git Status" },
   { "<leader>,f", function() Snacks.picker.git_files() end,                                                                desc = "Git Files" },
   -- Grep
-  { "<leader>fe", function() Snacks.picker.grep({ hidden = true, live = false, need_search = false }) end,                 desc = "GrEp" },
-  { "<leader>fE", function() Snacks.picker.grep({ hidden = true }) end,                                                    desc = "Live GrEp" },
+  { "<leader>fe", M.grep,                                                                                                  desc = "GrEp" },
+  { "<leader>fE", function() Snacks.picker.grep({ hidden = true, exclude = exclude }) end,                                 desc = "Live GrEp" },
   { "<leader>fi", function() Snacks.picker.grep({ hidden = true, ignored = true, live = false, need_search = false }) end, desc = "Grep (Ignored)" },
   { "<leader>fI", function() Snacks.picker.grep({ hidden = true, ignored = true }) end,                                    desc = "Live Grep (Ignored)" },
   { "<leader>fl", function() Snacks.picker.lines({ layout = layout_ivy_lines, }) end,                                      desc = "Buffer Lines" },

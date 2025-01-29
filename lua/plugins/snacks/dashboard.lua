@@ -1,11 +1,13 @@
+local picker = require('plugins.snacks.picker')
+
 local M = {}
 
 M.opts = {
   preset = {
     keys = {
-      { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files({ hidden = true })" },
+      { icon = " ", key = "f", desc = "Find File", action = picker.files },
       { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-      { icon = " ", key = "e", desc = "GrEp", action = ":lua Snacks.picker.grep({ hidden = true, live = false, need_search = false })" },
+      { icon = " ", key = "e", desc = "GrEp", action = picker.grep },
       { icon = " ", key = "E", desc = "Live GrEp", action = ":lua Snacks.picker.grep({ hidden = true })" },
       { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.picker.recent()" },
       { icon = " ", key = "d", desc = "Dotfiles", action = ":lua Snacks.picker.files({ cwd = '~/dotfiles', hidden = true })" },
