@@ -1,12 +1,14 @@
 return {
   'echasnovski/mini.clue',
   version = false,
-  event = 'VeryLazy',
   config = function()
     local miniclue = require('mini.clue')
     miniclue.setup({
       window = {
         delay = 0,
+        config = {
+          border = 'none',
+        },
       },
       triggers = {
         -- Leader triggers
