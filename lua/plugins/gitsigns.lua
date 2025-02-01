@@ -25,8 +25,8 @@ return {
       end, { expr = true, desc = 'Next Hunk', noremap = true })
 
       -- Actions
-      map({ 'n', 'x' }, '<Leader>;s', ':Gitsigns stage_hunk<CR>', { desc = 'Stage Hunk', noremap = true })
-      map({ 'n', 'x' }, '<Leader>;r', ':Gitsigns reset_hunk<CR>', { desc = 'Reset Hunk', noremap = true })
+      map({ 'n', 'x' }, '<Leader>.s', ':Gitsigns stage_hunk<CR>', { desc = 'Stage Hunk', noremap = true })
+      map({ 'n', 'x' }, '<Leader>.r', ':Gitsigns reset_hunk<CR>', { desc = 'Reset Hunk', noremap = true })
       map('n', '<Leader>.S', gs.stage_buffer, { desc = 'Stage Buffer', noremap = true })
       map('n', '<Leader>.u', gs.undo_stage_hunk, { desc = 'Undo Stage Hunk', noremap = true })
       map('n', '<Leader>.R', gs.reset_buffer, { desc = 'Reset Buffer', noremap = true })

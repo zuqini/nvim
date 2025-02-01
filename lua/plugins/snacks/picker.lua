@@ -102,6 +102,7 @@ M.opts = {
   layout = layout_main,
 }
 
+-- incorporate smart: https://github.com/folke/snacks.nvim/issues/693#issuecomment-2608464674
 M.keys = {
   -- find
   { "<leader>ff", M.files,                                                                                                 desc = "Find Files" },
