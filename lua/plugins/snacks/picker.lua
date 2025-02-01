@@ -84,6 +84,15 @@ local layout_vscode = {
 
 M.files = function() Snacks.picker.files({ hidden = true, exclude = exclude }) end
 M.grep = function() Snacks.picker.grep({ hidden = true, exclude = exclude, live = false, need_search = false }) end
+M.smart = function()
+  Snacks.picker.smart({
+    multi = {
+      { source = 'files', hidden = true, exclude = exclude },
+      'buffers',
+      'recent',
+    },
+  })
+end
 
 M.opts = {
   formatters = {
@@ -102,9 +111,9 @@ M.opts = {
   layout = layout_main,
 }
 
--- incorporate smart: https://github.com/folke/snacks.nvim/issues/693#issuecomment-2608464674
 M.keys = {
   -- find
+  { "<leader>fs", M.smart,                                                                                                 desc = "Find Smart" },
   { "<leader>ff", M.files,                                                                                                 desc = "Find Files" },
   { "<leader>fF", function() Snacks.picker.files({ hidden = true, ignored = true }) end,                                   desc = "Find Files (Ignored)" },
   { "<leader>fb", function() Snacks.picker.buffers() end,                                                                  desc = "Buffers" },

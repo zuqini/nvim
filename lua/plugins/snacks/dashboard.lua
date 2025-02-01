@@ -5,10 +5,11 @@ local M = {}
 M.opts = {
   preset = {
     keys = {
+      { icon = " ", key = "s", desc = "Smart Find", action = picker.smart },
       { icon = " ", key = "f", desc = "Find File", action = picker.files },
-      { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
       { icon = " ", key = "e", desc = "GrEp", action = picker.grep },
       { icon = " ", key = "E", desc = "Live GrEp", action = ":lua Snacks.picker.grep({ hidden = true })" },
+      { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
       { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.picker.recent()" },
       { icon = " ", key = "d", desc = "Dotfiles", action = ":lua Snacks.picker.files({ cwd = '~/dotfiles', hidden = true })" },
       { icon = " ", key = "s", desc = "Restore Session", section = "session" },
