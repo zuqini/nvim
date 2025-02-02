@@ -98,8 +98,8 @@ return {
           enable = true,
           border = 'none',
           peek_definition_code = {
-            ["<leader>gp"] = "@function.outer",
-            ["<leader>gP"] = "@class.outer",
+            ["<leader>gf"] = "@function.outer",
+            ["<leader>gF"] = "@class.outer",
           },
         },
       },
