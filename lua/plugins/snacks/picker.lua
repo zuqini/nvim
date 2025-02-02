@@ -84,12 +84,14 @@ local layout_vscode = {
 
 M.files = function() Snacks.picker.files({ hidden = true, exclude = exclude }) end
 M.grep = function() Snacks.picker.grep({ hidden = true, exclude = exclude, live = false, need_search = false }) end
+M.live_grep = function() Snacks.picker.grep({ hidden = true, exclude = exclude }) end
+M.recent = function() Snacks.picker.recent({ filter = { cwd = true } }) end
 M.smart = function()
   Snacks.picker.smart({
     multi = {
-      { source = 'files', hidden = true, exclude = exclude },
+      { source = 'files',  hidden = true,          exclude = exclude },
+      { source = 'recent', filter = { cwd = true } },
       'buffers',
-      'recent',
     },
   })
 end
@@ -115,10 +117,10 @@ M.keys = {
   -- find
   { "<leader>fs", M.smart,                                                                                                 desc = "Find Smart" },
   { "<leader>ff", M.files,                                                                                                 desc = "Find Files" },
+  { "<leader>fr", M.recent,                                                                                                desc = "Recent" },
   { "<leader>fF", function() Snacks.picker.files({ hidden = true, ignored = true }) end,                                   desc = "Find Files (Ignored)" },
   { "<leader>fb", function() Snacks.picker.buffers() end,                                                                  desc = "Buffers" },
   { "<leader>fd", function() Snacks.picker.files({ cwd = '~/dotfiles', hidden = true }) end,                               desc = "Find Dots" },
-  { "<leader>fr", function() Snacks.picker.recent() end,                                                                   desc = "Recent" },
   -- git
   { "<leader>,c", function() Snacks.picker.git_log_file() end,                                                             desc = "Git Log File (Commits)" },
   { "<leader>,l", function() Snacks.picker.git_log() end,                                                                  desc = "Git Log" },
@@ -127,7 +129,7 @@ M.keys = {
   { "<leader>,f", function() Snacks.picker.git_files() end,                                                                desc = "Git Files" },
   -- Grep
   { "<leader>fe", M.grep,                                                                                                  desc = "GrEp" },
-  { "<leader>fE", function() Snacks.picker.grep({ hidden = true, exclude = exclude }) end,                                 desc = "Live GrEp" },
+  { "<leader>fE", M.live_grep,                                                                                             desc = "Live GrEp" },
   { "<leader>fi", function() Snacks.picker.grep({ hidden = true, ignored = true, live = false, need_search = false }) end, desc = "Grep (Ignored)" },
   { "<leader>fI", function() Snacks.picker.grep({ hidden = true, ignored = true }) end,                                    desc = "Live Grep (Ignored)" },
   { "<leader>fl", function() Snacks.picker.lines({ layout = layout_ivy_lines, }) end,                                      desc = "Buffer Lines" },
