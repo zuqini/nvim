@@ -37,8 +37,9 @@ return {
       ['<Esc>'] = { 'hide', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
       ['<CR>'] = { 'select_and_accept', 'fallback' },
-
-      cmdline = {
+    },
+    cmdline = {
+      keymap = {
         preset = 'enter',
         ["<Tab>"] = { "select_next", "fallback" },
         ["<S-Tab>"] = { "select_prev", "fallback" },
@@ -66,18 +67,9 @@ return {
       documentation = {
         -- Controls whether the documentation window will automatically show when selecting a completion item
         auto_show = true,
-        auto_show_delay_ms = 100,
+        auto_show_delay_ms = 50,
         window = {
           winblend = (vim.g.no_winblend_if_transparent and vim.g.transparent_background) and 0 or vim.g.winblend
-        },
-      },
-      accept = {
-        -- Create an undo point when accepting a completion item
-        create_undo_point = true,
-        -- Experimental auto-brackets support
-        auto_brackets = {
-          -- Whether to auto-insert brackets for functions
-          enabled = true,
         },
       },
       list = {
