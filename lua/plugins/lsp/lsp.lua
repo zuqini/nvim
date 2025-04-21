@@ -131,7 +131,8 @@ return {
       }
     }
 
-    lspconfig.lua_ls.setup {
+    ---------------------------------------------- server configurations -------------------------------------------
+    vim.lsp.config('lua_ls', {
       settings = {
         Lua = {
           diagnostics = {
@@ -146,11 +147,9 @@ return {
           },
         }
       }
-    }
+    })
 
-    -- setup servers
-    lspconfig.vimls.setup {}
-    lspconfig.ts_ls.setup {
+    vim.lsp.config('ts_ls', {
       init_options = {
         preferences = {
           includeInlayParameterNameHints = 'all',
@@ -163,14 +162,19 @@ return {
           importModuleSpecifierPreference = 'non-relative',
         },
       },
-    }
-    lspconfig.pyright.setup {}
-    lspconfig.jdtls.setup {}
-    lspconfig.jsonls.setup {}
-    lspconfig.gdscript.setup {}
-    lspconfig.astro.setup {}
-    lspconfig.cssls.setup {}
+    })
+    ---------------------------------------------- server enablement -------------------------------------------
+    vim.lsp.enable('lua_ls')
+    vim.lsp.enable('ts_ls')
+    vim.lsp.enable('vimls')
+    vim.lsp.enable('pyright')
+    vim.lsp.enable('jdtls')
+    vim.lsp.enable('jsonls')
+    vim.lsp.enable('gdscript')
+    vim.lsp.enable('astro')
+    vim.lsp.enable('cssls')
 
+    ---------------------------------------------- NEED TO UPDATE INSTRUCTIONS TO >=0.11 -------------------------------------------
     -- if vim.g.is_windows then
     --   windows specific bug, see https://www.reddit.com/r/neovim/comments/114z8he/comment/j8z2w0k/?utm_source=share&utm_medium=web2x&context=3
     --   remember to run `scoop install nmap`
