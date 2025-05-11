@@ -4,12 +4,7 @@ return {
   dependencies = {
     {
       'williamboman/mason-lspconfig.nvim',
-      dependencies = {
-        {
-          "williamboman/mason.nvim",
-          build = ":MasonUpdate" -- :MasonUpdate updates registry contents
-        },
-      },
+      "williamboman/mason.nvim",
       config = function()
         require('mason').setup()
         require("mason-lspconfig").setup({
@@ -28,8 +23,6 @@ return {
   },
   config = function()
     -- vim.lsp.set_log_level("debug")
-    local lspconfig = require('lspconfig')
-
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
