@@ -1,26 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
   event = 'VeryLazy',
-  dependencies = {
-    {
-      'williamboman/mason-lspconfig.nvim',
-      "williamboman/mason.nvim",
-      config = function()
-        require('mason').setup()
-        require("mason-lspconfig").setup({
-          automatic_installation = {
-            exclude = {
-              "rust_analyzer",
-              "omnisharp",
-              "omnisharp_mono",
-              "jdtls",
-              "astro",
-            }
-          }
-        })
-      end
-    },
-  },
   config = function()
     -- vim.lsp.set_log_level("debug")
     vim.api.nvim_create_autocmd('LspAttach', {
