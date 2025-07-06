@@ -6,11 +6,7 @@ return {
   dependencies = 'rafamadriz/friendly-snippets',
 
   -- use a release tag to download pre-built binaries
-  version = vim.g.is_windows and '*' or nil,
-  -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-  build = vim.g.is_windows and nil or 'cargo build --release',
-  -- If you use nix, you can build from source using latest nightly rust with:
-  -- build = 'nix run .#build-plugin',
+  version = "1.*",
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config

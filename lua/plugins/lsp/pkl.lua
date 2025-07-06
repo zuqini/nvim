@@ -11,7 +11,7 @@ return {
       },
     },
     build = function()
-      require('pkl-neovim.internal').init()
+      require('pkl-neovim').init()
 
       -- Set up syntax highlighting.
       vim.cmd("TSInstall! pkl")
