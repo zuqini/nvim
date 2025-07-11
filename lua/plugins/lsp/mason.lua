@@ -1,18 +1,16 @@
 return {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {
-      automatic_installation = {
-        exclude = {
-          "rust_analyzer",
-          "omnisharp",
-          "omnisharp_mono",
-          "jdtls",
-          "astro",
-        }
-      }
-    },
-    dependencies = {
-        { "mason-org/mason.nvim", opts = {} },
-        "neovim/nvim-lspconfig",
-    },
+  "mason-org/mason-lspconfig.nvim",
+  opts = {
+    automatic_enable = {
+      ensure_installed = {
+        "vimls",
+        "lua_ls",
+      },
+      exclude = { "rust_analyzer" }
+    }
+  },
+  dependencies = {
+    { "mason-org/mason.nvim", opts = {} },
+    "neovim/nvim-lspconfig",
+  },
 }

@@ -137,15 +137,16 @@ return {
       },
     })
     ---------------------------------------------- server enablement -------------------------------------------
-    vim.lsp.enable('lua_ls')
-    vim.lsp.enable('ts_ls')
-    vim.lsp.enable('vimls')
-    vim.lsp.enable('pyright')
-    vim.lsp.enable('jdtls')
-    vim.lsp.enable('jsonls')
-    vim.lsp.enable('gdscript')
-    vim.lsp.enable('astro')
-    vim.lsp.enable('cssls')
+    -- Mason can do this for us now?
+    -- vim.lsp.enable('lua_ls')
+    -- vim.lsp.enable('ts_ls')
+    -- vim.lsp.enable('vimls')
+    -- vim.lsp.enable('pyright')
+    -- vim.lsp.enable('jdtls')
+    -- vim.lsp.enable('jsonls')
+    -- vim.lsp.enable('gdscript')
+    -- vim.lsp.enable('astro')
+    -- vim.lsp.enable('cssls')
 
     ---------------------------------------------- NEED TO UPDATE INSTRUCTIONS TO >=0.11 -------------------------------------------
     -- if vim.g.is_windows then
