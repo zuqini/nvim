@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local themes = {
   { name = 'gruvbox',         lualine = 'auto' },       -- brown
   { name = 'terafox',         lualine = 'auto' },       -- green

@@ -1,6 +1,7 @@
 return {
   'stevearc/oil.nvim',
   enabled = true,
+  cond = not vim.g.vscode,
   lazy = false, -- since this replaces netrw
   opts = {
     default_file_explorer = true,

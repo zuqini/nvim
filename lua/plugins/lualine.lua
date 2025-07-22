@@ -3,7 +3,7 @@ return {
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
-  enabled = not vim.g.vscode,
+  cond = not vim.g.vscode,
   config = function()
     local theme = require('utils.theme').get_current_lualine_theme()
 

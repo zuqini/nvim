@@ -1,5 +1,6 @@
 return {
   'chentoast/marks.nvim',
+  cond = not vim.g.vscode,
   event = "VeryLazy",
   opts = {
     -- whether to map keybinds or not. default true

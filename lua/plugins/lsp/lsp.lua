@@ -1,6 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   event = 'VeryLazy',
+  cond = not vim.g.vscode,
   config = function()
     -- vim.lsp.set_log_level("debug")
     vim.api.nvim_create_autocmd('LspAttach', {

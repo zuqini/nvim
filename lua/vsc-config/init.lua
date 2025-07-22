@@ -1,0 +1,1 @@
+require('vsc-config.mappings')

@@ -1,5 +1,6 @@
 return {
   "kevinhwang91/nvim-fundo",
+  cond = not vim.g.vscode,
   dependencies = {
     "kevinhwang91/promise-async",
   },

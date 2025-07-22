@@ -1,6 +1,7 @@
 return {
   {
     "apple/pkl-neovim",
+    cond = not vim.g.vscode,
     ft = "pkl",
     dependencies = {
       {

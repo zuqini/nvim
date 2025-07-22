@@ -1,5 +1,6 @@
 return {
   "mfussenegger/nvim-dap",
+  cond = not vim.g.vscode,
   ft = { "rust" },
   dependencies = {
     "rcarriga/nvim-dap-ui",

@@ -1,5 +1,6 @@
 return {
   "nvimtools/none-ls.nvim",
+  cond = not vim.g.vscode,
   dependencies = {
     "nvim-lua/plenary.nvim"
   },

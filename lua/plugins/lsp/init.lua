@@ -1,6 +1,7 @@
 return {
   {
     "folke/lazydev.nvim",
+    cond = not vim.g.vscode,
     ft = "lua", -- only load on lua files
     opts = {
       library = {
@@ -13,6 +14,7 @@ return {
   },
   {
     'mrcjkb/rustaceanvim',
+    cond = not vim.g.vscode,
     version = '^6', -- Recommended
     ft = "rust"
     -- make sure rust-analyzer is installed, and NOT through mason.nvim

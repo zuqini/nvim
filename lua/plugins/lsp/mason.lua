@@ -1,5 +1,6 @@
 return {
   "mason-org/mason-lspconfig.nvim",
+  cond = not vim.g.vscode,
   opts = {
     automatic_enable = {
       ensure_installed = {
