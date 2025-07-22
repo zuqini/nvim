@@ -1,6 +1,7 @@
 return {
   'echasnovski/mini.clue',
   version = false,
+  cond = not vim.g.vscode,
   config = function()
     local miniclue = require('mini.clue')
     miniclue.setup({

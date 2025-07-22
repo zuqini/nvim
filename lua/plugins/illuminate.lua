@@ -1,6 +1,7 @@
 return {
   'RRethy/vim-illuminate',
   event = 'VeryLazy',
+  cond = not vim.g.vscode,
   config = function()
     require('illuminate').configure({
       large_file_cutoff = 2000,

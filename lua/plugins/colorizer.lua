@@ -1,6 +1,7 @@
 return {
   "catgoose/nvim-colorizer.lua",
   event = "BufReadPre",
-  opts = {   -- set to setup table
+  cond = not vim.g.vscode,
+  opts = { -- set to setup table
   },
 }

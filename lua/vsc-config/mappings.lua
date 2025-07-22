@@ -8,4 +8,9 @@ local nmap_leader = function(suffix, rhs, desc)
   nmap('<Leader>' .. suffix, rhs, desc)
 end
 
-nmap_leader('fe', function() vscode.action('workbench.action.findInFiles', { args = { query = vim.fn.expand('<cword>') } }) end, 'Grep')
+nmap_leader('fe',
+  function() vscode.action('workbench.action.findInFiles', { args = { query = vim.fn.expand('<cword>') } }) end,
+  'Grep')
+nmap_leader('ff',
+  function() vscode.action('workbench.action.quickOpen', { args = { query = vim.fn.expand('<cword>') } }) end,
+  'Find Files')
