@@ -1,6 +1,7 @@
 return {
   "folke/snacks.nvim",
   lazy = false,
+  enabled = not vim.g.vscode,
   ---@type snacks.Config
   opts = {
     bigfile = {},
