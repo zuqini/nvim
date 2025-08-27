@@ -18,6 +18,10 @@ return {
 
         vim.lsp.inlay_hint.enable(true)
 
+        if client:supports_method('textDocument/documentColor') then
+          vim.lsp.document_color.enable(true, 0, { style = 'virtual' })
+        end
+
         if vim.lsp.codelens then
           vim.lsp.codelens.refresh()
           vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
