@@ -1,5 +1,5 @@
 return {
-  'echasnovski/mini.files',
+  'nvim-mini/mini.files',
   enabled = false,
   version = false,
   event = 'VeryLazy',

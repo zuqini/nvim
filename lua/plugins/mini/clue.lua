@@ -1,5 +1,5 @@
 return {
-  'echasnovski/mini.clue',
+  'nvim-mini/mini.clue',
   version = false,
   cond = not vim.g.vscode,
   config = function()
