@@ -12,6 +12,8 @@ end
 local function supertab()
   if pumvisible() then
     feedkeys '<C-n>'
+  elseif vim.snippet.active { direction = 1 } then
+    vim.snippet.jump(1)
   else
     if next(vim.lsp.get_clients { bufnr = 0 }) then
       vim.lsp.completion.get()
