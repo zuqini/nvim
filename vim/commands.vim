@@ -29,7 +29,7 @@ augroup mainMiscCommands
   " disable automatic comment insertion
   au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   " highlight yank
-  au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+  au TextYankPost * lua vim.hl.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 augroup END
 
 augroup numbertoggle
