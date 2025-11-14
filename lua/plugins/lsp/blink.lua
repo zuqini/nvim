@@ -4,7 +4,15 @@ return {
   cond = not vim.g.vscode,
   lazy = false, -- lazy loading handled internally
   -- optional: provides snippets for the snippet source
-  dependencies = 'rafamadriz/friendly-snippets',
+  dependencies = {
+    -- using LuaSnip because pkl needs it
+    'L3MON4D3/LuaSnip',
+    dependencies = { "rafamadriz/friendly-snippets" },
+    version = 'v2.*',
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end
+  },
 
   -- use a release tag to download pre-built binaries
   version = "1.*",
@@ -12,6 +20,7 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    snippets = { preset = 'luasnip' },
     sources = {
       -- add lazydev to your completion providers
       default = { "lsp", "path", "snippets", "buffer", "lazydev" },

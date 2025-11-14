@@ -2,11 +2,11 @@ return {
   "mason-org/mason-lspconfig.nvim",
   cond = not vim.g.vscode,
   opts = {
+    ensure_installed = {
+      "vimls",
+      "lua_ls",
+    },
     automatic_enable = {
-      ensure_installed = {
-        "vimls",
-        "lua_ls",
-      },
       exclude = { "rust_analyzer" }
     }
   },
