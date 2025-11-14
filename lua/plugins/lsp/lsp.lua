@@ -8,7 +8,7 @@ return {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client == nil then
-          print("LSP client is unexpectedly unavailable")
+          vim.notify("LSP client is unexpectedly unavailable", vim.log.levels.ERROR)
           return
         end
 
@@ -77,7 +77,7 @@ return {
         -- Get the detaching client
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client == nil then
-          print("LSP client is unexpectedly unavailable")
+          vim.notify("LSP client is unexpectedly unavailable", vim.log.levels.ERROR)
           return
         end
         -- Remove the autocommand to format the buffer on save, if it exists
