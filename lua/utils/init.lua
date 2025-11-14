@@ -42,7 +42,7 @@ M.open_url = function(url)
 end
 
 M.clear_reg = function()
-  print('Clearing registers')
+  vim.notify('Clearing registers', vim.log.levels.INFO, { title = "utils.clear_reg" })
   vim.cmd [[
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
     for r in regs
@@ -75,27 +75,6 @@ M.set_transparent_background = function()
       vim.cmd('hi DiagnosticVirtualTextHint guibg=NONE ctermbg=NONE')
       vim.cmd('hi DiagnosticVirtualTextOk guibg=NONE ctermbg=NONE')
     end
-  end
-end
-
-local max_file_size = 1024 * 1024 -- 1MiB
-local file_size_cache = {}
-M.is_large_file = function(buf)
-  local buf_name = vim.api.nvim_buf_get_name(buf)
-  if buf_name == nil or buf_name == '' then
-    return false
-  end
-
-  if file_size_cache[buf_name] == nil then
-    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-    if ok and stats then
-      file_size_cache[buf_name] = stats.size
-    else
-      vim.notify("Failed to fetch file size for " .. buf_name, vim.log.levels.WARN, { title = "utils.is_large_file" })
-    end
-  end
-  if file_size_cache[buf_name] ~= nil and file_size_cache[buf_name] > max_file_size then
-    return true
   end
 end
 

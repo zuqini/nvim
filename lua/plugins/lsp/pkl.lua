@@ -1,3 +1,4 @@
+-- also use this for .pcl files
 vim.filetype.add({
   extension = {
     pcl = "pkl",
