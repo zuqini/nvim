@@ -115,10 +115,10 @@ M.opts = {
 
 M.keys = {
   -- find
-  { "<leader>fs", M.smart,                                                                                                 desc = "Find Smart" },
-  { "<leader>ff", M.files,                                                                                                 desc = "Find Files" },
+  { "<leader>ff", M.smart,                                                                                                 desc = "Find Files (Smart)" },
+  { "<leader>fF", M.files,                                                                                                 desc = "Find Files" },
   { "<leader>fr", M.recent,                                                                                                desc = "Recent" },
-  { "<leader>fF", function() Snacks.picker.files({ hidden = true, ignored = true }) end,                                   desc = "Find Files (Ignored)" },
+  { "<leader>fs", function() Snacks.picker.files({ hidden = true, ignored = true }) end,                                   desc = "Find Files (Ignored)" },
   { "<leader>fb", function() Snacks.picker.buffers() end,                                                                  desc = "Buffers" },
   { "<leader>fd", function() Snacks.picker.files({ cwd = '~/dotfiles', hidden = true }) end,                               desc = "Find Dots" },
   -- git
