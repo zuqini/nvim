@@ -141,6 +141,9 @@ return {
         },
       },
     })
+
+    vim.lsp.enable('gdscript')
+
     ---------------------------------------------- server enablement -------------------------------------------
     -- Mason can do this for us now?
     -- vim.lsp.enable('lua_ls')
@@ -149,7 +152,6 @@ return {
     -- vim.lsp.enable('pyright')
     -- vim.lsp.enable('jdtls')
     -- vim.lsp.enable('jsonls')
-    -- vim.lsp.enable('gdscript')
     -- vim.lsp.enable('astro')
     -- vim.lsp.enable('cssls')
 
