@@ -4,6 +4,10 @@ end
 
 return {
   "aaronik/treewalker.nvim",
+  opts = {
+    highlight = true, -- Whether to briefly highlight the node after jumping to it
+    highlight_duration = 150, -- How long should above highlight last (in ms)
+  },
   config = function()
     map({ 'n', 'v' }, '<A-k>', '<cmd>Treewalker Up<cr>', 'Treewalker Up')
     map({ 'n', 'v' }, '<A-j>', '<cmd>Treewalker Down<cr>', 'Treewalker Down')
@@ -13,9 +17,6 @@ return {
     map('n', '<leader>tk', '<cmd>Treewalker SwapUp<cr>', 'Swap Up')
     map('n', '<leader>tn', "<cmd>Treewalker SwapRight<cr>", 'Swap Next')
     map('n', '<leader>tp', "<cmd>Treewalker SwapLeft<cr>", 'Swap Prev')
-    require('treewalker').setup({
-      highlight = true, -- Whether to briefly highlight the node after jumping to it
-      highlight_duration = 150, -- How long should above highlight last (in ms)
-    })
   end
 }
+

@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "cql-vim": {
+      "rev": "6f61df5a633c3a91edea7bcb5d5772648df19d1a",
+      "src": "https://github.com/elubow/cql-vim"
+    },
     "gruvbox-material": {
       "rev": "4bfc6983abc249c5943a60d8eb3980a3c2ababe1",
       "src": "https://github.com/sainnhe/gruvbox-material"
@@ -57,9 +61,18 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
+    "nvim-treesitter-context": {
+      "rev": "660861b1849256398f70450afdf93908d28dc945",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
+    },
     "nvim-treesitter-textobjects": {
-      "rev": "5ca4aaa6efdcc59be46b95a3e876300cfead05ef",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+      "rev": "dfbf9596f8aa8b4bed5301647485594ff7252955",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+      "version": "'main'"
+    },
+    "nvim-ts-autotag": {
+      "rev": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc",
+      "src": "https://github.com/windwp/nvim-ts-autotag"
     },
     "nvim-web-devicons": {
       "rev": "8dcb311b0c92d460fac00eac706abd43d94d68af",
@@ -77,6 +90,10 @@
       "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
       "src": "https://github.com/folke/tokyonight.nvim"
     },
+    "treewalker.nvim": {
+      "rev": "ec116249e6fa3f00f20acc5b1723cc1b4eca2d6d",
+      "src": "https://github.com/aaronik/treewalker.nvim"
+    },
     "typr": {
       "rev": "584e4ef34dea25a4035627794322f315b22d1253",
       "src": "https://github.com/nvzone/typr"
@@ -84,6 +101,14 @@
     "undotree": {
       "rev": "0f1c9816975b5d7f87d5003a19c53c6fd2ff6f7f",
       "src": "https://github.com/mbbill/undotree"
+    },
+    "vim-arduino": {
+      "rev": "2ded67cdf09bb07c4805d9e93d478095ed3d8606",
+      "src": "https://github.com/stevearc/vim-arduino"
+    },
+    "vim-godot": {
+      "rev": "1c8385789f7f4558bdbbf6e75033b34b4727944b",
+      "src": "https://github.com/habamax/vim-godot"
     },
     "volt": {
       "rev": "620de1321f275ec9d80028c68d1b88b409c0c8b1",

@@ -1,5 +1,7 @@
 local M = {}
 
+local debug = false
+
 local packs = {}
 local configs = {}
 local keys = {}
@@ -18,6 +20,7 @@ local import
 ---@field [1] string
 ---@field url? string
 ---@field build? string
+---@field ft? string
 ---@field dependencies? string[]
 ---@field enabled? boolean|(fun():boolean)
 ---@field cond? boolean|(fun():boolean)
@@ -31,6 +34,10 @@ import = function(specs)
     specs = { specs }
   else
     specs = specs
+  end
+
+  if debug then
+    print(require'utils'.dump_table(specs))
   end
 
   for _, spec in ipairs(specs) do
@@ -50,6 +57,10 @@ import = function(specs)
     end
 
     table.insert(packs, { src = src, version = spec.version })
+
+    if spec.ft and vim.bo.filetype == spec.ft then
+      return
+    end
 
     if spec.cond == false or (type(spec.cond) == "function" and not spec.cond()) then
       return
@@ -72,9 +83,15 @@ import = function(specs)
 end
 
 local initialize = function()
+  if debug then
+    print("adding spec for " .. require'utils'.dump_table(packs));
+  end
   vim.pack.add(packs)
 
   for src, config in pairs(configs) do
+    if debug then
+      print("running config for " .. src);
+    end
     local success, error_msg = pcall(config)
     if not success then
       vim.schedule(function()
