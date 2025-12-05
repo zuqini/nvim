@@ -1,9 +1,7 @@
+-- { 'nvim-treesitter/nvim-treesitter-textobjects' },
+-- { 'nvim-mini/mini.extra' },
 return {
   'nvim-mini/mini.ai',
-  dependencies = {
-    { 'nvim-mini/mini.extra' },
-    -- { 'nvim-treesitter/nvim-treesitter-textobjects' },
-  },
   config = function()
     local ai = require('mini.ai')
     local gen_spec = ai.gen_spec

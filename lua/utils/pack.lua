@@ -21,7 +21,6 @@ local import
 ---@field url? string
 ---@field build? string
 ---@field ft? string
----@field dependencies? string[]
 ---@field enabled? boolean|(fun():boolean)
 ---@field cond? boolean|(fun():boolean)
 ---@field version? string
@@ -37,16 +36,12 @@ import = function(specs)
   end
 
   if debug then
-    print(require'utils'.dump_table(specs))
+    print(require 'utils'.dump_table(specs))
   end
 
   for _, spec in ipairs(specs) do
     if spec.enabled == false or (type(spec.enabled) == "function" and not spec.enabled()) then
       return
-    end
-
-    if spec.dependencies then
-      import(spec.dependencies)
     end
 
     local src
@@ -66,7 +61,7 @@ import = function(specs)
       return
     end
 
-    if spec.config then
+    if src and spec.config then
       configs[src] = spec.config
     end
 
@@ -84,7 +79,7 @@ end
 
 local initialize = function()
   if debug then
-    print("adding spec for " .. require'utils'.dump_table(packs));
+    print("adding spec for " .. require 'utils'.dump_table(packs));
   end
   vim.pack.add(packs)
 
@@ -101,8 +96,8 @@ local initialize = function()
   end
 
   for _, build in ipairs(builds) do
-    vim.schedule(function() 
-      vim.cmd(build) 
+    vim.schedule(function()
+      vim.cmd(build)
     end)
   end
 

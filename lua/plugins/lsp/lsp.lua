@@ -1,6 +1,5 @@
 return {
   'neovim/nvim-lspconfig',
-  event = 'VeryLazy',
   cond = not vim.g.vscode,
   config = function()
     -- vim.lsp.set_log_level("debug")
@@ -13,7 +12,7 @@ return {
         end
 
         if vim.g.cmp_engine == 'builtin' then
-          require('lazy-plugins.lsp.utils.builtin-cmp').setup({ client = client, bufnr = args.buf })
+          require('plugins.lsp.utils.builtin-cmp').setup({ client = client, bufnr = args.buf })
         end
 
         vim.lsp.inlay_hint.enable(true)
