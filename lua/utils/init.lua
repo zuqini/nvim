@@ -94,12 +94,12 @@ M.trim_last_lines = function()
   if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
 end
 
-M.dump_dictionary = function(o)
+M.dump_table = function(o)
   if type(o) == 'table' then
     local s = '{ '
     for k, v in pairs(o) do
       if type(k) ~= 'number' then k = '"' .. k .. '"' end
-      s = s .. '[' .. k .. '] = ' .. M.dump_dictionary(v) .. ','
+      s = s .. '[' .. k .. '] = ' .. M.dump_table(v) .. ','
     end
     return s .. '} '
   else

@@ -13,5 +13,5 @@ return {
     'elubow/cql-vim',
     ft = 'cql',
   },
-  { import = 'plugins/treesitter' }
+  { import = 'lazy-plugins.treesitter' }
 }

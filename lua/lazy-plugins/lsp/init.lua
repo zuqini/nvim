@@ -20,5 +20,5 @@ return {
     -- make sure rust-analyzer is installed, and NOT through mason.nvim
     -- see https://github.com/mrcjkb/rustaceanvim/blob/master/doc/mason.txt
   },
-  { import = 'plugins.lsp' }
+  { import = 'lazy-plugins.lsp' }
 }

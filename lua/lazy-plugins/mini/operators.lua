@@ -1,5 +1,7 @@
 return {
   'nvim-mini/mini.operators',
+  version = false,
+  event = 'VeryLazy',
   config = function()
     require('mini.operators').setup({
       replace = {
