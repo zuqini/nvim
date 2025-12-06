@@ -5,20 +5,12 @@ vim.filetype.add({
   },
 })
 
+-- {"nvim-treesitter/nvim-treesitter"}
+-- {"L3MON4D3/LuaSnip"}
 return {
   "apple/pkl-neovim",
   cond = not vim.g.vscode,
-  lazy = true,
-  ft = { 'pkl' },
-  dependencies = {
-    {
-      "nvim-treesitter/nvim-treesitter",
-      build = function(_)
-        vim.cmd("TSUpdate")
-      end,
-    },
-    "L3MON4D3/LuaSnip",
-  },
+  -- ft = 'pkl',
   build = function()
     require('pkl-neovim').init()
 

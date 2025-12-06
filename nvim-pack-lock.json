@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "LuaSnip": {
+      "rev": "3732756842a2f7e0e76a7b0487e9692072857277",
+      "src": "https://github.com/L3MON4D3/LuaSnip"
+    },
     "cql-vim": {
       "rev": "6f61df5a633c3a91edea7bcb5d5772648df19d1a",
       "src": "https://github.com/elubow/cql-vim"
@@ -64,6 +68,10 @@
       "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
       "src": "https://github.com/folke/noice.nvim"
     },
+    "none-ls.nvim": {
+      "rev": "5abf61927023ea83031753504adb19630ba80eef",
+      "src": "https://github.com/nvimtools/none-ls.nvim"
+    },
     "nui.nvim": {
       "rev": "de740991c12411b663994b2860f1a4fd0937c130",
       "src": "https://github.com/MunifTanjim/nui.nvim"
@@ -97,6 +105,10 @@
     "oil.nvim": {
       "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
       "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "pkl-neovim": {
+      "rev": "69871ac93ef104fbdc6f0ab30e59564b65c8c4f7",
+      "src": "https://github.com/apple/pkl-neovim"
     },
     "rustaceanvim": {
       "rev": "6c3785d6a230bec63f70c98bf8e2842bed924245",

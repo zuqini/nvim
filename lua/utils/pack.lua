@@ -19,24 +19,23 @@ local import
 ---@class Spec
 ---@field [1] string
 ---@field url? string
----@field build? string
----@field ft? string
+---@field build? string|fun()
 ---@field enabled? boolean|(fun():boolean)
 ---@field cond? boolean|(fun():boolean)
 ---@field version? string
 ---@field keys? table<integer, {[1]: string, [2]: fun(), noremap?: boolean, desc?: string, mode?: string|string[], nowait?: boolean}>
 ---@field config? fun()
 
----@param specs Spec|Spec[]
-import = function(specs)
-  if type(specs[1]) == "string" then
-    specs = { specs }
-  else
-    specs = specs
-  end
+---@param spec_item_or_list Spec|Spec[]
+import = function(spec_item_or_list)
+  local specs = (type(spec_item_or_list[1]) == "string" or spec_item_or_list.url)
+      and { spec_item_or_list }
+      or spec_item_or_list --[[@as Spec[] ]]
 
   if debug then
-    print(require 'utils'.dump_table(specs))
+    vim.schedule(function()
+      vim.notify(require 'utils'.dump_table(specs))
+    end)
   end
 
   for _, spec in ipairs(specs) do
@@ -52,10 +51,6 @@ import = function(specs)
     end
 
     table.insert(packs, { src = src, version = spec.version })
-
-    if spec.ft and vim.bo.filetype == spec.ft then
-      return
-    end
 
     if spec.cond == false or (type(spec.cond) == "function" and not spec.cond()) then
       return
@@ -79,13 +74,17 @@ end
 
 local initialize = function()
   if debug then
-    print("adding spec for " .. require 'utils'.dump_table(packs));
+    vim.schedule(function()
+      vim.notify("adding spec for " .. require 'utils'.dump_table(packs));
+    end)
   end
   vim.pack.add(packs)
 
   for src, config in pairs(configs) do
     if debug then
-      print("running config for " .. src);
+      vim.schedule(function()
+        vim.notify("running config for " .. src);
+      end)
     end
     local success, error_msg = pcall(config)
     if not success then
@@ -95,15 +94,19 @@ local initialize = function()
     end
   end
 
-  for _, build in ipairs(builds) do
-    vim.schedule(function()
-      vim.cmd(build)
-    end)
-  end
-
   for _, key in ipairs(keys) do
     map(key[1], key[2], key.noremap, key.desc, key.mode, key.nowait)
   end
+
+  vim.schedule(function()
+    for _, build in ipairs(builds) do
+      if type(build) == "string" then
+        vim.cmd(build)
+      elseif type(build) == "function" then
+        build()
+      end
+    end
+  end)
 end
 
 ---@param plugins_dir string
@@ -115,11 +118,11 @@ M.import_plugins = function(plugins_dir)
     local success, spec = pcall(require, plugins_dir .. "." .. plugin_name)
     if not success then
       vim.schedule(function()
-        vim.notify(("Failed to load plugin spec for %s"):format(plugin_name), vim.log.levels.ERROR)
+        vim.notify(("Failed to load plugin spec for %s: %s"):format(plugin_name, spec), vim.log.levels.ERROR)
       end)
     elseif type(spec) ~= "table" then
       vim.schedule(function()
-        vim.notify(("Invalid spec for %s, not a table"):format(plugin_name), vim.log.levels.ERROR)
+        vim.notify(("Invalid spec for %s, not a table: %s"):format(plugin_name, spec), vim.log.levels.ERROR)
       end)
     else
       import(spec)
