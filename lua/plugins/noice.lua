@@ -1,8 +1,9 @@
 return {
-  { "MunifTanjim/nui.nvim" },
+  { "MunifTanjim/nui.nvim", enabled = false },
   {
     "folke/noice.nvim",
     cond = not vim.g.vscode,
+    enabled = false,
     config = function()
       local map = function(mapping, rhs, desc)
         vim.keymap.set({ 'n', 'i', 's' }, mapping, rhs, { desc = desc, noremap = true })

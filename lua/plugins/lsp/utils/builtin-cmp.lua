@@ -30,77 +30,72 @@ local function supertab()
   end
 end
 
---- lifted from:
----   https://www.reddit.com/r/neovim/comments/1f02fp9/comment/ljtzucj/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
----   https://github.com/konradmalik/neovim-flake/blob/6dba374af89a294c976d72615cca6cfca583a9f2/config/native/lua/pde/lsp/completion.lua
----@param client vim.lsp.Client
----@param bufnr integer
-local function enable_completion_documentation(client, bufnr)
-  if not timer then
-    vim.notify("cannot create timer", vim.log.levels.ERROR)
-    return {}
-  end
-
+-- https://github.com/neovim/neovim/pull/32820
+local function enable_completion_documentation()
   vim.api.nvim_create_autocmd("CompleteChanged", {
-    buffer = bufnr,
     callback = function()
-      timer:stop()
+      local event = vim.v.event
+      if not event or not event.completed_item then return end
 
-      local client_id =
-          vim.tbl_get(vim.v.completed_item, "user_data", "nvim", "lsp", "client_id")
-      if client_id ~= client.id then return end
+      local cy = event.row
+      local cx = event.col
+      local cw = event.width
+      local ch = event.height
 
-      local completion_item =
-          vim.tbl_get(vim.v.completed_item, "user_data", "nvim", "lsp", "completion_item")
-      if not completion_item then return end
+      local item = event.completed_item
+      local lsp_item = item.user_data and item.user_data.nvim and item.user_data.nvim.lsp.completion_item
+      local client = vim.lsp.get_clients({ bufnr = 0 })[1]
 
-      local complete_info = vim.fn.complete_info({ "selected" })
-      if vim.tbl_isempty(complete_info) then return end
+      if not client or not lsp_item then return end
 
-      timer:start(
-        docs_debounce_ms,
-        0,
-        vim.schedule_wrap(function()
-          client.request(
-            vim.lsp.protocol.Methods.completionItem_resolve,
-            completion_item,
-            ---@param err lsp.ResponseError
-            ---@param result any
-            function(err, result)
-              if err ~= nil then
-                vim.notify(
-                  "client " .. client.id .. vim.inspect(err),
-                  vim.log.levels.ERROR
-                )
-                return
-              end
+      client:request('completionItem/resolve', lsp_item, function(_, result)
+        vim.cmd("pclose")
 
-              local docs = vim.tbl_get(result, "documentation", "value")
-              if not docs then return end
+        if result and result.documentation then
+          local docs = result.documentation.value or result.documentation
+          if type(docs) == "table" then docs = table.concat(docs, "\n") end
+          if not docs or docs == "" then return end
 
-              local wininfo =
-                  vim.api.nvim__complete_set(complete_info.selected, { info = docs })
-              if
-                  vim.tbl_isempty(wininfo)
-                  or not vim.api.nvim_win_is_valid(wininfo.winid)
-              then
-                return
-              end
+          local buf = vim.api.nvim_create_buf(false, true)
+          vim.bo[buf].bufhidden = 'wipe'
 
-              vim.api.nvim_win_set_config(wininfo.winid, { border = "rounded" })
-              vim.wo[wininfo.winid].conceallevel = 2
-              vim.wo[wininfo.winid].concealcursor = "niv"
+          local contents = vim.lsp.util.convert_input_to_markdown_lines(docs)
+          vim.api.nvim_buf_set_lines(buf, 0, -1, false, contents)
+          vim.treesitter.start(buf, "markdown")
 
-              if not vim.api.nvim_buf_is_valid(wininfo.bufnr) then return end
+          local dx = cx + cw + 1
+          local dw = 60
+          local anchor = "NW"
 
-              vim.bo[wininfo.bufnr].syntax = "markdown"
-              vim.treesitter.start(wininfo.bufnr, "markdown")
-            end,
-            bufnr
-          )
-        end)
-      )
+          if dx + dw > vim.o.columns then
+            dw = vim.o.columns - dx
+            anchor = "NE"
+          end
+
+          local win = vim.api.nvim_open_win(buf, false, {
+            relative = "editor",
+            row = cy,
+            col = dx,
+            width = dw,
+            height = ch,
+            anchor = anchor,
+            border = "none",
+            style = "minimal",
+            zindex = 60,
+          })
+
+          vim.wo[win].conceallevel = 2
+          vim.wo[win].wrap = true
+          vim.wo[win].previewwindow = true
+        end
+      end)
     end,
+  })
+
+  vim.api.nvim_create_autocmd("CompleteDone", {
+    callback = function()
+      vim.cmd("pclose")
+    end
   })
 end
 
@@ -126,8 +121,14 @@ M.setup = function(opts)
 
   -- Enable completion and configure keybindings.
   if client:supports_method("textDocument/completion") then
+    -- Trigger completion on any character
+    local chars = {}
+    for i = 32, 126 do
+      table.insert(chars, string.char(i))
+    end
+    client.server_capabilities.completionProvider.triggerCharacters = chars
     vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-    -- enable_completion_documentation(client, bufnr)
+    enable_completion_documentation()
 
     -- Use enter to accept completions.
     keymap('<cr>', function()

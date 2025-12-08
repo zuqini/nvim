@@ -1,8 +1,8 @@
 local M = {}
 
-M.init = function (list)
+M.from_array = function(array)
   local set = {}
-  for _, l in ipairs(list) do set[l] = true end
+  for _, l in ipairs(array) do set[l] = true end
   return set
 end
 

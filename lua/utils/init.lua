@@ -107,4 +107,10 @@ M.dump_table = function(o)
   end
 end
 
+M.schedule_notify = function(msg, level)
+  vim.schedule(function()
+    vim.notify(msg, level)
+  end)
+end
+
 return M

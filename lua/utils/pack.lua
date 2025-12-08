@@ -1,21 +1,3 @@
-local M = {}
-
-local debug = false
-
-local packs = {}
-local configs = {}
-local keys = {}
-local builds = {}
-
-local map = function(mapping, rhs, noremap, desc, mode, nowait)
-  noremap = noremap or true
-  desc = desc or ""
-  mode = mode or { 'n' }
-  nowait = nowait or false
-  vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = noremap, nowait = nowait })
-end
-
-local import
 ---@class Spec
 ---@field [1] string
 ---@field url? string
@@ -26,6 +8,32 @@ local import
 ---@field keys? table<integer, {[1]: string, [2]: fun(), noremap?: boolean, desc?: string, mode?: string|string[], nowait?: boolean}>
 ---@field config? fun()
 
+---@class InitializeParams
+---@field build? string|fun()
+---@field config? fun()
+
+local utils = require('utils')
+local M = {}
+
+local debug = false
+
+local packs = {}
+local keys = {}
+---@type { [string]: InitializeParams }
+local src_initialize_params = {}
+---@type string[]
+local src_to_request_build = {}
+
+local map = function(mapping, rhs, noremap, desc, mode, nowait)
+  noremap = noremap or true
+  desc = desc or ""
+  mode = mode or { 'n' }
+  nowait = nowait or false
+  vim.keymap.set(mode, mapping, rhs, { desc = desc, noremap = noremap, nowait = nowait })
+end
+
+
+local import
 ---@param spec_item_or_list Spec|Spec[]
 import = function(spec_item_or_list)
   local specs = (type(spec_item_or_list[1]) == "string" or spec_item_or_list.url)
@@ -33,9 +41,7 @@ import = function(spec_item_or_list)
       or spec_item_or_list --[[@as Spec[] ]]
 
   if debug then
-    vim.schedule(function()
-      vim.notify(require 'utils'.dump_table(specs))
-    end)
+    utils.schedule_notify(utils.dump_table(specs))
   end
 
   for _, spec in ipairs(specs) do
@@ -43,26 +49,19 @@ import = function(spec_item_or_list)
       return
     end
 
-    local src
-    if spec.url then
-      src = spec.url
-    else
-      src = 'https://github.com/' .. spec[1]
-    end
-
+    local src = spec.url and spec.url or 'https://github.com/' .. spec[1]
     table.insert(packs, { src = src, version = spec.version })
 
     if spec.cond == false or (type(spec.cond) == "function" and not spec.cond()) then
       return
     end
 
-    if src and spec.config then
-      configs[src] = spec.config
+    if src then
+      src_initialize_params[src] = {}
+      src_initialize_params[src].config = spec.config
+      src_initialize_params[src].build = spec.build
     end
 
-    if spec.build then
-      table.insert(builds, spec.build)
-    end
 
     if spec.keys then
       for _, key in ipairs(spec.keys) do
@@ -73,40 +72,47 @@ import = function(spec_item_or_list)
 end
 
 local initialize = function()
+  vim.api.nvim_create_autocmd('PackChanged', {
+    callback = function(event)
+      if event.data.kind == "update" or event.data.kind == "install" then
+        table.insert(src_to_request_build, event.data.spec.src)
+      end
+    end,
+  })
+
   if debug then
-    vim.schedule(function()
-      vim.notify("adding spec for " .. require 'utils'.dump_table(packs));
-    end)
+    utils.schedule_notify("adding spec for " .. utils.dump_table(packs));
   end
   vim.pack.add(packs)
 
-  for src, config in pairs(configs) do
-    if debug then
-      vim.schedule(function()
-        vim.notify("running config for " .. src);
-      end)
-    end
-    local success, error_msg = pcall(config)
-    if not success then
-      vim.schedule(function()
-        vim.notify(("Failed to run config for %s: %s"):format(src, error_msg), vim.log.levels.ERROR)
-      end)
+  for src, params in pairs(src_initialize_params) do
+    if params.config then
+      if debug then
+        utils.schedule_notify("running config for " .. src);
+      end
+      local success, error_msg = pcall(params.config)
+      if not success then
+        utils.schedule_notify(("Failed to run config for %s: %s"):format(src, error_msg), vim.log.levels.ERROR);
+      end
     end
   end
+
+  vim.schedule(function()
+    for _, src in ipairs(src_to_request_build) do
+      local build = src_initialize_params[src].build
+      if build then
+        if type(build) == "string" then
+          vim.cmd(build)
+        elseif type(build) == "function" then
+          build()
+        end
+      end
+    end
+  end)
 
   for _, key in ipairs(keys) do
     map(key[1], key[2], key.noremap, key.desc, key.mode, key.nowait)
   end
-
-  vim.schedule(function()
-    for _, build in ipairs(builds) do
-      if type(build) == "string" then
-        vim.cmd(build)
-      elseif type(build) == "function" then
-        build()
-      end
-    end
-  end)
 end
 
 ---@param plugins_dir string
