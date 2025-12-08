@@ -94,18 +94,8 @@ return {
             update_in_insert = false, -- Update diagnostics in insert mode.
             always_visible = false,   -- Show diagnostics even if there are none.
           },
-          -- {
-          --   require("noice").api.status.mode.get,
-          --   cond = require("noice").api.status.mode.has,
-          --   color = { fg = "#ff9e64" },
-          -- },
         },
         lualine_x = {
-          -- {
-          --   require("noice").api.status.command.get,
-          --   cond = require("noice").api.status.command.has,
-          --   color = { fg = "#ff9e64" },
-          -- },
           {
             'filetype',
             icon = { align = 'right' }, -- Display filetype icon on the right hand side
