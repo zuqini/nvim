@@ -6,6 +6,6 @@ return {
       vrequire('plugins/undotree')
     end
   },
-  { 'stevearc/vim-arduino', ft = "arduino", },
-  { 'habamax/vim-godot',    ft = "gdscript" },
+  { 'stevearc/vim-arduino' },
+  { 'habamax/vim-godot' },
 }

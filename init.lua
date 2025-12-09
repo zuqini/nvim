@@ -7,9 +7,6 @@ vrequire("utils")
 vrequire("commands")
 require("commands")
 
-vrequire("options")
-require("options")
-
 vrequire("mappings")
 require("mappings")
 
@@ -18,7 +15,10 @@ if vim.g.vscode then
 end
 
 -- require("utils.lazy") -- make sure to set `mapleader` before lazy. mapleader is set in mappings
-require("utils.pack").import_plugins('plugins')
+require("utils.pack").import_specs_from_dir('plugins')
+
+vrequire("options")
+require("options")
 
 require("utils.theme")
 
