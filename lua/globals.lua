@@ -3,8 +3,6 @@ vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.f
 vim.g.cmp_engine = 'blink' -- blink | builtin
 vim.g.hybrid_nu = true
 vim.g.transparent_background = true
-vim.g.winblend = 10
-vim.g.no_winblend_if_transparent = false
 vim.g.transparent_float_if_transparent = false
 vim.g.virtual_line_current_line = true
 
