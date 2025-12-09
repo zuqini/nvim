@@ -15,7 +15,7 @@ set incsearch
 set hlsearch
 set ignorecase smartcase
 set laststatus=3
-set cmdheight=0
+" set cmdheight=0
 
 set scrolloff=4
 set synmaxcol=512
