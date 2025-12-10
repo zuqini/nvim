@@ -2,7 +2,7 @@ local M = {}
 
 local max_file_size = 1024 * 1024 -- 1MiB
 local file_size_cache = {}
-local ignored_buf_substrs = { "oil://", "undotree", "Grug FAR", "health://" }
+local ignored_buf_substrs = { "oil://", "undotree", "Grug FAR", "health://", "any-jump" }
 
 local function buf_should_be_ignored(buf_name)
   for _, ignored_buf_substr in ipairs(ignored_buf_substrs) do

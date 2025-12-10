@@ -2,7 +2,7 @@ local vrequire = require("utils").vrequire
 return {
   {
     'mbbill/undotree',
-    cmd = 'U',
+    cmd = { 'U', 'UndotreeToggle' },
     config = function()
       vrequire('plugins/undotree')
     end

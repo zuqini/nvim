@@ -3,7 +3,9 @@ local picker = require('plugins.snacks.picker');
 return {
   'folke/snacks.nvim',
   lazy = false,
-  keys = picker.keys,
+  keys = vim.list_extend({
+    { "<leader>gh", mode = { "n" }, function() require('snacks').gitbrowse() end, desc = "Git browse" },
+  }, picker.keys),
   config = function()
     require('snacks').setup({
       bigfile = {},
@@ -12,6 +14,7 @@ return {
       indent = require('plugins.snacks.indent').opts,
       dashboard = require('plugins.snacks.dashboard').opts,
       picker = picker.opts,
+      gitbrowse = {},
     })
   end
 }
