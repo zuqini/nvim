@@ -2,6 +2,7 @@ local picker = require('plugins.snacks.picker');
 
 return {
   'folke/snacks.nvim',
+  lazy = false,
   keys = picker.keys,
   config = function()
     require('snacks').setup({

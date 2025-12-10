@@ -5,25 +5,38 @@
 ---@field build? string|fun()
 ---@field enabled? boolean|(fun():boolean)
 ---@field cond? boolean|(fun():boolean)
+---@field lazy? boolean
 ---@field version? string
 ---@field keys? table<integer, {[1]: string, [2]: fun(), noremap?: boolean, desc?: string, mode?: string|string[], nowait?: boolean}>
 ---@field config? fun()
+---@field event? string|string[]
+---@field pattern? string|string[]
+---@field cmd? string|string[]
+---@field nargs? string
+---@field range? boolean
+---@field bang? boolean
+---@field complete? string
+---@field count? boolean
 
 local utils = require('utils')
 local M = {}
 
 local debug = false
 
-local packs = {}
-local keys = {}
+local lazy_group = vim.api.nvim_create_augroup('LazyPack', { clear = true })
+local startup_group = vim.api.nvim_create_augroup('StartupPack', { clear = true })
+
+local startup_packs = {}
+local lazy_packs = {}
+local startup_keys = {}
 ---@type { [string]: Spec }
 local src_spec = {}
----@type string[]
+---@type { [string]: boolean }
 local src_to_request_build = {}
 ---@type string[]
-local src_to_request_init = {}
+local src_with_startup_init = {}
 ---@type string[]
-local src_to_request_config = {}
+local src_with_startup_config = {}
 
 local map = function(mapping, rhs, noremap, desc, mode, nowait)
   noremap = noremap or true
@@ -59,6 +72,108 @@ local try_call_hook = function(src, hook_name)
   end
 end
 
+---@param spec Spec
+local is_lazy = function(spec)
+  if spec.lazy ~= nil then
+    return spec.lazy
+  end
+  return spec.event or spec.cmd or (spec.keys and #spec.keys > 0)
+end
+
+local lazy_process_spec = function(plugin)
+  local spec = src_spec[plugin.spec.src]
+
+  if spec.init then
+    try_call_hook(plugin.spec.src, 'init')
+  end
+
+  vim.cmd.packadd(plugin.spec.name)
+
+  if spec.config then
+    try_call_hook(plugin.spec.src, 'config')
+  end
+
+  if src_to_request_build[plugin.spec.src] and spec.build then
+    if type(spec.build) == "string" then
+      vim.schedule(function()
+        vim.cmd(spec.build)
+      end)
+    elseif type(spec.build) == "function" then
+      vim.schedule(function()
+        spec.build()
+      end)
+    end
+  end
+
+  if spec.keys then
+    for _, key in ipairs(spec.keys) do
+      map(key[1], key[2], key.noremap, key.desc, key.mode, key.nowait)
+    end
+  end
+end
+
+local process_lazy_specs = function()
+  vim.pack.add(lazy_packs, {
+    load = function(plugin)
+      local spec = src_spec[plugin.spec.src]
+      if spec.event then
+        local events = type(spec.event) == "string" and { spec.event } or spec.event --[[@as string[] ]]
+        vim.api.nvim_create_autocmd(events, {
+          group = lazy_group,
+          once = true,
+          pattern = spec.pattern or '*',
+          callback = function()
+            lazy_process_spec(plugin)
+          end,
+        })
+      end
+
+      if spec.cmd then
+        local commands = type(spec.cmd) == "string" and { spec.cmd } or spec.cmd --[[@as string[] ]]
+        for _, cmd in ipairs(commands) do
+          vim.api.nvim_create_user_command(cmd, function(cmd_args)
+            pcall(vim.api.nvim_del_user_command, cmd)
+
+            lazy_process_spec(plugin)
+            -- Re-execute the command
+            vim.api.nvim_cmd({
+              cmd = cmd,
+              args = cmd_args.fargs,
+              bang = cmd_args.bang,
+              nargs = cmd_args.nargs,
+              range = cmd_args.range ~= 0 and { cmd_args.line1, cmd_args.line2 } or nil,
+              count = cmd_args.count ~= -1 and cmd_args.count or nil,
+            }, {})
+          end, {
+            nargs = spec.nargs or '*',
+            range = spec.range,
+            bang = spec.bang,
+            complete = spec.complete,
+            count = spec.count,
+          })
+        end
+      end
+
+      if spec.keys then
+        for _, key in ipairs(spec.keys) do
+          local lhs = key[1]
+          local mode = key.mode or 'n'
+          local modes = type(mode) == "string" and { mode } or mode --[[@as string[] ]]
+
+          for _, m in ipairs(modes) do
+            vim.keymap.set(m, lhs, function()
+              vim.keymap.del(m, lhs)
+              lazy_process_spec(plugin)
+              -- Re-feed the key
+              vim.api.nvim_feedkeys(vim.keycode(lhs), 'm', false)
+            end, { desc = key.desc })
+          end
+        end
+      end
+    end
+  })
+end
+
 local import_specs
 ---@param spec_item_or_list Spec|Spec[]
 import_specs = function(spec_item_or_list)
@@ -72,60 +187,67 @@ import_specs = function(spec_item_or_list)
 
   for _, spec in ipairs(specs) do
     if spec.enabled == false or (type(spec.enabled) == "function" and not spec.enabled()) then
-      return
+      goto continue
+    end
+
+    if spec.cond == false or (type(spec.cond) == "function" and not spec.cond()) then
+      goto continue
     end
 
     local src = spec.url and spec.url or 'https://github.com/' .. spec[1]
-    table.insert(packs, { src = src, version = spec.version })
 
-    if spec.cond == false or (type(spec.cond) == "function" and not spec.cond()) then
-      return
-    end
+    src_spec[src] = spec
 
-    if src then
-      src_spec[src] = spec
+    if is_lazy(spec) then
+      table.insert(lazy_packs, { src = src, version = spec.version })
+    else
+      table.insert(startup_packs, { src = src, version = spec.version })
+
       if spec.config then
-        table.insert(src_to_request_config, src)
+        table.insert(src_with_startup_config, src)
       end
       if spec.init then
-        table.insert(src_to_request_init, src)
+        table.insert(src_with_startup_init, src)
+      end
+
+      if spec.keys then
+        for _, key in ipairs(spec.keys) do
+          table.insert(startup_keys, key)
+        end
       end
     end
 
-    if spec.keys then
-      for _, key in ipairs(spec.keys) do
-        table.insert(keys, key)
-      end
-    end
+    ::continue::
   end
 end
 
 local process_specs = function()
   vim.api.nvim_create_autocmd('PackChanged', {
+    group = startup_group,
     callback = function(event)
       if event.data.kind == "update" or event.data.kind == "install" then
-        table.insert(src_to_request_build, event.data.spec.src)
+        src_to_request_build[event.data.spec.src] = true
       end
     end,
   })
 
-  for _, src in ipairs(src_to_request_init) do
+  for _, src in ipairs(src_with_startup_init) do
     try_call_hook(src, 'init')
   end
 
   if debug then
-    utils.schedule_notify("adding spec for " .. utils.dump_table(packs));
+    utils.schedule_notify("adding spec for " .. utils.dump_table(startup_packs));
   end
-  vim.pack.add(packs)
+  vim.pack.add(startup_packs)
 
-  for _, src in ipairs(src_to_request_config) do
+  for _, src in ipairs(src_with_startup_config) do
     try_call_hook(src, 'config')
   end
 
   vim.schedule(function()
-    for _, src in ipairs(src_to_request_build) do
+    for src, _ in pairs(src_to_request_build) do
       local build = src_spec[src].build
-      if build then
+      if not is_lazy(src_spec[src]) and build then
         if type(build) == "string" then
           vim.cmd(build)
         elseif type(build) == "function" then
@@ -135,7 +257,7 @@ local process_specs = function()
     end
   end)
 
-  for _, key in ipairs(keys) do
+  for _, key in ipairs(startup_keys) do
     map(key[1], key[2], key.noremap, key.desc, key.mode, key.nowait)
   end
 end
@@ -158,6 +280,7 @@ M.import_specs_from_dir = function(plugins_dir)
     end
   end
 
+  process_lazy_specs()
   process_specs()
 end
 

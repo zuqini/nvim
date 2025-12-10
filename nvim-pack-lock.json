@@ -134,7 +134,7 @@
       "src": "https://github.com/dstein64/nvim-scrollview"
     },
     "nvim-treesitter": {
-      "rev": "f47f549f74cea5d5f25a5205c9e127cd882f1d20",
+      "rev": "b6271b678e035a5cbf62d637364f3eeca0890171",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -158,6 +158,10 @@
     "oil.nvim": {
       "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
       "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "openingh.nvim": {
+      "rev": "7cc8c897cb6b34d8ed28e99d95baccef609ed251",
+      "src": "https://github.com/almo7aya/openingh.nvim"
     },
     "outline.nvim": {
       "rev": "6b62f73a6bf317531d15a7ae1b724e85485d8148",
@@ -197,7 +201,7 @@
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "treewalker.nvim": {
-      "rev": "85e79f665ac9ba95488d4b289d69c22227188286",
+      "rev": "c1028cb50ba61ac21c712fa1a8b7a121cf256512",
       "src": "https://github.com/aaronik/treewalker.nvim"
     },
     "ts-comments.nvim": {
