@@ -26,8 +26,4 @@
 ---@field complete? string
 ---@field count? boolean
 
----@class PackLoadParam
----@field spec vim.pack.Spec
----@field path string
-
 return {}
