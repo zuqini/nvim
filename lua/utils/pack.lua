@@ -107,7 +107,9 @@ local lazy_process_spec = function(plugin)
 
   if spec.keys then
     for _, key in ipairs(spec.keys) do
-      map(key[1], key[2], key.noremap, key.desc, key.mode, key.nowait)
+      if key[2] ~= nil then
+        map(key[1], key[2], key.noremap, key.desc, key.mode, key.nowait)
+      end
     end
   end
 end
@@ -284,7 +286,9 @@ local process_specs = function()
   end)
 
   for _, key in ipairs(startup_keys) do
-    map(key[1], key[2], key.noremap, key.desc, key.mode, key.nowait)
+    if key[2] ~= nil then
+      map(key[1], key[2], key.noremap, key.desc, key.mode, key.nowait)
+    end
   end
 end
 
