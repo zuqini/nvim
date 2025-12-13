@@ -1,6 +1,7 @@
 -- { 'lewis6991/gitsigns.nvim' },
 return {
   'dstein64/nvim-scrollview',
+  event = "VeryLazy",
   cond = not vim.g.vscode,
   config = function()
     require('scrollview').setup({

@@ -1,6 +1,9 @@
 return {
   'akinsho/toggleterm.nvim',
   cond = not vim.g.vscode,
+  -- keymap = {
+  --   '<leader>\\'
+  -- },
   config = function()
     require("toggleterm").setup({
       open_mapping = [[<leader>\]],

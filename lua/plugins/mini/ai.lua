@@ -2,6 +2,7 @@
 -- { 'nvim-mini/mini.extra' },
 return {
   'nvim-mini/mini.ai',
+  event = "VeryLazy",
   config = function()
     local ai = require('mini.ai')
     local gen_spec = ai.gen_spec

@@ -1,5 +1,6 @@
 return {
   'nvim-mini/mini.surround',
+  event = "VeryLazy",
   config = function()
     -- emulate vim surround
     require('mini.surround').setup({

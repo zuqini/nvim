@@ -1,5 +1,6 @@
 return {
   'RRethy/vim-illuminate',
+  event = "VeryLazy",
   cond = not vim.g.vscode,
   config = function()
     require('illuminate').configure({

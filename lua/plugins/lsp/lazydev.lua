@@ -2,7 +2,7 @@ return {
   "folke/lazydev.nvim",
   cond = not vim.g.vscode,
   -- have to always load this for blink
-  -- event = "BufNew",
+  -- event = "BufReadPre",
   -- pattern = "*.lua",
   config = function()
     require('lazydev').setup({

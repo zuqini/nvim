@@ -1,6 +1,8 @@
 return {
   'stevearc/quicker.nvim',
   cond = not vim.g.vscode,
+  event = 'FileType',
+  pattern = 'qf',
   config = function()
     ---@module "quicker"
     ---@type quicker.SetupOptions

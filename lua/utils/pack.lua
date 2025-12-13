@@ -118,14 +118,40 @@ local process_lazy_specs = function()
       local spec = src_spec[plugin.spec.src]
       if spec.event then
         local events = type(spec.event) == "string" and { spec.event } or spec.event --[[@as string[] ]]
-        vim.api.nvim_create_autocmd(events, {
-          group = lazy_group,
-          once = true,
-          pattern = spec.pattern or '*',
-          callback = function()
-            lazy_process_spec(plugin)
-          end,
-        })
+
+        -- Handle VeryLazy event specially
+        local has_very_lazy = false
+        local other_events = {}
+        for _, event in ipairs(events) do
+          if event == "VeryLazy" then
+            has_very_lazy = true
+          else
+            table.insert(other_events, event)
+          end
+        end
+
+        if has_very_lazy then
+          vim.api.nvim_create_autocmd("UIEnter", {
+            group = lazy_group,
+            once = true,
+            callback = function()
+              vim.schedule(function()
+                lazy_process_spec(plugin)
+              end)
+            end,
+          })
+        end
+
+        if #other_events > 0 then
+          vim.api.nvim_create_autocmd(other_events, {
+            group = lazy_group,
+            once = true,
+            pattern = spec.pattern or '*',
+            callback = function()
+              lazy_process_spec(plugin)
+            end,
+          })
+        end
       end
 
       if spec.cmd then
