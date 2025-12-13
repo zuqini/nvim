@@ -45,7 +45,8 @@ local categorize_spec = function(spec, src)
     end
 
     if spec.keys then
-      for _, key in ipairs(spec.keys) do
+      local keys = (spec.keys[1] and type(spec.keys[1]) == "string") and { spec.keys } or spec.keys --[[@as KeySpec[] ]]
+      for _, key in ipairs(keys) do
         table.insert(state.startup_keys, key)
       end
     end

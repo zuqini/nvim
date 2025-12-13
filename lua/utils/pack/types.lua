@@ -15,7 +15,7 @@
 ---@field cond? boolean|(fun():boolean)
 ---@field lazy? boolean
 ---@field version? string
----@field keys? KeySpec[]
+---@field keys? KeySpec|KeySpec[]
 ---@field config? fun()
 ---@field event? string|string[]
 ---@field pattern? string|string[]

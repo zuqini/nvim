@@ -117,7 +117,9 @@ end
 ---@param plugin vim.pack.Spec
 ---@param spec Spec
 local setup_key_loading = function(plugin, spec)
-  for _, key in ipairs(spec.keys) do
+  local keys = (spec.keys[1] and type(spec.keys[1]) == "string") and { spec.keys } or spec.keys --[[@as KeySpec[] ]]
+
+  for _, key in ipairs(keys) do
     local lhs = key[1]
     local mode = key.mode or 'n'
     local modes = type(mode) == "string" and { mode } or mode --[[@as string[] ]]
