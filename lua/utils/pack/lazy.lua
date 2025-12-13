@@ -13,22 +13,22 @@ M.is_lazy = function(spec)
   return (spec.event ~= nil) or (spec.cmd ~= nil) or (spec.keys ~= nil and #spec.keys > 0)
 end
 
----@param plugin vim.pack.Spec
-M.process_spec = function(plugin)
-  local spec = state.src_spec[plugin.spec.src]
+---@param vim_spec vim.pack.Spec
+M.process_spec = function(vim_spec)
+  local spec = state.src_spec[vim_spec.src]
 
   if spec.init then
-    hooks.try_call_hook(plugin.spec.src, 'init')
+    hooks.try_call_hook(vim_spec.src, 'init')
   end
 
-  vim.cmd.packadd(plugin.spec.name)
+  vim.cmd.packadd(vim_spec.name)
 
   if spec.config then
-    hooks.try_call_hook(plugin.spec.src, 'config')
+    hooks.try_call_hook(vim_spec.src, 'config')
   end
 
   if spec.build then
-    hooks.execute_build(plugin.spec.src, spec.build)
+    hooks.execute_build(vim_spec.src, spec.build)
   end
 
   if spec.keys then
@@ -53,7 +53,7 @@ local split_very_lazy = function(events)
   return has_very_lazy, other_events
 end
 
----@param plugin vim.pack.Spec
+---@param plugin PackLoadParam
 ---@param spec Spec
 local setup_event_loading = function(plugin, spec)
   local events = type(spec.event) == "string" and { spec.event } or spec.event --[[@as string[] ]]
@@ -66,7 +66,7 @@ local setup_event_loading = function(plugin, spec)
       once = true,
       callback = function()
         vim.schedule(function()
-          M.process_spec(plugin)
+          M.process_spec(plugin.spec)
         end)
       end,
     })
@@ -78,13 +78,13 @@ local setup_event_loading = function(plugin, spec)
       once = true,
       pattern = spec.pattern or '*',
       callback = function()
-        M.process_spec(plugin)
+        M.process_spec(plugin.spec)
       end,
     })
   end
 end
 
----@param plugin vim.pack.Spec
+---@param plugin PackLoadParam
 ---@param spec Spec
 local setup_cmd_loading = function(plugin, spec)
   local commands = type(spec.cmd) == "string" and { spec.cmd } or spec.cmd --[[@as string[] ]]
@@ -93,7 +93,7 @@ local setup_cmd_loading = function(plugin, spec)
     vim.api.nvim_create_user_command(cmd, function(cmd_args)
       pcall(vim.api.nvim_del_user_command, cmd)
 
-      M.process_spec(plugin)
+      M.process_spec(plugin.spec)
 
       -- Re-execute the command
       vim.api.nvim_cmd({
@@ -114,7 +114,7 @@ local setup_cmd_loading = function(plugin, spec)
   end
 end
 
----@param plugin vim.pack.Spec
+---@param plugin PackLoadParam
 ---@param spec Spec
 local setup_key_loading = function(plugin, spec)
   local keys = (spec.keys[1] and type(spec.keys[1]) == "string") and { spec.keys } or spec.keys --[[@as KeySpec[] ]]
@@ -127,7 +127,7 @@ local setup_key_loading = function(plugin, spec)
     for _, m in ipairs(modes) do
       vim.keymap.set(m, lhs, function()
         vim.keymap.del(m, lhs)
-        M.process_spec(plugin)
+        M.process_spec(plugin.spec)
         -- Re-feed the key
         vim.api.nvim_feedkeys(vim.keycode(lhs), 'm', false)
       end, { desc = key.desc })
