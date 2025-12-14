@@ -134,7 +134,7 @@
       "src": "https://github.com/dstein64/nvim-scrollview"
     },
     "nvim-treesitter": {
-      "rev": "74b119812e9f82bccc2f0eca156faff0354362ae",
+      "rev": "d3218d988f72ed34414959c9ccd802d393432d6e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -233,7 +233,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "c41efe8614c389bf3db391d31a3f1009ae9a97d7",
+      "rev": "94e14b7325712ce3e708b8d09df5d0b90f7d3272",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
