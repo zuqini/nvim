@@ -82,7 +82,7 @@
       "src": "https://github.com/nvim-mini/mini.bracketed"
     },
     "mini.clue": {
-      "rev": "c465495a962d8bcca1718666ec33769b6f6969ad",
+      "rev": "d96fef9db8fcb38c058f2edb2eeb69cb8b2d462a",
       "src": "https://github.com/nvim-mini/mini.clue"
     },
     "mini.extra": {
@@ -90,7 +90,7 @@
       "src": "https://github.com/nvim-mini/mini.extra"
     },
     "mini.operators": {
-      "rev": "59f5fdbaaed7cce160076e70926cb16faadea78c",
+      "rev": "6df2fd410afd55ebd87757345031fc0af0c95068",
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "mini.surround": {
@@ -126,7 +126,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "a2bd1cf7b0446a7414aaf373cea5e4ca804c9c69",
+      "rev": "0044d0987ef7e624d04141d0f90d0481fd3c3663",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
@@ -134,7 +134,7 @@
       "src": "https://github.com/dstein64/nvim-scrollview"
     },
     "nvim-treesitter": {
-      "rev": "b6271b678e035a5cbf62d637364f3eeca0890171",
+      "rev": "74b119812e9f82bccc2f0eca156faff0354362ae",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -143,7 +143,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "76deedf0f1cec4496ef8d49b6d1f020f6d0c6ec9",
+      "rev": "0d7c800fadcfe2d33089f5726cb8907fc846eece",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -168,7 +168,7 @@
       "src": "https://github.com/hedyhli/outline.nvim"
     },
     "pkl-neovim": {
-      "rev": "69871ac93ef104fbdc6f0ab30e59564b65c8c4f7",
+      "rev": "08bcabc52cc2cf64b33e51b6bf94172164829941",
       "src": "https://github.com/apple/pkl-neovim"
     },
     "promise-async": {
@@ -231,6 +231,10 @@
     "volt": {
       "rev": "620de1321f275ec9d80028c68d1b88b409c0c8b1",
       "src": "https://github.com/nvzone/volt"
+    },
+    "zpack.nvim": {
+      "rev": "c41efe8614c389bf3db391d31a3f1009ae9a97d7",
+      "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
 }

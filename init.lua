@@ -1,3 +1,5 @@
+vim.pack.add({{ src = 'https://github.com/zuqini/zpack.nvim' }})
+
 local vrequire = require("utils").vrequire
 
 require("globals")
@@ -10,7 +12,7 @@ require("commands")
 vrequire("mappings")
 require("mappings")
 
-require("utils.pack").import_specs_from_dir('plugins')
+require('zpack').setup({})
 
 vrequire("options")
 require("options")
