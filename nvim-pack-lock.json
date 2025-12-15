@@ -221,7 +221,7 @@
       "src": "https://github.com/stevearc/vim-arduino"
     },
     "vim-godot": {
-      "rev": "1c8385789f7f4558bdbbf6e75033b34b4727944b",
+      "rev": "2cecd0c83a7b3f012142a584d53a3a51be246c8e",
       "src": "https://github.com/habamax/vim-godot"
     },
     "vim-illuminate": {
@@ -233,7 +233,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "7e44daff24200ceb186a4d6e6870a9b5035b16aa",
+      "rev": "c3caa4cedf6b83188b59ef64498fad5a7ce9c277",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
