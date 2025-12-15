@@ -66,7 +66,7 @@
       "src": "https://github.com/chentoast/marks.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "c55bd8a8fb191e24176c206a7af1dd51ce7276a5",
+      "rev": "3b3571b4dadbcb464804466e9872e7246c316af7",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -126,7 +126,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "0044d0987ef7e624d04141d0f90d0481fd3c3663",
+      "rev": "ad95655ec5d13ff7c728d731eb9fd39f34395a03",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
@@ -233,7 +233,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "94e14b7325712ce3e708b8d09df5d0b90f7d3272",
+      "rev": "7e44daff24200ceb186a4d6e6870a9b5035b16aa",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }

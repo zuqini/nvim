@@ -160,7 +160,7 @@ return {
               "dapui_scopes",
               "dapui_watches",
               "dapui_stacks",
-              "snacks_dashboard",
+              -- "snacks_dashboard", -- causes colorscheme issues with dashboard if we disable this
             },
             winbar = {
               "dap-repl",
