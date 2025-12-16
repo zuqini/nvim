@@ -1,22 +1,7 @@
 # nvim
+<img width="1512" height="982" alt="Image" src="https://github.com/user-attachments/assets/c3669669-786d-4f2a-a584-15d0ddbd1585" />
 
-## Install
-MacOS / Linux
-
-```
-brew install neovim    # or some other package manager
-git clone https://github.com/zuqini/nvim.git ~/.config/nvim
-nvim
-```
-Windows
-
-```
-choco install neovim    # or some other package manager
-git clone https://github.com/zuqini/nvim.git ~/AppData/Local/nvim
-nvim
-```
-
-## Optional Setup
+## misc info
 <details>
 <summary>Icons/Italics/Ligatures</summary>
 

@@ -126,7 +126,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "9e36c0d1efc46859d8349b45deabb01ca7aaf7a0",
+      "rev": "ef96fce99c72ff4b6e9c44ed6b15f8a52e6a7284",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
