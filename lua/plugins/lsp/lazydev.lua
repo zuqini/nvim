@@ -1,7 +1,6 @@
 return {
   "folke/lazydev.nvim",
   cond = not vim.g.vscode,
-  -- have to always load this for blink
   event = "BufReadPre",
   pattern = "*.lua",
   config = function()

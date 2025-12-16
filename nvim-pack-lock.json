@@ -126,7 +126,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "ad95655ec5d13ff7c728d731eb9fd39f34395a03",
+      "rev": "9e36c0d1efc46859d8349b45deabb01ca7aaf7a0",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
@@ -170,6 +170,10 @@
     "pkl-neovim": {
       "rev": "08bcabc52cc2cf64b33e51b6bf94172164829941",
       "src": "https://github.com/apple/pkl-neovim"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "promise-async": {
       "rev": "119e8961014c9bfaf1487bf3c2a393d254f337e2",
@@ -233,7 +237,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "c3caa4cedf6b83188b59ef64498fad5a7ce9c277",
+      "rev": "e9a018bbde38560bd9a3e714d61d3f20874f5b4a",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
