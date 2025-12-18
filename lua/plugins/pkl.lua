@@ -10,8 +10,12 @@ vim.filetype.add({
 return {
   "apple/pkl-neovim",
   cond = not vim.g.vscode,
-  event = "BufReadPre",
-  pattern = "*.pkl,*.pcl",
+  event = {
+    {
+      event = "BufReadPre",
+      pattern = { "*.pkl", "*.pcl" },
+    },
+  },
   build = function()
     require('pkl-neovim').init()
 
@@ -19,6 +23,7 @@ return {
     vim.cmd("TSInstall pkl")
   end,
   config = function()
+    require('utils').schedule_notify('pkl/pcl loaded')
     -- Set up snippets.
     require("luasnip.loaders.from_snipmate").lazy_load()
 

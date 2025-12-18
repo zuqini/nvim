@@ -2,6 +2,7 @@ return {
   'windwp/nvim-autopairs',
   event = 'InsertEnter',
   config = function()
+    require('utils').schedule_notify('nvim-autopairs loaded on InsertEnter')
     local npairs = require('nvim-autopairs')
 
     npairs.setup({ disable_filetype = { "fzf", "vim" } })

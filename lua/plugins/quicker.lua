@@ -1,9 +1,12 @@
 return {
   'stevearc/quicker.nvim',
   cond = not vim.g.vscode,
-  event = 'FileType',
-  pattern = 'qf',
+  event = {
+    event = 'FileType',
+    pattern = 'qf',
+  },
   config = function()
+    require('utils').schedule_notify('quicker loaded on FileType qf')
     ---@module "quicker"
     ---@type quicker.SetupOptions
     local opts = {
