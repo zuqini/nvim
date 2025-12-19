@@ -34,7 +34,7 @@
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
-      "rev": "b58b2d65863f4ebad88b10a1ddd519e5380466e0",
+      "rev": "bc589a1ba340a00ae40bf1436401eac5b1454687",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
     "gruvbox-material": {
