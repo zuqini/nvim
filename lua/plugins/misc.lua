@@ -9,24 +9,14 @@ return {
   },
   {
     'stevearc/vim-arduino',
-    event = {
-      event = 'FileType',
-      pattern = 'arduino',
-    },
+    ft = 'arduino',
   },
   {
     'habamax/vim-godot',
-    event = {
-      event = 'FileType',
-      pattern = 'gdscript',
-    },
+    ft = 'gdscript',
   },
   {
     'elubow/cql-vim',
-    -- vim plugins need to be loaded before entering
-    event = {
-      event = 'BufReadPre',
-      pattern = '*.cql',
-    },
+    ft = 'cqlang',
   },
 }

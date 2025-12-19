@@ -1,7 +1,7 @@
 return {
   "folke/lazydev.nvim",
   cond = not vim.g.vscode,
-  event = { event = "BufReadPre", pattern = "*.lua" },
+  ft = 'lua',
   config = function()
     require('utils').schedule_notify('Lazydev loaded on BufReadPre lua')
     require('lazydev').setup({

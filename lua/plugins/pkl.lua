@@ -10,12 +10,7 @@ vim.filetype.add({
 return {
   "apple/pkl-neovim",
   cond = not vim.g.vscode,
-  event = {
-    {
-      event = "BufReadPre",
-      pattern = { "*.pkl", "*.pcl" },
-    },
-  },
+  ft = 'pkl',
   build = function()
     require('pkl-neovim').init()
 
