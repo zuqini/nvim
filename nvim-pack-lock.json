@@ -66,7 +66,7 @@
       "src": "https://github.com/chentoast/marks.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "3b3571b4dadbcb464804466e9872e7246c316af7",
+      "rev": "bf9e7205192015dc48727744f21e09ac986664f9",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -237,7 +237,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "88f5617203073323d00628ba125c19b05325650a",
+      "rev": "30b9f8fe63e84ff5efdc7837523d97d463af5892",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }

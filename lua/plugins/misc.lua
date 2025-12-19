@@ -18,5 +18,8 @@ return {
   {
     'elubow/cql-vim',
     ft = 'cqlang',
+    config = function()
+      require('utils').schedule_notify('cql loaded')
+    end
   },
 }

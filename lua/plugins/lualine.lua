@@ -1,7 +1,7 @@
 return {
   { 'nvim-tree/nvim-web-devicons' },
   {
-    'nvim-lualine/lualine.nvim',
+    url = 'https://github.com/nvim-lualine/lualine.nvim',
     cond = not vim.g.vscode,
     config = function()
       local theme = require('utils.theme').current_lualine_theme()
