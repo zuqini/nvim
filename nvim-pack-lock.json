@@ -66,7 +66,7 @@
       "src": "https://github.com/chentoast/marks.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "bf9e7205192015dc48727744f21e09ac986664f9",
+      "rev": "8f1a3e6eecb638817e8999aaa16ada27cd54d867",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/nvim-mini/mini.bracketed"
     },
     "mini.clue": {
-      "rev": "d96fef9db8fcb38c058f2edb2eeb69cb8b2d462a",
+      "rev": "5f0f5ca2ab967755ccde80795d7f0f33fe0015b7",
       "src": "https://github.com/nvim-mini/mini.clue"
     },
     "mini.extra": {
@@ -126,7 +126,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "c4f67bf85b01a57e3c130352c0a0e453ab8cd5b9",
+      "rev": "d20d83b3f24f5884da73a9fc92fdc47e778b8d0d",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
@@ -134,7 +134,7 @@
       "src": "https://github.com/dstein64/nvim-scrollview"
     },
     "nvim-treesitter": {
-      "rev": "4fc09bee78e91bf4ba471cdab4bf9dfa37fde51c",
+      "rev": "6e42d823ce0a5a76180c473c119c7677738a09d1",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -143,7 +143,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "0d7c800fadcfe2d33089f5726cb8907fc846eece",
+      "rev": "e91c585ac0ee760198dabc1fad2e6227effdcd5e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -152,11 +152,11 @@
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
     "nvim-web-devicons": {
-      "rev": "8dcb311b0c92d460fac00eac706abd43d94d68af",
+      "rev": "6788013bb9cb784e606ada44206b0e755e4323d7",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "oil.nvim": {
-      "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
+      "rev": "756dec855b4811f2d27f067a3aca477f368d99f5",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "openingh.nvim": {
@@ -237,7 +237,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "30b9f8fe63e84ff5efdc7837523d97d463af5892",
+      "rev": "ffa9dd01cb9cacadddd3696e4af7c12c70c6777c",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }

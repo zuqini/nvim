@@ -9,7 +9,7 @@ M.opts = {
       { icon = " ", key = "fe", desc = "GrEp", action = picker.grep },
       { icon = " ", key = "fE", desc = "Live GrEp", action = picker.live_grep },
       { icon = " ", key = "r", desc = "Recent Files", action = picker.recent },
-      { icon = "󱏒 ", key = "e", desc = "File Explorer", action = ":E" },
+      { icon = "󱏒 ", key = "E", desc = "File Explorer", action = ":E" },
       { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
       { icon = " ", key = "d", desc = "Dotfiles", action = ":lua Snacks.picker.files({ cwd = '~/dotfiles', hidden = true })" },
       { icon = " ", key = "q", desc = "Quit", action = ":qa" },
