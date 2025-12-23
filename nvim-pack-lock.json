@@ -126,7 +126,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "d20d83b3f24f5884da73a9fc92fdc47e778b8d0d",
+      "rev": "b34c08e0ea22bac67798f00238318fd16bd99b7c",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
@@ -164,7 +164,7 @@
       "src": "https://github.com/almo7aya/openingh.nvim"
     },
     "outline.nvim": {
-      "rev": "6b62f73a6bf317531d15a7ae1b724e85485d8148",
+      "rev": "1967ef50036b0b1eac4977aeede55915a741afe0",
       "src": "https://github.com/hedyhli/outline.nvim"
     },
     "pkl-neovim": {
@@ -180,7 +180,7 @@
       "src": "https://github.com/kevinhwang91/promise-async"
     },
     "quicker.nvim": {
-      "rev": "9983d4b28881e1df626e3682167b45c284d4da8c",
+      "rev": "771437c3e3672dba9233156e1c2e2fc1888a5fff",
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "rainbow-delimiters.nvim": {
@@ -237,7 +237,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "ffa9dd01cb9cacadddd3696e4af7c12c70c6777c",
+      "rev": "8837f16297c158cb428030ec21d18b061194e285",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
