@@ -143,7 +143,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "e91c585ac0ee760198dabc1fad2e6227effdcd5e",
+      "rev": "f7122acf1bd2c9e4626651ad33bf5944be9d9392",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -237,7 +237,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "8837f16297c158cb428030ec21d18b061194e285",
+      "rev": "6f91090cefe3b4e9e25a57793771297b92588304",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }

@@ -9,6 +9,15 @@ return {
       end
       require('noice').setup({
         notify = { enabled = false },
+        routes = {
+          {
+            filter = {
+              event = "msg_show",
+              find = "vim.pack", -- otherwise vim.pack messages get filtered for some reason
+            },
+            view = "mini",
+          },
+        },
         views = {
           mini = {
             align = "message-left",
