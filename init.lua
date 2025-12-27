@@ -13,7 +13,7 @@ require("commands")
 vrequire("mappings")
 require("mappings")
 
-require('zpack').setup({})
+require('zpack').setup()
 
 -- testing add after setup
 local typr_cmd = {

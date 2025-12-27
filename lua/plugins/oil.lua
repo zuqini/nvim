@@ -2,7 +2,6 @@ return {
   'stevearc/oil.nvim',
   enabled = true,
   cond = not vim.g.vscode,
-  cmd = { 'E', 'EE', 'ED' },
   config = function()
     vim.api.nvim_create_user_command('E', ':Oil %:p:h', { nargs = 0 })   --Edit current path
     vim.api.nvim_create_user_command('EE', ':Oil .', { nargs = 0 })      --Edit working directory
