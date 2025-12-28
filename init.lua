@@ -15,31 +15,6 @@ require("mappings")
 
 require('zpack').setup()
 
--- testing add after setup
-local typr_cmd = {
-  "Typr", "TyprStats"
-}
-require('zpack').add({
-  {
-    'nvzone/volt',
-    cmd = typr_cmd,
-    keys = '<leader>a',
-    priority = 1000,
-    config = function()
-      print("volt loaded")
-    end
-  },
-  {
-    'nvzone/typr',
-    cmd = typr_cmd,
-    keys = { '<leader>a', ":Typr<CR>" },
-    config = function()
-      print("typr loaded")
-      require('typr').setup({ mode = "phrases", kblayout = "colemak_dh" })
-    end
-  },
-})
-
 vrequire("options")
 require("options")
 
