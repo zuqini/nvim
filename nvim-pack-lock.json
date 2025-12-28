@@ -205,7 +205,7 @@
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "treewalker.nvim": {
-      "rev": "f83d36e26b09a7f974f9544c0cc44540fc6411ba",
+      "rev": "3d5148e160ed9728b3275d37d06ea028cef5f43b",
       "src": "https://github.com/aaronik/treewalker.nvim"
     },
     "ts-comments.nvim": {
@@ -237,7 +237,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "6124277a489e121d3f212522667f38140bc4f330",
+      "rev": "957c60be494818e966bb2ad77c45fa36b1064109",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }

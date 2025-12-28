@@ -7,7 +7,7 @@ return {
     cond = not vim.g.vscode,
 
     -- use a release tag to download pre-built binaries
-    version = vim.version.range("1.*"),
+    sem_version = "1.*",
 
     config = function()
       ---@module 'blink.cmp'

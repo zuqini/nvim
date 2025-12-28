@@ -1,6 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  version = 'main',
+  branch = 'main',
   build = ':TSUpdate',
   config = function()
     -- zsh parser is not very good as of late 2025
