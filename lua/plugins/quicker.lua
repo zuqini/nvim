@@ -2,28 +2,11 @@ return {
   'stevearc/quicker.nvim',
   cond = not vim.g.vscode,
   ft = 'qf',
-  config = function()
-    require('utils').schedule_notify('quicker loaded on FileType qf')
-    ---@module "quicker"
-    ---@type quicker.SetupOptions
-    local opts = {
-      keys = {
-        {
-          "<Tab>",
-          function()
-            require("quicker").expand()
-          end,
-          desc = "Expand quickfix context",
-        },
-        {
-          "<S-Tab>",
-          function()
-            require("quicker").collapse()
-          end,
-          desc = "Collapse quickfix context",
-        },
-      },
-    }
-    require('quicker').setup(opts)
-  end
+  ---@type quicker.SetupOptions
+  opts = {
+    keys = {
+      { "<Tab>", function() require("quicker").expand() end, desc = "Expand quickfix context" },
+      { "<S-Tab>", function() require("quicker").collapse() end, desc = "Collapse quickfix context" },
+    },
+  },
 }

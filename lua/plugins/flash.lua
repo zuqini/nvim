@@ -1,5 +1,6 @@
 return {
   "folke/flash.nvim",
+  opts = {},
   -- stylua: ignore
   keys = {
     { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
@@ -12,10 +13,4 @@ return {
     't',
     'T',
   },
-  config = function()
-    require('utils').schedule_notify('flash loaded')
-    ---@type Flash.Config
-    local opts = {}
-    require('flash').setup(opts)
-  end
 }

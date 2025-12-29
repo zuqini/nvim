@@ -1,14 +1,12 @@
 return {
   'nvim-mini/mini.operators',
   event = "VeryLazy",
-  config = function()
-    require('mini.operators').setup({
-      replace = {
-        prefix = 'gp',
-      },
-    })
-    -- remap = true to use mini.operators replace
+  opts = {
+    replace = { prefix = 'gp' },
+  },
+  config = function(_, opts)
+    require('mini.operators').setup(opts)
     vim.keymap.set('n', '<leader>gp', '"0gp', { desc = 'Yank Replace Operator', remap = true })
     vim.keymap.set('n', '<leader>gv', '"+gp', { desc = 'Clipboard Replace Operator', remap = true })
   end
-};
+}

@@ -1,7 +1,6 @@
 return {
   'hiphish/rainbow-delimiters.nvim',
   cond = not vim.g.vscode,
-  config = function()
-    require('rainbow-delimiters.setup').setup {}
-  end,
+  main = 'rainbow-delimiters.setup',
+  opts = {},
 }
