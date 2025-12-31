@@ -135,8 +135,7 @@
     },
     "nvim-treesitter": {
       "rev": "36fcb4a4238928f0b627e1ab84ade0acc1facc2c",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "'main'"
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
       "rev": "64dd4cf3f6fd0ab17622c5ce15c91fc539c3f24a",
@@ -144,8 +143,7 @@
     },
     "nvim-treesitter-textobjects": {
       "rev": "ecd03f5811eb5c66d2fa420b79121b866feecd82",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-      "version": "'main'"
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-ts-autotag": {
       "rev": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc",
@@ -237,8 +235,9 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "715a3206ab7759f0a4ade26f02aeedffc1f9fa0e",
-      "src": "https://github.com/zuqini/zpack.nvim"
+      "rev": "737a03e49c7276b73437a158853c7dc771458ea2",
+      "src": "/Users/zuqinimbp16/projects/zpack.nvim",
+      "version": "'dependencies2'"
     }
   }
 }

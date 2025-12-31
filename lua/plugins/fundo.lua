@@ -1,8 +1,8 @@
 return {
-  { "kevinhwang91/promise-async" },
   {
     "kevinhwang91/nvim-fundo",
     cond = not vim.g.vscode,
+    dependencies = { "kevinhwang91/promise-async" },
     build = function() require("fundo").install() end,
     opts = {},
     config = function(_, opts)

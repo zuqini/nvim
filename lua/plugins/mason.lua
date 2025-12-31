@@ -1,7 +1,7 @@
 return {
-  { "mason-org/mason.nvim" },
   {
     "mason-org/mason-lspconfig.nvim",
+    dependencies = { "mason-org/mason.nvim" },
     cond = not vim.g.vscode,
     config = function()
       require('mason').setup({})

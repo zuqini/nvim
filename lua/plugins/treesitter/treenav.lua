@@ -4,6 +4,7 @@ end
 
 return {
   "aaronik/treewalker.nvim",
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
   opts = {
     highlight = true, -- Whether to briefly highlight the node after jumping to it
     highlight_duration = 150, -- How long should above highlight last (in ms)

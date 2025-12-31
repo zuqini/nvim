@@ -1,15 +1,9 @@
-local cmd = { "Typr", "TyprStats" }
 return {
   {
-    'nvzone/volt',
-    cmd = cmd,
-    keys = '<leader>a',
-    priority = 1000,
-  },
-  {
     'nvzone/typr',
-    cmd = cmd,
+    cmd = { "Typr", "TyprStats" },
     keys = { '<leader>a', ":Typr<CR>" },
+    dependencies = { 'nvzone/volt' },
     opts = { mode = "phrases", kblayout = "colemak_dh" },
   },
 }

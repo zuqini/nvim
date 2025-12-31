@@ -1,10 +1,12 @@
 return {
-  { "rafamadriz/friendly-snippets" },
-  { 'L3MON4D3/LuaSnip' },
   {
     'saghen/blink.cmp',
     enabled = vim.g.cmp_engine == 'blink',
     cond = not vim.g.vscode,
+    dependencies = {
+      'L3MON4D3/LuaSnip',
+      'rafamadriz/friendly-snippets',
+    },
 
     -- use a release tag to download pre-built binaries
     sem_version = "1.*",
