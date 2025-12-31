@@ -1,7 +1,7 @@
 return {
   'hiphish/rainbow-delimiters.nvim',
   cond = not vim.g.vscode,
-  lazy = true,
+  event = 'VeryLazy',
   main = 'rainbow-delimiters.setup',
   opts = {},
 }

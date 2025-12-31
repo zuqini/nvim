@@ -1,14 +1,12 @@
 return {
-  { 'nvim-mini/mini.extra', lazy = true },
   {
     'nvim-mini/mini.ai',
     -- event = "VeryLazy",
     dependencies = {
-      -- 'nvim-mini/mini.extra',
+      'nvim-mini/mini.extra',
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     config = function()
-      require('rainbow-delimiters.setup').setup({})
       local ai = require('mini.ai')
       local gen_spec = ai.gen_spec
       local gen_ai_spec = require('mini.extra').gen_ai_spec

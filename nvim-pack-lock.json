@@ -134,8 +134,9 @@
       "src": "https://github.com/dstein64/nvim-scrollview"
     },
     "nvim-treesitter": {
-      "rev": "36fcb4a4238928f0b627e1ab84ade0acc1facc2c",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+      "rev": "c6dd314086f7b471bf6c9110092a94ce1c06d220",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
     },
     "nvim-treesitter-context": {
       "rev": "64dd4cf3f6fd0ab17622c5ce15c91fc539c3f24a",
@@ -143,7 +144,8 @@
     },
     "nvim-treesitter-textobjects": {
       "rev": "ecd03f5811eb5c66d2fa420b79121b866feecd82",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+      "version": "'main'"
     },
     "nvim-ts-autotag": {
       "rev": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc",
@@ -154,7 +156,7 @@
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "oil.nvim": {
-      "rev": "bbfa7cba85967dc9dbfe0ca486fd4b17084bf846",
+      "rev": "78ed0cf7d9a64280d621960af4be7872aa650417",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "openingh.nvim": {
@@ -235,9 +237,8 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "4fb332fa2c09b5d9e3d9ac0cc2d54622bd9e1f09",
-      "src": "https://github.com/zuqini/zpack.nvim",
-      "version": "'module-loader'"
+      "rev": "b331e1dda54511085a778d2881dd246b8ed58800",
+      "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
 }
