@@ -1,7 +1,8 @@
-vim.pack.add({ 'https://github.com/zuqini/zpack.nvim' })
+-- vim.pack.add({ 'https://github.com/zuqini/zpack.nvim' })
+vim.pack.add({ { src = 'https://github.com/zuqini/zpack.nvim', version = 'module-loader' } })
 -- vim.pack.add({ { src = vim.fn.expand('~/projects/zpack.nvim'), version = '8911d52' } })
--- vim.pack.add({ { src = vim.fn.expand('~/projects/zpack.nvim'), version = 'dependencies' } })
--- vim.pack.add({ { src = vim.fn.expand('~/projects/zpack.nvim'), version = 'dependencies2' } })
+-- vim.pack.add({ { src = vim.fn.expand('~/projects/zpack.nvim'), version = 'module-loader' } })
+-- vim.pack.add({ { src = vim.fn.expand('~/projects/zpack.nvim'), version = 'main' } })
 
 local vrequire = require("utils").vrequire
 
@@ -15,7 +16,12 @@ require("commands")
 vrequire("mappings")
 require("mappings")
 
-require('zpack').setup()
+require('zpack').setup({
+  profiling = {
+    loader = true,
+    require = true,
+  }
+})
 
 vrequire("options")
 require("options")

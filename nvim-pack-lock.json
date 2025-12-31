@@ -235,9 +235,9 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "737a03e49c7276b73437a158853c7dc771458ea2",
-      "src": "/Users/zuqinimbp16/projects/zpack.nvim",
-      "version": "'dependencies2'"
+      "rev": "4fb332fa2c09b5d9e3d9ac0cc2d54622bd9e1f09",
+      "src": "https://github.com/zuqini/zpack.nvim",
+      "version": "'module-loader'"
     }
   }
 }

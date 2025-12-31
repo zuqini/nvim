@@ -18,10 +18,11 @@ return {
         snippets = { preset = 'luasnip' },
         sources = {
           -- add lazydev to your completion providers
-          default = { "lsp", "path", "snippets", "buffer" },
-          per_filetype = {
-            lua = { inherit_defaults = true, 'lazydev' }
-          },
+          -- default = { "lsp", "path", "snippets", "buffer" },
+          -- per_filetype = {
+          --   lua = { inherit_defaults = true, 'lazydev' }
+          -- },
+          default = { "lsp", "path", "snippets", "buffer", "lazydev" },
           providers = {
             -- dont show LuaLS require statements when lazydev has items
             lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },

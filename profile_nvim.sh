@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# Profile Neovim startup time by running nvim multiple times and calculating
+# statistics (min, max, median, mean, variance, std dev). Results are saved
+# to a timestamped directory along with individual startup logs.
+#
+# Usage: ./profile_nvim.sh [count]
+#   count: number of times to run nvim (default: 10)
 
 set -e
 
