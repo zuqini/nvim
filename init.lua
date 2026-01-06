@@ -1,4 +1,5 @@
 vim.pack.add({ 'https://github.com/zuqini/zpack.nvim' })
+-- vim.pack.add({ { src = vim.fn.expand('~/projects/zpack.nvim'), version = 'main' } })
 
 local vrequire = require("utils").vrequire
 
