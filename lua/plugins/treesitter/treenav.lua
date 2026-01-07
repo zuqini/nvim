@@ -6,18 +6,17 @@ return {
   "aaronik/treewalker.nvim",
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   opts = {
-    highlight = true, -- Whether to briefly highlight the node after jumping to it
+    highlight = true,         -- Whether to briefly highlight the node after jumping to it
     highlight_duration = 150, -- How long should above highlight last (in ms)
   },
   config = function()
-    map({ 'n', 'v' }, '<A-k>', '<cmd>Treewalker Up<cr>', 'Treewalker Up')
-    map({ 'n', 'v' }, '<A-j>', '<cmd>Treewalker Down<cr>', 'Treewalker Down')
-    map({ 'n', 'v' }, '<A-l>', '<cmd>Treewalker Right<cr>', 'Treewalker Right')
-    map({ 'n', 'v' }, '<A-h>', '<cmd>Treewalker Left<cr>', 'Treewalker Left')
+    map({ 'n', 'v' }, '<up>', '<cmd>Treewalker Up<cr>', 'Treewalker Up')
+    map({ 'n', 'v' }, '<down>', '<cmd>Treewalker Down<cr>', 'Treewalker Down')
+    map({ 'n', 'v' }, '<right>', '<cmd>Treewalker Right<cr>', 'Treewalker Right')
+    map({ 'n', 'v' }, '<left>', '<cmd>Treewalker Left<cr>', 'Treewalker Left')
     map('n', '<leader>tj', '<cmd>Treewalker SwapDown<cr>', 'Swap Down')
     map('n', '<leader>tk', '<cmd>Treewalker SwapUp<cr>', 'Swap Up')
     map('n', '<leader>tn', "<cmd>Treewalker SwapRight<cr>", 'Swap Next')
     map('n', '<leader>tp', "<cmd>Treewalker SwapLeft<cr>", 'Swap Prev')
   end
 }
-

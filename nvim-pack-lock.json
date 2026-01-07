@@ -237,7 +237,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "643108dc68e355ca730e511d38b5eaec25675e84",
+      "rev": "89a5a0ce4542a8433b9b7a94621f58e538ed9f01",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }

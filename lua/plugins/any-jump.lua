@@ -1,8 +1,8 @@
 return {
   'pechorin/any-jump.vim',
   keys = {
-    { 'grj', ':AnyJump<CR>',       mode = 'n', desk = 'AnyJump' },
-    { 'grj', ':AnyJumpVisual<CR>', mode = 'x', desk = 'AnyJump' },
+    { 'grj', ':AnyJump<CR>',       mode = 'n', desc = 'AnyJump' },
+    { 'grj', ':AnyJumpVisual<CR>', mode = 'x', desc = 'AnyJump' },
   },
   cmd = { 'AnyJumpLastResults', 'AJ' },
   init = function()
