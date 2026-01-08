@@ -15,8 +15,4 @@ return {
     'rebelot/kanagawa.nvim',
     cond = not vim.g.vscode,
   },
-  {
-    'Shatur/neovim-ayu',
-    cond = not vim.g.vscode,
-  },
 }

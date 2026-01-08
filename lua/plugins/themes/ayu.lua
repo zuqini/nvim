@@ -1,6 +1,8 @@
-require('ayu').colorscheme()
+local M = {}
 
--- vim.api.nvim_set_hl(0, 'Cursor', { reverse=true })
--- vim.api.nvim_set_hl(0, 'TermCursor', { reverse=true })
--- vim.api.nvim_set_hl(0, 'TermCursorNC', { reverse=true })
-vim.cmd("colorscheme ayu")
+function M.setup()
+  require('ayu').colorscheme()
+  vim.cmd("colorscheme ayu")
+end
+
+return M

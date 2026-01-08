@@ -1,11 +1,15 @@
--- Default options
-require('nightfox').setup({
-  options = {
-    styles = {
-      comments = "italic",
-    }
-  }
-})
+local M = {}
 
--- setup must be called before loading
-vim.cmd("colorscheme duskfox")
+function M.setup()
+  require('nightfox').setup({
+    options = {
+      styles = {
+        comments = "italic",
+      }
+    }
+  })
+
+  vim.cmd("colorscheme duskfox")
+end
+
+return M
