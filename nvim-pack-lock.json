@@ -97,10 +97,6 @@
       "rev": "cc7b9d0a056b5fa6915ffac1cb91f29bf7c96f69",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
-    "neovim-ayu": {
-      "rev": "d8877d5fba6c7e8aa6fcb5b8d8cb303f8046f980",
-      "src": "https://github.com/Shatur/neovim-ayu"
-    },
     "nightfox.nvim": {
       "rev": "ba47d4b4c5ec308718641ba7402c143836f35aa9",
       "src": "https://github.com/EdenEast/nightfox.nvim"
@@ -237,7 +233,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zpack.nvim": {
-      "rev": "89a5a0ce4542a8433b9b7a94621f58e538ed9f01",
+      "rev": "2d79e1ccde5759213608b72ac531ce77ac40bd1b",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
