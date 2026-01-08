@@ -26,6 +26,33 @@ function M.current_theme_transparent()
   return themes[index].transparent
 end
 
+local theme_names_cache = nil
+function M.get_theme_names()
+  if not theme_names_cache then
+    theme_names_cache = {}
+    for _, theme in ipairs(themes) do
+      table.insert(theme_names_cache, theme.name)
+    end
+    table.sort(theme_names_cache)
+  end
+  return theme_names_cache
+end
+
+function M.set_theme(name)
+  for i, theme in ipairs(themes) do
+    if theme.name == name then
+      index = i
+      require('plugins.themes.' .. M.current_theme()).setup()
+      if themes[index].transparent then
+        require('utils').set_transparent_background()
+      end
+      vim.notify('Theme: ' .. M.current_theme(), vim.log.levels.INFO)
+      return
+    end
+  end
+  vim.notify('Theme not found: ' .. name, vim.log.levels.ERROR)
+end
+
 if vim.g.vscode then
   return M
 end
@@ -82,5 +109,23 @@ end
 
 vim.api.nvim_create_user_command('ThemeNext', M.next_theme, {})
 vim.api.nvim_create_user_command('ThemePrev', M.prev_theme, {})
+vim.api.nvim_create_user_command('Theme', function(opts)
+  M.set_theme(opts.args)
+end, {
+  nargs = 1,
+  complete = function(arg_lead, cmdline, cursorpos)
+    local theme_names = M.get_theme_names()
+    if arg_lead == '' then
+      return theme_names
+    end
+    local matches = {}
+    for _, name in ipairs(theme_names) do
+      if vim.startswith(name, arg_lead) then
+        table.insert(matches, name)
+      end
+    end
+    return matches
+  end,
+})
 
 return M
