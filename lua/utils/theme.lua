@@ -41,6 +41,7 @@ end
 function M.set_theme(name)
   for i, theme in ipairs(themes) do
     if theme.name == name then
+      M.stop_timer()
       index = i
       require('plugins.themes.' .. M.current_theme()).setup()
       if themes[index].transparent then
@@ -56,6 +57,8 @@ end
 if vim.g.vscode then
   return M
 end
+
+local timer = nil
 
 function M.select_theme_by_time()
   local hour = tonumber(os.date("%H"))
@@ -78,12 +81,26 @@ function M.select_theme_by_time()
   end
 end
 
-M.select_theme_by_time()
+function M.start_timer()
+  if timer then
+    timer:stop()
+  end
+  timer = vim.uv.new_timer()
+  timer:start(10 * 60 * 1000, 10 * 60 * 1000, vim.schedule_wrap(M.select_theme_by_time))
+end
 
-local timer = vim.uv.new_timer()
-timer:start(10 * 60 * 1000, 10 * 60 * 1000, vim.schedule_wrap(M.select_theme_by_time))
+function M.stop_timer()
+  if timer then
+    timer:stop()
+    timer = nil
+  end
+end
+
+M.select_theme_by_time()
+M.start_timer()
 
 function M.next_theme()
+  M.stop_timer()
   index = index + 1
   if index > #themes then
     index = 1
@@ -96,6 +113,7 @@ function M.next_theme()
 end
 
 function M.prev_theme()
+  M.stop_timer()
   index = index - 1
   if index < 1 then
     index = #themes
@@ -109,6 +127,11 @@ end
 
 vim.api.nvim_create_user_command('ThemeNext', M.next_theme, {})
 vim.api.nvim_create_user_command('ThemePrev', M.prev_theme, {})
+vim.api.nvim_create_user_command('ThemeSetByTime', function()
+  M.select_theme_by_time()
+  M.start_timer()
+  vim.notify('Theme set by time: ' .. M.current_theme(), vim.log.levels.INFO)
+end, {})
 vim.api.nvim_create_user_command('Theme', function(opts)
   M.set_theme(opts.args)
 end, {
