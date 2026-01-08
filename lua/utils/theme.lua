@@ -2,7 +2,7 @@ local M = {}
 
 local index = 2
 local themes = {
-  { name = 'gruvbox',         lualine = 'auto',       transparent = true },  -- brown
+  { name = 'gruvbox',         lualine = 'auto',       transparent = false }, -- brown
   { name = 'terafox',         lualine = 'auto',       transparent = true },  -- green
   { name = 'duskfox',         lualine = 'auto',       transparent = true },  -- "bright" purple
   { name = 'nightfox',        lualine = 'auto',       transparent = true },  -- blue
@@ -11,7 +11,7 @@ local themes = {
   { name = 'kanagawa-dragon', lualine = 'auto',       transparent = false }, -- pastel brown
   { name = 'kanagawa-lotus',  lualine = 'auto',       transparent = false }, -- gold paper
   { name = 'tokyonight',      lualine = 'tokyonight', transparent = true },  -- purple
-  { name = 'default',         lualine = 'auto',       transparent = true },  -- midnight
+  { name = 'default',         lualine = 'auto',       transparent = false }, -- midnight
 }
 
 function M.current_theme()
