@@ -2,16 +2,16 @@ local M = {}
 
 local index = 2
 local themes = {
-  { name = 'gruvbox',         transparent = false },       -- brown
-  { name = 'terafox',         transparent = true },        -- green
-  { name = 'duskfox',         transparent = true },        -- "bright" purple
-  { name = 'nightfox',        transparent = true },        -- blue
-  { name = 'carbonfox',       transparent = true },        -- midnight brown
-  { name = 'kanagawa-wave',   transparent = false },       -- pastel purple
-  { name = 'kanagawa-dragon', transparent = false },       -- pastel brown
-  { name = 'kanagawa-lotus',  transparent = false },       -- gold paper
-  { name = 'tokyonight',      transparent = true },        -- purple
-  { name = 'default',         transparent = false },       -- midnight
+  { name = 'gruvbox',         transparent = false }, -- brown
+  { name = 'terafox',         transparent = true },  -- green
+  { name = 'duskfox',         transparent = true },  -- "bright" purple
+  { name = 'nightfox',        transparent = true },  -- blue
+  { name = 'carbonfox',       transparent = true },  -- midnight brown
+  { name = 'kanagawa-wave',   transparent = false }, -- pastel purple
+  { name = 'kanagawa-dragon', transparent = false }, -- pastel brown
+  { name = 'kanagawa-lotus',  transparent = false }, -- gold paper
+  { name = 'tokyonight',      transparent = true },  -- purple
+  { name = 'default',         transparent = false }, -- midnight
 }
 
 function M.current_theme()
@@ -81,8 +81,13 @@ function M.start_timer()
   if timer then
     timer:stop()
   end
+
   timer = vim.uv.new_timer()
-  timer:start(10 * 60 * 1000, 10 * 60 * 1000, vim.schedule_wrap(M.select_theme_by_time))
+  if timer then
+    timer:start(10 * 60 * 1000, 10 * 60 * 1000, vim.schedule_wrap(M.select_theme_by_time))
+  else
+    vim.notify('Failed to create theme timer', vim.log.levels.ERROR)
+  end
 end
 
 function M.stop_timer()
@@ -132,7 +137,7 @@ vim.api.nvim_create_user_command('Theme', function(opts)
   M.set_theme(opts.args)
 end, {
   nargs = 1,
-  complete = function(arg_lead, cmdline, cursorpos)
+  complete = function(arg_lead)
     local theme_names = M.get_theme_names()
     if arg_lead == '' then
       return theme_names
