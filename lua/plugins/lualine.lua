@@ -7,7 +7,7 @@ return {
     },
     cond = not vim.g.vscode,
     config = function()
-      local theme = require('utils.theme').current_lualine_theme()
+      local theme = 'auto'
 
       local no_seps = { left = '', right = '' }
       local winbar_no_seps = { left = ' ' } -- need to add an extra space, or else the component would take up the whole bar

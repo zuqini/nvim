@@ -2,24 +2,20 @@ local M = {}
 
 local index = 2
 local themes = {
-  { name = 'gruvbox',         lualine = 'auto',       transparent = false }, -- brown
-  { name = 'terafox',         lualine = 'auto',       transparent = true },  -- green
-  { name = 'duskfox',         lualine = 'auto',       transparent = true },  -- "bright" purple
-  { name = 'nightfox',        lualine = 'auto',       transparent = true },  -- blue
-  { name = 'carbonfox',       lualine = 'auto',       transparent = true },  -- midnight brown
-  { name = 'kanagawa-wave',   lualine = 'auto',       transparent = false }, -- pastel purple
-  { name = 'kanagawa-dragon', lualine = 'auto',       transparent = false }, -- pastel brown
-  { name = 'kanagawa-lotus',  lualine = 'auto',       transparent = false }, -- gold paper
-  { name = 'tokyonight',      lualine = 'tokyonight', transparent = true },  -- purple
-  { name = 'default',         lualine = 'auto',       transparent = false }, -- midnight
+  { name = 'gruvbox',         transparent = false },       -- brown
+  { name = 'terafox',         transparent = true },        -- green
+  { name = 'duskfox',         transparent = true },        -- "bright" purple
+  { name = 'nightfox',        transparent = true },        -- blue
+  { name = 'carbonfox',       transparent = true },        -- midnight brown
+  { name = 'kanagawa-wave',   transparent = false },       -- pastel purple
+  { name = 'kanagawa-dragon', transparent = false },       -- pastel brown
+  { name = 'kanagawa-lotus',  transparent = false },       -- gold paper
+  { name = 'tokyonight',      transparent = true },        -- purple
+  { name = 'default',         transparent = false },       -- midnight
 }
 
 function M.current_theme()
   return themes[index].name
-end
-
-function M.current_lualine_theme()
-  return themes[index].lualine
 end
 
 function M.current_theme_transparent()
