@@ -26,11 +26,11 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitlinker.nvim": {
-      "rev": "d2a250e65207ddc04724579b99e564da01922a65",
+      "rev": "0a746e66eb6a047f0b88b31ed2791a22953a3967",
       "src": "https://github.com/linrongbin16/gitlinker.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "72acb69020c92d99cf388bfeb390481ccec50c04",
+      "rev": "42d6aed4e94e0f0bbced16bbdcc42f57673bd75e",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -86,7 +86,7 @@
       "src": "https://github.com/nvim-mini/mini.clue"
     },
     "mini.extra": {
-      "rev": "673633b97b64292c82d473ea2bd31b767dbe3907",
+      "rev": "e703d32e67030c266c7d9e6eeaa299f59ae5db52",
       "src": "https://github.com/nvim-mini/mini.extra"
     },
     "mini.operators": {
