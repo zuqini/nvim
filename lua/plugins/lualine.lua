@@ -135,10 +135,24 @@ return {
           },
         },
         lualine_y = {
-          { 'progress' },
+          {
+            'location',
+            separator = '|'
+          },
+          {
+            'selectioncount',
+            separator = '·'
+          },
         },
         lualine_z = {
-          { 'location' },
+          {
+            'progress',
+            separator = '·'
+          },
+          {
+            'searchcount',
+            separator = '·'
+          },
         },
       }
 
