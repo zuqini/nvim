@@ -18,7 +18,7 @@ return {
         vim.lsp.inlay_hint.enable(true)
 
         if client:supports_method('textDocument/documentColor') then
-          vim.lsp.document_color.enable(true, 0, { style = 'virtual' })
+          vim.lsp.document_color.enable(true, { bufnr = args.buf }, { style = 'virtual' })
         end
 
         if vim.lsp.codelens then
