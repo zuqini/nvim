@@ -22,11 +22,7 @@ return {
         end
 
         if vim.lsp.codelens then
-          vim.lsp.codelens.refresh()
-          vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-            buffer = args.buf,
-            callback = vim.lsp.codelens.refresh,
-          })
+          vim.lsp.codelens.enable(true, { bufnr = args.buf })
         end
 
         -- Mappings.
