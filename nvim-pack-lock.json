@@ -9,7 +9,7 @@
       "src": "https://github.com/pechorin/any-jump.vim"
     },
     "blink.cmp": {
-      "rev": "4b18c32adef2898f95cdef6192cbd5796c1a332d",
+      "rev": "451168851e8e2466bc97ee3e026c3dcb9141ce07",
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
@@ -50,7 +50,7 @@
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "lazydev.nvim": {
-      "rev": "5231c62aa83c2f8dc8e7ba957aa77098cda1257d",
+      "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "lualine.nvim": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/nvim-mini/mini.bracketed"
     },
     "mini.clue": {
-      "rev": "8b748316c5a5ab24ab18ccd5db9d62fe86fdddee",
+      "rev": "3012ba5349b2ef725c5e418a581174edc5c19dc3",
       "src": "https://github.com/nvim-mini/mini.clue"
     },
     "mini.extra": {
@@ -122,7 +122,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "883c6495b53fccbd35d0938aac8bdf72f6d499c0",
+      "rev": "e057806776c8bed91971338d96a78a0f6a313dae",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
@@ -130,16 +130,16 @@
       "src": "https://github.com/dstein64/nvim-scrollview"
     },
     "nvim-treesitter": {
-      "rev": "eb1f8e80cb28eb7892f347609e0bdc5eb574b945",
+      "rev": "2b50ab5ccbcd9e5708deb351308edd738adbf84c",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-context": {
-      "rev": "529ee357b8c03d76ff71233afed68fd0f5fe10b1",
+      "rev": "9a8e39993e3b895601bf8227124a48ea8268149e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "4e91b5d0394329a229725b021a8ea217099826ef",
+      "rev": "7359dfcefa38db632541e1f9b5b5f291626a1d47",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -164,7 +164,7 @@
       "src": "https://github.com/hedyhli/outline.nvim"
     },
     "pkl-neovim": {
-      "rev": "51a56dcaaa04035a86d75eb5698864c288142636",
+      "rev": "bdc3dbbbd134992a8d5ff4d0668d8baa40d396ab",
       "src": "https://github.com/apple/pkl-neovim"
     },
     "plenary.nvim": {
@@ -180,7 +180,7 @@
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "rainbow-delimiters.nvim": {
-      "rev": "01993eb20c6cdc1d33e7e98252368840309f99b9",
+      "rev": "607a438d8c647a355749973fd295e33505afafde",
       "src": "https://github.com/hiphish/rainbow-delimiters.nvim"
     },
     "rustaceanvim": {
@@ -189,7 +189,7 @@
       "version": "6.0.0 - 7.0.0"
     },
     "snacks.nvim": {
-      "rev": "9912042fc8bca2209105526ac7534e9a0c2071b2",
+      "rev": "a049339328e2599ad6e85a69fa034ac501e921b2",
       "src": "https://github.com/folke/snacks.nvim"
     },
     "toggleterm.nvim": {
@@ -201,7 +201,7 @@
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "treewalker.nvim": {
-      "rev": "3d5148e160ed9728b3275d37d06ea028cef5f43b",
+      "rev": "7baacb0efbdc2ac523ede90e266d685bc2227673",
       "src": "https://github.com/aaronik/treewalker.nvim"
     },
     "ts-comments.nvim": {
