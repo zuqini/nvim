@@ -122,7 +122,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "5492a24edd68f78d8a778edcb8905d0a28993abc",
+      "rev": "8e2084bf5e40c79c1f42210a6ef96a0a4793a763",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
@@ -211,10 +211,6 @@
     "typr": {
       "rev": "584e4ef34dea25a4035627794322f315b22d1253",
       "src": "https://github.com/nvzone/typr"
-    },
-    "undotree": {
-      "rev": "6fa6b57cda8459e1e4b2ca34df702f55242f4e4d",
-      "src": "https://github.com/mbbill/undotree"
     },
     "vim-arduino": {
       "rev": "2ded67cdf09bb07c4805d9e93d478095ed3d8606",

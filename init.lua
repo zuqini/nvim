@@ -22,6 +22,7 @@ require('zpack').setup({
     require = true,
   }
 })
+require("builtin-plugins")
 
 vrequire("options")
 require("options")
