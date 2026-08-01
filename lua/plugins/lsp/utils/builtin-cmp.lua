@@ -1,6 +1,3 @@
-local docs_debounce_ms = 100
-local timer = vim.uv.new_timer()
-
 ---For replacing certain <C-x>... keymaps.
 ---@param keys string
 local function feedkeys(keys)
@@ -28,75 +25,6 @@ local function supertab()
       end
     end
   end
-end
-
--- https://github.com/neovim/neovim/pull/32820
-local function enable_completion_documentation()
-  vim.api.nvim_create_autocmd("CompleteChanged", {
-    callback = function()
-      local event = vim.v.event
-      if not event or not event.completed_item then return end
-
-      local cy = event.row
-      local cx = event.col
-      local cw = event.width
-      local ch = event.height
-
-      local item = event.completed_item
-      local lsp_item = item.user_data and item.user_data.nvim and item.user_data.nvim.lsp.completion_item
-      local client = vim.lsp.get_clients({ bufnr = 0 })[1]
-
-      if not client or not lsp_item then return end
-
-      client:request('completionItem/resolve', lsp_item, function(_, result)
-        vim.cmd("pclose")
-
-        if result and result.documentation then
-          local docs = result.documentation.value or result.documentation
-          if type(docs) == "table" then docs = table.concat(docs, "\n") end
-          if not docs or docs == "" then return end
-
-          local buf = vim.api.nvim_create_buf(false, true)
-          vim.bo[buf].bufhidden = 'wipe'
-
-          local contents = vim.lsp.util.convert_input_to_markdown_lines(docs)
-          vim.api.nvim_buf_set_lines(buf, 0, -1, false, contents)
-          vim.treesitter.start(buf, "markdown")
-
-          local dx = cx + cw + 1
-          local dw = 60
-          local anchor = "NW"
-
-          if dx + dw > vim.o.columns then
-            dw = vim.o.columns - dx
-            anchor = "NE"
-          end
-
-          local win = vim.api.nvim_open_win(buf, false, {
-            relative = "editor",
-            row = cy,
-            col = dx,
-            width = dw,
-            height = ch,
-            anchor = anchor,
-            border = "none",
-            style = "minimal",
-            zindex = 60,
-          })
-
-          vim.wo[win].conceallevel = 2
-          vim.wo[win].wrap = true
-          vim.wo[win].previewwindow = true
-        end
-      end)
-    end,
-  })
-
-  vim.api.nvim_create_autocmd("CompleteDone", {
-    callback = function()
-      vim.cmd("pclose")
-    end
-  })
 end
 
 local M = {}
@@ -128,7 +56,6 @@ M.setup = function(opts)
     end
     client.server_capabilities.completionProvider.triggerCharacters = chars
     vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-    enable_completion_documentation()
 
     -- Use enter to accept completions.
     keymap('<cr>', function()

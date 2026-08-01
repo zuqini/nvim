@@ -5,6 +5,9 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {
       notify = { enabled = false },
+      -- Externalizing the pum zeroes out nvim's internal pum geometry, so the
+      -- builtin completion docs popup gets placed at col 0 underneath the menu.
+      popupmenu = { enabled = false },
       routes = {
         {
           filter = {
