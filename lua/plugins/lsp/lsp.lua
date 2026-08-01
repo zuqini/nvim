@@ -3,6 +3,10 @@ return {
   cond = not vim.g.vscode,
   config = function()
     -- vim.lsp.set_log_level("debug")
+    if vim.g.cmp_engine == 'builtin' then
+      require('plugins.lsp.utils.cmp-sources').enable()
+    end
+
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -13,6 +17,11 @@ return {
 
         if vim.g.cmp_engine == 'builtin' then
           require('plugins.lsp.utils.builtin-cmp').setup({ client = client, bufnr = args.buf })
+
+          -- Not a real server, so none of the LSP setup below applies.
+          if client.name == require('plugins.lsp.utils.cmp-sources').name then
+            return
+          end
         end
 
         vim.lsp.inlay_hint.enable(true)
