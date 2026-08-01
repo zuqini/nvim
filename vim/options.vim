@@ -8,6 +8,8 @@ set mouse=a
 set hidden
 set number
 set showcmd
+" pending keys go to lualine's %S component; nothing renders them at cmdheight=0
+set showcmdloc=statusline
 set wildmenu
 set showmatch " show matching brackets
 set noshowmode

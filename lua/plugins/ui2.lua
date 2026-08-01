@@ -17,9 +17,6 @@ end
 -- until the cmdline is active, so cmdheight=0 is what makes it share a row
 -- with lualine.
 vim.o.cmdheight = 0
--- Nothing renders 'showcmd' once the cmdline row is gone; lualine picks it up
--- through the `%S` statusline item instead.
-vim.o.showcmdloc = 'statusline'
 
 ui2.enable({
   msg = {

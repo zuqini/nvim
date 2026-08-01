@@ -100,23 +100,22 @@ return {
           -- cmdheight=0, so recording state has to come from the register.
           {
             function()
-              local reg = vim.fn.reg_recording()
-              if reg ~= '' then
-                return '󰑊 recording @' .. reg
+              local rec, exec = vim.fn.reg_recording(), vim.fn.reg_executing()
+              if rec ~= '' then
+                return '󰑊 recording @' .. rec
               end
-              return '󰑊 executing @' .. vim.fn.reg_executing()
-            end,
-            cond = function()
-              return vim.fn.reg_recording() ~= '' or vim.fn.reg_executing() ~= ''
+              return exec ~= '' and '󰑊 executing @' .. exec or ''
             end,
             color = { fg = "#ff9e64" },
           },
         },
         lualine_x = {
-          -- 'showcmd' content, routed here by showcmdloc=statusline (see ui2.lua)
+          -- 'showcmd' content, routed here by showcmdloc=statusline. The %( %)
+          -- group collapses when %S is empty; lualine's padding would not.
           {
-            '%S',
+            '%( %S %)',
             type = 'stl',
+            padding = 0,
             color = { fg = "#ff9e64" },
           },
           {
