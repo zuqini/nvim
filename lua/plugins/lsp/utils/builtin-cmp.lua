@@ -1,3 +1,16 @@
+-- Colorschemes tend to link PmenuKind to Pmenu, leaving the kind column
+-- indistinguishable from the label. Noice used to color it via Special.
+local function set_pum_kind_hl()
+  local special = vim.api.nvim_get_hl(0, { name = 'Special', link = false })
+  local pmenu = vim.api.nvim_get_hl(0, { name = 'Pmenu', link = false })
+  local pmenu_sel = vim.api.nvim_get_hl(0, { name = 'PmenuSel', link = false })
+  vim.api.nvim_set_hl(0, 'PmenuKind', { fg = special.fg, bg = pmenu.bg })
+  vim.api.nvim_set_hl(0, 'PmenuKindSel', { fg = special.fg, bg = pmenu_sel.bg or pmenu.bg })
+end
+
+set_pum_kind_hl()
+vim.api.nvim_create_autocmd('ColorScheme', { callback = set_pum_kind_hl })
+
 ---For replacing certain <C-x>... keymaps.
 ---@param keys string
 local function feedkeys(keys)
