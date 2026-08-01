@@ -1,6 +1,7 @@
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 
 vim.g.cmp_engine = 'builtin' -- blink | builtin
+vim.g.ui_engine = 'ui2'      -- ui2 | noice
 vim.g.hybrid_nu = true
 vim.g.transparent_background = true
 vim.g.transparent_float_if_transparent = false

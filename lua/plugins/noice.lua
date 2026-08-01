@@ -2,6 +2,7 @@ return {
   {
     "folke/noice.nvim",
     cond = not vim.g.vscode,
+    enabled = vim.g.ui_engine == 'noice',
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {
       notify = { enabled = false },

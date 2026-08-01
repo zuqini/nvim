@@ -2,7 +2,6 @@ return {
   {
     url = 'https://github.com/nvim-lualine/lualine.nvim',
     dependencies = {
-      'folke/noice.nvim',
       'nvim-tree/nvim-web-devicons',
     },
     cond = not vim.g.vscode,
@@ -97,16 +96,27 @@ return {
             update_in_insert = false, -- Update diagnostics in insert mode.
             always_visible = false,   -- Show diagnostics even if there are none.
           },
+          -- 'showmode' messages go to the cmdline window, which is hidden at
+          -- cmdheight=0, so recording state has to come from the register.
           {
-            require("noice").api.status.mode.get,
-            cond = require("noice").api.status.mode.has,
+            function()
+              local reg = vim.fn.reg_recording()
+              if reg ~= '' then
+                return '󰑊 recording @' .. reg
+              end
+              return '󰑊 executing @' .. vim.fn.reg_executing()
+            end,
+            cond = function()
+              return vim.fn.reg_recording() ~= '' or vim.fn.reg_executing() ~= ''
+            end,
             color = { fg = "#ff9e64" },
           },
         },
         lualine_x = {
+          -- 'showcmd' content, routed here by showcmdloc=statusline (see ui2.lua)
           {
-            require("noice").api.status.command.get,
-            cond = require("noice").api.status.command.has,
+            '%S',
+            type = 'stl',
             color = { fg = "#ff9e64" },
           },
           {
@@ -230,6 +240,15 @@ return {
         sections = sections,
         -- extensions = { 'fzf' },
       }
+
+      -- reg_recording() still returns the register during RecordingLeave, so
+      -- refresh on the next tick or the component lingers until the 1s timer.
+      vim.api.nvim_create_autocmd({ 'RecordingEnter', 'RecordingLeave' }, {
+        group = vim.api.nvim_create_augroup('lualine_recording', { clear = true }),
+        callback = function()
+          vim.schedule(require('lualine').refresh)
+        end,
+      })
       -- vim.cmd("set showtabline=1") --https://github.com/nvim-lualine/lualine.nvim/issues/395
     end
   }
