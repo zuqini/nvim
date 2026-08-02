@@ -156,7 +156,7 @@ local M = {}
 M.enable = function()
   set_pum_kind_hl()
   vim.api.nvim_create_autocmd('ColorScheme', {
-    group = vim.api.nvim_create_augroup('builtin-cmp', {}),
+    group = vim.api.nvim_create_augroup('lsp-process-cmp', {}),
     callback = set_pum_kind_hl,
   })
   -- Without 'nosort', fuzzy score re-sorts everything and source_rank is lost.

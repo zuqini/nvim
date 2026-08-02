@@ -1,7 +1,7 @@
 -- The same candidates as cmp-sources, driven by 'autocomplete' (see
 -- |ins-autocompletion|) instead of an in-process LSP server. A spike: the two
 -- substrates trade rather than rank, and living with both is how the trade gets
--- settled. Selected with vim.g.cmp_engine = 'native'.
+-- settled. Selected with vim.g.cmp_engine = 'native-autocomplete'.
 --
 -- What this buys over cmp-sources, and what the whole exercise is for: each 'F'
 -- source in 'complete' returns its own start column, so the path source can
@@ -11,30 +11,36 @@
 -- come down to. Core also dedups identical words across sources, so there is
 -- nothing here like lsp_words().
 --
--- What it costs: real servers do not share this menu. vim.lsp.completion drives
--- vim.fn.complete() itself, and set_completion() in insexpand.c opens by tearing
--- down whatever completion is in flight -- ins_compl_prep(), ins_compl_clear(),
--- ins_compl_free(), then ctrl_x_mode = CTRL_X_EVAL over its own list. So the two
--- menus alternate rather than merge: whoever called last owns the pum, and while
--- an LSP completion is active the 'complete' sources are not consulted at all.
--- Typing `vim.` gives the server's 103 items with none of ours among them.
+-- Real servers do share this menu, through the 'o' flag M.setup appends to
+-- 'complete'. Typing `l` in this file gives one menu holding Field/Function/
+-- Keyword/Variable from lua_ls next to 12 of our snippets and 167 buffer words,
+-- and it stays that way through `lo`, `loc`, `loca`.
 --
--- Alternating is all it is, though. They coexist fine -- `vim.` then `l` then
--- `s` filters 103 down to 17 and keeps going. An earlier version of this file
--- reported that as a hard break where the menu died on the next keystroke; that
--- was the missing 'noinsert' below, not the substrate.
+-- The one seam is neovim#32428. vim.fn.complete(), which vim.lsp.completion
+-- calls when a response lands, is destructive -- set_completion() in
+-- insexpand.c opens with ins_compl_prep(), ins_compl_clear(), ins_compl_free()
+-- and then takes ctrl_x_mode = CTRL_X_EVAL. From that point the 'complete'
+-- sources are not consulted again for the cycle, so our items are preserved but
+-- never recomputed. That matters less than it sounds: fuzzy matching only ever
+-- narrows, so anything matching a longer prefix already matched the shorter one
+-- and is still in the list. Two residual cases, both narrow -- a candidate past
+-- the ^N cap on the first keystroke never arrives, and after a separator, where
+-- our sources correctly offer nothing for an empty keyword, they stay silent for
+-- the rest of the word. The second is exactly what cmp-sources' server_anchored
+-- does deliberately, for the reason recorded in review-decisions.md: after a
+-- '.' or ':' the server's own members are what is wanted anyway.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
 
 local candidates = require 'plugins.lsp.utils.cmp-candidates'
 local zsnip = require 'zsnip'
 
-local NAME = 'native-cmp'
+local NAME = 'autocomplete-cmp'
 -- 'complete' reaches the source functions through v:lua, so they have to hang
 -- off a global. Dotted lookup resolves there, which keeps the three out of _G.
 local NS = 'ZCmpNative'
 
--- Duplicated from builtin-cmp rather than shared: this is a spike, the two
+-- Duplicated from lsp-process-cmp rather than shared: this is a spike, the two
 -- engines are mutually exclusive, and folding them together now would design
 -- the seam before the evidence that decides where it goes. Same for the keymap
 -- block below.
@@ -74,7 +80,7 @@ end
 ---other documented way out -- does not cost the fuzzy sort: it navigates to the
 ---marked item instead of pinning the menu to index 1. Every source marks its
 ---own first item, so whichever survives the sort highest is the one selected.
----Verified: <cr> over a menu accepts, the same as under the builtin engine.
+---Verified: <cr> over a menu accepts, the same as under the native-lsp-process engine.
 ---@param items lsp.CompletionItem[]
 ---@param snippet boolean? bodies go to CompleteDone rather than into the buffer
 ---@return table[] complete-items
@@ -343,12 +349,12 @@ M.enable = function()
   end
 end
 
----Real servers only, and unchanged from what the builtin engine asks for: they
----keep driving vim.fn.complete() themselves, on their own track, next to the
----menu 'autocomplete' is building. See the header for why the two alternate
----instead of merging, and ~/workspace/nvim-autocomplete/TASK.md for the upstream
----change that would fix it -- a blocking 'complete' source in vim.lsp.completion,
----which is prototyped and measured there and needs no C change.
+---Real servers only. The trigger characters are widened exactly as the
+---native-lsp-process engine widens them, but the delivery is different: 'o' in
+---'complete' puts the LSP omnifunc *inside* the autocomplete cycle, which is the
+---only arrangement where a server's items and everything else end up in one
+---ranked menu. See the header for the seam that leaves, and
+---~/workspace/nvim-autocomplete/TASK.md for the upstream work behind it.
 ---@param opts { client: vim.lsp.Client, bufnr: integer }
 M.setup = function(opts)
   local client, bufnr = opts.client, opts.bufnr

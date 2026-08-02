@@ -17,7 +17,7 @@ return {
     dependencies = { 'rafamadriz/friendly-snippets' },
     config = function()
       -- Both engines read the registry themselves: blink through the
-      -- zsnip.blink source, the builtin one through cmp-sources, which dedupes
+      -- zsnip.blink source, the native-lsp-process one through cmp-sources, which dedupes
       -- against what the real servers already offered.
       require('zsnip').setup()
       require('zsnip.loaders.from_vscode').lazy_load()

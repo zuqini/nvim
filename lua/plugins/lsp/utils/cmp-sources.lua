@@ -1,7 +1,7 @@
 -- Snippet, buffer word and path completion, served as an in-process LSP server
 -- (see |lsp-server|) so vim.lsp.completion merges it into the same menu as the
 -- real servers attached to the buffer. The candidates themselves come from
--- cmp-candidates.lua, which native-cmp.lua serves a different way.
+-- cmp-candidates.lua, which autocomplete-cmp.lua serves a different way.
 local api = vim.api
 
 local candidates = require 'plugins.lsp.utils.cmp-candidates'
@@ -90,7 +90,7 @@ local methods = {
   initialize = function(_, callback)
     callback(nil, {
       capabilities = {
-        -- builtin-cmp adds the word characters on top of these.
+        -- lsp-process-cmp adds the word characters on top of these.
         completionProvider = { triggerCharacters = { '/', '.', '~' } },
       },
     })
