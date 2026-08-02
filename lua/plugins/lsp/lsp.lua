@@ -18,6 +18,12 @@ return {
           if client.name == require('plugins.lsp.utils.cmp-sources').name then
             return
           end
+        elseif vim.g.cmp_engine == 'native' then
+          -- Only the LSP half. Its own sources reach the menu through
+          -- 'complete', which is per-buffer and set from BufEnter, so buffers
+          -- with no server attached still complete -- there is no in-process
+          -- client here to make LspAttach fire in one.
+          require('plugins.lsp.utils.native-cmp').setup({ client = client, bufnr = args.buf })
         end
 
         vim.lsp.inlay_hint.enable(true)
@@ -77,6 +83,8 @@ return {
     if vim.g.cmp_engine == 'builtin' then
       require('plugins.lsp.utils.builtin-cmp').enable()
       require('plugins.lsp.utils.cmp-sources').enable()
+    elseif vim.g.cmp_engine == 'native' then
+      require('plugins.lsp.utils.native-cmp').enable()
     end
 
     vim.api.nvim_create_autocmd('LspDetach', {

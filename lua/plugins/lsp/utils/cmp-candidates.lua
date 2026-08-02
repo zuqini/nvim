@@ -341,7 +341,7 @@ end
 
 ---@param ctx CmpContext
 ---@param taken? fun(): table<string, true> words already in the menu
----@param check? fun() called between scans, for engines that must stay responsive
+---@param check? fun(): boolean asked between buffers whether to give up scanning
 ---@return lsp.CompletionItem[]
 function M.buffer(ctx, taken, check)
   -- An empty prefix would dump the whole buffer into the menu.
@@ -372,11 +372,8 @@ function M.buffer(ctx, taken, check)
   for _, buf in ipairs(visible_buffers()) do
     -- Checked here too: Lua evaluates buffer_words() before add() can bail, so
     -- a filled menu would still pay for a full scan of every other buffer.
-    if #items >= M.limits.buffer then
+    if #items >= M.limits.buffer or (check and check()) then
       break
-    end
-    if check then
-      check()
     end
     add(buffer_words(buf))
   end
