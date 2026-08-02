@@ -11,19 +11,11 @@ return {
           return
         end
 
-        if vim.g.cmp_engine == 'native-lsp-process' then
-          require('plugins.lsp.utils.lsp-process-cmp').setup({ client = client, bufnr = args.buf })
-
-          -- Not a real server, so none of the LSP setup below applies.
-          if client.name == require('plugins.lsp.utils.cmp-sources').name then
-            return
-          end
-        elseif vim.g.cmp_engine == 'native-autocomplete' then
+        if vim.g.cmp_engine == 'builtin' then
           -- Only the LSP half. Its own sources reach the menu through
           -- 'complete', which is per-buffer and set from BufEnter, so buffers
-          -- with no server attached still complete -- there is no in-process
-          -- client here to make LspAttach fire in one.
-          require('plugins.lsp.utils.autocomplete-cmp').setup({ client = client, bufnr = args.buf })
+          -- with no server attached still complete.
+          require('plugins.lsp.utils.builtin-cmp').setup({ client = client, bufnr = args.buf })
         end
 
         vim.lsp.inlay_hint.enable(true)
@@ -78,13 +70,8 @@ return {
       end,
     })
 
-    -- After LspAttach is registered: vim.lsp.start fires it synchronously for
-    -- the in-process server, so buffers attached here would otherwise be missed.
-    if vim.g.cmp_engine == 'native-lsp-process' then
-      require('plugins.lsp.utils.lsp-process-cmp').enable()
-      require('plugins.lsp.utils.cmp-sources').enable()
-    elseif vim.g.cmp_engine == 'native-autocomplete' then
-      require('plugins.lsp.utils.autocomplete-cmp').enable()
+    if vim.g.cmp_engine == 'builtin' then
+      require('plugins.lsp.utils.builtin-cmp').enable()
     end
 
     vim.api.nvim_create_autocmd('LspDetach', {

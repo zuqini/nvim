@@ -1,6 +1,7 @@
 -- Snippet, buffer word and path candidates, as LSP completion items. Knows
--- nothing about how they reach the menu: cmp-sources.lua serves them through an
--- in-process LSP server, native-cmp.lua through 'complete' functions.
+-- nothing about how they reach the menu -- builtin-cmp.lua serves them as
+-- 'complete' functions. Kept separate because the scanning is the part worth
+-- packaging, and the transport is the part that keeps changing.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
 
@@ -13,7 +14,7 @@ local MAX_CACHED_DIRS = 64
 
 local M = {}
 
----How many items each source will return. Also what native-cmp hands 'complete'
+---How many items each source will return. Also what builtin-cmp hands 'complete'
 ---as its per-source '^{count}', so the two cannot drift apart.
 M.limits = { path = 250, snippet = 30, buffer = 200 }
 
@@ -211,19 +212,10 @@ end
 ---@field before string line up to the cursor
 ---@field keyword string the run each source is being asked to replace
 
----@type table<string, true>
-local nothing_taken = {}
-
----@param taken? fun(): table<string, true>
----@return table<string, true>
-local function words_taken(taken)
-  return taken and taken() or nothing_taken
-end
-
 ---The context every source shares: the cursor position, and the trailing
----'iskeyword' run as the run being replaced. Engines that can anchor a source
----somewhere else -- native-cmp does, per source -- overwrite `keyword` with the
----text between their own anchor and the cursor.
+---'iskeyword' run as the run being replaced. A caller that anchors a source
+---somewhere else -- builtin-cmp does, per source -- overwrites `keyword` with
+---the text between its own anchor and the cursor.
 ---@return CmpContext
 function M.context()
   local bufnr = api.nvim_get_current_buf()
@@ -234,8 +226,8 @@ function M.context()
 end
 
 ---Where the path token before the cursor splits into a directory to list and a
----segment to match against. Shared with native-cmp, whose findstart has to
----agree with M.path() on what counts as a path at all.
+---segment to match against. Shared with the findstart in builtin-cmp, which has
+---to agree with M.path() on what counts as a path at all.
 ---@param before string line up to the cursor
 ---@return string? dir trailing directory part, always ends in '/'
 ---@return string? segment the part after it, possibly empty
@@ -251,9 +243,8 @@ function M.path_split(before)
 end
 
 ---@param ctx CmpContext
----@param taken? fun(): table<string, true> entries already in the menu
 ---@return lsp.CompletionItem[]? items nil when the cursor is not inside a path
-function M.path(ctx, taken)
+function M.path(ctx)
   local dir, segment = M.path_split(ctx.before)
   if not dir or not segment then
     return nil
@@ -279,7 +270,6 @@ function M.path(ctx, taken)
   local wanted = segment:lower()
   local hidden = vim.startswith(segment, '.')
 
-  local seen = words_taken(taken)
   local items = {}
   local labels, names, lowers = listing.labels, listing.names, listing.lowers
   for i = 1, #labels do
@@ -298,8 +288,6 @@ function M.path(ctx, taken)
       -- duplicate what the buffer already holds.
       and #label > #typed
       and (hidden or not vim.startswith(name, '.'))
-      and not seen[label]
-      and not seen[name]
     then
       items[#items + 1] = {
         label = label,
@@ -316,14 +304,12 @@ end
 ---already LSP snippet syntax, so insertTextFormat is enough for
 ---vim.lsp.completion to expand them.
 ---@param ctx CmpContext
----@param taken? fun(): table<string, true> triggers already in the menu
 ---@return lsp.CompletionItem[]
-function M.snippet(ctx, taken)
+function M.snippet(ctx)
   if ctx.keyword == '' then
     return {}
   end
 
-  local seen = words_taken(taken)
   return zsnip.completion_items({
     prefix = ctx.keyword,
     bufnr = ctx.bufnr,
@@ -331,36 +317,27 @@ function M.snippet(ctx, taken)
     -- No detail/documentation on purpose: without them the popup previews the
     -- expanded snippet, which beats friendly-snippets' terse descriptions.
     documentation = false,
-    -- Filtered before the limit is spent, so a trigger a real server already
-    -- offered does not cost a slot.
-    filter = function(snippet)
-      return not seen[snippet.prefix]
-    end,
   })
 end
 
 ---@param ctx CmpContext
----@param taken? fun(): table<string, true> words already in the menu
 ---@param check? fun(): boolean asked between buffers whether to give up scanning
 ---@return lsp.CompletionItem[]
-function M.buffer(ctx, taken, check)
+function M.buffer(ctx, check)
   -- An empty prefix would dump the whole buffer into the menu.
   if ctx.keyword == '' then
     return {}
   end
 
   local prefix = ctx.keyword
-  local seen = words_taken(taken)
   local items, added = {}, {}
   local function add(words)
     local limit = M.limits.buffer - #items
     if limit <= 0 then
       return
     end
-    -- Filter before matchfuzzy: its limit caps the input, and the words we drop
-    -- are the ones a real server already offered, i.e. the best matches.
     local candidates = vim.tbl_filter(function(word)
-      return word ~= prefix and not seen[word] and not added[word]
+      return word ~= prefix and not added[word]
     end, words)
     for _, word in ipairs(vim.fn.matchfuzzy(candidates, prefix, { limit = limit })) do
       added[word] = true
