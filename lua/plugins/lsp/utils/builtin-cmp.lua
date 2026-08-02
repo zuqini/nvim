@@ -2,6 +2,11 @@
 -- indistinguishable from the label. Noice used to color it via Special.
 local function set_pum_kind_hl()
   local special = vim.api.nvim_get_hl(0, { name = 'Special', link = false })
+  -- An undefined group returns {}, and setting fg = nil would *define*
+  -- PmenuKind with no attributes -- worse than the link we are replacing.
+  if not special.fg then
+    return
+  end
   local pmenu = vim.api.nvim_get_hl(0, { name = 'Pmenu', link = false })
   local pmenu_sel = vim.api.nvim_get_hl(0, { name = 'PmenuSel', link = false })
   vim.api.nvim_set_hl(0, 'PmenuKind', { fg = special.fg, bg = pmenu.bg })
@@ -94,13 +99,20 @@ local function complete()
     feedkeys '<C-n>'
   elseif vim.snippet.active { direction = 1 } then
     vim.snippet.jump(1)
-  else
+  elseif next(vim.lsp.get_clients { bufnr = 0, method = 'textDocument/completion' }) then
     vim.lsp.completion.get()
+  else
+    -- The maps are buffer-local and outlive the clients, and get() with none
+    -- attached never calls back -- :LspRestart would otherwise leave <Tab> and
+    -- <C-n> doing nothing at all until the next BufEnter reattaches us.
+    feedkeys '<C-x><C-n>'
   end
 end
 
 ---cmp-sources attaches to nearly every buffer, so an unconditional <Tab> here
 ---would swallow every indent. Only a word under the cursor asks for a menu.
+---<C-n> maps straight to complete() instead: it has no indenting job, and
+---sharing this fallback made it type a literal tab on an empty line.
 local function supertab()
   local before = vim.api.nvim_get_current_line():sub(1, vim.api.nvim_win_get_cursor(0)[2])
   if pumvisible() or vim.snippet.active { direction = 1 } or vim.fn.matchstr(before, '\\k*$') ~= '' then
@@ -168,7 +180,7 @@ M.setup = function(opts)
     return pumvisible() and '<C-e>' or '<esc>'
   end, { expr = true })
 
-  keymap('i', '<C-n>', supertab, { desc = 'Trigger/select next completion' })
+  keymap('i', '<C-n>', complete, { desc = 'Trigger/select next completion' })
   keymap({ 'i', 's' }, '<Tab>', supertab)
   keymap({ 'i', 's' }, '<S-Tab>', shifttab)
 
