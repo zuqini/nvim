@@ -4,7 +4,7 @@ return {
     enabled = vim.g.cmp_engine == 'blink',
     cond = not vim.g.vscode,
     dependencies = {
-      'zuqini/ZSnip.nvim',
+      'zuqini/zsnip.nvim',
       'rafamadriz/friendly-snippets',
     },
 

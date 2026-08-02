@@ -11,7 +11,7 @@ return {
   },
   {
     -- Loading only: expansion is vim.snippet's, under both engines.
-    'zuqini/ZSnip.nvim',
+    'zuqini/zsnip.nvim',
     cond = not vim.g.vscode,
     lazy = false,
     dependencies = { 'rafamadriz/friendly-snippets' },
