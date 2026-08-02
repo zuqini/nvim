@@ -12,23 +12,26 @@
 -- exactly one start column for the entire menu.
 --
 -- Real servers share the menu: typing `l` in this file gives one popup holding
--- Field/Function/Keyword/Variable from lua_ls next to 12 snippets and 167 buffer
--- words, and it stays that way through `lo`, `loc`, `loca`. That merge is
+-- Field/Function/Keyword/Variable from lua_ls next to a dozen snippets and the
+-- buffer's words, and it stays that way through `lo`, `loc`, `loca`. That merge is
 -- neovim PR #35346, which seeds vim.lsp.completion's match list from
 -- complete_info() so each response rebuilds the union instead of replacing it.
 --
--- The one seam is neovim#32428. vim.fn.complete(), which vim.lsp.completion
--- calls when a response lands, is destructive -- set_completion() in
--- insexpand.c opens with ins_compl_prep(), ins_compl_clear(), ins_compl_free()
--- and then takes ctrl_x_mode = CTRL_X_EVAL. From that point the 'complete'
--- sources are not consulted again for the cycle, so their items are preserved
--- but never recomputed. That matters less than it sounds: fuzzy matching only
--- ever narrows, so anything matching a longer prefix already matched the shorter
--- one and is still in the list. Two residual cases, both narrow -- a candidate
--- past the ^N cap on the first keystroke never arrives, and after a separator,
--- where the word sources correctly offer nothing for an empty keyword, they stay
--- silent for the rest of the word. The second is arguably right: after a '.' or
--- ':' the server's own members are what you wanted.
+-- The seam is neovim#32428. vim.fn.complete(), which vim.lsp.completion calls
+-- when a response lands, is destructive -- set_completion() in insexpand.c opens
+-- with ins_compl_prep(), ins_compl_clear(), ins_compl_free() and then takes
+-- ctrl_x_mode = CTRL_X_EVAL. From that point the 'complete' sources are not
+-- consulted again for the cycle, so their items are preserved but never
+-- recomputed. Mostly that is harmless, since fuzzy matching only narrows and
+-- anything matching a longer prefix already matched the shorter one. What it
+-- does cost is a source that legitimately returned nothing at the start of the
+-- cycle -- the word sources after a '.', where the keyword is empty -- staying
+-- silent for the rest of the word. Arguably right: after a '.' or ':' the
+-- server's own members are what you wanted.
+--
+-- The server half does not have that problem, because M.setup runs autotrigger
+-- as well and it re-asks per keystroke. That is why both are on; see the note
+-- there, and do not remove one thinking it is redundant.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
 
@@ -360,14 +363,28 @@ M.setup = function(opts)
   end
 
   provider.triggerCharacters = trigger_chars(client)
-  -- autotrigger = false, and 'o' appended to 'complete' below, is the supported
-  -- way to combine LSP with other sources -- neovim#35257, fixed by PR #35346,
-  -- which seeds trigger()'s match list from complete_info() so each response
-  -- rebuilds the union instead of replacing it. autotrigger = true is the other
-  -- path: vim.fn.complete() on its own track, tearing down the cpt cycle.
-  vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
-  if not vim.bo[bufnr].complete:find(',o^', 1, true) then
-    vim.bo[bufnr].complete = vim.bo[bufnr].complete .. ',o^100'
+  -- Both delivery paths, deliberately, because each covers what the other
+  -- misses and they are not alternatives.
+  --
+  -- 'o' in 'complete' runs the LSP omnifunc inside the autocomplete cycle, which
+  -- is what puts server items in the same ranked menu as ours -- neovim#35257,
+  -- fixed by PR #35346, which seeds trigger()'s match list from complete_info()
+  -- so each response rebuilds the union instead of replacing it. On its own it
+  -- asks the server once per cycle: after `vim.` you get whatever came back for
+  -- the bare prefix, and typing `tbl_g` never fetches `tbl_get`, because
+  -- vim.fn.complete() has taken the cycle and the 'complete' sources are done
+  -- (neovim#32428).
+  --
+  -- autotrigger re-asks on each of the trigger characters widened above, which
+  -- is what fetches it -- `vim.tbl_g` comes back with 21 items including
+  -- `tbl_get`. On its own it delivers nothing for a plain keyword, so the menu
+  -- has no server items at all until you type a separator.
+  --
+  -- Together: measured, `l` gives Field/Function/Keyword/Variable beside 12
+  -- snippets and 172 buffer words, and `vim.tbl_g` still finds `tbl_get`.
+  vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+  if not vim.bo[bufnr].complete:find(',o', 1, true) then
+    vim.bo[bufnr].complete = vim.bo[bufnr].complete .. ',o'
   end
 end
 
