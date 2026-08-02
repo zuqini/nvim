@@ -10,7 +10,8 @@
     },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
-      "src": "https://github.com/saghen/blink.cmp"
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "1.0.0 - 2.0.0"
     },
     "cql-vim": {
       "rev": "6f61df5a633c3a91edea7bcb5d5772648df19d1a",

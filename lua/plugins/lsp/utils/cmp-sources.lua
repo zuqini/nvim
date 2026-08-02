@@ -212,7 +212,7 @@ local function snippet_source(prefix, bufnr, taken)
     items[#items + 1] = {
       label = trigger,
       kind = Kind.Snippet,
-      insertText = snippet.body,
+      insertText = snippets.resolve(snippet.body),
       insertTextFormat = Format.Snippet,
       sortText = ('%04d'):format(#items),
     }
