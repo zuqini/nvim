@@ -304,6 +304,31 @@ local function path_source(before, bufnr, taken)
   return items
 end
 
+---A server can anchor its items before the keyword boundary -- lua_ls offers
+---'plenary.async' for `require('plenary.asy` -- and vim.lsp.completion applies
+---that one anchor to the whole merged menu. Our items carry no textEdit, so the
+---missing-prefix correction skips them (see |vim.lsp.completion|), and accepting
+---one deletes back to the server's anchor: 'require('asyncthing'. Standing down
+---after a separator costs little, since the server's own members are what is
+---wanted there anyway.
+---@param before string line up to the cursor
+---@param bufnr integer
+---@return boolean
+local function server_anchored(before, bufnr)
+  local keyword = vim.fn.matchstr(before, '\\k*$')
+  local at = #before - #keyword
+  local separator = at > 0 and before:sub(at, at) or ''
+  if separator ~= '.' and separator ~= ':' and separator ~= '/' then
+    return false
+  end
+  for _, client in ipairs(vim.lsp.get_clients { bufnr = bufnr }) do
+    if client.name ~= NAME then
+      return true
+    end
+  end
+  return false
+end
+
 ---@return lsp.CompletionItem[]
 local function completion_items()
   local bufnr = api.nvim_get_current_buf()
@@ -322,6 +347,10 @@ local function completion_items()
   local paths = path_source(before, bufnr, taken)
   if paths then
     return paths
+  end
+
+  if server_anchored(before, bufnr) then
+    return {}
   end
 
   local pattern = patterns()

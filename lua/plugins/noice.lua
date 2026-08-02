@@ -53,10 +53,9 @@ return {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
         },
-        -- blink brings its own signature window; the builtin engine has none,
-        -- so noice is the only thing offering one.
+        -- Not wanted, under either engine.
         signature = {
-          enabled = vim.g.cmp_engine ~= 'blink',
+          enabled = false,
         },
       },
       -- you can enable a preset for easier configuration
