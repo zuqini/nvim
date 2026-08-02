@@ -1,4 +1,4 @@
-command! L :ZPack
+command! L :ZShow
 command! LS :ZPack sync
 
 " message history: noice's own view, or the ui2 pager

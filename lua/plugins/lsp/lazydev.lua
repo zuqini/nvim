@@ -10,6 +10,5 @@ return {
   },
   config = function(_, opts)
     require('lazydev').setup(opts)
-    print('lazydev loaded')
   end
 }

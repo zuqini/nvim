@@ -5,14 +5,13 @@ vim.filetype.add({
   },
 })
 
--- pkl-neovim ships its snippets in snipmate format, which only luasnip reads.
--- The builtin engine discovers vscode-format packages through a package.json
--- and pkl-neovim has none, so under it there is nothing here to load -- and
--- nothing else pulls luasnip in either.
-local snipmate = vim.g.cmp_engine == 'blink'
+-- pkl-neovim ships its snippets in snipmate format. Under the builtin engine
+-- cmp-sources reads them off the runtimepath itself, so luasnip is only needed
+-- to load them under blink -- and nothing else in this config pulls it in.
+local use_luasnip = vim.g.cmp_engine == 'blink'
 
 local dependencies = { "nvim-treesitter/nvim-treesitter" }
-if snipmate then
+if use_luasnip then
   dependencies[#dependencies + 1] = "L3MON4D3/LuaSnip"
 end
 
@@ -29,7 +28,7 @@ return {
   end,
   config = function()
     require('utils').schedule_notify('pkl/pcl loaded')
-    if snipmate then
+    if use_luasnip then
       require("luasnip.loaders.from_snipmate").lazy_load()
     end
 

@@ -53,7 +53,8 @@ return {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
         },
-        -- Not wanted, under either engine.
+        -- noice's own signature window, not wanted under either cmp engine.
+        -- blink keeps its own (see blink.lua), which this says nothing about.
         signature = {
           enabled = false,
         },

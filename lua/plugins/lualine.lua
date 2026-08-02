@@ -96,8 +96,8 @@ return {
             update_in_insert = false, -- Update diagnostics in insert mode.
             always_visible = false,   -- Show diagnostics even if there are none.
           },
-          -- 'showmode' messages go to the cmdline window, which is hidden at
-          -- cmdheight=0, so recording state has to come from the register.
+          -- 'noshowmode' suppresses the "recording @q" message outright, so the
+          -- state has to be read back off the register instead.
           {
             function()
               local rec, exec = vim.fn.reg_recording(), vim.fn.reg_executing()
