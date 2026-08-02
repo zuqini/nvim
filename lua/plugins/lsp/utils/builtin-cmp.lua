@@ -275,6 +275,23 @@ local complete_option = table.concat({
 ---Terminal, quickfix and plugin scratch buffers are still buftype '' at
 ---BufEnter and only settle afterwards, so decide on the next tick.
 ---@param bufnr integer
+---The single writer of 'complete'. Both BufEnter and LspAttach reach it, in
+---either order -- a warm client makes LspAttach fire before the scheduled
+---attach(), a cold one after -- so it derives the whole value from current state
+---rather than appending to whatever is there. Appending is what broke it: setup
+---added 'o', the scheduled attach() then overwrote the option wholesale, and
+---every buffer after the first had no LSP source at all.
+---@param bufnr integer
+local function set_complete(bufnr)
+  local cpt = complete_option
+  -- 'o' is the LSP omnifunc, which vim.lsp.completion.enable installs per
+  -- client, so it is only worth listing once a server can actually answer.
+  if next(vim.lsp.get_clients { bufnr = bufnr, method = 'textDocument/completion' }) then
+    cpt = cpt .. ',o'
+  end
+  vim.bo[bufnr].complete = cpt
+end
+
 local function attach(bufnr)
   vim.schedule(function()
     if not api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= '' then
@@ -284,7 +301,7 @@ local function attach(bufnr)
     -- prompt or terminal buffer does not start popping up core's own
     -- '.,w,b,u,t' menu, which is the default 'complete' we never replaced there.
     vim.bo[bufnr].autocomplete = true
-    vim.bo[bufnr].complete = complete_option
+    set_complete(bufnr)
     keymaps(bufnr)
   end)
 end
@@ -386,9 +403,7 @@ M.setup = function(opts)
   -- Together: measured, `l` gives Field/Function/Keyword/Variable beside 12
   -- snippets and 172 buffer words, and `vim.tbl_g` still finds `tbl_get`.
   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-  if not vim.bo[bufnr].complete:find(',o', 1, true) then
-    vim.bo[bufnr].complete = vim.bo[bufnr].complete .. ',o'
-  end
+  set_complete(bufnr)
 end
 
 return M
