@@ -10,8 +10,8 @@ end
 
 local sources = require 'plugins.lsp.utils.cmp-sources'
 
----LSP, then our paths, then plain words. Servers suggest bare document words
----too (kind Text); at LSP priority they bury everything else.
+---LSP, then our paths and snippets, then plain words. Servers suggest bare
+---document words too (kind Text); at LSP priority they bury everything else.
 ---@param item table complete-item
 ---@return integer
 local function source_rank(item)
@@ -30,15 +30,31 @@ local function sort_key(item)
   return lsp_item.sortText or lsp_item.label or item.word or ''
 end
 
+---table.sort calls the comparator O(n log n) times over the whole merged menu
+---on every keystroke, so both halves are derived once per item instead. Weak
+---keys: the items are thrown away with each response.
+local ordering = setmetatable({}, { __mode = 'k' })
+
+---@param item table complete-item
+---@return { rank: integer, key: string }
+local function order_of(item)
+  local cached = ordering[item]
+  if not cached then
+    cached = { rank = source_rank(item), key = sort_key(item) }
+    ordering[item] = cached
+  end
+  return cached
+end
+
 ---@param a table
 ---@param b table
 ---@return boolean
 local function compare(a, b)
-  local rank_a, rank_b = source_rank(a), source_rank(b)
-  if rank_a ~= rank_b then
-    return rank_a < rank_b
+  local order_a, order_b = order_of(a), order_of(b)
+  if order_a.rank ~= order_b.rank then
+    return order_a.rank < order_b.rank
   end
-  return sort_key(a) < sort_key(b)
+  return order_a.key < order_b.key
 end
 
 local word_chars = {}
@@ -73,15 +89,24 @@ local function pumvisible()
   return vim.fn.pumvisible() == 1
 end
 
-local function supertab()
+local function complete()
   if pumvisible() then
     feedkeys '<C-n>'
   elseif vim.snippet.active { direction = 1 } then
     vim.snippet.jump(1)
-  elseif next(vim.lsp.get_clients { bufnr = 0 }) then
-    vim.lsp.completion.get()
   else
-    feedkeys(vim.bo.omnifunc == '' and '<C-x><C-n>' or '<C-x><C-o>')
+    vim.lsp.completion.get()
+  end
+end
+
+---cmp-sources attaches to nearly every buffer, so an unconditional <Tab> here
+---would swallow every indent. Only a word under the cursor asks for a menu.
+local function supertab()
+  local before = vim.api.nvim_get_current_line():sub(1, vim.api.nvim_win_get_cursor(0)[2])
+  if pumvisible() or vim.snippet.active { direction = 1 } or vim.fn.matchstr(before, '\\k*$') ~= '' then
+    complete()
+  else
+    feedkeys '<Tab>'
   end
 end
 
@@ -112,9 +137,15 @@ local M = {}
 
 M.enable = function()
   set_pum_kind_hl()
-  vim.api.nvim_create_autocmd('ColorScheme', { callback = set_pum_kind_hl })
+  vim.api.nvim_create_autocmd('ColorScheme', {
+    group = vim.api.nvim_create_augroup('builtin-cmp', {}),
+    callback = set_pum_kind_hl,
+  })
   -- Without 'nosort', fuzzy score re-sorts everything and source_rank is lost.
   vim.o.completeopt = 'fuzzy,nosort,menuone,popup,noinsert'
+  -- Autotriggering in every buffer means ins-completion would otherwise report
+  -- 'match 1 of 9' / 'Pattern not found' on nearly every keystroke.
+  vim.opt.shortmess:append 'c'
 end
 
 ---@param opts { client: vim.lsp.Client, bufnr: integer }

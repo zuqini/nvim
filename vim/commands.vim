@@ -1,7 +1,8 @@
-command! L :Lazy
-command! LS :Lazy sync
+command! L :ZPack
+command! LS :ZPack sync
 
-command! H :Noice
+" message history: noice's own view, or the ui2 pager
+command! H execute get(g:, 'ui_engine', '') ==# 'noice' ? 'Noice' : "normal! g<"
 command! M :messages
 
 command! -bang -nargs=* SearchMulti call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>

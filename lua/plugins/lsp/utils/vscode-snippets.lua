@@ -21,6 +21,18 @@ local function read_json(path)
   return decoded and result or nil
 end
 
+-- vim.snippet.expand() raises on a body it cannot parse, and vim.lsp.completion
+-- deletes the typed word *before* expanding, so an unparseable snippet takes the
+-- word with it and leaves an error behind. ~4% of friendly-snippets' bodies do
+-- not parse, so they are dropped here rather than at accept time.
+local has_grammar, grammar = pcall(require, 'vim.lsp._snippet_grammar')
+
+---@param body string
+---@return boolean
+local function expandable(body)
+  return not has_grammar or (pcall(grammar.parse, body))
+end
+
 ---@param value string|string[]|nil
 ---@return string?
 local function joined(value)
@@ -38,9 +50,11 @@ local function parse(path)
     local body = joined(def.body)
     -- A prefix list means several triggers expand the same body.
     local prefixes = type(def.prefix) == 'table' and def.prefix or { def.prefix or name }
-    for _, prefix in ipairs(prefixes) do
-      if type(prefix) == 'string' and body then
-        snippets[#snippets + 1] = { prefix = prefix, body = body }
+    if body and expandable(body) then
+      for _, prefix in ipairs(prefixes) do
+        if type(prefix) == 'string' then
+          snippets[#snippets + 1] = { prefix = prefix, body = body }
+        end
       end
     end
   end
@@ -54,9 +68,14 @@ local function scan_manifests()
     local root = vim.fs.dirname(manifest)
     for _, entry in ipairs(vim.tbl_get(read_json(manifest) or {}, 'contributes', 'snippets') or {}) do
       local languages = type(entry.language) == 'table' and entry.language or { entry.language }
-      for _, language in ipairs(languages) do
-        by_language[language] = by_language[language] or {}
-        table.insert(by_language[language], vim.fs.normalize(root .. '/' .. entry.path))
+      -- Every plugin's package.json is read, not just snippet packs, so an
+      -- entry that declares a language but no file has to be skipped.
+      if type(entry.path) == 'string' then
+        for _, language in ipairs(languages) do
+          by_language[language] = by_language[language] or {}
+          local files = by_language[language]
+          files[#files + 1] = vim.fs.normalize(root .. '/' .. entry.path)
+        end
       end
     end
   end

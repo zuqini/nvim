@@ -8,7 +8,6 @@ local Format = vim.lsp.protocol.InsertTextFormat
 local snippets = require 'plugins.lsp.utils.vscode-snippets'
 
 local NAME = 'cmp-sources'
-local WORD_PATTERN = '[%a_][%w_]*'
 local MIN_WORD_LEN = 3
 local MAX_SCAN_LINES = 20000
 local RESCAN_INTERVAL_NS = 5e9
@@ -16,12 +15,44 @@ local MAX_BUFFER_ITEMS = 200
 local MAX_PATH_ITEMS = 250
 local MAX_SNIPPET_ITEMS = 30
 
+---@type table<string, { word: string, prefix: string }>
+local kw_patterns = {}
+
+---vim.lsp.completion filters the merged menu against the trailing 'iskeyword'
+---run, so the sources have to agree on what a word is. In css (iskeyword+=-) a
+---plain [%w_] prefix offers candidates for 'di' while the menu filters on
+---'flex-di', and every one of them gets dropped again.
+---Reads the current buffer's 'iskeyword' -- '\k' is buffer-local.
+---@return { word: string, prefix: string }
+local function patterns()
+  local iskeyword = vim.bo.iskeyword
+  local cached = kw_patterns[iskeyword]
+  if cached then
+    return cached
+  end
+
+  local extra = {}
+  for byte = 33, 126 do
+    local char = string.char(byte)
+    -- '%' turns any punctuation into a literal inside a Lua character class.
+    if not char:match '[%w_]' and vim.fn.match(char, '\\k') == 0 then
+      extra[#extra + 1] = '%' .. char
+    end
+  end
+  extra = table.concat(extra)
+
+  cached = { word = ('[%%a_%s][%%w_%s]*'):format(extra, extra), prefix = ('[%%w_%s]*$'):format(extra) }
+  kw_patterns[iskeyword] = cached
+  return cached
+end
+
 ---@param lines string[]
+---@param pattern string
 ---@return string[]
-local function words_in(lines)
+local function words_in(lines, pattern)
   local seen, words = {}, {}
   for _, line in ipairs(lines) do
-    for word in line:gmatch(WORD_PATTERN) do
+    for word in line:gmatch(pattern) do
       if #word >= MIN_WORD_LEN and not seen[word] then
         seen[word] = true
         words[#words + 1] = word
@@ -31,37 +62,56 @@ local function words_in(lines)
   return words
 end
 
----@type table<integer, { tick: integer, time: integer, words: string[] }>
+---@type table<integer, { tick: integer, time: integer, words: string[], pattern: string, scanning: boolean? }>
 local word_cache = {}
 
----Throttled: a full scan costs ~10ms on a 20k line buffer, and words typed
----since the last one are picked up by visible_words().
 ---@param bufnr integer
+---@param pattern string
 ---@return string[]
-local function buffer_words(bufnr)
-  local cached = word_cache[bufnr]
-  local tick = vim.b[bufnr].changedtick
-  local now = vim.uv.hrtime()
-  if cached and (cached.tick == tick or now - cached.time < RESCAN_INTERVAL_NS) then
-    return cached.words
+local function rescan(bufnr, pattern)
+  if not api.nvim_buf_is_valid(bufnr) then
+    word_cache[bufnr] = nil
+    return {}
   end
-
-  local words = words_in(api.nvim_buf_get_lines(bufnr, 0, MAX_SCAN_LINES, false))
-  word_cache[bufnr] = { tick = tick, time = now, words = words }
+  local words = words_in(api.nvim_buf_get_lines(bufnr, 0, MAX_SCAN_LINES, false), pattern)
+  word_cache[bufnr] = { tick = vim.b[bufnr].changedtick, time = vim.uv.hrtime(), words = words, pattern = pattern }
   return words
 end
 
+---A full scan costs ~10ms on a 20k line buffer, too much to spend on the
+---keystroke that wants the words, so a stale cache is served and refreshed on
+---the next tick. Words typed since then are picked up by visible_words().
+---@param bufnr integer
+---@param pattern string
 ---@return string[]
-local function visible_words()
+local function buffer_words(bufnr, pattern)
+  local cached = word_cache[bufnr]
+  if not cached or cached.pattern ~= pattern then
+    return rescan(bufnr, pattern)
+  end
+
+  local stale = cached.tick ~= vim.b[bufnr].changedtick
+  if stale and not cached.scanning and vim.uv.hrtime() - cached.time >= RESCAN_INTERVAL_NS then
+    cached.scanning = true
+    vim.schedule(function()
+      rescan(bufnr, pattern)
+    end)
+  end
+  return cached.words
+end
+
+---@param pattern string
+---@return string[]
+local function visible_words(pattern)
   local top, bot = vim.fn.line 'w0' - 1, vim.fn.line 'w$'
-  return words_in(api.nvim_buf_get_lines(0, top, bot, false))
+  return words_in(api.nvim_buf_get_lines(0, top, bot, false), pattern)
 end
 
 ---@return integer[]
 local function visible_buffers()
   local cur = api.nvim_get_current_buf()
   local bufs, seen = { cur }, { [cur] = true }
-  for _, win in ipairs(api.nvim_list_wins()) do
+  for _, win in ipairs(api.nvim_tabpage_list_wins(0)) do
     local buf = api.nvim_win_get_buf(win)
     if not seen[buf] and vim.bo[buf].buftype == '' then
       seen[buf] = true
@@ -94,14 +144,16 @@ local function lsp_words()
 end
 
 ---@param prefix string keyword under the cursor
----@param taken table<string, true> words already in the menu
+---@param pattern string
+---@param taken fun(): table<string, true> words already in the menu
 ---@return lsp.CompletionItem[]
-local function buffer_source(prefix, taken)
+local function buffer_source(prefix, pattern, taken)
   -- An empty prefix would dump the whole buffer into the menu.
   if prefix == '' then
     return {}
   end
 
+  local seen = taken()
   local items, added = {}, {}
   local function add(words)
     local limit = MAX_BUFFER_ITEMS - #items
@@ -111,7 +163,7 @@ local function buffer_source(prefix, taken)
     -- Filter before matchfuzzy: its limit caps the input, and the words we drop
     -- are the ones a real server already offered, i.e. the best matches.
     local candidates = vim.tbl_filter(function(word)
-      return word ~= prefix and not taken[word] and not added[word]
+      return word ~= prefix and not seen[word] and not added[word]
     end, words)
     for _, word in ipairs(vim.fn.matchfuzzy(candidates, prefix, { limit = limit })) do
       added[word] = true
@@ -119,9 +171,14 @@ local function buffer_source(prefix, taken)
     end
   end
 
-  add(visible_words())
+  add(visible_words(pattern))
   for _, buf in ipairs(visible_buffers()) do
-    add(buffer_words(buf))
+    -- Checked here too: Lua evaluates buffer_words() before add() can bail, so
+    -- a filled menu would still pay for a full scan of every other buffer.
+    if #items >= MAX_BUFFER_ITEMS then
+      break
+    end
+    add(buffer_words(buf, pattern))
   end
   return items
 end
@@ -130,17 +187,18 @@ end
 ---insertTextFormat is enough for vim.lsp.completion to expand them.
 ---@param prefix string keyword under the cursor
 ---@param bufnr integer
----@param taken table<string, true> triggers already in the menu
+---@param taken fun(): table<string, true> triggers already in the menu
 ---@return lsp.CompletionItem[]
 local function snippet_source(prefix, bufnr, taken)
   if prefix == '' then
     return {}
   end
 
+  local seen = taken()
   local by_trigger = {}
   local triggers = {}
   for _, snippet in ipairs(snippets.get(vim.bo[bufnr].filetype)) do
-    if not taken[snippet.prefix] and not by_trigger[snippet.prefix] then
+    if not seen[snippet.prefix] and not by_trigger[snippet.prefix] then
       by_trigger[snippet.prefix] = snippet
       triggers[#triggers + 1] = snippet.prefix
     end
@@ -180,12 +238,14 @@ end
 
 ---@param before string line up to the cursor
 ---@param bufnr integer
----@param taken table<string, true> entries already in the menu
+---@param taken fun(): table<string, true> entries already in the menu
 ---@return lsp.CompletionItem[]? items nil when the cursor is not inside a path
 local function path_source(before, bufnr, taken)
   local token = before:match '[%w%._%-%+@~$/]*$'
   local dir = token:match '^(.*/)'
-  if not dir then
+  -- Nothing but slashes ahead of the last one is a comment marker ('//'), a
+  -- division ('a /') or the scheme of a url, not a path worth listing '/' for.
+  if not dir or not dir:sub(1, -2):match '[^/]' then
     return nil
   end
 
@@ -199,10 +259,18 @@ local function path_source(before, bufnr, taken)
   -- only 'lua' is replaceable; the rest is ours to filter on and trim off.
   -- Must be the same run vim.lsp.completion computes, or the insert is offset.
   local segment = token:sub(#dir + 1)
-  local typed = segment:sub(1, math.max(#segment - #vim.fn.matchstr(before, '\\k*$'), 0))
+  local keyword = vim.fn.matchstr(before, '\\k*$')
+  -- Filetypes with '/' in 'iskeyword' (clojure, dune) leave that run reaching
+  -- back past the separator, so there is nothing here we can anchor to.
+  if #keyword > #segment then
+    return nil
+  end
+
+  local typed = segment:sub(1, #segment - #keyword)
   local wanted = segment:lower()
   local hidden = vim.startswith(segment, '.')
 
+  local seen = taken()
   local items = {}
   while #items < MAX_PATH_ITEMS do
     local name, type = vim.uv.fs_scandir_next(scanner)
@@ -218,9 +286,12 @@ local function path_source(before, bufnr, taken)
     if
       vim.startswith(name:lower(), wanted)
       and vim.startswith(name, typed)
+      -- Nothing left to insert: complete() falls back to the label and would
+      -- duplicate what the buffer already holds.
+      and #label > #typed
       and (hidden or not vim.startswith(name, '.'))
-      and not taken[label]
-      and not taken[name]
+      and not seen[label]
+      and not seen[name]
     then
       items[#items + 1] = {
         label = label,
@@ -238,7 +309,13 @@ local function completion_items()
   local bufnr = api.nvim_get_current_buf()
   local before = api.nvim_get_current_line():sub(1, api.nvim_win_get_cursor(0)[2])
 
-  local taken = lsp_words()
+  -- Deferred: complete_info() marshals every item in the menu, thousands of
+  -- them on a big LSP response, and most requests bail before needing it.
+  local words
+  local function taken()
+    words = words or lsp_words()
+    return words
+  end
 
   -- Inside a path, the other sources are just noise, even if nothing is left
   -- to offer.
@@ -247,8 +324,9 @@ local function completion_items()
     return paths
   end
 
-  local prefix = before:match '[%w_]*$'
-  return vim.list_extend(snippet_source(prefix, bufnr, taken), buffer_source(prefix, taken))
+  local pattern = patterns()
+  local prefix = before:match(pattern.prefix)
+  return vim.list_extend(snippet_source(prefix, bufnr, taken), buffer_source(prefix, pattern.word, taken))
 end
 
 local methods = {

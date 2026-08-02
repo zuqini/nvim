@@ -28,13 +28,13 @@ ui2.enable({
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('ui2-config', {}),
   pattern = { 'cmd', 'msg', 'pager', 'dialog' },
   desc = 'Keep the ui2 windows opaque, the global winblend is 10',
-  callback = function(ev)
-    local win = vim.fn.bufwinid(ev.buf)
-    if win ~= -1 then
-      vim.wo[win].winblend = 0
-    end
+  callback = function()
+    -- ui2 fires this inside the window it just built, and bufwinid() would only
+    -- find it while that window is in the current tabpage.
+    vim.wo[vim.api.nvim_get_current_win()].winblend = 0
   end,
 })
 

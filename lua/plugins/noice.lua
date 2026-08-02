@@ -52,11 +52,11 @@ return {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
         },
-        -- signature handled by blink.cmp
+        -- blink brings its own signature window; the builtin engine has none,
+        -- so noice is the only thing offering one.
         signature = {
-          enabled = false,
+          enabled = vim.g.cmp_engine ~= 'blink',
         },
       },
       -- you can enable a preset for easier configuration
