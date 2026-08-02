@@ -1,10 +1,11 @@
--- VSCode-format snippet packages on the runtimepath -- rafamadriz/friendly-snippets
--- and anything shaped like it. A package.json says which languages each file
--- covers, and the bodies are already LSP snippet syntax, so they need no
--- translation to go straight into the completion menu.
+-- Snippet packages on the runtimepath, in both formats plugins ship:
+-- VSCode (rafamadriz/friendly-snippets and anything shaped like it), where a
+-- package.json says which languages each file covers, and snipmate
+-- (apple/pkl-neovim), where the filename is the filetype. Either way the bodies
+-- are already LSP snippet syntax and need no translation to reach the menu.
 --
--- Discovery matches what luasnip's from_vscode loader does, so the same plugins
--- are picked up under either completion engine.
+-- Discovery matches luasnip's from_vscode and from_snipmate loaders between
+-- them, so the same plugins are picked up under either completion engine.
 
 ---@class VscodeSnippet
 ---@field prefix string
@@ -119,7 +120,9 @@ local function editable_final_tabstop(body)
   for index in body:gmatch '%$(%d+)' do
     last = math.max(last, tonumber(index) or 0)
   end
-  for index in body:gmatch '%${(%d+)[:|}]' do
+  -- '/' catches ${N/regex/format/}, the one form that names a tabstop without
+  -- ever writing it plainly.
+  for index in body:gmatch '%${(%d+)[:|}/]' do
     last = math.max(last, tonumber(index) or 0)
   end
 
@@ -140,13 +143,18 @@ end
 local function parse_vscode(path)
   local snippets = {}
   for name, def in pairs(read_json(path) or {}) do
-    local body = joined(def.body)
-    -- A prefix list means several triggers expand the same body.
-    local prefixes = type(def.prefix) == 'table' and def.prefix or { def.prefix or name }
-    if body then
-      for _, prefix in ipairs(prefixes) do
-        if type(prefix) == 'string' then
-          snippets[#snippets + 1] = { prefix = prefix, body = body }
+    -- Every value is someone else's JSON: a non-table entry would raise from
+    -- inside the completion handler, on every keystroke, since the failure
+    -- happens before the filetype is cached.
+    if type(def) == 'table' then
+      local body = joined(def.body)
+      -- A prefix list means several triggers expand the same body.
+      local prefixes = type(def.prefix) == 'table' and def.prefix or { def.prefix or name }
+      if body then
+        for _, prefix in ipairs(prefixes) do
+          if type(prefix) == 'string' then
+            snippets[#snippets + 1] = { prefix = prefix, body = body }
+          end
         end
       end
     end
@@ -154,13 +162,15 @@ local function parse_vscode(path)
   return snippets
 end
 
----snipmate escapes with a backslash, but the LSP grammar only knows \$, \} and
----\\, so every other one would reach the buffer with its backslash still
----attached -- pkl's `thr` inserting `throw \"message\"`.
+---snipmate escapes a quote or a backtick that the LSP grammar has no meaning
+---for, so `thr` would otherwise insert `throw \"message\"` verbatim. Only those
+---two: the grammar passes any other stray backslash straight through (`\d+`
+---parses to `\d+`), so a wider rule would eat the backslash out of a regex, a
+---LaTeX macro or a Windows path.
 ---@param body string
 ---@return string
 local function unescape(body)
-  return (body:gsub('\\([^$}\\])', '%1'))
+  return (body:gsub('\\(["`])', '%1'))
 end
 
 ---snipmate: '#' comments, `snippet <trigger> [description]` headers, and a body
@@ -174,12 +184,12 @@ local function parse_snipmate(path)
     return {}
   end
 
-  local snippets, trigger, body = {}, nil, {}
+  local snippets, trigger, body, indent, blanks = {}, nil, {}, nil, 0
   local function flush()
     if trigger and #body > 0 then
       snippets[#snippets + 1] = { prefix = trigger, body = unescape(table.concat(body, '\n')) }
     end
-    trigger, body = nil, {}
+    trigger, body, indent, blanks = nil, {}, nil, 0
   end
 
   for _, line in ipairs(lines) do
@@ -187,11 +197,21 @@ local function parse_snipmate(path)
     if next_trigger then
       flush()
       trigger = next_trigger
-    elseif trigger and vim.startswith(line, '\t') then
-      body[#body + 1] = line:sub(2)
-    elseif not line:match '^%s*$' then
-      -- A comment or anything else unindented ends the body; blank lines do not,
-      -- since they are just spacing between entries.
+    elseif trigger and line:match '^[\t ]' then
+      -- The first body line sets the indent the rest is measured against, so a
+      -- space-indented file works and deeper nesting keeps its own indent.
+      indent = indent or line:match '^[\t ]+'
+      -- Held back until a body line follows: blank lines *between* entries are
+      -- just spacing, blank lines inside one are part of the snippet.
+      for _ = 1, blanks do
+        body[#body + 1] = ''
+      end
+      blanks = 0
+      body[#body + 1] = vim.startswith(line, indent) and line:sub(#indent + 1) or line
+    elseif line:match '^%s*$' then
+      blanks = blanks + 1
+    else
+      -- A comment or anything else unindented ends the body.
       flush()
     end
   end
@@ -224,13 +244,17 @@ local function scan_manifests()
 
   for _, manifest in ipairs(vim.api.nvim_get_runtime_file('package.json', true)) do
     local root = vim.fs.dirname(manifest)
-    for _, entry in ipairs(vim.tbl_get(read_json(manifest) or {}, 'contributes', 'snippets') or {}) do
-      local languages = type(entry.language) == 'table' and entry.language or { entry.language }
-      -- Every plugin's package.json is read, not just snippet packs, so an
-      -- entry that declares a language but no file has to be skipped.
-      if type(entry.path) == 'string' then
+    local declared = vim.tbl_get(read_json(manifest) or {}, 'contributes', 'snippets')
+    -- Every plugin's package.json is read, not just snippet packs, so nothing
+    -- about the shape can be assumed: `"snippets": "x"` would raise out of
+    -- ipairs() and take the completion request with it.
+    for _, entry in ipairs(vim.islist(declared) and declared or {}) do
+      if type(entry) == 'table' and type(entry.path) == 'string' then
+        local languages = type(entry.language) == 'table' and entry.language or { entry.language }
         for _, language in ipairs(languages) do
-          add(language, root .. '/' .. entry.path)
+          if type(language) == 'string' then
+            add(language, root .. '/' .. entry.path)
+          end
         end
       end
     end
