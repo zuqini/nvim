@@ -97,13 +97,15 @@ end
 
 ---nvim-autopairs owns <cr> globally; our buffer-local map would otherwise
 ---shadow it everywhere cmp-sources attaches, which is nearly every buffer.
+---Returns real termcodes, since autopairs_cr() does -- feeding those through
+---replace_keycodes a second time inserts them as literal text.
 ---@return string
 local function enter()
   if pumvisible() then
-    return '<C-y>'
+    return vim.keycode '<C-y>'
   end
   local ok, autopairs = pcall(require, 'nvim-autopairs')
-  return ok and autopairs.autopairs_cr() or '<cr>'
+  return ok and autopairs.autopairs_cr() or vim.keycode '<cr>'
 end
 
 local M = {}
@@ -130,7 +132,7 @@ M.setup = function(opts)
     vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('error', key_opts or {}, { buffer = bufnr }))
   end
 
-  keymap('i', '<cr>', enter, { expr = true })
+  keymap('i', '<cr>', enter, { expr = true, replace_keycodes = false })
   keymap('i', '<esc>', function()
     return pumvisible() and '<C-e>' or '<esc>'
   end, { expr = true })

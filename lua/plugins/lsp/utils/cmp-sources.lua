@@ -1,8 +1,11 @@
--- Buffer word and path completion, served as an in-process LSP server (see
--- |lsp-server|) so vim.lsp.completion merges it into the same menu as the real
--- servers attached to the buffer.
+-- Snippet, buffer word and path completion, served as an in-process LSP server
+-- (see |lsp-server|) so vim.lsp.completion merges it into the same menu as the
+-- real servers attached to the buffer.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
+local Format = vim.lsp.protocol.InsertTextFormat
+
+local snippets = require 'plugins.lsp.utils.vscode-snippets'
 
 local NAME = 'cmp-sources'
 local WORD_PATTERN = '[%a_][%w_]*'
@@ -11,6 +14,7 @@ local MAX_SCAN_LINES = 20000
 local RESCAN_INTERVAL_NS = 5e9
 local MAX_BUFFER_ITEMS = 200
 local MAX_PATH_ITEMS = 250
+local MAX_SNIPPET_ITEMS = 30
 
 ---@param lines string[]
 ---@return string[]
@@ -122,6 +126,42 @@ local function buffer_source(prefix, taken)
   return items
 end
 
+---friendly-snippets and friends. The bodies are already LSP snippet syntax, so
+---insertTextFormat is enough for vim.lsp.completion to expand them.
+---@param prefix string keyword under the cursor
+---@param bufnr integer
+---@param taken table<string, true> triggers already in the menu
+---@return lsp.CompletionItem[]
+local function snippet_source(prefix, bufnr, taken)
+  if prefix == '' then
+    return {}
+  end
+
+  local by_trigger = {}
+  local triggers = {}
+  for _, snippet in ipairs(snippets.get(vim.bo[bufnr].filetype)) do
+    if not taken[snippet.prefix] and not by_trigger[snippet.prefix] then
+      by_trigger[snippet.prefix] = snippet
+      triggers[#triggers + 1] = snippet.prefix
+    end
+  end
+
+  local items = {}
+  for _, trigger in ipairs(vim.fn.matchfuzzy(triggers, prefix, { limit = MAX_SNIPPET_ITEMS })) do
+    local snippet = by_trigger[trigger]
+    -- No detail/documentation on purpose: without them the popup previews the
+    -- expanded snippet, which beats friendly-snippets' terse descriptions.
+    items[#items + 1] = {
+      label = trigger,
+      kind = Kind.Snippet,
+      insertText = snippet.body,
+      insertTextFormat = Format.Snippet,
+      sortText = ('%04d'):format(#items),
+    }
+  end
+  return items
+end
+
 ---Relative tokens are anchored to the buffer's own directory, cwd otherwise.
 ---@param dir string trailing directory part of the token, always ends in '/'
 ---@param bufnr integer
@@ -200,8 +240,15 @@ local function completion_items()
 
   local taken = lsp_words()
 
-  -- Inside a path, buffer words are just noise, even if nothing is left to offer.
-  return path_source(before, bufnr, taken) or buffer_source(before:match '[%w_]*$', taken)
+  -- Inside a path, the other sources are just noise, even if nothing is left
+  -- to offer.
+  local paths = path_source(before, bufnr, taken)
+  if paths then
+    return paths
+  end
+
+  local prefix = before:match '[%w_]*$'
+  return vim.list_extend(snippet_source(prefix, bufnr, taken), buffer_source(prefix, taken))
 end
 
 local methods = {

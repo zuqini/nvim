@@ -8,6 +8,10 @@
       "rev": "f95674d9a4251ac02f452d5f1861e4422f4652c7",
       "src": "https://github.com/pechorin/any-jump.vim"
     },
+    "blink.cmp": {
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/saghen/blink.cmp"
+    },
     "cql-vim": {
       "rev": "6f61df5a633c3a91edea7bcb5d5772648df19d1a",
       "src": "https://github.com/elubow/cql-vim"
@@ -15,6 +19,10 @@
     "flash.nvim": {
       "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
       "src": "https://github.com/folke/flash.nvim"
+    },
+    "friendly-snippets": {
+      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitlinker.nvim": {
       "rev": "a1b74070bbd5e50128190c85b09f1431ea5fbd83",
