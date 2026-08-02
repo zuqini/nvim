@@ -3,9 +3,8 @@
 -- real servers attached to the buffer.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
-local Format = vim.lsp.protocol.InsertTextFormat
 
-local snippets = require 'plugins.lsp.utils.vscode-snippets'
+local zsnip = require 'zsnip'
 
 local NAME = 'cmp-sources'
 local MIN_WORD_LEN = 3
@@ -203,8 +202,9 @@ local function buffer_source(prefix, taken)
   return items
 end
 
----friendly-snippets and friends. The bodies are already LSP snippet syntax, so
----insertTextFormat is enough for vim.lsp.completion to expand them.
+---friendly-snippets and friends, discovered and read by zsnip. The bodies are
+---already LSP snippet syntax, so insertTextFormat is enough for
+---vim.lsp.completion to expand them.
 ---@param prefix string keyword under the cursor
 ---@param bufnr integer
 ---@param taken fun(): table<string, true> triggers already in the menu
@@ -215,29 +215,19 @@ local function snippet_source(prefix, bufnr, taken)
   end
 
   local seen = taken()
-  local by_trigger = {}
-  local triggers = {}
-  for _, snippet in ipairs(snippets.get(vim.bo[bufnr].filetype)) do
-    if not seen[snippet.prefix] and not by_trigger[snippet.prefix] then
-      by_trigger[snippet.prefix] = snippet
-      triggers[#triggers + 1] = snippet.prefix
-    end
-  end
-
-  local items = {}
-  for _, trigger in ipairs(vim.fn.matchfuzzy(triggers, prefix, { limit = MAX_SNIPPET_ITEMS })) do
-    local snippet = by_trigger[trigger]
+  return zsnip.completion_items({
+    prefix = prefix,
+    bufnr = bufnr,
+    limit = MAX_SNIPPET_ITEMS,
     -- No detail/documentation on purpose: without them the popup previews the
     -- expanded snippet, which beats friendly-snippets' terse descriptions.
-    items[#items + 1] = {
-      label = trigger,
-      kind = Kind.Snippet,
-      insertText = snippets.resolve(snippet.body),
-      insertTextFormat = Format.Snippet,
-      sortText = ('%04d'):format(#items),
-    }
-  end
-  return items
+    documentation = false,
+    -- Filtered before the limit is spent, so a trigger a real server already
+    -- offered does not cost a slot.
+    filter = function(snippet)
+      return not seen[snippet.prefix]
+    end,
+  })
 end
 
 ---Relative tokens are anchored to the buffer's own directory, cwd otherwise.

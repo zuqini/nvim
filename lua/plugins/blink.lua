@@ -4,7 +4,7 @@ return {
     enabled = vim.g.cmp_engine == 'blink',
     cond = not vim.g.vscode,
     dependencies = {
-      'L3MON4D3/LuaSnip',
+      'zuqini/ZSnip.nvim',
       'rafamadriz/friendly-snippets',
     },
 
@@ -15,17 +15,22 @@ return {
       ---@module 'blink.cmp'
       ---@type blink.cmp.Config
       local opts = {
-        snippets = { preset = 'luasnip' },
+        -- 'default' is blink's own vim.snippet wrapper, which is the engine
+        -- zsnip loads for. blink's built-in `snippets` source is replaced
+        -- rather than joined: it reads the same VSCode packs, and none of the
+        -- snipmate ones.
+        snippets = { preset = 'default' },
         sources = {
           -- add lazydev to your completion providers
-          -- default = { "lsp", "path", "snippets", "buffer" },
+          -- default = { "lsp", "path", "zsnip", "buffer" },
           -- per_filetype = {
           --   lua = { inherit_defaults = true, 'lazydev' }
           -- },
-          default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+          default = { "lsp", "path", "zsnip", "buffer", "lazydev" },
           providers = {
             -- dont show LuaLS require statements when lazydev has items
             lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
+            zsnip = { name = "zsnip", module = "zsnip.blink" },
           },
         },
         -- 'default' for mappings similar to built-in completion
@@ -98,7 +103,6 @@ return {
           }
         }
       }
-      require("luasnip.loaders.from_vscode").lazy_load()
       require('blink.cmp').setup(opts)
     end
   },

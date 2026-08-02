@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "ZSnip.nvim": {
+      "rev": "ae5a7fe5a1bfb5e82453b6faa3ea678c2a7e2617",
+      "src": "https://github.com/zuqini/ZSnip.nvim"
+    },
     "any-jump.vim": {
       "rev": "f95674d9a4251ac02f452d5f1861e4422f4652c7",
       "src": "https://github.com/pechorin/any-jump.vim"
