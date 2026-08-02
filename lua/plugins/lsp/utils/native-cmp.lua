@@ -11,18 +11,18 @@
 -- come down to. Core also dedups identical words across sources, so there is
 -- nothing here like lsp_words().
 --
--- What it costs: real servers no longer share the menu -- vim.lsp.completion
--- drives vim.fn.complete() itself and cannot be a 'complete' source (its
--- omnifunc returns -2 for both findstart values), so LSP items race on a
--- separate track. Measured, and the finding that decides this engine's fate:
--- the two do not interleave, they cancel. Typing `vim.` in a lua buffer hands
--- the menu to the server (103 items); the very next character empties it, and
--- 'autocomplete' does not re-arm for the rest of the word -- not on further
--- typing, not on <C-n>. Dropping the word characters from triggerCharacters
--- does not change it, so it is not autotrigger frequency. With
--- `autotrigger = false` in M.setup the same keystrokes behave perfectly and
--- there are no LSP items at all. That is the whole trade, and it is one word
--- wide: server items, or a menu that survives the next keystroke.
+-- What it costs: real servers do not share this menu. vim.lsp.completion drives
+-- vim.fn.complete() itself, and set_completion() in insexpand.c opens by tearing
+-- down whatever completion is in flight -- ins_compl_prep(), ins_compl_clear(),
+-- ins_compl_free(), then ctrl_x_mode = CTRL_X_EVAL over its own list. So the two
+-- menus alternate rather than merge: whoever called last owns the pum, and while
+-- an LSP completion is active the 'complete' sources are not consulted at all.
+-- Typing `vim.` gives the server's 103 items with none of ours among them.
+--
+-- Alternating is all it is, though. They coexist fine -- `vim.` then `l` then
+-- `s` filters 103 down to 17 and keeps going. An earlier version of this file
+-- reported that as a hard break where the menu died on the next keystroke; that
+-- was the missing 'noinsert' below, not the substrate.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
 
@@ -302,7 +302,15 @@ M.enable = function()
   -- in 'complete' is a time-slicing priority, not the ranking. 'preinsert' is
   -- the other way to defeat the forced 'noselect', but it requires 'fuzzy' to
   -- be unset, and our candidates are fuzzy-matched before core ever sees them.
-  vim.o.completeopt = 'fuzzy,menuone,popup,preselect'
+  --
+  -- 'noinsert' is the exception to that list, and leaving it out cost a day.
+  -- It is inert for the 'autocomplete' pipeline, but vim.lsp.completion does
+  -- not go through that pipeline -- it calls vim.fn.complete() itself, and that
+  -- path still honours it. Without it, 'preselect' selects the server's first
+  -- item and complete() *inserts* it: `vim.` becomes `vim.F`, every later
+  -- keystroke appends to the wrong word, and the menu is empty from then on.
+  -- Reads exactly like a substrate-level race between the two menus. It isn't.
+  vim.o.completeopt = 'fuzzy,menuone,popup,noinsert,preselect'
   -- Autotriggering in every buffer means ins-completion would otherwise report
   -- 'match 1 of 9' / 'Pattern not found' on nearly every keystroke.
   vim.opt.shortmess:append 'c'
@@ -337,11 +345,10 @@ end
 
 ---Real servers only, and unchanged from what the builtin engine asks for: they
 ---keep driving vim.fn.complete() themselves, on their own track, next to the
----menu 'autocomplete' is building. They cannot share a screen -- see the header
----for what that looks like -- and `autotrigger = false` is the switch that
----trades every server item for a menu that survives typing. Left on, because
----the A/B needs to show what the substrate actually does, not what it does
----after being talked out of it.
+---menu 'autocomplete' is building. See the header for why the two alternate
+---instead of merging, and ~/workspace/nvim-autocomplete/TASK.md for the upstream
+---change that would fix it -- a blocking 'complete' source in vim.lsp.completion,
+---which is prototyped and measured there and needs no C change.
 ---@param opts { client: vim.lsp.Client, bufnr: integer }
 M.setup = function(opts)
   local client, bufnr = opts.client, opts.bufnr
