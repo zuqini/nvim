@@ -358,7 +358,15 @@ M.setup = function(opts)
   end
 
   provider.triggerCharacters = trigger_chars(client)
-  vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+  -- autotrigger = false, and 'o' appended to 'complete' below, is the supported
+  -- way to combine LSP with other sources -- neovim#35257, fixed by PR #35346,
+  -- which seeds trigger()'s match list from complete_info() so each response
+  -- rebuilds the union instead of replacing it. autotrigger = true is the other
+  -- path: vim.fn.complete() on its own track, tearing down the cpt cycle.
+  vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
+  if not vim.bo[bufnr].complete:find(',o^', 1, true) then
+    vim.bo[bufnr].complete = vim.bo[bufnr].complete .. ',o^100'
+  end
 end
 
 return M
