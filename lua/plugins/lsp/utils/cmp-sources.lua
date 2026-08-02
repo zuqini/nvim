@@ -67,6 +67,13 @@ local function visible_buffers()
   return bufs
 end
 
+---@param item table complete-item
+---@return vim.lsp.Client?
+local function client_of(item)
+  local client_id = vim.tbl_get(item, 'user_data', 'nvim', 'lsp', 'client_id')
+  return client_id and vim.lsp.get_client_by_id(client_id) or nil
+end
+
 ---Words the real servers offered for the menu on screen. The merge has no hook
 ---to drop duplicates, so the sources skip them instead; the menu lags a
 ---keystroke behind, so a fresh one can still show a word twice.
@@ -74,8 +81,7 @@ end
 local function lsp_words()
   local words = {}
   for _, item in ipairs(vim.fn.complete_info({ 'items' }).items) do
-    local client_id = vim.tbl_get(item, 'user_data', 'nvim', 'lsp', 'client_id')
-    local client = client_id and vim.lsp.get_client_by_id(client_id)
+    local client = client_of(item)
     if client and client.name ~= NAME then
       words[item.word] = true
     end
@@ -92,17 +98,20 @@ local function buffer_source(prefix, taken)
     return {}
   end
 
-  local items = {}
+  local items, added = {}, {}
   local function add(words)
     local limit = MAX_BUFFER_ITEMS - #items
     if limit <= 0 then
       return
     end
-    for _, word in ipairs(vim.fn.matchfuzzy(words, prefix, { limit = limit })) do
-      if word ~= prefix and not taken[word] then
-        taken[word] = true
-        items[#items + 1] = { label = word, kind = Kind.Text, sortText = ('%04d'):format(#items) }
-      end
+    -- Filter before matchfuzzy: its limit caps the input, and the words we drop
+    -- are the ones a real server already offered, i.e. the best matches.
+    local candidates = vim.tbl_filter(function(word)
+      return word ~= prefix and not taken[word] and not added[word]
+    end, words)
+    for _, word in ipairs(vim.fn.matchfuzzy(candidates, prefix, { limit = limit })) do
+      added[word] = true
+      items[#items + 1] = { label = word, kind = Kind.Text, sortText = ('%04d'):format(#items) }
     end
   end
 
@@ -146,10 +155,11 @@ local function path_source(before, bufnr, taken)
     return nil
   end
 
-  -- Completion replaces from the last keyword character, so in './lualine.lua'
+  -- Completion replaces the trailing 'iskeyword' run, so in './lualine.lua'
   -- only 'lua' is replaceable; the rest is ours to filter on and trim off.
+  -- Must be the same run vim.lsp.completion computes, or the insert is offset.
   local segment = token:sub(#dir + 1)
-  local typed = segment:sub(1, #segment - #segment:match '[%w_]*$')
+  local typed = segment:sub(1, math.max(#segment - #vim.fn.matchstr(before, '\\k*$'), 0))
   local wanted = segment:lower()
   local hidden = vim.startswith(segment, '.')
 
@@ -161,9 +171,13 @@ local function path_source(before, bufnr, taken)
     end
     local is_dir = type == 'directory'
     local label = is_dir and name .. '/' or name
-    -- A server offering the same entry may not have kept the slash.
+    -- Only the replaceable run can be case-corrected; `typed` stays in the
+    -- buffer verbatim, so an entry it doesn't literally prefix would insert a
+    -- path that does not exist. A server offering the same entry may not have
+    -- kept the slash.
     if
       vim.startswith(name:lower(), wanted)
+      and vim.startswith(name, typed)
       and (hidden or not vim.startswith(name, '.'))
       and not taken[label]
       and not taken[name]
@@ -211,37 +225,69 @@ local methods = {
 ---@return vim.lsp.rpc.Client
 local function cmd(dispatchers)
   local closing, request_id = false, 0
+
+  ---Both a graceful 'exit' and a forced stop land here; without on_exit the
+  ---client is never removed and the next BufEnter starts a second one.
+  local function exit()
+    if not closing then
+      closing = true
+      dispatchers.on_exit(0, 15)
+    end
+  end
+
   return {
-    request = function(method, params, callback)
+    ---notify_reply_callback is what clears the request from client.requests;
+    ---skipping it leaks a pending entry per keystroke.
+    request = function(method, params, callback, notify_reply_callback)
+      request_id = request_id + 1
+      local id = request_id
+      local function reply(err, result)
+        callback(err, result, id)
+        if notify_reply_callback then
+          notify_reply_callback(id)
+        end
+      end
+
       local impl = methods[method]
       if impl then
-        impl(params, callback)
+        impl(params, reply)
+      else
+        reply({ code = -32601, message = 'Method not found: ' .. method }, nil)
       end
-      request_id = request_id + 1
-      return true, request_id
+      return true, id
     end,
     notify = function(method)
       if method == 'exit' then
-        dispatchers.on_exit(0, 15)
+        exit()
       end
-      return false
+      -- False means "shut down" to the caller, which suppresses LspNotify.
+      return not closing
     end,
     is_closing = function()
       return closing
     end,
-    terminate = function()
-      closing = true
-    end,
+    terminate = exit,
   }
 end
 
 local M = { name = NAME }
 
+---@param item table complete-item
+---@return boolean
+M.owns = function(item)
+  local client = client_of(item)
+  return client ~= nil and client.name == NAME
+end
+
+---Terminal, quickfix and plugin scratch buffers are still buftype '' at
+---BufEnter and only settle afterwards, so decide on the next tick.
 ---@param bufnr integer
 local function attach(bufnr)
-  if vim.bo[bufnr].buftype == '' then
-    vim.lsp.start({ name = NAME, cmd = cmd }, { bufnr = bufnr })
-  end
+  vim.schedule(function()
+    if api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buftype == '' then
+      vim.lsp.start({ name = NAME, cmd = cmd }, { bufnr = bufnr })
+    end
+  end)
 end
 
 M.enable = function()

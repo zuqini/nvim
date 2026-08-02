@@ -3,10 +3,6 @@ return {
   cond = not vim.g.vscode,
   config = function()
     -- vim.lsp.set_log_level("debug")
-    if vim.g.cmp_engine == 'builtin' then
-      require('plugins.lsp.utils.cmp-sources').enable()
-    end
-
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -75,6 +71,13 @@ return {
         end
       end,
     })
+
+    -- After LspAttach is registered: vim.lsp.start fires it synchronously for
+    -- the in-process server, so buffers attached here would otherwise be missed.
+    if vim.g.cmp_engine == 'builtin' then
+      require('plugins.lsp.utils.builtin-cmp').enable()
+      require('plugins.lsp.utils.cmp-sources').enable()
+    end
 
     vim.api.nvim_create_autocmd('LspDetach', {
       callback = function(args)

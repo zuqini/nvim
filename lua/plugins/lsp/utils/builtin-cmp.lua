@@ -8,12 +8,6 @@ local function set_pum_kind_hl()
   vim.api.nvim_set_hl(0, 'PmenuKindSel', { fg = special.fg, bg = pmenu_sel.bg or pmenu.bg })
 end
 
-set_pum_kind_hl()
-vim.api.nvim_create_autocmd('ColorScheme', { callback = set_pum_kind_hl })
-
--- Without 'nosort', fuzzy score re-sorts everything and source_rank is lost.
-vim.o.completeopt = 'fuzzy,nosort,menuone,popup,noinsert'
-
 local sources = require 'plugins.lsp.utils.cmp-sources'
 
 ---LSP, then our paths, then plain words. Servers suggest bare document words
@@ -24,9 +18,7 @@ local function source_rank(item)
   if item.kind == 'Text' then
     return 3
   end
-  local client_id = vim.tbl_get(item, 'user_data', 'nvim', 'lsp', 'client_id')
-  local client = client_id and vim.lsp.get_client_by_id(client_id)
-  return client and client.name == sources.name and 2 or 1
+  return sources.owns(item) and 2 or 1
 end
 
 ---table.sort is unstable: without a real tiebreaker the server's own ranking
@@ -103,25 +95,42 @@ local function shifttab()
   end
 end
 
+---nvim-autopairs owns <cr> globally; our buffer-local map would otherwise
+---shadow it everywhere cmp-sources attaches, which is nearly every buffer.
+---@return string
+local function enter()
+  if pumvisible() then
+    return '<C-y>'
+  end
+  local ok, autopairs = pcall(require, 'nvim-autopairs')
+  return ok and autopairs.autopairs_cr() or '<cr>'
+end
+
 local M = {}
+
+M.enable = function()
+  set_pum_kind_hl()
+  vim.api.nvim_create_autocmd('ColorScheme', { callback = set_pum_kind_hl })
+  -- Without 'nosort', fuzzy score re-sorts everything and source_rank is lost.
+  vim.o.completeopt = 'fuzzy,nosort,menuone,popup,noinsert'
+end
 
 ---@param opts { client: vim.lsp.Client, bufnr: integer }
 M.setup = function(opts)
   local client, bufnr = opts.client, opts.bufnr
-  if not client:supports_method('textDocument/completion') then
+  local provider = client.server_capabilities.completionProvider
+  if not provider or not client:supports_method('textDocument/completion') then
     return
   end
 
-  client.server_capabilities.completionProvider.triggerCharacters = trigger_chars(client)
+  provider.triggerCharacters = trigger_chars(client)
   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true, cmp = compare })
 
   local function keymap(mode, lhs, rhs, key_opts)
     vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('error', key_opts or {}, { buffer = bufnr }))
   end
 
-  keymap('i', '<cr>', function()
-    return pumvisible() and '<C-y>' or '<cr>'
-  end, { expr = true })
+  keymap('i', '<cr>', enter, { expr = true })
   keymap('i', '<esc>', function()
     return pumvisible() and '<C-e>' or '<esc>'
   end, { expr = true })
@@ -129,8 +138,6 @@ M.setup = function(opts)
   keymap('i', '<C-n>', supertab, { desc = 'Trigger/select next completion' })
   keymap({ 'i', 's' }, '<Tab>', supertab)
   keymap({ 'i', 's' }, '<S-Tab>', shifttab)
-
-  keymap('i', '<C-u>', '<C-x><C-n>', { desc = 'Buffer completions' })
 
   -- Inside a snippet, backspace removes the placeholder.
   keymap('s', '<BS>', '<C-o>s')
