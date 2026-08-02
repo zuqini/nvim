@@ -132,6 +132,12 @@ local function shifttab()
   end
 end
 
+---An open menu always has item 1 highlighted, since 'completeopt' carries
+---'noinsert' but not 'noselect', so <cr> accepts a completion rather than
+---opening a line -- deliberate, and what blink did here too by binding <CR> to
+---select_and_accept, which takes item 1 when nothing is selected. <esc> below
+---is the way out when the newline was what you wanted.
+---
 ---nvim-autopairs owns <cr> globally; our buffer-local map would otherwise
 ---shadow it everywhere cmp-sources attaches, which is nearly every buffer.
 ---Returns real termcodes, since autopairs_cr() does -- feeding those through
@@ -176,6 +182,10 @@ M.setup = function(opts)
   end
 
   keymap('i', '<cr>', enter, { expr = true, replace_keycodes = false })
+  -- <C-e> cancels the menu and *stays* in insert mode, so this dismisses a
+  -- suggestion without interrupting typing -- press it before <cr> when the
+  -- highlighted item is not what you meant. The cost is that <esc> no longer
+  -- leaves insert mode while a menu is open; that takes a second one.
   keymap('i', '<esc>', function()
     return pumvisible() and '<C-e>' or '<esc>'
   end, { expr = true })
