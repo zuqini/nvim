@@ -137,14 +137,13 @@ end
 
 ---@param path string
 ---@return VscodeSnippet[]
-local function parse(path)
+local function parse_vscode(path)
   local snippets = {}
   for name, def in pairs(read_json(path) or {}) do
     local body = joined(def.body)
     -- A prefix list means several triggers expand the same body.
-    body = body and editable_final_tabstop(body)
     local prefixes = type(def.prefix) == 'table' and def.prefix or { def.prefix or name }
-    if body and expandable(body) then
+    if body then
       for _, prefix in ipairs(prefixes) do
         if type(prefix) == 'string' then
           snippets[#snippets + 1] = { prefix = prefix, body = body }
@@ -155,9 +154,74 @@ local function parse(path)
   return snippets
 end
 
+---snipmate escapes with a backslash, but the LSP grammar only knows \$, \} and
+---\\, so every other one would reach the buffer with its backslash still
+---attached -- pkl's `thr` inserting `throw \"message\"`.
+---@param body string
+---@return string
+local function unescape(body)
+  return (body:gsub('\\([^$}\\])', '%1'))
+end
+
+---snipmate: '#' comments, `snippet <trigger> [description]` headers, and a body
+---indented one tab per line. The bodies are already LSP snippet syntax, so only
+---the container needs reading.
+---@param path string
+---@return VscodeSnippet[]
+local function parse_snipmate(path)
+  local ok, lines = pcall(vim.fn.readfile, path)
+  if not ok then
+    return {}
+  end
+
+  local snippets, trigger, body = {}, nil, {}
+  local function flush()
+    if trigger and #body > 0 then
+      snippets[#snippets + 1] = { prefix = trigger, body = unescape(table.concat(body, '\n')) }
+    end
+    trigger, body = nil, {}
+  end
+
+  for _, line in ipairs(lines) do
+    local next_trigger = line:match '^snippet%s+(%S+)'
+    if next_trigger then
+      flush()
+      trigger = next_trigger
+    elseif trigger and vim.startswith(line, '\t') then
+      body[#body + 1] = line:sub(2)
+    elseif not line:match '^%s*$' then
+      -- A comment or anything else unindented ends the body; blank lines do not,
+      -- since they are just spacing between entries.
+      flush()
+    end
+  end
+  flush()
+  return snippets
+end
+
+---@param path string
+---@return VscodeSnippet[]
+local function parse(path)
+  local parsed = vim.endswith(path, '.snippets') and parse_snipmate(path) or parse_vscode(path)
+  local snippets = {}
+  for _, snippet in ipairs(parsed) do
+    local body = editable_final_tabstop(snippet.body)
+    if expandable(body) then
+      snippets[#snippets + 1] = { prefix = snippet.prefix, body = body }
+    end
+  end
+  return snippets
+end
+
 ---@return table<string, string[]> language to the files contributing to it
 local function scan_manifests()
   local by_language = {}
+  local function add(language, path)
+    by_language[language] = by_language[language] or {}
+    local files = by_language[language]
+    files[#files + 1] = vim.fs.normalize(path)
+  end
+
   for _, manifest in ipairs(vim.api.nvim_get_runtime_file('package.json', true)) do
     local root = vim.fs.dirname(manifest)
     for _, entry in ipairs(vim.tbl_get(read_json(manifest) or {}, 'contributes', 'snippets') or {}) do
@@ -166,18 +230,28 @@ local function scan_manifests()
       -- entry that declares a language but no file has to be skipped.
       if type(entry.path) == 'string' then
         for _, language in ipairs(languages) do
-          by_language[language] = by_language[language] or {}
-          local files = by_language[language]
-          files[#files + 1] = vim.fs.normalize(root .. '/' .. entry.path)
+          add(language, root .. '/' .. entry.path)
         end
       end
     end
   end
+
+  -- snipmate names its files after the filetype, either directly or as a
+  -- directory of them. pkl-neovim ships one and no package.json.
+  for _, path in ipairs(vim.api.nvim_get_runtime_file('snippets/*.snippets', true)) do
+    add(vim.fn.fnamemodify(path, ':t:r'), path)
+  end
+  for _, path in ipairs(vim.api.nvim_get_runtime_file('snippets/*/*.snippets', true)) do
+    add(vim.fn.fnamemodify(path, ':h:t'), path)
+  end
+
   return by_language
 end
 
 ---@type table<string, string[]>?
 local manifests = nil
+---@type string?
+local scanned_rtp = nil
 ---@type table<string, VscodeSnippet[]>
 local cache = {}
 
@@ -188,11 +262,18 @@ local M = { resolve = resolve }
 ---@param filetype string
 ---@return VscodeSnippet[]
 M.get = function(filetype)
+  -- Checked ahead of the cache, not behind it: a plugin loaded on a filetype --
+  -- pkl-neovim, say -- joins the runtimepath after we may already have cached an
+  -- answer for that very filetype. Reading and comparing costs ~0.1us, and
+  -- OptionSet does not fire for 'runtimepath', so there is nothing to hook.
+  local rtp = vim.o.runtimepath
+  if not manifests or scanned_rtp ~= rtp then
+    manifests, scanned_rtp, cache = scan_manifests(), rtp, {}
+  end
+
   if cache[filetype] then
     return cache[filetype]
   end
-
-  manifests = manifests or scan_manifests()
   local snippets, seen = {}, {}
   -- 'all' is the catch-all bucket every language inherits.
   for _, language in ipairs({ filetype, 'all' }) do
