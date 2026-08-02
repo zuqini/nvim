@@ -350,10 +350,13 @@ end
 
 ---Real servers only. 'o' in 'complete' puts the LSP omnifunc *inside* the
 ---autocomplete cycle, which is the only arrangement where a server's items and
----everything else end up in one ranked menu -- autotrigger = true is the other
----path, and it drives vim.fn.complete() on its own, tearing the cycle down. See
----the header for the seam that leaves, and
----~/workspace/nvim-autocomplete/TASK.md for the upstream work behind it.
+---everything else end up in one ranked menu. See the header for the seam that
+---leaves, and the note below for why autotrigger is on as well.
+---
+---Upstream, in case any of this comes loose: neovim#35257 is non-merging, fixed
+---by PR #35346 (October 2025) with the complete_info() reconstruction that makes
+---the merge work at all; neovim#32428 is the open one this config works around,
+---blocked on an append primitive that Vim declined in vim/vim#16662.
 ---@param opts { client: vim.lsp.Client, bufnr: integer }
 M.setup = function(opts)
   local client, bufnr = opts.client, opts.bufnr
