@@ -220,7 +220,7 @@
       "src": "https://gitlab.com/sairy/zshow.nvim"
     },
     "zsnip.nvim": {
-      "rev": "80523512569196cdc759ddca60f1470291186300",
+      "rev": "577fd13dbc6b3ca5011a829b7368f0ddde7d5047",
       "src": "https://github.com/zuqini/zsnip.nvim"
     }
   }

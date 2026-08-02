@@ -86,7 +86,9 @@ end
 local sources = {}
 _G[NS] = sources
 
----Anchored at the segment after the last '/', with no '\k' constraint.
+---Anchored at the whole path token, with no '\k' constraint -- the capability
+---vim.fn.complete() cannot express, since one start column has to serve every
+---item in the menu.
 ---@param findstart integer
 ---@param base string
 function sources.path(findstart, base)
@@ -98,22 +100,9 @@ function sources.path(findstart, base)
       -- sources down with it.
       return -2
     end
-    return #ctx.before - #segment
+    return #ctx.before - #dir - #segment
   end
   return reply(candidates.path(candidates.context(base)) or {})
-end
-
----@param findstart integer
----@param base string
-function sources.buffer(findstart, base)
-  if findstart == 1 then
-    local ctx = candidates.context()
-    return #ctx.before - #ctx.keyword
-  end
-  local items = candidates.buffer(candidates.context(base), function()
-    return vim.fn.complete_check() ~= 0
-  end)
-  return reply(items)
 end
 
 ---@param keys string
@@ -195,13 +184,23 @@ local function keymaps(bufnr)
   keymap('s', '<BS>', '<C-o>s')
 end
 
--- No '^{count}' caps: every source truncates before core sees it, so a cap
--- could only ever restate a limit that already held. Source order still
--- matters -- it is the time-slicing priority.
+-- Buffer words are core's '.', 'w' and 'b' -- the current buffer, the ones in
+-- other windows, and the rest of the loaded ones. Scanning them by hand was
+-- compensation for vim.fn.complete() taking the cycle and never consulting
+-- these; under 'complete' they are reachable, and they are C.
+--
+-- Only they carry a '^{count}': our path source and zsnip both truncate before
+-- core sees a list, so a cap there could only restate a limit that already
+-- held, while these three have no limit of their own. The budget is the 200 the
+-- hand-rolled source had, spent visible-first.
+--
+-- Order is the time-slicing priority.
 local complete_option = table.concat({
   ('Fv:lua.%s.path'):format(NS),
   zsnip_complete.source(),
-  ('Fv:lua.%s.buffer'):format(NS),
+  '.^100',
+  'w^50',
+  'b^50',
 }, ',')
 
 ---The single writer of 'complete'. Both BufEnter and LspAttach reach it, in
@@ -283,15 +282,6 @@ M.enable = function()
       attach(args.buf)
     end,
   })
-  -- BufUnload too: an unloaded buffer keeps its entry otherwise, and its
-  -- contents are re-read from disk if it comes back.
-  api.nvim_create_autocmd({ 'BufDelete', 'BufWipeout', 'BufUnload' }, {
-    group = group,
-    callback = function(args)
-      candidates.forget(args.buf)
-    end,
-  })
-
   -- Buffers opened before this ran never see BufEnter.
   for _, buf in ipairs(api.nvim_list_bufs()) do
     if api.nvim_buf_is_loaded(buf) then

@@ -1,148 +1,31 @@
--- Buffer word and path candidates, as LSP completion items. Knows nothing about
--- how they reach the menu -- builtin-cmp.lua serves them as 'complete'
--- functions. Kept separate because the scanning is the part worth packaging,
--- and the transport is the part that keeps changing. Snippets are not here:
--- zsnip ships its own 'complete' source and expands what it offers.
+-- Path candidates, as LSP completion items. Knows nothing about how they reach
+-- the menu -- builtin-cmp.lua serves them as a 'complete' function.
+--
+-- Buffer words and snippets are not here: core's own '.', 'w' and 'b' scan
+-- buffers, and zsnip ships a 'complete' source for snippets. The listing is
+-- vim.fn.getcompletion()'s too. What is left is deciding where a path token
+-- starts in a line, which takes a cursor and so cannot be asked of it.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
 
-local MIN_WORD_LEN = 3
-local MAX_SCAN_LINES = 20000
-local RESCAN_INTERVAL_NS = 5e9
-local MAX_CACHED_DIRS = 64
-
----How many items each source will return, capped here rather than by
----'complete', which never sees more than this.
-local limits = { path = 250, buffer = 200 }
+---How many items the source will return. getcompletion() has no limit of its
+---own and a wide directory answers with all of it.
+local PATH_LIMIT = 250
 
 local M = {}
 
----@type table<string, string>
-local kw_patterns = {}
-
----The scan has to agree with what '\k' calls a word, since vim.lsp.completion
----filters the merged menu against the trailing 'iskeyword' run: in css
----(iskeyword+=-) a plain [%w_] scan offers 'direction' while the menu filters on
----'flex-di'. Only the scan needs a Lua pattern -- the prefix comes from
----matchstr('\k*$'), which is the run nvim itself computes.
----@param bufnr integer
----@return string
-local function word_pattern(bufnr)
-  local iskeyword = vim.bo[bufnr].iskeyword
-  local cached = kw_patterns[iskeyword]
-  if cached then
-    return cached
-  end
-
-  local extra = {}
-  -- '\k' is buffer-local, so the probe has to run in that buffer.
-  api.nvim_buf_call(bufnr, function()
-    for byte = 33, 126 do
-      local char = string.char(byte)
-      if not char:match '[%w_]' and vim.fn.match(char, '\\k') == 0 then
-        extra[#extra + 1] = '%' .. char
-      end
-    end
-    -- A byte range is as close as a Lua pattern gets to 'iskeyword' 192-255,
-    -- which is in every default value ('\195\169' is 'é'). Without it 'café_x'
-    -- scans as 'caf' plus '_x' and never matches the menu's own 'café_x' filter.
-    -- It also swallows non-Latin-1 punctuation, which costs only a candidate
-    -- that the same filter drops again.
-    if vim.fn.match('\195\169', '\\k') == 0 then
-      extra[#extra + 1] = '\128-\255'
-    end
-  end)
-  extra = table.concat(extra)
-
-  cached = ('[%%a_%s][%%w_%s]*'):format(extra, extra)
-  kw_patterns[iskeyword] = cached
-  return cached
-end
-
----@param lines string[]
----@param pattern string
----@return string[]
-local function words_in(lines, pattern)
-  local seen, words = {}, {}
-  for _, line in ipairs(lines) do
-    for word in line:gmatch(pattern) do
-      if #word >= MIN_WORD_LEN and not seen[word] then
-        seen[word] = true
-        words[#words + 1] = word
-      end
-    end
-  end
-  return words
-end
-
----@type table<integer, { tick: integer, time: integer, words: string[], pattern: string, scanning: boolean? }>
-local word_cache = {}
-
----@param bufnr integer
----@return string[]
-local function rescan(bufnr)
-  if not api.nvim_buf_is_valid(bufnr) then
-    word_cache[bufnr] = nil
-    return {}
-  end
-  local pattern = word_pattern(bufnr)
-  local words = words_in(api.nvim_buf_get_lines(bufnr, 0, MAX_SCAN_LINES, false), pattern)
-  word_cache[bufnr] = { tick = vim.b[bufnr].changedtick, time = vim.uv.hrtime(), words = words, pattern = pattern }
-  return words
-end
-
----A full scan costs ~10ms on a 20k line buffer, too much to spend on the
----keystroke that wants the words, so a stale cache is served and refreshed on
----the next tick. Words typed since then are picked up by visible_words().
----Each buffer is cached under its own 'iskeyword'.
----@param bufnr integer
----@return string[]
-local function buffer_words(bufnr)
-  local cached = word_cache[bufnr]
-  if not cached or cached.pattern ~= word_pattern(bufnr) then
-    return rescan(bufnr)
-  end
-
-  local stale = cached.tick ~= vim.b[bufnr].changedtick
-  if stale and not cached.scanning and vim.uv.hrtime() - cached.time >= RESCAN_INTERVAL_NS then
-    cached.scanning = true
-    vim.schedule(function()
-      rescan(bufnr)
-    end)
-  end
-  return cached.words
-end
-
----@param bufnr integer
----@return string[]
-local function visible_words(bufnr)
-  local top, bot = vim.fn.line 'w0' - 1, vim.fn.line 'w$'
-  return words_in(api.nvim_buf_get_lines(0, top, bot, false), word_pattern(bufnr))
-end
-
----@return integer[]
-local function visible_buffers()
-  local cur = api.nvim_get_current_buf()
-  local bufs, seen = { cur }, { [cur] = true }
-  for _, win in ipairs(api.nvim_tabpage_list_wins(0)) do
-    local buf = api.nvim_win_get_buf(win)
-    if not seen[buf] and vim.bo[buf].buftype == '' then
-      seen[buf] = true
-      bufs[#bufs + 1] = buf
-    end
-  end
-  return bufs
-end
-
----Relative tokens are anchored to the buffer's own directory, cwd otherwise.
+---Relative tokens are anchored to the buffer's own directory, cwd otherwise --
+---which is what getcompletion() cannot do, since it resolves against cwd alone.
+---The result keeps its trailing '/': the caller concatenates the segment onto
+---it, and normalize() would otherwise drop it and glue the two together.
 ---@param dir string trailing directory part of the token, always ends in '/'
 ---@param bufnr integer
----@return string?
+---@return string? dir resolved, ending in '/'
 local function resolve_dir(dir, bufnr)
   if vim.startswith(dir, '/') then
     return dir
   elseif vim.startswith(dir, '~/') then
-    return vim.fs.normalize(dir)
+    return vim.fs.normalize(dir) .. '/'
   end
 
   local name = api.nvim_buf_get_name(bufnr)
@@ -150,81 +33,28 @@ local function resolve_dir(dir, bufnr)
   return root and root .. '/' .. dir or nil
 end
 
----@class DirListing
----@field mtime number
----@field labels string[] name, with a '/' appended for directories
----@field names string[] the same names, without it
----@field lowers string[] and lowercased, for the case-insensitive match
-
----@type table<string, DirListing>
-local dir_cache = {}
-
----A scandir costs ~9ms in a 20k entry directory (node_modules, build output, a
----monorepo target/) and the filter below only stops after limits.path *matches*,
----so a narrow prefix walked the whole thing on every keystroke.
----A directory's mtime changes whenever an entry is added or removed, which is
----all this listing depends on. The three forms are derived once here rather
----than rebuilt per entry per keystroke; for a lowercase file name Lua interns
----all three to the same string.
----@param path string
----@return DirListing? nil when the path is not a readable directory
-local function dir_entries(path)
-  local stat = vim.uv.fs_stat(path)
-  if not stat or stat.type ~= 'directory' then
-    return nil
-  end
-
-  local mtime = stat.mtime.sec + stat.mtime.nsec / 1e9
-  local cached = dir_cache[path]
-  if cached and cached.mtime == mtime then
-    return cached
-  end
-
-  local scanner = vim.uv.fs_scandir(path)
-  if not scanner then
-    return nil
-  end
-  local listing = { mtime = mtime, labels = {}, names = {}, lowers = {} }
-  local n = 0
-  while true do
-    local name, type = vim.uv.fs_scandir_next(scanner)
-    if not name then
-      break
-    end
-    n = n + 1
-    listing.labels[n] = type == 'directory' and name .. '/' or name
-    listing.names[n] = name
-    listing.lowers[n] = name:lower()
-  end
-
-  if not cached and vim.tbl_count(dir_cache) >= MAX_CACHED_DIRS then
-    dir_cache = {}
-  end
-  dir_cache[path] = listing
-  return listing
-end
-
 ---@class CmpContext
 ---@field bufnr integer
 ---@field before string line up to the cursor
----@field keyword string the run each source is being asked to replace
+---@field keyword string the run the source is being asked to replace
 
----The context every source shares: the cursor position, and the run being
----replaced. A source anchored somewhere other than the trailing 'iskeyword'
----run passes the text between its own anchor and the cursor.
+---The cursor position, and the run being replaced. A source anchored somewhere
+---other than the trailing 'iskeyword' run passes the text between its own
+---anchor and the cursor.
 ---@param keyword? string defaults to the trailing 'iskeyword' run
 ---@return CmpContext
 function M.context(keyword)
   local bufnr = api.nvim_get_current_buf()
   local before = api.nvim_get_current_line():sub(1, api.nvim_win_get_cursor(0)[2])
-  -- Taken from '\k' rather than reconstructed, so it cannot drift from the run
-  -- vim.lsp.completion filters the merged menu against.
   return { bufnr = bufnr, before = before, keyword = keyword or vim.fn.matchstr(before, '\\k*$') }
 end
 
 ---Where the path token before the cursor splits into a directory to list and a
 ---segment to match against. Shared with the findstart in builtin-cmp, which has
 ---to agree with M.path() on what counts as a path at all.
+---
+---The character class is also what keeps a glob out of getcompletion(): no '*',
+---'?' or '[' can reach it.
 ---@param before string line up to the cursor
 ---@return string? dir trailing directory part, always ends in '/'
 ---@return string? segment the part after it, possibly empty
@@ -247,81 +77,33 @@ function M.path(ctx)
     return nil
   end
 
-  local path = resolve_dir(dir, ctx.bufnr)
-  local listing = path and dir_entries(path)
-  if not listing then
+  -- The source anchors at the whole token, so the token is what gets replaced.
+  -- If the two ever disagree -- the cursor moved between findstart and here --
+  -- offering nothing beats inserting a path that does not exist.
+  if ctx.keyword ~= dir .. segment then
     return nil
   end
 
-  -- The source anchors at the segment, so the whole segment is what gets
-  -- replaced and an entry's own casing can be inserted over what was typed.
-  -- Filetypes with '/' in 'iskeyword' (clojure, dune) leave the keyword run
-  -- reaching back past the separator, so there is nothing here to anchor to.
-  if ctx.keyword ~= segment then
+  local root = resolve_dir(dir, ctx.bufnr)
+  if not root then
     return nil
   end
-
-  local wanted = segment:lower()
-  local hidden = vim.startswith(segment, '.')
 
   local items = {}
-  local labels, names, lowers = listing.labels, listing.names, listing.lowers
-  for i = 1, #labels do
-    if #items >= limits.path then
+  for _, match in ipairs(vim.fn.getcompletion(root .. segment, 'file')) do
+    if #items >= PATH_LIMIT then
       break
     end
-    if vim.startswith(lowers[i], wanted) and (hidden or not vim.startswith(names[i], '.')) then
-      items[#items + 1] = {
-        label = labels[i],
-        kind = labels[i] ~= names[i] and Kind.Folder or Kind.File,
-      }
-    end
+    -- getcompletion() answers in terms of the pattern it was handed, so the
+    -- token's own prefix goes back on in place of the resolved one. It appends
+    -- '/' to a directory, hides dotfiles until one is asked for, and expands
+    -- '~/' -- every rule this file used to carry itself.
+    items[#items + 1] = {
+      label = dir .. match:sub(#root + 1),
+      kind = vim.endswith(match, '/') and Kind.Folder or Kind.File,
+    }
   end
   return items
-end
-
----@param ctx CmpContext
----@param check? fun(): boolean asked between buffers whether to give up scanning
----@return lsp.CompletionItem[]
-function M.buffer(ctx, check)
-  -- An empty prefix would dump the whole buffer into the menu.
-  if ctx.keyword == '' then
-    return {}
-  end
-
-  local prefix = ctx.keyword
-  local items, added = {}, {}
-  local function add(words)
-    local limit = limits.buffer - #items
-    if limit <= 0 then
-      return
-    end
-    local candidates = vim.tbl_filter(function(word)
-      return word ~= prefix and not added[word]
-    end, words)
-    for _, word in ipairs(vim.fn.matchfuzzy(candidates, prefix, { limit = limit })) do
-      added[word] = true
-      items[#items + 1] = { label = word, kind = Kind.Text }
-    end
-  end
-
-  add(visible_words(ctx.bufnr))
-  for _, buf in ipairs(visible_buffers()) do
-    -- Checked here too: Lua evaluates buffer_words() before add() can bail, so
-    -- a filled menu would still pay for a full scan of every other buffer.
-    if #items >= limits.buffer or (check and check()) then
-      break
-    end
-    add(buffer_words(buf))
-  end
-  return items
-end
-
----Drop a buffer's cached word list; builtin-cmp calls this from its
----BufDelete/BufWipeout/BufUnload autocmd.
----@param bufnr integer
-function M.forget(bufnr)
-  word_cache[bufnr] = nil
 end
 
 return M
