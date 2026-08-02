@@ -89,6 +89,10 @@ return {
             buffer = args.buf,
           })
         end
+
+        if vim.g.cmp_engine == 'builtin' then
+          require('plugins.lsp.utils.builtin-cmp').detach(args.buf)
+        end
       end,
     })
 

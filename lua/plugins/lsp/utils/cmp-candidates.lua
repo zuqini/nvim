@@ -1,22 +1,21 @@
--- Snippet, buffer word and path candidates, as LSP completion items. Knows
--- nothing about how they reach the menu -- builtin-cmp.lua serves them as
--- 'complete' functions. Kept separate because the scanning is the part worth
--- packaging, and the transport is the part that keeps changing.
+-- Buffer word and path candidates, as LSP completion items. Knows nothing about
+-- how they reach the menu -- builtin-cmp.lua serves them as 'complete'
+-- functions. Kept separate because the scanning is the part worth packaging,
+-- and the transport is the part that keeps changing. Snippets are not here:
+-- zsnip ships its own 'complete' source and expands what it offers.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
-
-local zsnip = require 'zsnip'
 
 local MIN_WORD_LEN = 3
 local MAX_SCAN_LINES = 20000
 local RESCAN_INTERVAL_NS = 5e9
 local MAX_CACHED_DIRS = 64
 
-local M = {}
+---How many items each source will return, capped here rather than by
+---'complete', which never sees more than this.
+local limits = { path = 250, buffer = 200 }
 
----How many items each source will return. Also what builtin-cmp hands 'complete'
----as its per-source '^{count}', so the two cannot drift apart.
-M.limits = { path = 250, snippet = 30, buffer = 200 }
+local M = {}
 
 ---@type table<string, string>
 local kw_patterns = {}
@@ -40,7 +39,6 @@ local function word_pattern(bufnr)
   api.nvim_buf_call(bufnr, function()
     for byte = 33, 126 do
       local char = string.char(byte)
-      -- '%' turns any punctuation into a literal inside a Lua character class.
       if not char:match '[%w_]' and vim.fn.match(char, '\\k') == 0 then
         extra[#extra + 1] = '%' .. char
       end
@@ -96,8 +94,7 @@ end
 ---A full scan costs ~10ms on a 20k line buffer, too much to spend on the
 ---keystroke that wants the words, so a stale cache is served and refreshed on
 ---the next tick. Words typed since then are picked up by visible_words().
----Each buffer is scanned with its own 'iskeyword', so entering a window with a
----different one no longer invalidates every other visible buffer at once.
+---Each buffer is cached under its own 'iskeyword'.
 ---@param bufnr integer
 ---@return string[]
 local function buffer_words(bufnr)
@@ -116,11 +113,11 @@ local function buffer_words(bufnr)
   return cached.words
 end
 
----@param pattern string
+---@param bufnr integer
 ---@return string[]
-local function visible_words(pattern)
+local function visible_words(bufnr)
   local top, bot = vim.fn.line 'w0' - 1, vim.fn.line 'w$'
-  return words_in(api.nvim_buf_get_lines(0, top, bot, false), pattern)
+  return words_in(api.nvim_buf_get_lines(0, top, bot, false), word_pattern(bufnr))
 end
 
 ---@return integer[]
@@ -212,17 +209,17 @@ end
 ---@field before string line up to the cursor
 ---@field keyword string the run each source is being asked to replace
 
----The context every source shares: the cursor position, and the trailing
----'iskeyword' run as the run being replaced. A caller that anchors a source
----somewhere else -- builtin-cmp does, per source -- overwrites `keyword` with
----the text between its own anchor and the cursor.
+---The context every source shares: the cursor position, and the run being
+---replaced. A source anchored somewhere other than the trailing 'iskeyword'
+---run passes the text between its own anchor and the cursor.
+---@param keyword? string defaults to the trailing 'iskeyword' run
 ---@return CmpContext
-function M.context()
+function M.context(keyword)
   local bufnr = api.nvim_get_current_buf()
   local before = api.nvim_get_current_line():sub(1, api.nvim_win_get_cursor(0)[2])
   -- Taken from '\k' rather than reconstructed, so it cannot drift from the run
   -- vim.lsp.completion filters the merged menu against.
-  return { bufnr = bufnr, before = before, keyword = vim.fn.matchstr(before, '\\k*$') }
+  return { bufnr = bufnr, before = before, keyword = keyword or vim.fn.matchstr(before, '\\k*$') }
 end
 
 ---Where the path token before the cursor splits into a directory to list and a
@@ -256,68 +253,31 @@ function M.path(ctx)
     return nil
   end
 
-  -- Only ctx.keyword is replaceable, so in './lualine.lua' an engine anchored at
-  -- the 'iskeyword' run can replace only 'lua'; the rest is ours to filter on
-  -- and trim off. An engine that anchors at the segment passes the whole segment
-  -- as the keyword, and `typed` falls out empty.
-  -- Filetypes with '/' in 'iskeyword' (clojure, dune) leave that run reaching
-  -- back past the separator, so there is nothing here we can anchor to.
-  if #ctx.keyword > #segment then
+  -- The source anchors at the segment, so the whole segment is what gets
+  -- replaced and an entry's own casing can be inserted over what was typed.
+  -- Filetypes with '/' in 'iskeyword' (clojure, dune) leave the keyword run
+  -- reaching back past the separator, so there is nothing here to anchor to.
+  if ctx.keyword ~= segment then
     return nil
   end
 
-  local typed = segment:sub(1, #segment - #ctx.keyword)
   local wanted = segment:lower()
   local hidden = vim.startswith(segment, '.')
 
   local items = {}
   local labels, names, lowers = listing.labels, listing.names, listing.lowers
   for i = 1, #labels do
-    if #items >= M.limits.path then
+    if #items >= limits.path then
       break
     end
-    local label, name = labels[i], names[i]
-    -- Only the replaceable run can be case-corrected; `typed` stays in the
-    -- buffer verbatim, so an entry it doesn't literally prefix would insert a
-    -- path that does not exist. A server offering the same entry may not have
-    -- kept the slash.
-    if
-      vim.startswith(lowers[i], wanted)
-      and vim.startswith(name, typed)
-      -- Nothing left to insert: complete() falls back to the label and would
-      -- duplicate what the buffer already holds.
-      and #label > #typed
-      and (hidden or not vim.startswith(name, '.'))
-    then
+    if vim.startswith(lowers[i], wanted) and (hidden or not vim.startswith(names[i], '.')) then
       items[#items + 1] = {
-        label = label,
-        insertText = label:sub(#typed + 1),
-        filterText = label:sub(#typed + 1),
-        kind = label ~= name and Kind.Folder or Kind.File,
+        label = labels[i],
+        kind = labels[i] ~= names[i] and Kind.Folder or Kind.File,
       }
     end
   end
   return items
-end
-
----friendly-snippets and friends, discovered and read by zsnip. The bodies are
----already LSP snippet syntax, so insertTextFormat is enough for
----vim.lsp.completion to expand them.
----@param ctx CmpContext
----@return lsp.CompletionItem[]
-function M.snippet(ctx)
-  if ctx.keyword == '' then
-    return {}
-  end
-
-  return zsnip.completion_items({
-    prefix = ctx.keyword,
-    bufnr = ctx.bufnr,
-    limit = M.limits.snippet,
-    -- No detail/documentation on purpose: without them the popup previews the
-    -- expanded snippet, which beats friendly-snippets' terse descriptions.
-    documentation = false,
-  })
 end
 
 ---@param ctx CmpContext
@@ -332,7 +292,7 @@ function M.buffer(ctx, check)
   local prefix = ctx.keyword
   local items, added = {}, {}
   local function add(words)
-    local limit = M.limits.buffer - #items
+    local limit = limits.buffer - #items
     if limit <= 0 then
       return
     end
@@ -341,15 +301,15 @@ function M.buffer(ctx, check)
     end, words)
     for _, word in ipairs(vim.fn.matchfuzzy(candidates, prefix, { limit = limit })) do
       added[word] = true
-      items[#items + 1] = { label = word, kind = Kind.Text, sortText = ('%04d'):format(#items) }
+      items[#items + 1] = { label = word, kind = Kind.Text }
     end
   end
 
-  add(visible_words(word_pattern(ctx.bufnr)))
+  add(visible_words(ctx.bufnr))
   for _, buf in ipairs(visible_buffers()) do
     -- Checked here too: Lua evaluates buffer_words() before add() can bail, so
     -- a filled menu would still pay for a full scan of every other buffer.
-    if #items >= M.limits.buffer or (check and check()) then
+    if #items >= limits.buffer or (check and check()) then
       break
     end
     add(buffer_words(buf))
@@ -357,8 +317,8 @@ function M.buffer(ctx, check)
   return items
 end
 
----Drop a buffer's cached word list; the engines call this from their own
----BufDelete/BufWipeout/BufUnload autocmds.
+---Drop a buffer's cached word list; builtin-cmp calls this from its
+---BufDelete/BufWipeout/BufUnload autocmd.
 ---@param bufnr integer
 function M.forget(bufnr)
   word_cache[bufnr] = nil

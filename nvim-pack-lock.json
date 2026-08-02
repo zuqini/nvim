@@ -118,7 +118,7 @@
       "version": "'main'"
     },
     "nvim-treesitter-context": {
-      "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
+      "rev": "f3061339b8eaf9fda873600bc425b8d2d8502533",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
@@ -220,7 +220,7 @@
       "src": "https://gitlab.com/sairy/zshow.nvim"
     },
     "zsnip.nvim": {
-      "rev": "ae5a7fe5a1bfb5e82453b6faa3ea678c2a7e2617",
+      "rev": "80523512569196cdc759ddca60f1470291186300",
       "src": "https://github.com/zuqini/zsnip.nvim"
     }
   }
