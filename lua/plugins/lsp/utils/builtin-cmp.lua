@@ -1,25 +1,7 @@
--- Buffer word and path completion as 'complete' functions under 'autocomplete'
--- (see |ins-autocompletion|), alongside zsnip's snippet source and the LSP
--- omnifunc, which M.setup adds through the 'o' flag. Selected with
--- vim.g.cmp_engine = 'builtin'.
---
--- The design principle, arrived at the long way round: do not work against what
--- core already does. Each 'F' source returns its own start column, so the path
--- source anchors at the path segment and zsnip's at a trigger built only from
--- punctuation. Core dedups identical words across sources, fuzzy-ranks the
--- union, applies per-source '^{count}' limits and time-slices slow sources. All
--- of that used to be hand-rolled here against vim.fn.complete(), which has
--- exactly one start column for the entire menu.
---
--- The seam is neovim#32428. vim.fn.complete(), which vim.lsp.completion calls
--- when a response lands, is destructive: from that point the 'complete' sources
--- are not consulted again for the cycle, so their items are preserved but never
--- recomputed. Mostly that is harmless, since fuzzy matching only narrows and
--- anything matching a longer prefix already matched the shorter one. What it
--- does cost is a source that legitimately returned nothing at the start of the
--- cycle -- the word sources after a '.', where the keyword is empty -- staying
--- silent for the rest of the word. Arguably right: after a '.' or ':' the
--- server's own members are what you wanted.
+-- Neovim's own completion under 'autocomplete' (see |ins-autocompletion|): a
+-- path source, zsnip's snippets, core's buffer scanners and the LSP omnifunc,
+-- fuzzy-ranked into one menu. Selected with vim.g.cmp_engine = 'builtin'.
+-- Design rationale is in .claude/review-decisions.md.
 local api = vim.api
 local Kind = vim.lsp.protocol.CompletionItemKind
 
@@ -27,11 +9,9 @@ local candidates = require 'plugins.lsp.utils.cmp-candidates'
 local zsnip_complete = require 'zsnip.complete'
 
 local NAME = 'builtin-cmp'
--- 'complete' reaches the source functions through v:lua, so they have to hang
--- off a global. Dotted lookup resolves there, which keeps the two out of _G.
-local NS = 'ZCmpBuiltin'
-
 local SNIPPET_LIMIT = 30
+
+local M = {}
 
 local function set_pum_kind_hl()
   local special = api.nvim_get_hl(0, { name = 'Special', link = false })
@@ -44,12 +24,10 @@ local function set_pum_kind_hl()
   api.nvim_set_hl(0, 'PmenuKindSel', { fg = special.fg, bg = pmenu_sel.bg or pmenu.bg })
 end
 
-local word_chars = {}
-for i = string.byte 'a', string.byte 'z' do
-  word_chars[#word_chars + 1] = string.char(i)
-  word_chars[#word_chars + 1] = string.char(i):upper()
-end
+local word_chars = vim.split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', '')
 
+---Widening triggers to every letter is what makes autotrigger re-ask on a plain
+---keyword. Idempotent: a second call re-reads the widened list and dedups.
 ---@param client vim.lsp.Client
 ---@return string[]
 local function trigger_chars(client)
@@ -64,36 +42,24 @@ local function trigger_chars(client)
   return chars
 end
 
----'autocomplete' forces 'noselect' on, which would leave <cr> with nothing to
----accept. A "preselect" item overrides that, and every source marks its own
----first item, so whichever survives the sort highest is the one selected.
----
----'refresh' is what makes a source re-run as the leading text changes; without
----it the first call's matches are filtered down and never replaced, so a source
----whose anchor sits before the keyword run goes stale the moment you type.
+---'autocomplete' forces 'noselect', so 'preselect' is the only thing putting an
+---item under the cursor for <cr>. 'refresh' re-runs the source as the leading
+---text changes; without it matches are only ever filtered down.
 ---@param items lsp.CompletionItem[]
 ---@return table
 local function reply(items)
   local words = {}
   for i, item in ipairs(items) do
-    -- The label, never insertText: each source anchors at the run its item
-    -- replaces in full.
+    -- The label, never insertText: each source anchors at the run it replaces.
     words[i] = { word = item.label, kind = Kind[item.kind], preselect = i == 1 and 1 or nil }
   end
   return { words = words, refresh = 'always' }
 end
 
-local sources = {}
-_G[NS] = sources
-
----Anchored at the whole path token, with no '\k' constraint -- the capability
----vim.fn.complete() cannot express, since one start column has to serve every
----item in the menu.
 ---@param findstart integer
-function sources.path(findstart)
+function M.path_source(findstart)
   if findstart == 1 then
-    -- -2, not -3: -3 leaves completion mode, which would take the other sources
-    -- down with it.
+    -- -2, not -3: -3 leaves completion mode, taking the other sources with it.
     return candidates.path_start() or -2
   end
   return reply(candidates.path() or {})
@@ -108,12 +74,9 @@ local function pumvisible()
   return vim.fn.pumvisible() == 1
 end
 
----The 'popup' info window is created focusable = false, and focusing it would
----not help: reaching it means leaving insert mode, which dismisses the menu and
----takes the window with it. Scroll it where it stands instead.
----
----complete_info() is called without a 'what' filter on purpose -- the filter
----silently drops 'preview_winid', despite it being a documented key.
+---The info window cannot be focused -- reaching it means leaving insert mode,
+---which dismisses the menu. Scroll it where it stands instead. complete_info()
+---takes no 'what' filter here: the filter silently drops 'preview_winid'.
 ---@param keys string
 ---@return boolean
 local function scroll_info(keys)
@@ -127,8 +90,7 @@ local function scroll_info(keys)
   return true
 end
 
----Core owns triggering here, so there is nothing to ask for -- the only job
----left is stepping through a menu that is already up, or through a snippet.
+---Core owns triggering; this only steps through a menu already up, or a snippet.
 local function complete()
   if not pumvisible() and vim.snippet.active { direction = 1 } then
     vim.snippet.jump(1)
@@ -138,11 +100,16 @@ local function complete()
 end
 
 ---An unconditional <Tab> would swallow every indent, since this attaches to
----nearly every buffer. Only a word under the cursor asks for a menu.
+---nearly every buffer. The mode check matters: <C-n> is a no-op in the select
+---mode a placeholder puts you in, leaving <Tab> dead at the last tabstop.
 local function supertab()
   local before = api.nvim_get_current_line():sub(1, api.nvim_win_get_cursor(0)[2])
-  if pumvisible() or vim.snippet.active { direction = 1 } or vim.fn.matchstr(before, '\\k*$') ~= '' then
-    complete()
+  if pumvisible() then
+    feedkeys '<C-n>'
+  elseif vim.snippet.active { direction = 1 } then
+    vim.snippet.jump(1)
+  elseif vim.fn.mode() == 'i' and vim.fn.matchstr(before, '\\k*$') ~= '' then
+    feedkeys '<C-n>'
   else
     feedkeys '<Tab>'
   end
@@ -158,14 +125,10 @@ local function shifttab()
   end
 end
 
----Gated on a real selection rather than on the menu being up: 'autocomplete'
----sets 'noselect', and only the preselect marking above puts anything under the
----cursor. Without the gate <cr> would swallow the newline and insert nothing.
----
----nvim-autopairs owns <cr> globally and this map is buffer-local, so the
----fallback has to hand it back. Returns real termcodes, since autopairs_cr()
----does -- feeding those through replace_keycodes a second time inserts them as
----literal text.
+---Gated on a real selection, not on the menu being up, or <cr> would swallow the
+---newline. nvim-autopairs owns <cr> globally and this map is buffer-local, so the
+---fallback hands it back -- in real termcodes, as autopairs_cr() returns, since
+---replace_keycodes would insert them literally.
 ---@return string
 local function enter()
   if pumvisible() and vim.fn.complete_info({ 'selected' }).selected >= 0 then
@@ -182,9 +145,8 @@ local function keymaps(bufnr)
   end
 
   keymap('i', '<cr>', enter, { expr = true, replace_keycodes = false })
-  -- <C-e> cancels the menu and *stays* in insert mode, so this dismisses a
-  -- suggestion without interrupting typing. The cost is that <esc> no longer
-  -- leaves insert mode while a menu is open; that takes a second one.
+  -- <C-e> cancels the menu and *stays* in insert mode. The cost is that <esc> no
+  -- longer leaves insert mode while a menu is open; that takes a second one.
   keymap('i', '<esc>', function()
     return pumvisible() and '<C-e>' or '<esc>'
   end, { expr = true })
@@ -208,58 +170,43 @@ local function keymaps(bufnr)
   keymap('s', '<BS>', '<C-o>s')
 end
 
--- Buffer words are core's '.', 'w' and 'b' -- the current buffer, the ones in
--- other windows, and the rest of the loaded ones. Scanning them by hand was
--- compensation for vim.fn.complete() taking the cycle and never consulting
--- these; under 'complete' they are reachable, and they are C.
---
--- Only they carry a '^{count}': our path source and zsnip both truncate before
--- core sees a list, so a cap there could only restate a limit that already
--- held, while these three have no limit of their own. The budget is the 200 the
--- hand-rolled source had, spent visible-first.
---
--- Order is the time-slicing priority.
+-- Order is the time-slicing priority. Only '.', 'w' and 'b' carry a '^{count}':
+-- the path and snippet sources truncate before core ever sees a list.
 local complete_option = table.concat({
-  ('Fv:lua.%s.path'):format(NS),
+  [[Fv:lua.require'plugins.lsp.utils.builtin-cmp'.path_source]],
   zsnip_complete.source(),
   '.^100',
   'w^50',
   'b^50',
 }, ',')
 
----The single writer of 'complete'. Both BufEnter and LspAttach reach it, in
----either order -- a warm client makes LspAttach fire before the scheduled
----attach(), a cold one after -- so it derives the whole value from current state
----rather than appending to whatever is there.
+---The single writer of 'complete'. Derives the whole value from current state,
+---because BufEnter and LspAttach reach it in either order.
 ---@param bufnr integer
 local function set_complete(bufnr)
   local cpt = complete_option
-  -- 'o' is the LSP omnifunc, which vim.lsp.completion.enable installs per
-  -- client, so it is only worth listing once a server can actually answer.
+  -- 'o' is the LSP omnifunc, only worth listing once a server can answer.
   if next(vim.lsp.get_clients { bufnr = bufnr, method = 'textDocument/completion' }) then
     cpt = cpt .. ',o'
   end
   vim.bo[bufnr].complete = cpt
 end
 
----Terminal, quickfix and plugin scratch buffers are still buftype '' at
----BufEnter and only settle afterwards, so decide on the next tick.
+---The one place deciding which buffers this engine owns, reached from BufEnter
+---and both LSP hooks. Scheduled because scratch buffers are still buftype '' at
+---BufEnter, and a detaching client is still attached while LspDetach runs.
 ---@param bufnr integer
 local function attach(bufnr)
   vim.schedule(function()
     if not api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= '' then
       return
     end
-    -- Buffer-local, both of them: 'autocomplete' is left off globally so a
-    -- prompt or terminal buffer does not start popping up core's own
-    -- '.,w,b,u,t' menu, which is the default 'complete' we never replaced there.
+    -- Buffer-local so a prompt or terminal buffer keeps core's default menu.
     vim.bo[bufnr].autocomplete = true
     set_complete(bufnr)
     keymaps(bufnr)
   end)
 end
-
-local M = {}
 
 M.enable = function()
   set_pum_kind_hl()
@@ -268,40 +215,28 @@ M.enable = function()
     callback = set_pum_kind_hl,
   })
 
-  -- zsnip's own 'complete' source, already named in complete_option above. It
-  -- expands what is accepted from it through its own CompleteDone handler;
-  -- `complete = false` stops enable() appending a second, uncapped copy to the
-  -- option set_complete owns.
+  -- `complete = false` stops enable() appending a second, uncapped copy of the
+  -- source to the option set_complete owns. No detail: the popup previews the
+  -- expanded body instead, which beats friendly-snippets' terse descriptions.
   zsnip_complete.enable {
     complete = false,
     limit = SNIPPET_LIMIT,
-    -- No detail on purpose: the popup previews the expanded body instead, which
-    -- beats friendly-snippets' terse descriptions.
     documentation = false,
   }
 
   vim.go.autocomplete = false
-  -- Explicit and at the default: the knob that decides whether the menu chases
-  -- every keystroke, and the one to reach for first if native feels noisy.
+  -- At the default; the knob to reach for first if native feels noisy.
   vim.o.autocompletedelay = 0
-  -- Under 'autocomplete' only fuzzy, longest, popup, preinsert, preselect and
-  -- preview still apply -- 'nosort' in particular is inert, so the source order
-  -- in 'complete' is a time-slicing priority, not the ranking.
-  --
-  -- 'noinsert' is the exception, and it is not inert here. It does nothing for
-  -- the 'autocomplete' pipeline, but vim.lsp.completion does not go through that
-  -- pipeline -- it calls vim.fn.complete() itself, and that path still honours
-  -- it. Without it 'preselect' selects the server's first item and complete()
-  -- *inserts* it: `vim.` becomes `vim.F`, every later keystroke appends to the
-  -- wrong word, and the menu is empty from then on.
-  vim.o.completeopt = 'fuzzy,menuone,popup,noinsert,preselect'
-  -- Autotriggering in every buffer means ins-completion would otherwise report
-  -- 'match 1 of 9' / 'Pattern not found' on nearly every keystroke.
+  -- 'noinsert' is the one flag 'autocomplete' ignores and is still load-bearing:
+  -- vim.lsp.completion calls vim.fn.complete() itself and that path honours it.
+  -- Without it 'preselect' inserts the server's first item, so `vim.` becomes
+  -- `vim.F` and every later keystroke appends to the wrong word.
+  vim.go.completeopt = 'fuzzy,menuone,popup,noinsert,preselect'
+  -- Autotriggering everywhere would report 'match 1 of 9' on nearly every key.
   vim.opt.shortmess:append 'c'
 
-  local group = api.nvim_create_augroup(NAME, {})
   api.nvim_create_autocmd('BufEnter', {
-    group = group,
+    group = api.nvim_create_augroup(NAME, {}),
     callback = function(args)
       attach(args.buf)
     end,
@@ -314,10 +249,9 @@ M.enable = function()
   end
 end
 
----Real servers only. 'o' in 'complete' puts the LSP omnifunc *inside* the
----autocomplete cycle, which is the only arrangement where a server's items and
----everything else end up in one ranked menu -- neovim#35257, fixed by PR #35346.
----See the header for the seam that leaves.
+---Both delivery paths, because each covers what the other misses: 'o' merges
+---server items into the ranked menu but asks once per cycle, and autotrigger
+---re-asks per trigger character but delivers nothing for a plain keyword.
 ---@param opts { client: vim.lsp.Client, bufnr: integer }
 M.setup = function(opts)
   local client, bufnr = opts.client, opts.bufnr
@@ -327,24 +261,12 @@ M.setup = function(opts)
   end
 
   provider.triggerCharacters = trigger_chars(client)
-  -- Both delivery paths, deliberately, because each covers what the other
-  -- misses: 'o' merges server items into the ranked menu but asks once per
-  -- cycle, and autotrigger re-asks on every widened trigger character but
-  -- delivers nothing for a plain keyword. Measurements in review-decisions.md.
   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-  set_complete(bufnr)
+  attach(bufnr)
 end
 
 ---The buffer may have just lost its last completion provider, leaving 'o' with
----nothing to answer. Scheduled because the detaching client is still attached
----while LspDetach runs.
----@param bufnr integer
-M.detach = function(bufnr)
-  vim.schedule(function()
-    if api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buftype == '' then
-      set_complete(bufnr)
-    end
-  end)
-end
+---nothing to answer.
+M.detach = attach
 
 return M
