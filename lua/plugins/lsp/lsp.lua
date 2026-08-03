@@ -11,13 +11,6 @@ return {
           return
         end
 
-        if vim.g.cmp_engine == 'builtin' then
-          -- Only the LSP half. Its own sources reach the menu through
-          -- 'complete', which is per-buffer and set from BufEnter, so buffers
-          -- with no server attached still complete.
-          require('plugins.lsp.utils.builtin-cmp').setup({ client = client, bufnr = args.buf })
-        end
-
         vim.lsp.inlay_hint.enable(true)
 
         if client:supports_method('textDocument/documentColor') then
@@ -70,10 +63,6 @@ return {
       end,
     })
 
-    if vim.g.cmp_engine == 'builtin' then
-      require('plugins.lsp.utils.builtin-cmp').enable()
-    end
-
     vim.api.nvim_create_autocmd('LspDetach', {
       callback = function(args)
         -- Get the detaching client
@@ -88,10 +77,6 @@ return {
             event = 'BufWritePre',
             buffer = args.buf,
           })
-        end
-
-        if vim.g.cmp_engine == 'builtin' then
-          require('plugins.lsp.utils.builtin-cmp').detach(args.buf)
         end
       end,
     })

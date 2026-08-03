@@ -17,7 +17,8 @@ return {
     dependencies = { 'rafamadriz/friendly-snippets' },
     config = function()
       -- Both engines read the registry themselves, through zsnip's own sources:
-      -- zsnip.blink for blink, zsnip.complete for the builtin one.
+      -- zsnip.blink for blink, zsnip.complete for zcmp -- which names it as its
+      -- `snippets` provider, so neither is wired up here.
       require('zsnip').setup()
       require('zsnip.loaders.from_vscode').lazy_load()
       require('zsnip.loaders.from_snipmate').lazy_load()

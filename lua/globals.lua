@@ -1,18 +1,18 @@
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 
--- 'builtin' is nvim's own completion under 'autocomplete': a path source with
--- core's buffer scanners, zsnip's snippet source and the LSP omnifunc alongside
--- it in one ranked menu.
+-- 'zcmp' is zcmp.nvim over nvim's own completion under 'autocomplete': a path
+-- source with core's buffer scanners, zsnip's snippet source and the LSP
+-- omnifunc alongside it in one ranked menu.
 --
 -- Falling back rather than trusting the variable: an unknown name matches
 -- neither branch, which leaves nvim with no completion engine at all and
 -- nothing said about why. The names have already changed twice.
-local CMP_ENGINES = { blink = true, builtin = true }
+local CMP_ENGINES = { blink = true, zcmp = true }
 local requested = vim.env.NVIM_CMP_ENGINE
-vim.g.cmp_engine = CMP_ENGINES[requested] and requested or 'builtin' -- blink | builtin
+vim.g.cmp_engine = CMP_ENGINES[requested] and requested or 'zcmp' -- blink | zcmp
 if requested and not CMP_ENGINES[requested] then
   vim.schedule(function()
-    local msg = ("NVIM_CMP_ENGINE=%q is not a completion engine; using 'builtin'"):format(requested)
+    local msg = ("NVIM_CMP_ENGINE=%q is not a completion engine; using 'zcmp'"):format(requested)
     vim.notify(msg, vim.log.levels.WARN)
   end)
 end

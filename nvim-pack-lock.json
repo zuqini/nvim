@@ -211,6 +211,10 @@
       "rev": "620de1321f275ec9d80028c68d1b88b409c0c8b1",
       "src": "https://github.com/nvzone/volt"
     },
+    "zcmp.nvim": {
+      "rev": "eaba5a6e2076294bfad83375a72ce0cacad2ae98",
+      "src": "https://github.com/zuqini/zcmp.nvim"
+    },
     "zpack.nvim": {
       "rev": "f1af873a894a3c1a433daad110500603387fa721",
       "src": "https://github.com/zuqini/zpack.nvim"
