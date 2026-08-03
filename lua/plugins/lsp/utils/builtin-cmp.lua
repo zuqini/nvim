@@ -108,6 +108,25 @@ local function pumvisible()
   return vim.fn.pumvisible() == 1
 end
 
+---The 'popup' info window is created focusable = false, and focusing it would
+---not help: reaching it means leaving insert mode, which dismisses the menu and
+---takes the window with it. Scroll it where it stands instead.
+---
+---complete_info() is called without a 'what' filter on purpose -- the filter
+---silently drops 'preview_winid', despite it being a documented key.
+---@param keys string
+---@return boolean
+local function scroll_info(keys)
+  local win = vim.fn.complete_info().preview_winid
+  if not win or win == 0 or not api.nvim_win_is_valid(win) then
+    return false
+  end
+  api.nvim_win_call(win, function()
+    vim.cmd('normal! ' .. vim.keycode(keys))
+  end)
+  return true
+end
+
 ---Core owns triggering here, so there is nothing to ask for -- the only job
 ---left is stepping through a menu that is already up, or through a snippet.
 local function complete()
@@ -171,6 +190,17 @@ local function keymaps(bufnr)
   end, { expr = true })
 
   keymap('i', '<C-n>', complete, { desc = 'Trigger/select next completion' })
+  -- Not <C-d>/<C-u>: those are i_CTRL-D and i_CTRL-U, dedent and kill-line.
+  keymap('i', '<C-f>', function()
+    if not scroll_info '<C-d>' then
+      feedkeys '<C-f>'
+    end
+  end, { desc = 'Scroll documentation down' })
+  keymap('i', '<C-b>', function()
+    if not scroll_info '<C-u>' then
+      feedkeys '<C-b>'
+    end
+  end, { desc = 'Scroll documentation up' })
   keymap({ 'i', 's' }, '<Tab>', supertab)
   keymap({ 'i', 's' }, '<S-Tab>', shifttab)
 
