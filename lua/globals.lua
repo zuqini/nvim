@@ -1,8 +1,8 @@
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 
--- 'builtin' is nvim's own completion: buffer words and paths as 'complete'
--- functions under 'autocomplete', with zsnip's snippet source and the LSP
--- omnifunc alongside them in the same ranked menu.
+-- 'builtin' is nvim's own completion under 'autocomplete': a path source with
+-- core's buffer scanners, zsnip's snippet source and the LSP omnifunc alongside
+-- it in one ranked menu.
 --
 -- Falling back rather than trusting the variable: an unknown name matches
 -- neither branch, which leaves nvim with no completion engine at all and

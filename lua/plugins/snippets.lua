@@ -16,9 +16,8 @@ return {
     lazy = false,
     dependencies = { 'rafamadriz/friendly-snippets' },
     config = function()
-      -- Both engines read the registry themselves: blink through the
-      -- zsnip.blink source, the builtin one through cmp-candidates. Neither
-      -- dedupes by hand -- core does it across 'complete' sources.
+      -- Both engines read the registry themselves, through zsnip's own sources:
+      -- zsnip.blink for blink, zsnip.complete for the builtin one.
       require('zsnip').setup()
       require('zsnip.loaders.from_vscode').lazy_load()
       require('zsnip.loaders.from_snipmate').lazy_load()
