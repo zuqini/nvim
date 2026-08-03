@@ -90,19 +90,13 @@ _G[NS] = sources
 ---vim.fn.complete() cannot express, since one start column has to serve every
 ---item in the menu.
 ---@param findstart integer
----@param base string
-function sources.path(findstart, base)
+function sources.path(findstart)
   if findstart == 1 then
-    local ctx = candidates.context()
-    local dir, segment = candidates.path_split(ctx.before)
-    if not dir or not segment then
-      -- -2, not -3: -3 leaves completion mode, which would take the other
-      -- sources down with it.
-      return -2
-    end
-    return #ctx.before - #dir - #segment
+    -- -2, not -3: -3 leaves completion mode, which would take the other sources
+    -- down with it.
+    return candidates.path_start() or -2
   end
-  return reply(candidates.path(candidates.context(base)) or {})
+  return reply(candidates.path() or {})
 end
 
 ---@param keys string
