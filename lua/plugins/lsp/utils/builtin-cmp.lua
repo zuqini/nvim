@@ -225,8 +225,11 @@ M.enable = function()
   }
 
   vim.go.autocomplete = false
-  -- At the default; the knob to reach for first if native feels noisy.
-  vim.o.autocompletedelay = 0
+  -- Sources only run once the delay elapses, so this also bounds how often the
+  -- path listing and the server are asked. It suppresses nothing while typing
+  -- faster than the value: measured 10 keystrokes 120ms apart, 0 and 60 both
+  -- ran the source 10 times, 150 ran it once. Raise it past your own gap.
+  vim.o.autocompletedelay = 200
   -- 'noinsert' is the one flag 'autocomplete' ignores and is still load-bearing:
   -- vim.lsp.completion calls vim.fn.complete() itself and that path honours it.
   -- Without it 'preselect' inserts the server's first item, so `vim.` becomes
