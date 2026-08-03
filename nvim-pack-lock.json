@@ -105,7 +105,7 @@
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
     "nvim-lspconfig": {
-      "rev": "1c0d8f70dbc8827263eedc3cf7021ceba0f68689",
+      "rev": "43ed3797b266e1ee8d222e491379ad471c9d3146",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
@@ -212,7 +212,7 @@
       "src": "https://github.com/nvzone/volt"
     },
     "zcmp.nvim": {
-      "rev": "eaba5a6e2076294bfad83375a72ce0cacad2ae98",
+      "rev": "8ee992605d7a5e281625661af0df703b612074e2",
       "src": "https://github.com/zuqini/zcmp.nvim"
     },
     "zpack.nvim": {
@@ -224,7 +224,7 @@
       "src": "https://gitlab.com/sairy/zshow.nvim"
     },
     "zsnip.nvim": {
-      "rev": "26646595164652ae97f913892816c8b50f75ee83",
+      "rev": "15e9243e88f0b128502674fdddb89c8fad43440e",
       "src": "https://github.com/zuqini/zsnip.nvim"
     }
   }

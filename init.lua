@@ -20,7 +20,8 @@ require('zpack').setup({
   profiling = {
     loader = true,
     require = true,
-  }
+  },
+  cmd_name = 'Z'
 })
 require("builtin-plugins")
 
