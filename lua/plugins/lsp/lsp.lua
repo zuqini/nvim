@@ -3,6 +3,19 @@ return {
   cond = not vim.g.vscode,
   config = function()
     -- vim.lsp.set_log_level("debug")
+
+    -- Float height is computed from the *concealed* markdown (fence lines are
+    -- hidden), but nvim sets concealcursor='', so focusing the float reveals the
+    -- ```lang line under the cursor and it no longer fits.
+    local open_floating_preview = vim.lsp.util.open_floating_preview
+    vim.lsp.util.open_floating_preview = function(contents, syntax, opts)
+      local bufnr, winnr = open_floating_preview(contents, syntax, opts)
+      if vim.api.nvim_win_is_valid(winnr) and vim.wo[winnr].conceallevel >= 2 then
+        vim.wo[winnr].concealcursor = 'nc'
+      end
+      return bufnr, winnr
+    end
+
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
