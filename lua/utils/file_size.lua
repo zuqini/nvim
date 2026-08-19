@@ -19,22 +19,24 @@ M.is_large_file = function(buf)
     return false
   end
 
+  if vim.bo[buf].buftype ~= '' then
+    return false
+  end
+
   if file_size_cache[buf_name] == nil then
     if buf_should_be_ignored(buf_name) then
       file_size_cache[buf_name] = 0
     else
-      local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats then
-        file_size_cache[buf_name] = stats.size
-      else
-        vim.notify("Failed to fetch file size for " .. buf_name, vim.log.levels.WARN, { title = "utils.is_large_file" })
+      local stats, err = vim.uv.fs_stat(buf_name)
+      file_size_cache[buf_name] = stats and stats.size or 0
+      if not stats and not (err and err:find("^ENOENT")) then
+        vim.notify("Failed to fetch file size for " .. buf_name .. ": " .. tostring(err),
+          vim.log.levels.WARN, { title = "utils.is_large_file" })
       end
     end
   end
 
-  if file_size_cache[buf_name] ~= nil and file_size_cache[buf_name] > max_file_size then
-    return true
-  end
+  return file_size_cache[buf_name] > max_file_size
 end
 
 return M
