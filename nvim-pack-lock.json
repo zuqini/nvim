@@ -104,6 +104,10 @@
       "rev": "c2b83cb19e4ac475f2b08aaf775afe3da19bc495",
       "src": "https://github.com/kevinhwang91/nvim-fundo"
     },
+    "nvim-jdtls": {
+      "rev": "6e9d953f0b82bccdb834cfde0e893f3119c22592",
+      "src": "https://github.com/mfussenegger/nvim-jdtls"
+    },
     "nvim-lspconfig": {
       "rev": "43ed3797b266e1ee8d222e491379ad471c9d3146",
       "src": "https://github.com/neovim/nvim-lspconfig"
