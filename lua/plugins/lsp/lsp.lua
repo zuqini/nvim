@@ -3,6 +3,9 @@ return {
   cond = not vim.g.vscode,
   config = function()
     -- vim.lsp.set_log_level("debug")
+    vim.api.nvim_create_user_command("LspLog", function()
+      vim.cmd.edit(vim.lsp.log.get_filename())
+    end, { desc = "Open LSP log" })
 
     -- Float height is computed from the *concealed* markdown (fence lines are
     -- hidden), but nvim sets concealcursor='', so focusing the float reveals the
