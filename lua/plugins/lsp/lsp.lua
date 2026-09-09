@@ -2,7 +2,7 @@ return {
   'neovim/nvim-lspconfig',
   cond = not vim.g.vscode,
   config = function()
-    -- vim.lsp.set_log_level("debug")
+    -- vim.lsp.log.set_level("debug")
     vim.api.nvim_create_user_command("LspLog", function()
       vim.cmd.edit(vim.lsp.log.get_filename())
     end, { desc = "Open LSP log" })
