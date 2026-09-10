@@ -12,6 +12,11 @@ end
 
 local cache = vim.fs.joinpath(vim.fn.stdpath('cache'), 'jdtls')
 
+-- Every data dir `cmd` has handed to a server this session. Pruning consults
+-- it so a workspace outside `roots` -- one keyed on cwd by the fallback below,
+-- or started by hand -- doesn't get deleted out from under a running import.
+local live = {}
+
 -- jdtls reports import progress over `language/status`, a non-standard
 -- notification nvim has no handler for, so it only ever reached the log. Keep
 -- the last one; a single import emitted 5,632 of these, so notifying on each
@@ -27,19 +32,27 @@ return {
   -- file first -- the point is to reclaim space for checkouts you've deleted.
   init = function()
     vim.api.nvim_create_user_command('JdtlsPrune', function()
-      -- Autostart is pinned to `roots`, so those four hashes are the only
-      -- legitimate workspaces and anything else is a leftover. That also
-      -- means a live server is never in scope, so nothing needs stopping.
+      -- Autostart is pinned to `roots`, so those hashes are the only
+      -- legitimate workspaces and anything else is a leftover.
       local keep = {}
       for _, root in ipairs(roots) do
         keep[vim.fn.sha256(root)] = true
       end
 
+      -- Collect before deleting: removing entries from an open scandir handle
+      -- can skip siblings.
+      local stale = {}
       for name, kind in vim.fs.dir(cache) do
-        if kind == 'directory' and not keep[name] then
-          vim.fs.rm(vim.fs.joinpath(cache, name), { recursive = true, force = true })
+        local path = vim.fs.joinpath(cache, name)
+        if kind == 'directory' and not keep[name] and not live[path] then
+          stale[#stale + 1] = path
         end
       end
+
+      for _, path in ipairs(stale) do
+        vim.fs.rm(path, { recursive = true, force = true })
+      end
+      vim.notify(('jdtls: pruned %d workspace(s)'):format(#stale))
     end, { desc = 'Remove orphaned jdtls workspaces' })
 
     vim.api.nvim_create_user_command('JdtlsStatus', function()
@@ -65,7 +78,9 @@ return {
       -- root_dir instead so a monorepo's import survives across sessions.
       cmd = function(dispatchers, config)
         local root = config.root_dir or assert(vim.uv.cwd())
-        local cmd = { 'jdtls', '-data', vim.fs.joinpath(cache, vim.fn.sha256(root)) }
+        local data = vim.fs.joinpath(cache, vim.fn.sha256(root))
+        live[data] = true
+        local cmd = { 'jdtls', '-data', data }
         if jdk.code == 0 then
           vim.list_extend(cmd, {
             '--java-executable',
