@@ -10,6 +10,8 @@ return {
     -- tooling, and the older Gradle wrappers in our repos reject Java 25.
     local jdk = vim.system({ '/usr/libexec/java_home', '-v', '21' }):wait()
 
+    local gradle_off = { java = { import = { gradle = { enabled = false } } } }
+
     -- Both nvim-lspconfig and nvim-jdtls ship an lsp/jdtls.lua and every match
     -- on the rtp gets deep-merged, so set cmd here to win regardless of order.
     vim.lsp.config('jdtls', {
@@ -35,13 +37,14 @@ return {
           detached = config.detached,
         })
       end,
-      settings = {
-        java = {
-          -- Our repos are Maven; the Gradle syncs only ever fail and each
-          -- failure adds seconds to an already slow import.
-          import = { gradle = { enabled = false } },
-        },
-      },
+      -- Our repos are Maven; the Gradle syncs only ever fail and each failure
+      -- adds seconds to an already slow import. `settings` alone is too late:
+      -- it ships in didChangeConfiguration, by which point the initial import
+      -- has already given the nested Gradle builds a Gradle nature that
+      -- Buildship then resyncs forever. init_options is read during
+      -- initialize, so send it in both places.
+      init_options = { settings = gradle_off },
+      settings = gradle_off,
     })
     vim.lsp.enable('jdtls')
   end,
