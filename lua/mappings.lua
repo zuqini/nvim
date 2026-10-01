@@ -55,7 +55,7 @@ nmap_leader('x', ':call ToggleLocList()<CR>', 'Toggle LocList')
 nmap('<leader>lp', ':lp<CR>', 'LocList Prev')
 nmap('<leader>ln', ':lne<CR>', 'LocList Next')
 
-nmap('<C-l>', ':lua clear_floats_and_highlights()<CR><c-l>', 'Clear Floats & Highlights')
+nmap('<C-l>', clear_screen, 'Clear Floats & Highlights')
 nmap('<F5>', ':mod<CR>', 'Clear * Redraw')
 
 xmap('>', '>gv', 'Indent w/ Selection')

@@ -35,3 +35,9 @@ _G.clear_floats_and_highlights = function()
     end
   end
 end
+
+local default_ctrl_l = vim.fn.maparg('<C-L>', 'n', false, true).rhs or '<C-L>'
+_G.clear_screen = function()
+  clear_floats_and_highlights()
+  vim.api.nvim_feedkeys(vim.keycode(default_ctrl_l), 'n', false)
+end
